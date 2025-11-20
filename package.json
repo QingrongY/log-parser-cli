@@ -1,0 +1,37 @@
+{
+  "name": "log-parser-cli",
+  "version": "0.1.21",
+  "description": "Independent Gemini-powered semantic log parser CLI",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "log-parser": "dist/src/cli.js"
+  },
+  "scripts": {
+    "build": "node ../../scripts/build_package.js",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:ci": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@google/gemini-cli-core": "^0.17.0-nightly.20251114.0fcbff506",
+    "prompts": "^2.4.2",
+    "react": "^19.0.0",
+    "ink": "npm:@jrichman/ink@6.4.3",
+    "sql.js": "^1.9.0"
+  },
+  "devDependencies": {
+    "@google/gemini-cli-test-utils": "file:../test-utils",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
