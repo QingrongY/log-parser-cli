@@ -5,21 +5,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { randomUUID } from 'node:crypto';
 import { resolve } from 'node:path';
 import prompts from 'prompts';
 import { render } from 'ink';
-import {
-  AuthType,
-  Config,
-  FileDiscoveryService,
-} from '@google/gemini-cli-core';
 import type { LlmClient } from './agents/index.js';
-import { BaseLlmClientAdapter, GeminiLlmClient } from './agents/index.js';
 import type { SemanticLogParserOptions } from './runner/index.js';
 import { LogParserApp } from './ui/log-parser-app.js';
+import { AimlApiLlmClient, GeminiLlmClient } from './llm/index.js';
 
-const DEFAULT_LOG_PARSER_MODEL = 'gemini-2.0-flash';
+const DEFAULT_LOG_PARSER_MODEL = 'google/gemini-2.0-flash';
 
 interface RunnerOptions {
   inputPath: string;
@@ -86,80 +80,40 @@ const parseArgs = (argv: string[]): RunnerOptions => {
 };
 
 async function createLogParserLlmClient(): Promise<LlmClient | undefined> {
-  const cliClient = await tryCreateCliLlmClient();
-  if (cliClient) {
-    return cliClient;
-  }
-  return createDirectGeminiClient();
-}
+  const model = resolveModelPreference();
+  const temperature = 0;
+  const maxOutputTokens = 1024;
 
-async function tryCreateCliLlmClient(): Promise<LlmClient | undefined> {
-  const config = await bootstrapCliConfig();
-  if (!config) {
-    return undefined;
-  }
-
-  const authType = detectAuthType();
-  if (!authType) {
-    console.warn(
-      '[log-parser] No Gemini authentication detected. Set GEMINI_API_KEY or configure GOOGLE_GENAI_* auth variables.',
-    );
-    return undefined;
-  }
-
-  try {
-    await config.refreshAuth(authType);
-    return new BaseLlmClientAdapter({
-      baseClient: config.getBaseLlmClient(),
-      modelName: config.getModel(),
-      overrideScope: 'log-parser',
+  const aimlKey = process.env['AIMLAPI_API_KEY'];
+  if (aimlKey) {
+    return new AimlApiLlmClient({
+      apiKey: aimlKey,
+      model,
+      temperature,
+      maxOutputTokens,
+      baseUrl: process.env['AIMLAPI_BASE_URL'],
     });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.warn('[log-parser] Failed to initialize CLI Gemini client.', { message });
-    return undefined;
   }
-}
 
-function detectAuthType(): AuthType | undefined {
-  if (process.env['GOOGLE_GENAI_USE_GCA'] === 'true') {
-    return AuthType.LOGIN_WITH_GOOGLE;
+  const geminiKey = process.env['GEMINI_API_KEY'] ?? process.env['GOOGLE_API_KEY'];
+  if (geminiKey) {
+    return new GeminiLlmClient({
+      apiKey: geminiKey,
+      model,
+      temperature,
+      maxOutputTokens,
+      apiVersion: process.env['LOG_PARSER_GEMINI_API_VERSION'] ?? 'v1beta',
+    });
   }
-  if (process.env['GOOGLE_GENAI_USE_VERTEXAI'] === 'true') {
-    return AuthType.USE_VERTEX_AI;
-  }
-  if (process.env['GEMINI_API_KEY'] || process.env['GOOGLE_API_KEY']) {
-    return AuthType.USE_GEMINI;
-  }
+
   return undefined;
-}
-
-async function bootstrapCliConfig(): Promise<Config | undefined> {
-  try {
-    const cwd = process.cwd();
-    const config = new Config({
-      sessionId: `log-parser-${randomUUID()}`,
-      model: resolveModelPreference(),
-      targetDir: cwd,
-      debugMode:
-        process.env['DEBUG'] === 'true' ||
-        process.env['DEBUG'] === '1' ||
-        process.env['GEMINI_LOG_PARSER_DEBUG'] === '1',
-      cwd,
-      fileDiscoveryService: new FileDiscoveryService(cwd),
-      usageStatisticsEnabled: false,
-    });
-    await config.initialize();
-    return config;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.warn('[log-parser] Unable to bootstrap CLI Config.', { message });
-    return undefined;
-  }
 }
 
 function resolveModelPreference(): string {
   const candidate =
+    process.env['LOG_PARSER_LLM_MODEL'] ??
+    process.env['LOG_PARSER_AIMLAPI_MODEL'] ??
+    process.env['AIMLAPI_MODEL'] ??
     process.env['LOG_PARSER_GEMINI_MODEL'] ??
     process.env['GEMINI_MODEL'];
   const deprecated = new Set([
@@ -172,16 +126,6 @@ function resolveModelPreference(): string {
     return DEFAULT_LOG_PARSER_MODEL;
   }
   return candidate;
-}
-
-function createDirectGeminiClient(): GeminiLlmClient | undefined {
-  const apiKey = process.env['GEMINI_API_KEY'] ?? process.env['GOOGLE_API_KEY'];
-  if (!apiKey) {
-    return undefined;
-  }
-  const model = resolveModelPreference() || DEFAULT_LOG_PARSER_MODEL;
-  const apiVersion = process.env['LOG_PARSER_GEMINI_API_VERSION'];
-  return new GeminiLlmClient({ apiKey, model, apiVersion });
 }
 
 async function runInteractiveSetup(options: RunnerOptions): Promise<void> {
@@ -238,13 +182,18 @@ async function runInteractiveSetup(options: RunnerOptions): Promise<void> {
       {
         type: 'text',
         name: 'model',
-        message: 'Preferred Gemini model',
+        message: 'Preferred LLM model (e.g., google/gemini-2.0-flash)',
         initial: resolveModelPreference(),
       },
       {
         type: 'password',
-        name: 'apiKey',
-        message: 'Gemini API key (leave blank to keep existing)',
+        name: 'aimlApiKey',
+        message: 'AimlAPI API key (recommended)',
+      },
+      {
+        type: 'password',
+        name: 'geminiApiKey',
+        message: 'Direct Gemini API key (fallback)',
       },
     ],
     {
@@ -255,11 +204,14 @@ async function runInteractiveSetup(options: RunnerOptions): Promise<void> {
     },
   );
 
-  if (responses.apiKey) {
-    process.env['GEMINI_API_KEY'] = responses.apiKey;
+  if (responses.aimlApiKey) {
+    process.env['AIMLAPI_API_KEY'] = responses.aimlApiKey;
+  }
+  if (responses.geminiApiKey) {
+    process.env['GEMINI_API_KEY'] = responses.geminiApiKey;
   }
   if (responses.model) {
-    process.env['LOG_PARSER_GEMINI_MODEL'] = responses.model;
+    process.env['LOG_PARSER_LLM_MODEL'] = responses.model;
   }
   if (responses.inputPath) {
     options.inputPath = responses.inputPath.trim();
@@ -305,7 +257,7 @@ export const main = async (): Promise<void> => {
   const llmClient = options.matchOnly ? undefined : await createLogParserLlmClient();
   if (!options.matchOnly && !llmClient) {
     console.error(
-      '[log-parser] Gemini client not configured. Set GEMINI_API_KEY (or equivalent) before running.',
+      '[log-parser] LLM client not configured. Set AIMLAPI_API_KEY (preferred) or GEMINI_API_KEY before running.',
     );
     process.exit(1);
   }

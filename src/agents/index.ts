@@ -13,8 +13,6 @@ export * from './agents/validation-agent.js';
 export * from './agents/repair-agent.js';
 export * from './agents/update-agent.js';
 export * from './agents/interaction-agent.js';
-export * from './llm/gemini-client.js';
-export * from './llm/base-llm-client-adapter.js';
 export * from './prompts/parsing.js';
 export * from './prompts/repair.js';
 export * from './prompts/routing.js';
