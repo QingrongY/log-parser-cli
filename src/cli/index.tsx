@@ -8,10 +8,10 @@
 import { resolve } from 'node:path';
 import prompts from 'prompts';
 import { render } from 'ink';
-import type { LlmClient } from './agents/index.js';
-import type { SemanticLogParserOptions } from './runner/index.js';
-import { LogParserApp } from './ui/log-parser-app.js';
-import { AimlApiLlmClient, GeminiLlmClient } from './llm/index.js';
+import type { LlmClient } from '../agents/index.js';
+import type { SemanticLogParserOptions } from '../runner/index.js';
+import { LogParserApp } from '../ui/log-parser-app.js';
+import { AimlApiLlmClient, GeminiLlmClient } from '../llm/index.js';
 
 const DEFAULT_LOG_PARSER_MODEL = 'google/gemini-2.0-flash';
 
