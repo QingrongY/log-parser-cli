@@ -24,6 +24,7 @@ interface UiState {
   matched: number;
   pending: number;
   initialLearning?: number;
+  failed: number;
   templates: number;
   stageMessages: Record<StageName, StageState>;
   events: string[];
@@ -52,6 +53,7 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
     matched: 0,
     pending: 0,
     initialLearning: undefined,
+    failed: 0,
     templates: 0,
     stageMessages: initialStageState,
     events: [],
@@ -100,6 +102,7 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
           pending: info.unmatched,
           initialLearning:
             typeof prev.initialLearning === 'number' ? prev.initialLearning : info.unmatched,
+          failed: 0,
         }));
       },
       onStage: (event) => {
@@ -123,6 +126,12 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
           ) {
             templates += 1;
           }
+          let failed = prev.failed;
+          let pending = prev.pending;
+          if (isFailureEvent(event.stage as StageName, event.message, event.lineIndex)) {
+            failed += 1;
+            pending = Math.max(0, pending - 1); // remove from pending on failure to match pipeline behavior
+          }
           const lineLabel =
             typeof event.lineIndex === 'number' ? `line ${event.lineIndex + 1}` : 'global';
           return {
@@ -130,6 +139,8 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
             currentLine: event.lineIndex,
             stageMessages: newStages,
             templates,
+            pending,
+            failed,
             events: pushEvent(prev.events, `${lineLabel}: ${event.stage} -> ${event.message}`),
           };
         });
@@ -182,7 +193,8 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
   }, [summary, error, exit]);
 
   const learningTarget = state.initialLearning ?? 0;
-  const resolvedLearning = learningTarget > 0 ? Math.max(learningTarget - state.pending, 0) : 0;
+  const resolvedLearning =
+    learningTarget > 0 ? Math.max(0, learningTarget - state.pending) : state.pending === 0 ? 1 : 0;
   const progressRatio =
     learningTarget > 0 ? resolvedLearning / learningTarget : state.pending === 0 ? 1 : 0;
   const progressBar = renderProgressBar(progressRatio, 12);
@@ -217,7 +229,7 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
         <Text>
           Learning {progressBar} {progressLabel} [Line{' '}
           {typeof state.currentLine === 'number' ? state.currentLine + 1 : '--'} | Templates{' '}
-          {state.templates} | Matched {state.matched} | Pending {state.pending} | Batch{' '}
+          {state.templates} | Matched {state.matched} | Failed {state.failed} | Pending {state.pending} | Batch{' '}
           {state.totalBatches
             ? `${Math.min(state.batchIndex, state.totalBatches)}/${state.totalBatches}`
             : state.batchIndex > 0
@@ -293,4 +305,15 @@ function renderProgressBar(ratio: number, width: number): string {
   const filled = '█'.repeat(filledWidth);
   const empty = '░'.repeat(Math.max(width - filledWidth, 0));
   return `[${filled}${empty}]`;
+}
+
+function isFailureEvent(stage: StageName, message: string, lineIndex?: number): boolean {
+  if (typeof lineIndex !== 'number') {
+    return false;
+  }
+  const normalized = message.toLowerCase();
+  if (normalized.includes('fail') || normalized.includes('conflict')) {
+    return ['parsing', 'validation', 'repair', 'update'].includes(stage);
+  }
+  return false;
 }
