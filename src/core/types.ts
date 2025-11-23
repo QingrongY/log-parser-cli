@@ -49,10 +49,21 @@ export interface LogProcessingSummary {
   conflicts: TemplateConflict[];
   matchedRecords: MatchedLogRecord[];
   unmatchedSamples: string[];
+  failures: FailureRecord[];
 }
 
 export interface TemplateConflict {
   candidate: LogTemplateDefinition;
   conflictsWith: LogTemplateDefinition[];
   diagnostics?: TemplateValidationDiagnostics[];
+}
+
+export interface FailureRecord {
+  lineIndex: number;
+  rawLog: string;
+  stage: string;
+  reason: string;
+  timestamp: string;
+  template?: LogTemplateDefinition;
+  details?: Record<string, unknown>;
 }

@@ -24,6 +24,7 @@ import type {
   TemplateConflict,
   TemplateLibrary,
   TemplateManager,
+  FailureRecord,
 } from '../types.js';
 
 interface PipelineAgents {
@@ -39,6 +40,7 @@ export interface LogProcessingPipelineDeps {
   templateManager: TemplateManager;
   regexWorkerPool: RegexWorkerPool;
   observer?: ProcessingObserver;
+  failureLogPath?: string;
 }
 
 export interface StageEvent {
@@ -49,7 +51,7 @@ export interface StageEvent {
 }
 
 export interface ProcessingObserver {
-  onRouting?(info: { source: string; libraryId: string }): void;
+  onRouting?(info: { source: string; libraryId: string; existingTemplates: number }): void;
   onStage?(event: StageEvent): void;
   onMatching?(info: { lineIndex?: number; matched: number }): void;
   onExistingMatchSummary?(info: { matched: number; unmatched: number }): void;
@@ -59,23 +61,40 @@ export interface ProcessingObserver {
 export class LogProcessingPipeline {
   constructor(private readonly deps: LogProcessingPipelineDeps) {}
 
-  private formatPrefix(lineIndex?: number): string {
-    return typeof lineIndex === 'number'
-      ? `[log-parser] line ${lineIndex + 1}`
-      : '[log-parser]';
-  }
-
   private logStage(
-    lineIndex: number | undefined,
+    lineIndex: number,
     stage: string,
     message: string,
     data?: Record<string, unknown>,
   ): void {
-    if (this.deps.observer?.onStage) {
-      this.deps.observer.onStage({ lineIndex, stage, message, data });
-      return;
+    this.deps.observer?.onStage?.({ lineIndex, stage, message, data });
+  }
+
+  private failures: FailureRecord[] = [];
+
+  private async recordFailure(
+    lineIndex: number,
+    rawLog: string,
+    stage: string,
+    reason: string,
+    template?: LogTemplateDefinition,
+    details?: Record<string, unknown>
+  ): Promise<void> {
+    const failure: FailureRecord = {
+      lineIndex,
+      rawLog,
+      stage,
+      reason,
+      timestamp: new Date().toISOString(),
+      template,
+      details,
+    };
+    this.failures.push(failure);
+
+    if (this.deps.failureLogPath) {
+      const { appendFile } = await import('node:fs/promises');
+      await appendFile(this.deps.failureLogPath, JSON.stringify(failure, null, 2) + '\n', 'utf-8').catch(() => {});
     }
-    console.log(`${this.formatPrefix(lineIndex)}: ${stage} ${message}`);
   }
 
   private extractLineIndex(context: AgentContext | undefined): number | undefined {
@@ -102,15 +121,12 @@ export class LogProcessingPipeline {
     }
 
     const libraryId = routingResult.output.libraryId;
-    if (this.deps.observer?.onRouting) {
-      this.deps.observer.onRouting({
-        source: routingResult.output.source,
-        libraryId,
-      });
-    } else {
-      this.logStage(undefined, 'routing', `source="${routingResult.output.source}", library="${libraryId}"`);
-    }
     const library = await this.deps.templateManager.loadLibrary(libraryId);
+    this.deps.observer?.onRouting?.({
+      source: routingResult.output.source,
+      libraryId,
+      existingTemplates: library.templates.length,
+    });
     const initialEntries: RegexLogEntry[] = logs.map((raw, index) => ({
       raw,
       index,
@@ -122,19 +138,10 @@ export class LogProcessingPipeline {
 
     await this.deps.templateManager.recordMatches(libraryId, matchResult.matched);
     library.matchedSamples.push(...matchResult.matched);
-    if (this.deps.observer?.onExistingMatchSummary) {
-      this.deps.observer.onExistingMatchSummary({
-        matched: matchResult.matched.length,
-        unmatched: matchResult.unmatched.length,
-      });
-    } else {
-      if (matchResult.matched.length > 0) {
-        this.logStage(undefined, 'matching', `existing templates matched ${matchResult.matched.length} log(s)`);
-      }
-      if (matchResult.unmatched.length > 0) {
-        this.logStage(undefined, 'matching', `${matchResult.unmatched.length} log(s) require learning`);
-      }
-    }
+    this.deps.observer?.onExistingMatchSummary?.({
+      matched: matchResult.matched.length,
+      unmatched: matchResult.unmatched.length,
+    });
 
     const pipelineContext: AgentContext = {
       runId,
@@ -186,13 +193,13 @@ export class LogProcessingPipeline {
       );
       if (parseResult.status !== 'success' || !parseResult.output) {
         this.logStage(sample.index, 'parsing', 'failed');
+        await this.recordFailure(sample.index, sample.raw, 'parsing', 'Parsing agent failed', undefined, { issues: parseResult.issues });
         conflicts.push(
           this.toConflictFromIssues(sample.raw, parseResult.issues ?? ['Parsing agent failed.']),
         );
         unresolvedSamples.push(sample.raw);
         continue;
       }
-      this.logStage(sample.index, 'parsing', 'derived candidate');
 
       let currentTemplate: LogTemplateDefinition = parseResult.output;
       let templateAccepted = false;
@@ -300,10 +307,11 @@ export class LogProcessingPipeline {
         const revalidatedTemplate = await this.validateAndRepair(
           postUpdateTemplate,
           [sample.raw],
-          pipelineContext,
+          lineContext,
         );
 
         if (!revalidatedTemplate) {
+          await this.recordFailure(sample.index, sample.raw, 'validation', 'Template failed revalidation after update', postUpdateTemplate);
           conflicts.push({
             candidate: postUpdateTemplate,
             conflictsWith: [],
@@ -320,6 +328,17 @@ export class LogProcessingPipeline {
 
         postUpdateTemplate = revalidatedTemplate;
 
+        const sampleMatch = await this.deps.regexWorkerPool.match({
+          logs: [sample],
+          templates: [postUpdateTemplate],
+        });
+
+        if (sampleMatch.matched.length === 0) {
+          await this.recordFailure(sample.index, sample.raw, 'matching', 'Template does not match log after update', postUpdateTemplate);
+          unresolvedSamples.push(sample.raw);
+          break;
+        }
+
         if (updateResult.output.action !== 'skipped') {
           await this.persistTemplate(library, libraryId, {
             ...updateResult.output,
@@ -328,16 +347,6 @@ export class LogProcessingPipeline {
           newTemplates.push(postUpdateTemplate);
         }
         let newlyMatchedCount = 0;
-
-        const sampleMatch = await this.deps.regexWorkerPool.match({
-          logs: [sample],
-          templates: [postUpdateTemplate],
-        });
-
-        if (sampleMatch.matched.length === 0) {
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
         await this.appendMatches(libraryId, library, sampleMatch.matched, matchedRecords);
         newlyMatchedCount += sampleMatch.matched.length;
 
@@ -379,6 +388,7 @@ export class LogProcessingPipeline {
       conflicts,
       matchedRecords,
       unmatchedSamples: unresolvedSamples,
+      failures: this.failures,
     };
   }
 
@@ -413,6 +423,10 @@ export class LogProcessingPipeline {
     context: AgentContext,
   ): Promise<LogTemplateDefinition | undefined> {
     const lineIndex = this.extractLineIndex(context);
+    if (lineIndex === undefined) {
+      throw new Error('validateAndRepair requires lineIndex in context');
+    }
+
     const validationResult = await this.deps.agents.validation.run(
       {
         template: candidate,
@@ -422,7 +436,6 @@ export class LogProcessingPipeline {
     );
 
     if (validationResult.output?.isValid) {
-      this.logStage(lineIndex, 'validation', 'passed');
       return candidate;
     }
 
@@ -447,11 +460,6 @@ export class LogProcessingPipeline {
       return undefined;
     }
 
-    this.logStage(
-      lineIndex,
-      'repair',
-      repairResult.output.changed ? 'applied fix' : 'no changes needed',
-    );
     return repairResult.output.template;
   }
 

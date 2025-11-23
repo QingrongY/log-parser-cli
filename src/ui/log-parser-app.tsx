@@ -4,178 +4,164 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Text, useApp } from 'ink';
 import type { SemanticLogParserOptions, SemanticLogParserResult } from '../runner/index.js';
 import { runSemanticLogParser } from '../runner/index.js';
 import type { ProcessingObserver } from '../core/index.js';
 
-const STAGES = ['routing', 'parsing', 'validation', 'repair', 'update', 'matching'] as const;
-
-type StageName = typeof STAGES[number];
-
-interface StageState {
-  message: string;
-  lineIndex?: number;
-}
-
-interface UiState {
-  currentLine?: number;
+interface Stats {
   matched: number;
   pending: number;
-  initialLearning?: number;
   failed: number;
   templates: number;
-  stageMessages: Record<StageName, StageState>;
-  events: string[];
-  library?: string;
-  source?: string;
-  batchIndex: number;
-  totalBatches?: number;
+  processedLines: Set<number>;
 }
 
-const initialStageState: Record<StageName, StageState> = STAGES.reduce(
-  (acc, stage) => {
-    acc[stage] = { message: 'idle' };
-    return acc;
-  },
-  {} as Record<StageName, StageState>,
-);
+interface Progress {
+  currentLine: number;
+  totalLines: number;
+  currentBatch: number;
+  totalBatches: number;
+}
 
-const MAX_EVENTS = 6;
+interface AppState {
+  source: string;
+  library: string;
+  stats: Stats;
+  progress: Progress;
+  lastEvent: string;
+  isComplete: boolean;
+}
+
+const initialState: AppState = {
+  source: '...',
+  library: '...',
+  stats: { matched: 0, pending: 0, failed: 0, templates: 0, processedLines: new Set() },
+  progress: { currentLine: 0, totalLines: 0, currentBatch: 0, totalBatches: 0 },
+  lastEvent: 'Initializing...',
+  isComplete: false,
+};
 
 export interface LogParserAppProps {
   options: SemanticLogParserOptions;
 }
 
 export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
-  const [state, setState] = useState<UiState>({
-    matched: 0,
-    pending: 0,
-    initialLearning: undefined,
-    failed: 0,
-    templates: 0,
-    stageMessages: initialStageState,
-    events: [],
-    batchIndex: 0,
-    totalBatches: undefined,
-  });
-  const [summary, setSummary] = useState<SemanticLogParserResult | undefined>();
+  const [state, setState] = useState<AppState>(initialState);
+  const [result, setResult] = useState<SemanticLogParserResult | undefined>();
   const [error, setError] = useState<string | undefined>();
   const { exit } = useApp();
 
   useEffect(() => {
     let cancelled = false;
+
     const observer: ProcessingObserver = {
       onBatchProgress: (info) => {
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
         setState((prev) => ({
           ...prev,
-          batchIndex: info.current,
-          totalBatches: info.total ?? prev.totalBatches,
-        }));
-      },
-      onRouting: (info) => {
-        if (cancelled) {
-          return;
-        }
-        setState((prev) => ({
-          ...prev,
-          library: info.libraryId,
-          source: info.source,
-          stageMessages: {
-            ...prev.stageMessages,
-            routing: { message: `library=${info.libraryId}`, lineIndex: undefined },
+          progress: {
+            ...prev.progress,
+            currentBatch: info.current,
+            totalBatches: info.total ?? prev.progress.totalBatches,
           },
-          events: pushEvent(prev.events, `routing -> library=${info.libraryId}`),
+          lastEvent: `Processing batch ${info.current}/${info.total ?? '?'}`,
         }));
       },
-      onExistingMatchSummary: (info) => {
-        if (cancelled) {
-          return;
-        }
+
+      onRouting: (info) => {
+        if (cancelled) return;
         setState((prev) => ({
           ...prev,
-          matched: info.matched,
-          pending: info.unmatched,
-          initialLearning:
-            typeof prev.initialLearning === 'number' ? prev.initialLearning : info.unmatched,
-          failed: 0,
+          source: info.source,
+          library: info.libraryId,
+          stats: { ...prev.stats, templates: info.existingTemplates },
+          lastEvent: `Routed to library: ${info.libraryId}`,
         }));
       },
+
+      onExistingMatchSummary: (info) => {
+        if (cancelled) return;
+        setState((prev) => ({
+          ...prev,
+          stats: {
+            ...prev.stats,
+            matched: prev.stats.matched + info.matched,
+            pending: prev.stats.pending + info.unmatched,
+          },
+          lastEvent: `Loaded ${info.matched} existing matches, ${info.unmatched} pending`,
+        }));
+      },
+
       onStage: (event) => {
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
+        if (event.lineIndex === undefined) return;
+
+        const lineIndex = event.lineIndex;
+
         setState((prev) => {
-          const nextStage = { ...prev.stageMessages[event.stage as StageName] };
-          nextStage.message = event.message;
-          nextStage.lineIndex = event.lineIndex;
-          const newStages: Record<StageName, StageState> = {
-            ...prev.stageMessages,
-            [event.stage as StageName]: nextStage,
-          };
-          let templates = prev.templates;
-          if (
-            event.stage === 'update' &&
-            event.data &&
-            typeof event.data['action'] === 'string' &&
-            (event.data['action'] === 'added' || event.data['action'] === 'updated')
-          ) {
-            templates += 1;
+          const newStats = { ...prev.stats };
+          const msg = event.message.toLowerCase();
+
+          if (event.stage === 'update' && event.data?.action === 'added') {
+            newStats.templates += 1;
           }
-          let failed = prev.failed;
-          let pending = prev.pending;
-          if (isFailureEvent(event.stage as StageName, event.message, event.lineIndex)) {
-            failed += 1;
-            pending = Math.max(0, pending - 1); // remove from pending on failure to match pipeline behavior
+
+          if (msg.includes('fail') || msg.includes('skip')) {
+            if (!newStats.processedLines.has(lineIndex)) {
+              newStats.processedLines.add(lineIndex);
+              newStats.failed += 1;
+              newStats.pending = Math.max(0, newStats.pending - 1);
+            }
           }
-          const lineLabel =
-            typeof event.lineIndex === 'number' ? `line ${event.lineIndex + 1}` : 'global';
+
           return {
             ...prev,
-            currentLine: event.lineIndex,
-            stageMessages: newStages,
-            templates,
-            pending,
-            failed,
-            events: pushEvent(prev.events, `${lineLabel}: ${event.stage} -> ${event.message}`),
+            progress: { ...prev.progress, currentLine: lineIndex + 1 },
+            stats: newStats,
+            lastEvent: `[${event.stage}] ${event.message}`,
           };
         });
       },
+
       onMatching: (info) => {
-        if (cancelled) {
-          return;
-        }
-        setState((prev) => ({
-          ...prev,
-          currentLine: info.lineIndex,
-          matched: prev.matched + info.matched,
-          pending: Math.max(prev.pending - info.matched, 0),
-          events: pushEvent(
-            prev.events,
-            `matching -> +${info.matched} (total ${prev.matched + info.matched})`,
-          ),
-        }));
+        if (cancelled) return;
+        if (info.lineIndex === undefined) return;
+
+        const lineIndex = info.lineIndex;
+
+        setState((prev) => {
+          const newStats = { ...prev.stats };
+
+          if (!newStats.processedLines.has(lineIndex)) {
+            newStats.processedLines.add(lineIndex);
+            newStats.matched += info.matched;
+            newStats.pending = Math.max(0, newStats.pending - info.matched);
+          }
+
+          return {
+            ...prev,
+            progress: { ...prev.progress, currentLine: lineIndex + 1 },
+            stats: newStats,
+            lastEvent: `Matched ${info.matched} log(s)`,
+          };
+        });
       },
     };
 
-    runSemanticLogParser({
-      ...options,
-      observer,
-    })
-      .then((result) => {
-        if (cancelled) {
-          return;
-        }
-        setSummary(result);
+    runSemanticLogParser({ ...options, observer })
+      .then((res) => {
+        if (cancelled) return;
+        setResult(res);
+        setState((prev) => ({
+          ...prev,
+          progress: { ...prev.progress, totalLines: res.totalLines },
+          isComplete: true,
+        }));
       })
       .catch((err) => {
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
         setError(err instanceof Error ? err.message : String(err));
       });
 
@@ -185,135 +171,106 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
   }, [options]);
 
   useEffect(() => {
-    if (summary || error) {
+    if (result || error) {
       const timer = setTimeout(() => exit(error ? new Error(error) : undefined), 200);
       return () => clearTimeout(timer);
     }
-    return;
-  }, [summary, error, exit]);
+  }, [result, error, exit]);
 
-  const learningTarget = state.initialLearning ?? 0;
-  const resolvedLearning =
-    learningTarget > 0 ? Math.max(0, learningTarget - state.pending) : state.pending === 0 ? 1 : 0;
-  const progressRatio =
-    learningTarget > 0 ? resolvedLearning / learningTarget : state.pending === 0 ? 1 : 0;
-  const progressBar = renderProgressBar(progressRatio, 12);
-  const progressLabel =
-    learningTarget > 0 ? `${Math.round(progressRatio * 100)}%` : state.pending === 0 ? '100%' : '--';
-
-  const stageRows = useMemo(
-    () =>
-      STAGES.map((stage) => {
-        const entry = state.stageMessages[stage];
-        const color = colorForMessage(stage, entry.message);
-        return (
-          <Text key={stage} color={color}>
-            {`[${stage.padEnd(9)}]`} {entry.message}
-          </Text>
-        );
-      }),
-    [state.stageMessages],
-  );
+  const progressPercent = calculateProgress(state.stats);
+  const progressBar = renderBar(progressPercent, 30);
 
   return (
     <Box flexDirection="column">
-      <Box>
-        <Text>
-          Source:{' '}
-          {state.source
-            ? `${state.source} (${state.library ?? 'unknown'})`
-            : 'analyzing samples...'}
+      <Box borderStyle="round" borderColor="cyan" paddingX={1}>
+        <Text bold color="cyanBright">
+          LOG PARSER
         </Text>
       </Box>
-      <Box marginTop={1}>
-        <Text>
-          Learning {progressBar} {progressLabel} [Line{' '}
-          {typeof state.currentLine === 'number' ? state.currentLine + 1 : '--'} | Templates{' '}
-          {state.templates} | Matched {state.matched} | Failed {state.failed} | Pending {state.pending} | Batch{' '}
-          {state.totalBatches
-            ? `${Math.min(state.batchIndex, state.totalBatches)}/${state.totalBatches}`
-            : state.batchIndex > 0
-              ? `${state.batchIndex}/?`
-              : '0/?'}]
-        </Text>
-      </Box>
-      <Box flexDirection="column" marginTop={1}>
-        <Text>Stages:</Text>
-        {stageRows}
-      </Box>
-      <Box flexDirection="column" marginTop={1}>
-        <Text>Recent events:</Text>
-        {state.events.length === 0 ? (
-          <Text dimColor>No events yet.</Text>
-        ) : (
-          state.events.map((event, index) => (
-            <Text key={`${event}-${index}`}>• {event}</Text>
-          ))
-        )}
-      </Box>
-      {summary && (
-        <Box marginTop={1} flexDirection="column">
-          <Text color="green">Completed run {summary.runId}</Text>
+
+      <Box marginTop={1} borderStyle="single" borderColor="gray" flexDirection="column" paddingX={1} paddingY={0}>
+        <Box>
+          <Text dimColor>Source: </Text>
+          <Text color="white">{state.source}</Text>
+          <Text dimColor> | Library: </Text>
+          <Text color="cyan">{state.library}</Text>
+          <Text dimColor> | Batch: </Text>
           <Text>
-            Matched: {summary.matched} | Unmatched: {summary.unmatched} | Templates updated:{' '}
-            {summary.templatesUpdated}
+            {state.progress.currentBatch}/{state.progress.totalBatches || '?'}
+          </Text>
+          <Text dimColor> | Line: </Text>
+          <Text>
+            {state.progress.currentLine}
+            {state.progress.totalLines > 0 ? ` / ${state.progress.totalLines}` : ''}
           </Text>
         </Box>
+        <Box>
+          <Text dimColor>Matched: </Text>
+          <Text color="greenBright">{state.stats.matched}</Text>
+          <Text dimColor> | Pending: </Text>
+          <Text color="yellow">{state.stats.pending}</Text>
+          <Text dimColor> | Failed: </Text>
+          <Text color="red">{state.stats.failed}</Text>
+          <Text dimColor> | Templates: </Text>
+          <Text color="cyan">{state.stats.templates}</Text>
+        </Box>
+        <Box>
+          <Text dimColor>Progress: </Text>
+          <Text color="greenBright">{progressBar}</Text>
+          <Text color="white"> {progressPercent}%</Text>
+        </Box>
+      </Box>
+
+      <Box marginTop={1} borderStyle="single" borderColor="magenta" paddingX={1} paddingY={0}>
+        <Text bold color="magenta">
+          Activity:{' '}
+        </Text>
+        <Text>{state.lastEvent}</Text>
+      </Box>
+
+      {result && (
+        <Box marginTop={1} borderStyle="double" borderColor="greenBright" flexDirection="column" paddingX={1} paddingY={0}>
+          <Text bold color="greenBright">
+            ✓ COMPLETE
+          </Text>
+          <Text>
+            Run ID: <Text color="cyan">{result.runId}</Text>
+          </Text>
+          <Text>
+            Processed {result.totalLines} lines | Matched {result.matched} | Unmatched {result.unmatched}
+          </Text>
+          <Text>Templates Updated: {result.templatesUpdated}</Text>
+          {result.conflictsDetected > 0 && (
+            <Text color="yellow">
+              Conflicts: {result.conflictsDetected} (see {result.conflictReportPath})
+            </Text>
+          )}
+          {result.failureReportPath && (
+            <Text color="red">
+              Failure details: {result.failureReportPath}
+            </Text>
+          )}
+          <Text dimColor>Match report: {result.reportPath}</Text>
+        </Box>
       )}
+
       {error && (
-        <Box marginTop={1}>
-          <Text color="red">Error: {error}</Text>
+        <Box marginTop={1} borderStyle="bold" borderColor="red" paddingX={1} paddingY={0}>
+          <Text color="redBright">ERROR: {error}</Text>
         </Box>
       )}
     </Box>
   );
 };
 
-function pushEvent(events: string[], next: string): string[] {
-  const merged = [...events, next];
-  if (merged.length > MAX_EVENTS) {
-    return merged.slice(merged.length - MAX_EVENTS);
-  }
-  return merged;
+function calculateProgress(stats: Stats): number {
+  const total = stats.matched + stats.pending + stats.failed;
+  if (total === 0) return 0;
+  return Math.round((stats.matched / total) * 100);
 }
 
-function colorForMessage(stage: StageName, message: string): string {
-  const normalized = message.toLowerCase();
-  if (stage === 'routing') {
-    return 'cyan';
-  }
-  if (normalized.includes('fail') || normalized.includes('conflict') || normalized.includes('skipped')) {
-    return 'red';
-  }
-  if (normalized.includes('retry')) {
-    return 'yellow';
-  }
-  if (
-    normalized.includes('derived') ||
-    normalized.includes('passed') ||
-    normalized.includes('action') ||
-    normalized.includes('applied') ||
-    normalized.includes('library=')
-  ) {
-    return 'green';
-  }
-  return 'white';
-}
-
-function renderProgressBar(ratio: number, width: number): string {
-  const filledWidth = Math.round(Math.max(0, Math.min(1, ratio)) * width);
-  const filled = '█'.repeat(filledWidth);
-  const empty = '░'.repeat(Math.max(width - filledWidth, 0));
-  return `[${filled}${empty}]`;
-}
-
-function isFailureEvent(stage: StageName, message: string, lineIndex?: number): boolean {
-  if (typeof lineIndex !== 'number') {
-    return false;
-  }
-  const normalized = message.toLowerCase();
-  if (normalized.includes('fail') || normalized.includes('conflict')) {
-    return ['parsing', 'validation', 'repair', 'update'].includes(stage);
-  }
-  return false;
+function renderBar(percent: number, width: number): string {
+  const filled = Math.round((percent / 100) * width);
+  const empty = width - filled;
+  return '█'.repeat(filled) + '░'.repeat(empty);
 }

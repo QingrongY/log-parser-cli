@@ -29,6 +29,43 @@ import {
   writeMatchReport,
   getLibraryDatabasePath,
 } from '../tools/index.js';
+import type { TemplateConflict, FailureRecord } from '../core/types.js';
+
+async function writeConflictReport(
+  path: string,
+  conflicts: Array<{ lineIndex?: number; conflict: TemplateConflict }>,
+): Promise<void> {
+  const report = {
+    timestamp: new Date().toISOString(),
+    totalConflicts: conflicts.length,
+    conflicts: conflicts.map(({ lineIndex, conflict }) => ({
+      lineIndex,
+      candidate: conflict.candidate,
+      conflictsWith: conflict.conflictsWith,
+      diagnostics: conflict.diagnostics,
+    })),
+  };
+  await fs.writeFile(path, JSON.stringify(report, null, 2), 'utf-8');
+}
+
+async function writeFailureReport(
+  path: string,
+  failures: FailureRecord[],
+): Promise<void> {
+  const report = {
+    timestamp: new Date().toISOString(),
+    totalFailures: failures.length,
+    failures: failures.map((f) => ({
+      lineIndex: f.lineIndex,
+      rawLog: f.rawLog,
+      stage: f.stage,
+      reason: f.reason,
+      timestamp: f.timestamp,
+      details: f.details,
+    })),
+  };
+  await fs.writeFile(path, JSON.stringify(report, null, 2), 'utf-8');
+}
 
 export interface SemanticLogParserOptions {
   inputPath: string;
@@ -60,6 +97,8 @@ export interface SemanticLogParserResult {
   templateLibraryPaths: string[];
   reportPath: string;
   chunkDirectory: string;
+  conflictReportPath?: string;
+  failureReportPath?: string;
 }
 
 export async function runSemanticLogParser(
@@ -92,6 +131,9 @@ export async function runSemanticLogParser(
     });
   const regexWorkerPool: RegexWorkerPool =
     options.regexWorkerPool ?? new RegexWorkerPool();
+
+  const failureLogPath = join(reportDir, `${runId}-failures.jsonl`);
+  await fs.writeFile(failureLogPath, '', 'utf-8');
 
   if (options.matchOnly) {
     if (!options.libraryId) {
@@ -143,12 +185,15 @@ export async function runSemanticLogParser(
     templateManager,
     regexWorkerPool,
     observer: options.observer,
+    failureLogPath,
   });
 
   const chunkRecords: ChunkRecord[] = [];
   const libraryIds = new Set<string>();
   let templatesUpdated = 0;
   let conflictsDetected = 0;
+  const allConflicts: Array<{ lineIndex?: number; conflict: TemplateConflict }> = [];
+  const allFailures: FailureRecord[] = [];
   let chunkIndex = 0;
   let firstPassLines = 0;
 
@@ -171,6 +216,10 @@ export async function runSemanticLogParser(
     firstPassLines += summary.totalLines;
     templatesUpdated += summary.newTemplates.length;
     conflictsDetected += summary.conflicts.length;
+    summary.conflicts.forEach((conflict) => {
+      allConflicts.push({ conflict });
+    });
+    allFailures.push(...summary.failures);
     libraryIds.add(summary.libraryId);
 
     const chunkPath = await writeChunkFile(chunkDir, summary.libraryId, chunkIndex, batch);
@@ -198,6 +247,11 @@ export async function runSemanticLogParser(
     getLibraryDatabasePath(templateLibraryDir, id),
   );
 
+  const conflictReportPath = join(reportDir, `${runId}-conflicts.json`);
+  if (conflictsDetected > 0) {
+    await writeConflictReport(conflictReportPath, allConflicts);
+  }
+
   return {
     runId,
     totalLines: replayStats.totalLines,
@@ -208,6 +262,8 @@ export async function runSemanticLogParser(
     templateLibraryPaths,
     reportPath,
     chunkDirectory: chunkDir,
+    conflictReportPath: conflictsDetected > 0 ? conflictReportPath : undefined,
+    failureReportPath: allFailures.length > 0 ? failureLogPath : undefined,
   };
 }
 

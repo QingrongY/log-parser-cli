@@ -70,9 +70,7 @@ export abstract class BaseAgent<TInput, TOutput> {
 
     try {
       const result = await this.handle(input, context);
-      if (result.status === 'success') {
-        console.log(`${prefix}: ${this.name} success`);
-      } else {
+      if (result.status !== 'success') {
         console.log(
           `${prefix}: ${this.name} failed -> ${(result.issues ?? []).join('; ') || result.status}`,
         );
