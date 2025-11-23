@@ -5,3 +5,4 @@
  */
 
 export { runSemanticLogParser } from './runner/index.js';
+export { main as runCli } from './cli/main.js';

@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "log-parser": "dist/src/cli.js"
+    "log-parser": "dist/src/cli/main.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
