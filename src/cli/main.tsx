@@ -10,7 +10,7 @@ import type { SemanticLogParserOptions } from '../runner/index.js';
 import { LogParserApp } from '../ui/log-parser-app.js';
 import { parseArgs, type RunnerOptions } from './args.js';
 import { runInteractiveSetup } from './interactive.js';
-import { resolveLlmConfigFromEnv, createLlmClient } from '../config/llm-config.js';
+import { resolveLlmConfigFromEnv, createLlmClient } from '../llm/config.js';
 
 export const main = async (): Promise<void> => {
   const options = parseArgs(process.argv.slice(2));

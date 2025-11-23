@@ -6,7 +6,7 @@
 
 import { resolve } from 'node:path';
 import prompts from 'prompts';
-import { resolveModelFromEnv } from '../config/llm-config.js';
+import { resolveModelFromEnv } from '../llm/config.js';
 import type { RunnerOptions } from './args.js';
 
 export async function runInteractiveSetup(options: RunnerOptions): Promise<void> {
