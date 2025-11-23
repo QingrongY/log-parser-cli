@@ -17,14 +17,27 @@ export interface LlmEnvConfig {
 
 const DEFAULT_MODEL = 'google/gemini-2.0-flash';
 
-export function resolveLlmConfigFromEnv(): LlmEnvConfig | undefined {
-  const model =
+export const resolveModelFromEnv = (): string => {
+  const candidate =
     process.env['LOG_PARSER_LLM_MODEL'] ??
     process.env['LOG_PARSER_AIMLAPI_MODEL'] ??
     process.env['AIMLAPI_MODEL'] ??
     process.env['LOG_PARSER_GEMINI_MODEL'] ??
-    process.env['GEMINI_MODEL'] ??
-    DEFAULT_MODEL;
+    process.env['GEMINI_MODEL'];
+  const deprecated = new Set([
+    'gemini-1.5-pro-latest',
+    'gemini-1.5-pro',
+    'gemini-1.5-flash',
+    'gemini-1.5-flash-latest',
+  ]);
+  if (!candidate || deprecated.has(candidate)) {
+    return DEFAULT_MODEL;
+  }
+  return candidate;
+};
+
+export function resolveLlmConfigFromEnv(): LlmEnvConfig | undefined {
+  const model = resolveModelFromEnv();
 
   if (process.env['AIMLAPI_API_KEY']) {
     return {
