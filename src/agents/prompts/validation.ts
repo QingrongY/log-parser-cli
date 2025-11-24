@@ -7,13 +7,10 @@
 import { COMMON_LOG_PARSER_KNOWLEDGE } from '../knowledge.js';
 
 interface ValidationPromptOptions {
-  pattern: string;
-  variables: string[];
-  sample: string;
-  captures: Record<string, string>;
+  variables: Record<string, string>;
 }
 
-export const VALIDATION_SYSTEM_PROMPT = `You are reviewing whether a proposed regex template treats STRUCTURE vs BUSINESS DATA correctly. Focus on semantic consistency with the shared knowledge.`;
+export const VALIDATION_SYSTEM_PROMPT = `You are reviewing whether extracted VARIABLES look like BUSINESS DATA vs STRUCTURE. Focus on semantic consistency with the shared knowledge.`;
 
 export const VALIDATION_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
@@ -29,32 +26,23 @@ export const VALIDATION_RESPONSE_SCHEMA: Record<string, unknown> = {
   },
 };
 
-export const buildValidationPrompt = ({
-  pattern,
-  variables,
-  sample,
-  captures,
-}: ValidationPromptOptions): string => {
-  const formattedCaptures = Object.entries(captures)
+export const buildValidationPrompt = ({ variables }: ValidationPromptOptions): string => {
+  const formatted = Object.entries(variables)
     .map(([key, value]) => `- ${key}: ${value}`)
     .join('\n');
-  const variableList = variables.length > 0 ? variables.join(', ') : '(none)';
 
   return [
     `Shared knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
-    'Review whether the regex below marks STRUCTURE vs BUSINESS DATA correctly and strictly follow the requirement in the shared knowledge.',
-    'If any BUSINESS DATA is misclassified or any rules are violated, explain the issue and advice.',
+    'Review whether each VARIABLE value below is BUSINESS DATA (instance-specific) rather than STRUCTURE (fixed tokens) according to the shared knowledge.',
+    'Decide whether to extract these variables.',
     '',
-    `Regex template:\n${pattern}`,
-    `Declared variables: ${variableList}`,
-    `Sample log line:\n${sample}`,
-    'Captured BUSINESS DATA example:',
-    formattedCaptures || '- (no captures)',
+    'Variables:',
+    formatted || '- (none)',
     '',
     'Return ONLY JSON in this form:',
     '{',
     '  "verdict": "pass" | "fail",',
-    '  "issue": "very brief description of issue",',
+    '  "issues": ["very brief issue 1", "very brief issue 2"],',
     '  "advice": "very brief advice"',
     '}',
   ].join('\n');

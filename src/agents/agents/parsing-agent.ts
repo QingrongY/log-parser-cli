@@ -27,13 +27,9 @@ export interface ParsingAgentOutput extends LogTemplateDefinition {
 }
 
 interface ParsingLlmResponse {
-  pattern: string;
+  tagged: string;
   description?: string;
-  example?: {
-    structure?: string;
-    business_data?: Record<string, string>;
-  };
-  'BUSINESS DATA'?: Record<string, string>;
+  example?: Record<string, unknown>;
 }
 
 interface LlmParsingResult {
@@ -41,28 +37,20 @@ interface LlmParsingResult {
   prompt: string;
 }
 
+class ParsingFailureError extends Error {
+  constructor(message: string, public readonly details?: Record<string, unknown>) {
+    super(message);
+  }
+}
+
 const PARSING_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
-  additionalProperties: false,
-  required: ['pattern', 'BUSINESS DATA'],
+  additionalProperties: true,
+  required: ['tagged'],
   properties: {
-    pattern: { type: 'string', minLength: 1 },
-    'BUSINESS DATA': {
-      type: 'object',
-      additionalProperties: { type: 'string' },
-    },
+    tagged: { type: 'string', minLength: 1 },
     description: { type: 'string' },
-    example: {
-      type: 'object',
-      additionalProperties: false,
-      properties: {
-        structure: { type: 'string' },
-        business_data: {
-          type: 'object',
-          additionalProperties: { type: 'string' },
-        },
-      },
-    },
+    example: { type: 'object' },
   },
 };
 
@@ -94,8 +82,15 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       hint.trim().toLowerCase(),
     );
 
+    const prompt = buildParsingPrompt({ logLine: samples[0], variableHints });
+
     try {
-      const llmResult = await this.generateWithLlm(samples[0], variableHints, context);
+      const llmResult = await this.generateWithLlm(
+        samples[0],
+        variableHints,
+        context,
+        prompt,
+      );
       return {
         status: 'success',
         output: {
@@ -106,10 +101,13 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      this.logger.warn('LLM parsing failed', { message });
+      const details =
+        error instanceof ParsingFailureError ? error.details : undefined;
+      this.logger.warn('LLM parsing failed', { message, details });
       return {
         status: 'retryable-error',
         issues: [`LLM parsing failed: ${message}`],
+        diagnostics: { promptUsed: prompt, ...(details ?? {}) },
       };
     }
   }
@@ -118,9 +116,8 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
     sample: string,
     variableHints: string[],
     context: AgentContext,
+    prompt: string,
   ): Promise<LlmParsingResult> {
-    const prompt = buildParsingPrompt({ logLine: sample, variableHints });
-
     const completion = await this.llmClient!.complete({
       prompt,
       systemPrompt: PARSING_SYSTEM_PROMPT,
@@ -128,47 +125,272 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       responseMimeType: 'application/json',
       responseSchema: PARSING_RESPONSE_SCHEMA,
     });
-    if (!completion.output?.trim()) {
-      this.logger.warn('LLM returned empty response', {
-        runId: context.runId,
-        raw: safeSerialize(completion.raw),
-      });
-      throw new Error(`LLM returned empty response. raw=${safeSerialize(completion.raw)}`);
-    }
-    const parsed = extractJsonObject<ParsingLlmResponse>(completion.output);
-    if (!parsed.pattern) {
-      throw new Error('LLM response missing pattern.');
-    }
-    const businessData = parsed['BUSINESS DATA'] ?? {};
-    const variables = this.normalizeVariables(Object.keys(businessData), variableHints);
-    ensureValidRegex(parsed.pattern);
 
-    const template: LogTemplateDefinition = {
-      pattern: normalizeRegexPattern(parsed.pattern),
-      variables,
-      description: parsed.description ?? 'LLM-derived log template',
-      source: context.templateLibraryId ?? context.sourceHint,
+    try {
+      if (!completion.output?.trim()) {
+        throw new ParsingFailureError('LLM returned empty response.', {
+          llmRaw: safeSerialize(completion.raw),
+        });
+      }
+      const parsed = extractJsonObject<ParsingLlmResponse>(completion.output);
+      if (!parsed.tagged) {
+        throw new ParsingFailureError('LLM response missing tagged log line.', {
+          llmOutput: completion.output,
+        });
+      }
+      const { pattern, variables } = buildRegexFromTagged(sample, parsed.tagged);
+      const normalizedPattern = normalizeRegexPattern(pattern);
+      ensureValidRegex(normalizedPattern);
+
+      const template: LogTemplateDefinition = {
+        pattern: normalizedPattern,
+        variables,
+        description: parsed.description ?? 'LLM-tagged log template',
+        source: context.templateLibraryId ?? context.sourceHint,
       metadata: {
         sample,
         variableHints,
+        taggedSample: parsed.tagged,
         llmExample: parsed.example,
         llmModel: this.llmClient?.modelName,
         llmRaw: completion.output,
-        llmBusinessData: businessData,
+        llmTagged: parsed.tagged,
       },
-    };
+      };
 
-    return { template, prompt };
-  }
-
-  private normalizeVariables(candidates: string[], hints: string[]): string[] {
-    const names = candidates.length > 0 ? candidates : hints;
-    const normalized = names
-      .map((name) => name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_'))
-      .filter((name): name is string => Boolean(name));
-    return Array.from(new Set(normalized));
+      return { template, prompt };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const details =
+        error instanceof ParsingFailureError ? error.details : undefined;
+      throw new ParsingFailureError(message, {
+        ...(details ?? {}),
+        llmOutput: completion.output,
+      });
+    }
   }
 }
+
+type TaggedSegment =
+  | { kind: 'text'; value: string }
+  | { kind: 'var'; name: string; value: string };
+
+const TAG_TOKEN = /<(\/)?([a-zA-Z0-9_-]+)>/g;
+const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
+
+const buildRegexFromTagged = (sample: string, tagged: string): { pattern: string; variables: string[] } => {
+  const segments = parseTaggedSegments(tagged);
+  if (segments.length === 0) {
+    throw new Error('LLM did not produce any tagged segments.');
+  }
+  const hasVariables = segments.some((segment) => segment.kind === 'var');
+  if (!hasVariables) {
+    throw new Error('LLM output contained no tagged variables.');
+  }
+  const reconstructed = segments.map((segment) => segment.value).join('');
+  if (reconstructed !== sample) {
+    throw new Error('Tagged line does not match the original log sample.');
+  }
+
+  const variables: string[] = [];
+  const nameCounts = new Map<string, number>();
+  const parts: string[] = [];
+
+  for (const segment of segments) {
+    if (segment.kind === 'text') {
+      parts.push(escapeRegex(segment.value));
+      continue;
+    }
+    const baseName = sanitizeVariableName(segment.name);
+    const count = (nameCounts.get(baseName) ?? 0) + 1;
+    nameCounts.set(baseName, count);
+    const finalName = count === 1 ? baseName : `${baseName}${count}`;
+    variables.push(finalName);
+    const fragment = inferRegexForValue(segment.value);
+    parts.push(`(?<${finalName}>${fragment})`);
+  }
+
+  return { pattern: parts.join(''), variables };
+};
+
+const parseTaggedSegments = (tagged: string): TaggedSegment[] => {
+  const segments: TaggedSegment[] = [];
+  let textBuffer = '';
+  let open: { name: string; start: number; contentStart: number } | null = null;
+  const flushText = (): void => {
+    if (textBuffer.length > 0) {
+      segments.push({ kind: 'text', value: textBuffer });
+      textBuffer = '';
+    }
+  };
+
+  let i = 0;
+  while (i < tagged.length) {
+    if (tagged[i] !== '<') {
+      if (!open) {
+        textBuffer += tagged[i];
+      }
+      i += 1;
+      continue;
+    }
+
+    const closeIdx = tagged.indexOf('>', i + 1);
+    if (closeIdx === -1) {
+      // No closing bracket; treat the rest as text.
+      if (open) {
+        textBuffer += tagged.slice(open.start);
+        open = null;
+      } else {
+        textBuffer += tagged.slice(i);
+      }
+      break;
+    }
+
+    const token = tagged.slice(i, closeIdx + 1);
+    const match = token.match(/^<(\/)?([A-Za-z0-9_-]+)>$/);
+    if (!match) {
+      // Not a valid tag token, treat as literal.
+      if (!open) {
+        textBuffer += tagged[i];
+      }
+      i += 1;
+      continue;
+    }
+
+    const isClosing = Boolean(match[1]);
+    const name = match[2];
+
+    if (!open) {
+      if (isClosing) {
+        // Stray closing tag; treat as text.
+        textBuffer += token;
+        i = closeIdx + 1;
+        continue;
+      }
+      // Opening tag.
+      flushText();
+      open = { name, start: i, contentStart: closeIdx + 1 };
+      i = closeIdx + 1;
+      continue;
+    }
+
+    // We have an open tag already.
+    if (isClosing && name === open.name) {
+      const value = tagged.slice(open.contentStart, i);
+      segments.push({ kind: 'var', name, value });
+      open = null;
+      i = closeIdx + 1;
+      continue;
+    }
+
+    // Nested/mismatched tags are treated as literal content of the open tag.
+    i = closeIdx + 1;
+  }
+
+  if (open) {
+    textBuffer += tagged.slice(open.start);
+  }
+
+  flushText();
+  return segments;
+};
+
+const escapeRegex = (text: string): string => text.replace(REGEX_SPECIAL, '\\$&');
+
+const sanitizeVariableName = (name: string): string => {
+  const cleaned = name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_');
+  if (!cleaned) {
+    throw new Error('Invalid variable name encountered in tags.');
+  }
+  return cleaned;
+};
+
+const SPECIAL_SYMBOL_MAP: Record<string, string> = {
+  ' ': '\\s+',
+  '\t': '\\t',
+  '\r': '\\r',
+  '\n': '\\n',
+  '!': '\\!',
+  '"': '\\"',
+  '#': '\\#',
+  '$': '\\$',
+  '%': '\\%',
+  '&': '\\&',
+  "'": "\\'",
+  '(': '\\(',
+  ')': '\\)',
+  '*': '\\*',
+  '+': '\\+',
+  ',': '\\,',
+  '-': '\\-',
+  '.': '\\.',
+  '/': '\\/',
+  ':': '\\:',
+  ';': '\\;',
+  '<': '\\<',
+  '=': '\\=',
+  '>': '\\>',
+  '?': '\\?',
+  '@': '\\@',
+  '[': '\\[',
+  '\\': '\\\\',
+  ']': '\\]',
+  '^': '\\^',
+  '_': '_',
+  '`': '\\`',
+  '{': '\\{',
+  '|': '\\|',
+  '}': '\\}',
+  '~': '\\~',
+};
+
+const inferRegexForValue = (value: string): string => {
+  if (value.length === 0) {
+    return '[^\\r\\n]*';
+  }
+
+  const parts: string[] = [];
+  let inAlnumRun = false;
+
+  const flushRun = (): void => {
+    if (inAlnumRun) {
+      parts.push('[A-Za-z0-9]+');
+      inAlnumRun = false;
+    }
+  };
+
+  for (const ch of value) {
+    if (/[A-Za-z0-9]/.test(ch)) {
+      if (!inAlnumRun) {
+        flushRun();
+        inAlnumRun = true;
+      }
+      continue;
+    }
+
+    // Special symbol
+    flushRun();
+    parts.push(escapeSpecialChar(ch));
+  }
+
+  flushRun();
+  return parts.join('');
+};
+
+const escapeSpecialChar = (ch: string): string => {
+  if (SPECIAL_SYMBOL_MAP[ch] !== undefined) {
+    return SPECIAL_SYMBOL_MAP[ch];
+  }
+  // Fallback to hex escape to keep regex safe for unexpected symbols.
+  const code = ch.codePointAt(0);
+  if (code === undefined) {
+    return '';
+  }
+  if (code <= 0xff) {
+    return `\\x${code.toString(16).padStart(2, '0')}`;
+  }
+  return `\\u${code.toString(16).padStart(4, '0')}`;
+};
 
 const safeSerialize = (value: unknown): string => {
   try {

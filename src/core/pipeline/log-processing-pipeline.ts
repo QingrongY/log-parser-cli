@@ -26,6 +26,7 @@ import type {
   TemplateManager,
   FailureRecord,
 } from '../types.js';
+import { matchEntireLine } from '../../agents/utils/regex.js';
 
 interface PipelineAgents {
   routing: RoutingAgent;
@@ -193,7 +194,14 @@ export class LogProcessingPipeline {
       );
       if (parseResult.status !== 'success' || !parseResult.output) {
         this.logStage(sample.index, 'parsing', 'failed');
-        await this.recordFailure(sample.index, sample.raw, 'parsing', 'Parsing agent failed', undefined, { issues: parseResult.issues });
+        await this.recordFailure(
+          sample.index,
+          sample.raw,
+          'parsing',
+          'Parsing agent failed',
+          undefined,
+          { issues: parseResult.issues, diagnostics: parseResult.diagnostics },
+        );
         conflicts.push(
           this.toConflictFromIssues(sample.raw, parseResult.issues ?? ['Parsing agent failed.']),
         );
@@ -249,6 +257,14 @@ export class LogProcessingPipeline {
 
         if (!updateResult.output) {
           this.logStage(sample.index, 'update', 'failed');
+          await this.recordFailure(
+            sample.index,
+            sample.raw,
+            'update',
+            'Update agent failed',
+            validatedTemplate,
+            { issues: updateResult.issues },
+          );
           conflicts.push({
             candidate: validatedTemplate,
             conflictsWith: [],
@@ -265,6 +281,14 @@ export class LogProcessingPipeline {
 
         if (updateResult.output.action === 'conflict') {
           this.logStage(sample.index, 'update', 'conflict', { action: 'conflict' });
+          await this.recordFailure(
+            sample.index,
+            sample.raw,
+            'update',
+            'Template conflict detected',
+            validatedTemplate,
+            { conflicts: updateResult.output.conflictingTemplates },
+          );
           conflicts.push({
             candidate: validatedTemplate,
             conflictsWith: updateResult.output.conflictingTemplates ?? [],
@@ -277,6 +301,13 @@ export class LogProcessingPipeline {
           this.logStage(sample.index, 'update', 'retry requested', { action: 'retry' });
           retryCount += 1;
           if (retryCount > 1) {
+            await this.recordFailure(
+              sample.index,
+              sample.raw,
+              'update',
+              'Template exceeded retry limit; human review required.',
+              updateResult.output.template,
+            );
             conflicts.push({
               candidate: updateResult.output.template,
               conflictsWith: [],
@@ -427,10 +458,19 @@ export class LogProcessingPipeline {
       throw new Error('validateAndRepair requires lineIndex in context');
     }
 
+    const sample = samples[0] ?? '';
+    const matchResult = matchEntireLine(candidate.pattern, sample);
+    if (!matchResult.matched) {
+      this.logStage(lineIndex, 'validation', 'failed');
+      await this.recordFailure(lineIndex, sample, 'validation', 'Template did not match sample; cannot validate variables.', candidate, {
+        matchError: matchResult.error,
+      });
+      return undefined;
+    }
+
     const validationResult = await this.deps.agents.validation.run(
       {
-        template: candidate,
-        samples,
+        variables: matchResult.variables,
       },
       context,
     );
@@ -441,6 +481,14 @@ export class LogProcessingPipeline {
 
     if (!validationResult.output) {
       this.logStage(lineIndex, 'validation', 'failed');
+      await this.recordFailure(
+        lineIndex,
+        sample,
+        'validation',
+        'Validation agent did not return output.',
+        candidate,
+        { issues: validationResult.issues },
+      );
       return undefined;
     }
 
@@ -457,6 +505,14 @@ export class LogProcessingPipeline {
 
     if (repairResult.status !== 'success' || !repairResult.output) {
       this.logStage(lineIndex, 'repair', 'failed');
+      await this.recordFailure(
+        lineIndex,
+        sample,
+        'repair',
+        'Repair agent failed to fix validation issues.',
+        candidate,
+        { diagnostics: validationResult.output.diagnostics },
+      );
       return undefined;
     }
 
