@@ -59,7 +59,7 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
     input: RepairAgentInput,
     _context: AgentContext,
   ): Promise<AgentResult<RepairAgentOutput>> {
-    if (!input.template?.pattern) {
+    if (!input.template?.placeholderTemplate) {
       return {
         status: 'needs-input',
         issues: ['Repair requires the failed template definition.'],
@@ -102,10 +102,11 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
       logLine,
       template: input.template.metadata?.llmTemplate
         ? String(input.template.metadata.llmTemplate)
-        : input.template.metadata?.taggedSample
-          ? String(input.template.metadata.taggedSample)
-          : input.template.pattern,
-      variables: (input.template.metadata?.llmVariables as Record<string, string>) ?? {},
+        : input.template.placeholderTemplate,
+      variables:
+        (input.template.metadata?.llmVariables as Record<string, string>) ??
+        input.template.placeholderVariables ??
+        {},
       diagnostics,
     });
 
@@ -121,22 +122,22 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
       const sampleForRender =
         typeof logLine === 'string' && logLine.length > 0
           ? logLine
-          : typeof input.template.metadata?.sample === 'string'
-            ? (input.template.metadata.sample as string)
-            : input.template.pattern;
-      const { pattern, variables } = buildRegexFromTemplate(sampleForRender, parsed.template, parsed.variables);
+          : (input.template.metadata?.sample as string | undefined);
+      const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sampleForRender);
       const normalizedPattern = normalizeRegexPattern(pattern);
       ensureValidRegex(normalizedPattern);
 
       const changed =
-        normalizedPattern !== input.template.pattern ||
-        JSON.stringify(variables) !== JSON.stringify(input.template.variables ?? []);
+        parsed.template !== input.template.placeholderTemplate ||
+        JSON.stringify(parsed.variables ?? {}) !== JSON.stringify(input.template.placeholderVariables ?? {});
 
       return {
         status: 'success',
         output: {
           template: {
             ...input.template,
+            placeholderTemplate: parsed.template,
+            placeholderVariables: parsed.variables,
             pattern: normalizedPattern,
             variables,
             metadata: {

@@ -148,11 +148,12 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmOutput: completion.output,
         });
       }
-      const { pattern, variables } = buildRegexFromTemplate(sample, parsed.template, parsed.variables);
+      const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sample);
       const normalizedPattern = normalizeRegexPattern(pattern);
       ensureValidRegex(normalizedPattern);
-
       const template: LogTemplateDefinition = {
+        placeholderTemplate: parsed.template,
+        placeholderVariables: parsed.variables,
         pattern: normalizedPattern,
         variables,
         description: parsed.description ?? 'LLM-placeholder log template',
@@ -192,9 +193,9 @@ const START_PREFIX = `${ESC}]9;slot=`;
 const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
 
 export const buildRegexFromTemplate = (
-  sample: string,
   template: string,
   values: Record<string, string>,
+  sample?: string,
 ): { pattern: string; variables: string[] } => {
   const segments = parseTemplateSegments(template, values);
   if (segments.length === 0) {
@@ -205,11 +206,11 @@ export const buildRegexFromTemplate = (
     throw new Error('LLM output contained no variables.');
   }
 
-  const reconstructed = segments
-    .map((segment) => (segment.kind === 'var' ? segment.value : segment.value))
-    .join('');
-  if (reconstructed !== sample) {
-    throw new Error('Template with values does not match the original log sample.');
+  if (sample) {
+    const reconstructed = segments.map((segment) => segment.value).join('');
+    if (reconstructed !== sample) {
+      throw new Error('Template with values does not match the original log sample.');
+    }
   }
 
   const variables: string[] = [];

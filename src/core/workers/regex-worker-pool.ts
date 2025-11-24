@@ -5,6 +5,7 @@
  */
 
 import type { LogTemplateDefinition } from '../../agents/index.js';
+import { buildRegexFromTemplate } from '../../agents/agents/parsing-agent.js';
 import type { MatchedLogRecord } from '../types.js';
 
 export interface RegexLogEntry {
@@ -60,7 +61,14 @@ export class RegexWorkerPool {
   ): MatchedLogRecord | undefined {
     for (const template of templates) {
       try {
-        const regex = new RegExp(template.pattern);
+        if (!template.placeholderTemplate) {
+          continue;
+        }
+        const { pattern, variables } = buildRegexFromTemplate(
+          template.placeholderTemplate,
+          template.placeholderVariables ?? {},
+        );
+        const regex = new RegExp(pattern);
         const match = regex.exec(entry.raw);
         if (!match) {
           continue;
@@ -69,11 +77,11 @@ export class RegexWorkerPool {
           raw: entry.raw,
           lineIndex: entry.index,
           template,
-          variables: this.extractVariables(match, template.variables ?? []),
+          variables: this.extractVariables(match, variables ?? []),
         };
       } catch (error) {
         // eslint-disable-next-line no-console -- placeholder diagnostics until workers land.
-        console.warn('Failed to evaluate template', template.pattern, error);
+        console.warn('Failed to evaluate template', error);
       }
     }
     return undefined;

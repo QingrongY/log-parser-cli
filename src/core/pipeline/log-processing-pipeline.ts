@@ -27,6 +27,7 @@ import type {
   FailureRecord,
 } from '../types.js';
 import { matchEntireLine } from '../../agents/utils/regex.js';
+import { buildRegexFromTemplate } from '../../agents/agents/parsing-agent.js';
 
 interface PipelineAgents {
   routing: RoutingAgent;
@@ -85,9 +86,14 @@ export class LogProcessingPipeline {
   ): Promise<void> {
     const enrichedDetails = { ...(details ?? {}) };
 
-    if (template?.pattern) {
-      try {
-        const regex = new RegExp(template.pattern);
+    try {
+      if (template) {
+        const runtime = buildRegexFromTemplate(
+          template.placeholderTemplate,
+          template.placeholderVariables,
+          rawLog,
+        );
+        const regex = new RegExp(runtime.pattern);
         const matched = regex.exec(rawLog);
         enrichedDetails.regexSource = regex.source;
         enrichedDetails.regexFlags = regex.flags;
@@ -95,9 +101,9 @@ export class LogProcessingPipeline {
         if (matched?.groups) {
           enrichedDetails.regexGroups = matched.groups;
         }
-      } catch {
-        // ignore enrichment errors
       }
+    } catch {
+      // ignore enrichment errors
     }
 
     const failure: FailureRecord = {
@@ -452,8 +458,8 @@ export class LogProcessingPipeline {
   private toConflictFromIssues(sample: string, issues: string[]): TemplateConflict {
     return {
       candidate: {
-        pattern: sample,
-        variables: [],
+        placeholderTemplate: sample,
+        placeholderVariables: {},
       },
       conflictsWith: [],
       diagnostics: issues.map((issue) => ({ sample, reason: issue })),
@@ -485,7 +491,12 @@ export class LogProcessingPipeline {
     }
 
     const sample = samples[0] ?? '';
-    const matchResult = matchEntireLine(candidate.pattern, sample);
+    const runtime = buildRegexFromTemplate(
+      candidate.placeholderTemplate,
+      candidate.placeholderVariables,
+      sample,
+    );
+    const matchResult = matchEntireLine(runtime.pattern, sample);
     if (!matchResult.matched) {
       this.logStage(lineIndex, 'validation', 'failed');
       await this.recordFailure(lineIndex, sample, 'validation', 'Template did not match sample; cannot validate variables.', candidate, {

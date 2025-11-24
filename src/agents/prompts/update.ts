@@ -77,7 +77,7 @@ export const buildUpdatePrompt = ({
     '  },',
     '  "BUSINESS DATA": { "optional": "keep empty or copy variables" }',
     '}',
-    `Candidate pattern:\n${candidate.pattern}`,
+    `Candidate template:\n${candidate.placeholderTemplate}`,
     'Candidate sample log:',
     candidateLogSection,
     'Conflicting templates and their sample logs:',

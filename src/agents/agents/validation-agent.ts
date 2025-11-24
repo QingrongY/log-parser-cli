@@ -49,21 +49,6 @@ export class ValidationAgent extends BaseAgent<ValidationAgentInput, ValidationA
       };
     }
 
-    if (this.containsForbiddenVariable(Object.keys(input.variables ?? {}))) {
-      return {
-        status: 'success',
-        output: {
-          isValid: false,
-          diagnostics: [
-            {
-              sample: 'variable: message',
-              reason: 'Variable name "message" must remain STRUCTURE and cannot be treated as BUSINESS DATA.',
-            },
-          ],
-        },
-      };
-    }
-
     const diagnostics = await this.assessWithLlm(input.variables ?? {});
 
     return {
@@ -105,10 +90,5 @@ export class ValidationAgent extends BaseAgent<ValidationAgentInput, ValidationA
     }
   }
 
-  private containsForbiddenVariable(variableNames: string[]): boolean {
-    return (variableNames ?? []).some(
-      (variable) => variable.trim().toLowerCase() === 'message',
-    );
-  }
 }
 

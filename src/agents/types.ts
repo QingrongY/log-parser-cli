@@ -73,8 +73,11 @@ export interface BaseAgentConfig {
 
 export interface LogTemplateDefinition {
   id?: string;
-  pattern: string;
-  variables: string[];
+  placeholderTemplate: string;
+  placeholderVariables: Record<string, string>;
+  // Derived regex for transient matching (not persisted)
+  pattern?: string;
+  variables?: string[];
   description?: string;
   source?: string;
   metadata?: Record<string, unknown>;

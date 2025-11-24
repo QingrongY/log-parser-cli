@@ -26,8 +26,8 @@ export interface SqliteTemplateManagerOptions {
 
 interface TemplateRow {
   id: string;
-  pattern: string;
-  variables?: string;
+  placeholderTemplate: string;
+  placeholderVariables?: string;
   metadata?: string;
 }
 
@@ -35,8 +35,8 @@ interface MatchRow {
   raw: string;
   matchVariables?: string;
   templateId?: string;
-  templatePattern?: string;
-  templateVariables?: string;
+  templatePlaceholderTemplate?: string;
+  templatePlaceholderVariables?: string;
   templateMetadata?: string;
 }
 
@@ -93,14 +93,14 @@ export class SqliteTemplateManager implements TemplateManager {
       assignedId = `${id}#${this.getNextTemplateNumber(handle, id)}`;
       this.incrementTemplateNumber(handle, id);
     }
-    const variables = JSON.stringify(template.variables ?? []);
+    const placeholderVariables = JSON.stringify(template.placeholderVariables ?? {});
     const metadata = template.metadata ? JSON.stringify(template.metadata) : null;
     const stmt = handle.db.prepare(
-      `INSERT INTO log_templates (id, library_id, pattern, variables, metadata)
+      `INSERT INTO log_templates (id, library_id, placeholderTemplate, placeholderVariables, metadata)
        VALUES (?, ?, ?, ?, ?)
-       ON CONFLICT(id) DO UPDATE SET pattern=excluded.pattern, variables=excluded.variables, metadata=excluded.metadata`,
+       ON CONFLICT(id) DO UPDATE SET placeholderTemplate=excluded.placeholderTemplate, placeholderVariables=excluded.placeholderVariables, metadata=excluded.metadata`,
     );
-    stmt.bind([assignedId, id, template.pattern, variables, metadata]);
+    stmt.bind([assignedId, id, template.placeholderTemplate, placeholderVariables, metadata]);
     stmt.step();
     stmt.free();
     this.persist(handle);
@@ -169,8 +169,8 @@ export class SqliteTemplateManager implements TemplateManager {
       CREATE TABLE IF NOT EXISTS log_templates (
         id TEXT PRIMARY KEY,
         library_id TEXT NOT NULL,
-        pattern TEXT NOT NULL,
-        variables TEXT,
+        placeholderTemplate TEXT NOT NULL,
+        placeholderVariables TEXT,
         metadata TEXT,
         created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))
       );
@@ -197,7 +197,10 @@ export class SqliteTemplateManager implements TemplateManager {
 
   private loadTemplates(handle: DbHandle, libraryId: string): LogTemplateDefinition[] {
     const stmt = handle.db.prepare(
-      `SELECT id, pattern, variables, metadata
+      `SELECT id,
+              placeholderTemplate,
+              placeholderVariables,
+              metadata
        FROM log_templates
        WHERE library_id = ?
        ORDER BY created_at ASC`,
@@ -208,8 +211,8 @@ export class SqliteTemplateManager implements TemplateManager {
       const row = stmt.getAsObject() as unknown as TemplateRow;
       templates.push({
         id: row.id,
-        pattern: row.pattern,
-        variables: parseJsonArray(row.variables),
+        placeholderTemplate: row.placeholderTemplate,
+        placeholderVariables: parseJsonObject(row.placeholderVariables),
         metadata: row.metadata ? JSON.parse(row.metadata) : undefined,
       });
     }
@@ -222,8 +225,8 @@ export class SqliteTemplateManager implements TemplateManager {
       `SELECT ms.raw AS raw,
               ms.variables AS matchVariables,
               lt.id AS templateId,
-              lt.pattern AS templatePattern,
-              lt.variables AS templateVariables,
+              lt.placeholderTemplate AS templatePlaceholderTemplate,
+              lt.placeholderVariables AS templatePlaceholderVariables,
               lt.metadata AS templateMetadata
        FROM matched_samples ms
        LEFT JOIN log_templates lt ON lt.id = ms.template_id
@@ -238,13 +241,13 @@ export class SqliteTemplateManager implements TemplateManager {
       const template: LogTemplateDefinition = row.templateId
         ? {
             id: row.templateId,
-            pattern: row.templatePattern ?? '',
-            variables: parseJsonArray(row.templateVariables),
+            placeholderTemplate: row.templatePlaceholderTemplate ?? '',
+            placeholderVariables: parseJsonObject(row.templatePlaceholderVariables),
             metadata: row.templateMetadata ? JSON.parse(row.templateMetadata) : undefined,
           }
         : {
-            pattern: '',
-            variables: [],
+            placeholderTemplate: '',
+            placeholderVariables: {},
           };
       samples.push({
         raw: row.raw,
@@ -316,18 +319,6 @@ export class SqliteTemplateManager implements TemplateManager {
     } catch {
       return undefined;
     }
-  }
-}
-
-function parseJsonArray(value?: string): string[] {
-  if (!value) {
-    return [];
-  }
-  try {
-    const parsed = JSON.parse(value);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
   }
 }
 

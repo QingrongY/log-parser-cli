@@ -21,12 +21,12 @@ export const writeMatchReport = async (
   options: MatchReportOptions,
 ): Promise<void> => {
   const delimiter = options.delimiter ?? ',';
-  const header = ['raw_log', 'template_id', 'template_pattern', 'variables'];
+  const header = ['raw_log', 'template_id', 'template_placeholder', 'variables'];
   const rows = records.map((record) => [
     record.raw,
     record.template.id ?? '',
-    record.template.pattern,
-    JSON.stringify(record.variables ?? {}),
+    record.template.placeholderTemplate,
+    JSON.stringify(record.template.placeholderVariables ?? {}),
   ]);
   const formattedRows = rows.map((columns) =>
     columns.map((value) => formatCsvValue(value, delimiter)).join(delimiter),

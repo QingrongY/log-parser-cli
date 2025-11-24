@@ -110,14 +110,31 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
   }
 
   private isEquivalent(a: LogTemplateDefinition, b: LogTemplateDefinition): boolean {
-    return a.pattern === b.pattern && this.compareVariables(a.variables, b.variables);
+    return (
+      a.placeholderTemplate === b.placeholderTemplate &&
+      this.compareVariablesMap(a.placeholderVariables, b.placeholderVariables)
+    );
   }
 
-  private compareVariables(a: string[] = [], b: string[] = []): boolean {
-    if (a.length !== b.length) {
+  private compareVariablesMap(a: Record<string, string> = {}, b: Record<string, string> = {}): boolean {
+    const aEntries = Object.entries(a).sort();
+    const bEntries = Object.entries(b).sort();
+    if (aEntries.length !== bEntries.length) {
       return false;
     }
-    return a.every((value, index) => value === b[index]);
+    return aEntries.every(([k, v], idx) => k === bEntries[idx][0] && v === bEntries[idx][1]);
+  }
+
+  private toRuntime(template?: LogTemplateDefinition): { pattern: string; variables: string[] } {
+    if (!template) {
+      return { pattern: '', variables: [] };
+    }
+    const { pattern, variables } = buildRegexFromTemplate(
+      template.placeholderTemplate,
+      template.placeholderVariables,
+      template.metadata?.sample as string | undefined,
+    );
+    return { pattern, variables };
   }
 
   private findConflicts(
@@ -125,16 +142,15 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
     existingTemplates: LogTemplateDefinition[],
     samples: TemplateSampleSummary[],
   ): ConflictDetails[] {
+    const runtimeCandidate = this.toRuntime(candidate);
     const conflicts = new Map<string, ConflictDetails>();
-    const templateMap = new Map(
-      existingTemplates.map((template) => [template.id ?? template.pattern, template]),
-    );
+    const templateMap = new Map(existingTemplates.map((template) => [template.id ?? '', template]));
 
     for (const sample of samples) {
       if (!sample.raw) {
         continue;
       }
-      const result = matchEntireLine(candidate.pattern, sample.raw);
+      const result = matchEntireLine(runtimeCandidate.pattern, sample.raw);
       if (!result.matched) {
         continue;
       }
@@ -162,7 +178,7 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       candidateSamples: input.candidateSamples ?? [],
       conflicts: conflicts.map((entry) => ({
         id: entry.template.id,
-        pattern: entry.template.pattern,
+        pattern: entry.template.placeholderTemplate,
         samples: entry.samples,
       })),
     });
@@ -181,8 +197,8 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
           ? input.candidateSamples[0]
           : typeof input.template.metadata?.sample === 'string'
             ? (input.template.metadata.sample as string)
-            : input.template.pattern;
-      const { pattern, variables } = buildRegexFromTemplate(sampleForRender, parsed.template, parsed.variables);
+            : input.template.placeholderTemplate;
+      const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sampleForRender);
       const normalizedPattern = normalizeRegexPattern(pattern);
       ensureValidRegex(normalizedPattern);
       const note = parsed.explain ?? 'LLM conflict resolution';
@@ -194,6 +210,8 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
             action: 'retry',
             template: {
               ...input.template,
+              placeholderTemplate: parsed.template,
+              placeholderVariables: parsed.variables,
               pattern: normalizedPattern,
               variables: Object.keys(parsed.variables ?? {}),
             },
@@ -205,6 +223,8 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       if (parsed.action === 'Modify existing') {
         const adjustedTemplate: LogTemplateDefinition = {
           ...input.template,
+          placeholderTemplate: parsed.template,
+          placeholderVariables: parsed.variables,
           pattern: normalizedPattern,
           variables: Object.keys(parsed.variables ?? {}),
         };
