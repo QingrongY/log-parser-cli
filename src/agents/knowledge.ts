@@ -14,4 +14,8 @@ export const COMMON_LOG_PARSER_KNOWLEDGE = `
 - STRUCTURE (constants) are system-defined tokens such as event skeletons,
   module names, protocol keywords, message, and syntactic separators (colons, brackets, pipes).
   They draw from finite sets and altering them would change what the log entry represents.
-The final goal is to preserve STRUCTURE as literal text and capture BUSINESS DATA.`;
+The final goal is to preserve STRUCTURE as literal text and capture BUSINESS DATA.
+- Template format rules:
+  * For placeholder-based tasks, insert ESC]9;slot=<name>BEL (\u001b]9;slot=<name>\u0007) in place of variable values and provide the actual values in a variables map. Do NOT output regex in this mode.
+  * Do NOT change any other characters in the log line; after replacing placeholders with provided values, the line must match the raw log exactly.
+  * When explicitly asked to output a regex (e.g., conflict resolution), return a valid anchored (^...$) regex string, not English phrases or placeholders (never return text like "Modified candidate template").`;

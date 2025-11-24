@@ -27,7 +27,8 @@ export interface ParsingAgentOutput extends LogTemplateDefinition {
 }
 
 interface ParsingLlmResponse {
-  tagged: string;
+  template: string;
+  variables: Record<string, string>;
   description?: string;
   example?: Record<string, unknown>;
 }
@@ -46,9 +47,13 @@ class ParsingFailureError extends Error {
 const PARSING_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
   additionalProperties: true,
-  required: ['tagged'],
+  required: ['template', 'variables'],
   properties: {
-    tagged: { type: 'string', minLength: 1 },
+    template: { type: 'string', minLength: 1 },
+    variables: {
+      type: 'object',
+      additionalProperties: { type: 'string' },
+    },
     description: { type: 'string' },
     example: { type: 'object' },
   },
@@ -133,28 +138,34 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
         });
       }
       const parsed = extractJsonObject<ParsingLlmResponse>(completion.output);
-      if (!parsed.tagged) {
-        throw new ParsingFailureError('LLM response missing tagged log line.', {
+      if (!parsed.template) {
+        throw new ParsingFailureError('LLM response missing template with placeholders.', {
           llmOutput: completion.output,
         });
       }
-      const { pattern, variables } = buildRegexFromTagged(sample, parsed.tagged);
+      if (!parsed.variables || typeof parsed.variables !== 'object') {
+        throw new ParsingFailureError('LLM response missing variables map.', {
+          llmOutput: completion.output,
+        });
+      }
+      const { pattern, variables } = buildRegexFromTemplate(sample, parsed.template, parsed.variables);
       const normalizedPattern = normalizeRegexPattern(pattern);
       ensureValidRegex(normalizedPattern);
 
       const template: LogTemplateDefinition = {
         pattern: normalizedPattern,
         variables,
-        description: parsed.description ?? 'LLM-tagged log template',
+        description: parsed.description ?? 'LLM-placeholder log template',
         source: context.templateLibraryId ?? context.sourceHint,
       metadata: {
         sample,
         variableHints,
-        taggedSample: parsed.tagged,
+        taggedSample: parsed.template,
         llmExample: parsed.example,
         llmModel: this.llmClient?.modelName,
         llmRaw: completion.output,
-        llmTagged: parsed.tagged,
+        llmTemplate: parsed.template,
+        llmVariables: parsed.variables,
       },
       };
 
@@ -177,22 +188,28 @@ type TaggedSegment =
 
 const ESC = '\u001b';
 const BEL = '\u0007';
-const START_PREFIX = `${ESC}]9;var=`;
-const END_MARKER = `${ESC}]9;end${BEL}`;
+const START_PREFIX = `${ESC}]9;slot=`;
 const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
 
-const buildRegexFromTagged = (sample: string, tagged: string): { pattern: string; variables: string[] } => {
-  const segments = parseTaggedSegments(tagged);
+export const buildRegexFromTemplate = (
+  sample: string,
+  template: string,
+  values: Record<string, string>,
+): { pattern: string; variables: string[] } => {
+  const segments = parseTemplateSegments(template, values);
   if (segments.length === 0) {
-    throw new Error('LLM did not produce any tagged segments.');
+    throw new Error('LLM did not produce any placeholders.');
   }
   const hasVariables = segments.some((segment) => segment.kind === 'var');
   if (!hasVariables) {
-    throw new Error('LLM output contained no tagged variables.');
+    throw new Error('LLM output contained no variables.');
   }
-  const reconstructed = segments.map((segment) => segment.value).join('');
+
+  const reconstructed = segments
+    .map((segment) => (segment.kind === 'var' ? segment.value : segment.value))
+    .join('');
   if (reconstructed !== sample) {
-    throw new Error('Tagged line does not match the original log sample.');
+    throw new Error('Template with values does not match the original log sample.');
   }
 
   const variables: string[] = [];
@@ -216,52 +233,50 @@ const buildRegexFromTagged = (sample: string, tagged: string): { pattern: string
   return { pattern: parts.join(''), variables };
 };
 
-const parseTaggedSegments = (tagged: string): TaggedSegment[] => {
+const parseTemplateSegments = (
+  template: string,
+  values: Record<string, string>,
+): TaggedSegment[] => {
   const segments: TaggedSegment[] = [];
   let cursor = 0;
 
   const pushText = (end: number): void => {
     if (end > cursor) {
-      segments.push({ kind: 'text', value: tagged.slice(cursor, end) });
+      segments.push({ kind: 'text', value: template.slice(cursor, end) });
     }
   };
 
-  while (cursor < tagged.length) {
-    const startIdx = tagged.indexOf(START_PREFIX, cursor);
+  while (cursor < template.length) {
+    const startIdx = template.indexOf(START_PREFIX, cursor);
     if (startIdx === -1) {
-      pushText(tagged.length);
+      pushText(template.length);
       break;
     }
 
     pushText(startIdx);
     const nameStart = startIdx + START_PREFIX.length;
-    const nameEnd = tagged.indexOf(BEL, nameStart);
+    const nameEnd = template.indexOf(BEL, nameStart);
     if (nameEnd === -1) {
-      // No BEL terminator; treat ESC as literal.
-      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameStart) });
-      cursor = nameStart;
+      // No terminator; treat the ESC as literal.
+      segments.push({ kind: 'text', value: template.slice(startIdx, startIdx + 1) });
+      cursor = startIdx + 1;
       continue;
     }
 
-    const name = tagged.slice(nameStart, nameEnd);
-    if (!name || /[^A-Za-z0-9_-]/.test(name)) {
-      // Invalid name; keep the ESC literal.
-      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameEnd + 1) });
+    const name = template.slice(nameStart, nameEnd);
+    if (!name) {
+      segments.push({ kind: 'text', value: template.slice(startIdx, nameEnd + 1) });
       cursor = nameEnd + 1;
       continue;
     }
 
-    const endIdx = tagged.indexOf(END_MARKER, nameEnd + 1);
-    if (endIdx === -1) {
-      // No closing marker; keep the start marker as literal text.
-      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameEnd + 1) });
-      cursor = nameEnd + 1;
-      continue;
+    const value = values[name];
+    if (value === undefined) {
+      throw new Error(`LLM template placeholder "${name}" missing value in variables map.`);
     }
 
-    const value = tagged.slice(nameEnd + 1, endIdx);
     segments.push({ kind: 'var', name, value });
-    cursor = endIdx + END_MARKER.length;
+    cursor = nameEnd + 1;
   }
 
   return segments;

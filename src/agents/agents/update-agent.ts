@@ -12,6 +12,7 @@ import type {
   LogTemplateDefinition,
 } from '../types.js';
 import { matchEntireLine, normalizeRegexPattern } from '../utils/regex.js';
+import { buildRegexFromTemplate } from './parsing-agent.js';
 import {
   buildUpdatePrompt,
   UPDATE_RESPONSE_SCHEMA,
@@ -46,7 +47,8 @@ export interface UpdateAgentOutput {
 
 interface UpdateLlmResponse {
   action: 'Modify candidate' | 'Modify existing';
-  'correct template': string;
+  template: string;
+  variables: Record<string, string>;
   explain?: string;
 }
 
@@ -174,8 +176,15 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
         responseSchema: UPDATE_RESPONSE_SCHEMA,
       });
       const parsed = extractJsonObject<UpdateLlmResponse>(completion.output);
-      ensureValidRegex(parsed['correct template']);
-      const normalizedPattern = normalizeRegexPattern(parsed['correct template']);
+      const sampleForRender =
+        typeof input.candidateSamples?.[0] === 'string'
+          ? input.candidateSamples[0]
+          : typeof input.template.metadata?.sample === 'string'
+            ? (input.template.metadata.sample as string)
+            : input.template.pattern;
+      const { pattern, variables } = buildRegexFromTemplate(sampleForRender, parsed.template, parsed.variables);
+      const normalizedPattern = normalizeRegexPattern(pattern);
+      ensureValidRegex(normalizedPattern);
       const note = parsed.explain ?? 'LLM conflict resolution';
 
       if (parsed.action === 'Modify candidate') {
@@ -186,6 +195,7 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
             template: {
               ...input.template,
               pattern: normalizedPattern,
+              variables: Object.keys(parsed.variables ?? {}),
             },
             reason: note,
           },
@@ -196,6 +206,7 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
         const adjustedTemplate: LogTemplateDefinition = {
           ...input.template,
           pattern: normalizedPattern,
+          variables: Object.keys(parsed.variables ?? {}),
         };
         const replacedIds = conflicts
           .map((entry) => entry.template.id)

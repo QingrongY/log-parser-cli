@@ -15,7 +15,6 @@ interface Stats {
   pending: number;
   failed: number;
   templates: number;
-  processedLines: Set<number>;
 }
 
 interface Progress {
@@ -37,7 +36,7 @@ interface AppState {
 const initialState: AppState = {
   source: '...',
   library: '...',
-  stats: { matched: 0, pending: 0, failed: 0, templates: 0, processedLines: new Set() },
+  stats: { matched: 0, pending: 0, failed: 0, templates: 0 },
   progress: { currentLine: 0, totalLines: 0, currentBatch: 0, totalBatches: 0 },
   lastEvent: 'Initializing...',
   isComplete: false,
@@ -102,20 +101,9 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
 
         setState((prev) => {
           const newStats = { ...prev.stats };
-          const msg = event.message.toLowerCase();
-
           if (event.stage === 'update' && event.data?.action === 'added') {
             newStats.templates += 1;
           }
-
-          if (msg.includes('fail') || msg.includes('skip')) {
-            if (!newStats.processedLines.has(lineIndex)) {
-              newStats.processedLines.add(lineIndex);
-              newStats.failed += 1;
-              newStats.pending = Math.max(0, newStats.pending - 1);
-            }
-          }
-
           return {
             ...prev,
             progress: { ...prev.progress, currentLine: lineIndex + 1 },
@@ -133,18 +121,30 @@ export const LogParserApp: React.FC<LogParserAppProps> = ({ options }) => {
 
         setState((prev) => {
           const newStats = { ...prev.stats };
-
-          if (!newStats.processedLines.has(lineIndex)) {
-            newStats.processedLines.add(lineIndex);
-            newStats.matched += info.matched;
-            newStats.pending = Math.max(0, newStats.pending - info.matched);
-          }
-
+          newStats.matched += info.matched;
+          newStats.pending = Math.max(0, newStats.pending - info.matched);
           return {
             ...prev,
             progress: { ...prev.progress, currentLine: lineIndex + 1 },
             stats: newStats,
             lastEvent: `Matched ${info.matched} log(s)`,
+          };
+        });
+      },
+
+      onFailure: (failure) => {
+        if (cancelled) return;
+        const lineIndex = failure.lineIndex;
+
+        setState((prev) => {
+          const newStats = { ...prev.stats };
+          newStats.failed += 1;
+          newStats.pending = Math.max(0, newStats.pending - 1);
+          return {
+            ...prev,
+            progress: { ...prev.progress, currentLine: lineIndex + 1 },
+            stats: newStats,
+            lastEvent: `[failure] ${failure.stage}: ${failure.reason}`,
           };
         });
       },

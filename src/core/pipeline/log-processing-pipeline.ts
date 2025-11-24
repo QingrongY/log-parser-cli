@@ -57,6 +57,8 @@ export interface ProcessingObserver {
   onMatching?(info: { lineIndex?: number; matched: number }): void;
   onExistingMatchSummary?(info: { matched: number; unmatched: number }): void;
   onBatchProgress?(info: { current: number; total?: number }): void;
+  onFailure?(failure: FailureRecord): void;
+  onUnmatched?(info: { samples: string[] }): void;
 }
 
 export class LogProcessingPipeline {
@@ -81,6 +83,23 @@ export class LogProcessingPipeline {
     template?: LogTemplateDefinition,
     details?: Record<string, unknown>
   ): Promise<void> {
+    const enrichedDetails = { ...(details ?? {}) };
+
+    if (template?.pattern) {
+      try {
+        const regex = new RegExp(template.pattern);
+        const matched = regex.exec(rawLog);
+        enrichedDetails.regexSource = regex.source;
+        enrichedDetails.regexFlags = regex.flags;
+        enrichedDetails.regexMatched = Boolean(matched);
+        if (matched?.groups) {
+          enrichedDetails.regexGroups = matched.groups;
+        }
+      } catch {
+        // ignore enrichment errors
+      }
+    }
+
     const failure: FailureRecord = {
       lineIndex,
       rawLog,
@@ -88,9 +107,10 @@ export class LogProcessingPipeline {
       reason,
       timestamp: new Date().toISOString(),
       template,
-      details,
+      details: enrichedDetails,
     };
     this.failures.push(failure);
+    this.deps.observer?.onFailure?.(failure);
 
     if (this.deps.failureLogPath) {
       const { appendFile } = await import('node:fs/promises');
@@ -408,7 +428,7 @@ export class LogProcessingPipeline {
       }
     }
 
-    return {
+    const summary = {
       runId,
       source: routingResult.output.source,
       libraryId,
@@ -421,6 +441,12 @@ export class LogProcessingPipeline {
       unmatchedSamples: unresolvedSamples,
       failures: this.failures,
     };
+
+    if (unresolvedSamples.length > 0) {
+      this.deps.observer?.onUnmatched?.({ samples: unresolvedSamples });
+    }
+
+    return summary;
   }
 
   private toConflictFromIssues(sample: string, issues: string[]): TemplateConflict {

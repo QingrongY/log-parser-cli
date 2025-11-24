@@ -14,20 +14,26 @@ import type {
 } from '../types.js';
 import { buildRepairPrompt, REPAIR_SYSTEM_PROMPT } from '../prompts/repair.js';
 import { extractJsonObject } from '../utils/json.js';
+import { buildRegexFromTemplate } from './parsing-agent.js';
 import { normalizeRegexPattern } from '../utils/regex.js';
 import { ensureValidRegex } from '../utils/validation.js';
 
 interface RepairLlmResponse {
-  pattern: string;
+  template: string;
+  variables: Record<string, string>;
   note?: string;
 }
 
 const REPAIR_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
   additionalProperties: false,
-  required: ['pattern'],
+  required: ['template', 'variables'],
   properties: {
-    pattern: { type: 'string', minLength: 1 },
+    template: { type: 'string', minLength: 1 },
+    variables: {
+      type: 'object',
+      additionalProperties: { type: 'string' },
+    },
     note: { type: 'string' },
   },
 };
@@ -94,8 +100,12 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
     );
     const prompt = buildRepairPrompt({
       logLine,
-      pattern: input.template.pattern,
-      variables: input.template.variables ?? [],
+      template: input.template.metadata?.llmTemplate
+        ? String(input.template.metadata.llmTemplate)
+        : input.template.metadata?.taggedSample
+          ? String(input.template.metadata.taggedSample)
+          : input.template.pattern,
+      variables: (input.template.metadata?.llmVariables as Record<string, string>) ?? {},
       diagnostics,
     });
 
@@ -108,10 +118,19 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
         responseSchema: REPAIR_RESPONSE_SCHEMA,
       });
       const parsed = extractJsonObject<RepairLlmResponse>(completion.output);
-      ensureValidRegex(parsed.pattern);
-      const normalizedPattern = normalizeRegexPattern(parsed.pattern);
+      const sampleForRender =
+        typeof logLine === 'string' && logLine.length > 0
+          ? logLine
+          : typeof input.template.metadata?.sample === 'string'
+            ? (input.template.metadata.sample as string)
+            : input.template.pattern;
+      const { pattern, variables } = buildRegexFromTemplate(sampleForRender, parsed.template, parsed.variables);
+      const normalizedPattern = normalizeRegexPattern(pattern);
+      ensureValidRegex(normalizedPattern);
 
-      const changed = normalizedPattern !== input.template.pattern;
+      const changed =
+        normalizedPattern !== input.template.pattern ||
+        JSON.stringify(variables) !== JSON.stringify(input.template.variables ?? []);
 
       return {
         status: 'success',
@@ -119,8 +138,11 @@ export class RepairAgent extends BaseAgent<RepairAgentInput, RepairAgentOutput> 
           template: {
             ...input.template,
             pattern: normalizedPattern,
+            variables,
             metadata: {
               ...input.template.metadata,
+              llmTemplate: parsed.template,
+              llmVariables: parsed.variables,
               repairedBy: this.llmClient.modelName,
               repairDiagnostics: diagnostics,
               repairRaw: completion.output,
