@@ -175,7 +175,10 @@ type TaggedSegment =
   | { kind: 'text'; value: string }
   | { kind: 'var'; name: string; value: string };
 
-const TAG_TOKEN = /<(\/)?([a-zA-Z0-9_-]+)>/g;
+const ESC = '\u001b';
+const BEL = '\u0007';
+const START_PREFIX = `${ESC}]9;var=`;
+const END_MARKER = `${ESC}]9;end${BEL}`;
 const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
 
 const buildRegexFromTagged = (sample: string, tagged: string): { pattern: string; variables: string[] } => {
@@ -215,83 +218,52 @@ const buildRegexFromTagged = (sample: string, tagged: string): { pattern: string
 
 const parseTaggedSegments = (tagged: string): TaggedSegment[] => {
   const segments: TaggedSegment[] = [];
-  let textBuffer = '';
-  let open: { name: string; start: number; contentStart: number } | null = null;
-  const flushText = (): void => {
-    if (textBuffer.length > 0) {
-      segments.push({ kind: 'text', value: textBuffer });
-      textBuffer = '';
+  let cursor = 0;
+
+  const pushText = (end: number): void => {
+    if (end > cursor) {
+      segments.push({ kind: 'text', value: tagged.slice(cursor, end) });
     }
   };
 
-  let i = 0;
-  while (i < tagged.length) {
-    if (tagged[i] !== '<') {
-      if (!open) {
-        textBuffer += tagged[i];
-      }
-      i += 1;
-      continue;
-    }
-
-    const closeIdx = tagged.indexOf('>', i + 1);
-    if (closeIdx === -1) {
-      // No closing bracket; treat the rest as text.
-      if (open) {
-        textBuffer += tagged.slice(open.start);
-        open = null;
-      } else {
-        textBuffer += tagged.slice(i);
-      }
+  while (cursor < tagged.length) {
+    const startIdx = tagged.indexOf(START_PREFIX, cursor);
+    if (startIdx === -1) {
+      pushText(tagged.length);
       break;
     }
 
-    const token = tagged.slice(i, closeIdx + 1);
-    const match = token.match(/^<(\/)?([A-Za-z0-9_-]+)>$/);
-    if (!match) {
-      // Not a valid tag token, treat as literal.
-      if (!open) {
-        textBuffer += tagged[i];
-      }
-      i += 1;
+    pushText(startIdx);
+    const nameStart = startIdx + START_PREFIX.length;
+    const nameEnd = tagged.indexOf(BEL, nameStart);
+    if (nameEnd === -1) {
+      // No BEL terminator; treat ESC as literal.
+      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameStart) });
+      cursor = nameStart;
       continue;
     }
 
-    const isClosing = Boolean(match[1]);
-    const name = match[2];
-
-    if (!open) {
-      if (isClosing) {
-        // Stray closing tag; treat as text.
-        textBuffer += token;
-        i = closeIdx + 1;
-        continue;
-      }
-      // Opening tag.
-      flushText();
-      open = { name, start: i, contentStart: closeIdx + 1 };
-      i = closeIdx + 1;
+    const name = tagged.slice(nameStart, nameEnd);
+    if (!name || /[^A-Za-z0-9_-]/.test(name)) {
+      // Invalid name; keep the ESC literal.
+      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameEnd + 1) });
+      cursor = nameEnd + 1;
       continue;
     }
 
-    // We have an open tag already.
-    if (isClosing && name === open.name) {
-      const value = tagged.slice(open.contentStart, i);
-      segments.push({ kind: 'var', name, value });
-      open = null;
-      i = closeIdx + 1;
+    const endIdx = tagged.indexOf(END_MARKER, nameEnd + 1);
+    if (endIdx === -1) {
+      // No closing marker; keep the start marker as literal text.
+      segments.push({ kind: 'text', value: tagged.slice(startIdx, nameEnd + 1) });
+      cursor = nameEnd + 1;
       continue;
     }
 
-    // Nested/mismatched tags are treated as literal content of the open tag.
-    i = closeIdx + 1;
+    const value = tagged.slice(nameEnd + 1, endIdx);
+    segments.push({ kind: 'var', name, value });
+    cursor = endIdx + END_MARKER.length;
   }
 
-  if (open) {
-    textBuffer += tagged.slice(open.start);
-  }
-
-  flushText();
   return segments;
 };
 
