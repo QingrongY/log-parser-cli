@@ -7,6 +7,7 @@
 import { COMMON_LOG_PARSER_KNOWLEDGE } from '../knowledge.js';
 
 interface ValidationPromptOptions {
+  sample: string;
   variables: Record<string, string>;
 }
 
@@ -26,15 +27,16 @@ export const VALIDATION_RESPONSE_SCHEMA: Record<string, unknown> = {
   },
 };
 
-export const buildValidationPrompt = ({ variables }: ValidationPromptOptions): string => {
+export const buildValidationPrompt = ({ sample, variables }: ValidationPromptOptions): string => {
   const formatted = Object.entries(variables)
     .map(([key, value]) => `- ${key}: ${value}`)
     .join('\n');
 
   return [
     `Shared knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
-    'Review whether each VARIABLE value below is BUSINESS DATA (instance-specific) rather than STRUCTURE (fixed tokens) according to the shared knowledge.',
-    'Decide whether to extract these variables.',
+    'Given the raw log sample and extracted variables, decide if any variable is actually STRUCTURE (fixed text) or mixes STRUCTURE with BUSINESS DATA. Treat sentences/constant fragments as STRUCTURE.',
+    '',
+    `Raw sample:\n${sample}`,
     '',
     'Variables:',
     formatted || '- (none)',

@@ -178,7 +178,8 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       candidateSamples: input.candidateSamples ?? [],
       conflicts: conflicts.map((entry) => ({
         id: entry.template.id,
-        pattern: entry.template.placeholderTemplate,
+        template: entry.template.placeholderTemplate,
+        variables: entry.template.placeholderVariables,
         samples: entry.samples,
       })),
     });

@@ -189,7 +189,7 @@ type TaggedSegment =
 
 const ESC = '\u001b';
 const BEL = '\u0007';
-const START_PREFIX = `${ESC}]9;slot=`;
+const START_PREFIX = `${ESC}]9;var=`;
 const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
 
 export const buildRegexFromTemplate = (

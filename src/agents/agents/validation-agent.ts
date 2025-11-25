@@ -11,14 +11,11 @@ import type {
   BaseAgentConfig,
   TemplateValidationDiagnostics,
 } from '../types.js';
-import {
-  buildValidationPrompt,
-  VALIDATION_RESPONSE_SCHEMA,
-  VALIDATION_SYSTEM_PROMPT,
-} from '../prompts/validation.js';
+import { buildValidationPrompt, VALIDATION_RESPONSE_SCHEMA, VALIDATION_SYSTEM_PROMPT } from '../prompts/validation.js';
 import { extractJsonObject } from '../utils/json.js';
 
 export interface ValidationAgentInput {
+  sample: string;
   variables: Record<string, string>;
 }
 
@@ -42,15 +39,7 @@ export class ValidationAgent extends BaseAgent<ValidationAgentInput, ValidationA
     input: ValidationAgentInput,
     _context: AgentContext,
   ): Promise<AgentResult<ValidationAgentOutput>> {
-    if (!this.llmClient) {
-      return {
-        status: 'needs-input',
-        issues: ['Validation requires an LLM client to perform semantic review.'],
-      };
-    }
-
-    const diagnostics = await this.assessWithLlm(input.variables ?? {});
-
+    const diagnostics = this.assessLocally(input.variables ?? {});
     return {
       status: 'success',
       output: {
@@ -60,35 +49,22 @@ export class ValidationAgent extends BaseAgent<ValidationAgentInput, ValidationA
     };
   }
 
-  private async assessWithLlm(
-    variables: Record<string, string>,
-  ): Promise<TemplateValidationDiagnostics[]> {
-    try {
-      const prompt = buildValidationPrompt({ variables });
-      const completion = await this.llmClient!.complete({
-        prompt,
-        systemPrompt: VALIDATION_SYSTEM_PROMPT,
-        temperature: 0.1,
-        responseMimeType: 'application/json',
-        responseSchema: VALIDATION_RESPONSE_SCHEMA,
-      });
-      const parsed = extractJsonObject<ValidationLlmResponse>(completion.output);
-      if (parsed.verdict === 'pass') {
-        return [];
+  private assessLocally(variables: Record<string, string>): TemplateValidationDiagnostics[] {
+    const issues: TemplateValidationDiagnostics[] = [];
+    const tsPattern = /^timestamp\d*$/i;
+    for (const [name, value] of Object.entries(variables)) {
+      if (typeof value !== 'string') continue;
+      if (tsPattern.test(name)) {
+        continue;
       }
-      const reasons = parsed.issues?.length ? parsed.issues : ['LLM flagged structure/business data issues.'];
-      return reasons.map((reason) => ({
-        sample: Object.entries(variables)
-          .map(([k, v]) => `${k}:${v}`)
-          .join(' | '),
-        reason,
-      }));
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      this.logger.warn('LLM validation review failed; ignoring semantic check.', { message });
-      return [];
+      if (value.includes(' ')) {
+        issues.push({
+          sample: `${name}:${value}`,
+          reason: `${name} contains spaces and is likely STRUCTURE, timestamp names are exempt.`,
+        });
+      }
     }
+    return issues;
   }
-
 }
 

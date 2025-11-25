@@ -507,6 +507,7 @@ export class LogProcessingPipeline {
 
     const validationResult = await this.deps.agents.validation.run(
       {
+        sample,
         variables: matchResult.variables,
       },
       context,

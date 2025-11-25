@@ -32,7 +32,7 @@ export const buildRepairPrompt = ({ logLine, template, variables, diagnostics }:
     `Shared background knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
     'Your task is to consider why the issue happened and what should be changed.' +
     'Then, fix the template (using placeholders) so it matches the entire log line and captures BUSINESS DATA correctly.',
-    'Placeholders are in the form ESC]9;slot=<name>BEL (\\u001b]9;slot=<name>\\u0007).',
+    'Placeholders are in the form ESC]9;var=<name>BEL (\\u001b]9;var=<name>\\u0007).',
     'Do NOT output regex. Keep the log text unchanged except for placeholders.',
 
     logSection.trimEnd(),

@@ -10,7 +10,7 @@ import type { LogTemplateDefinition } from '../types.js';
 interface UpdatePromptOptions {
   candidate: LogTemplateDefinition;
   candidateSamples: string[];
-  conflicts: Array<{ id?: string; pattern: string; samples: string[] }>;
+  conflicts: Array<{ id?: string; template: string; variables: Record<string, string>; samples: string[] }>;
 }
 
 export const UPDATE_SYSTEM_PROMPT =
@@ -46,9 +46,13 @@ export const buildUpdatePrompt = ({
           .map((entry, index) => {
             const conflictSample =
               entry.samples.length > 0 ? `      • ${entry.samples[0]}` : '      • (no sample provided)';
+            const varList = Object.entries(entry.variables ?? {})
+              .map(([k, v]) => `${k}=${v}`)
+              .join(', ');
             return [
               `${index + 1}. Template ID: ${entry.id ?? 'unknown'}`,
-              `   Pattern: ${entry.pattern}`,
+              `   Template: ${entry.template}`,
+              `   Variables: ${varList || '(none)'}`,
               '   Sample log:',
               conflictSample,
             ].join('\n');
@@ -70,7 +74,7 @@ export const buildUpdatePrompt = ({
     'Return ONLY JSON in this form:',
     '{',
     '  "action": "Modify candidate" | "Modify existing",',
-    '  "template": "log with ESC]9;slot=<name> BEL placeholders inserted instead of variable values",',
+    '  "template": "log with ESC]9;var=<name> BEL placeholders inserted instead of variable values",',
     '  "variables": {',
     '    "name1": "value1",',
     '    "name2": "value2"',
