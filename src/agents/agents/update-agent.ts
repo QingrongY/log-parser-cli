@@ -52,25 +52,6 @@ interface UpdateLlmResponse {
   explain?: string;
 }
 
-const sanitizeJsonish = (text: string): string =>
-  text
-    .replace(/```(?:json)?/gi, '')
-    .replace(/[\u0000-\u001f]/g, (ch) => `\\u${ch.charCodeAt(0).toString(16).padStart(4, '0')}`);
-
-const parseJsonSafe = <T>(text: string): T => {
-  const sanitized = sanitizeJsonish(text);
-  try {
-    return extractJsonObject<T>(sanitized);
-  } catch {
-    const start = sanitized.indexOf('{');
-    const end = sanitized.lastIndexOf('}');
-    if (start !== -1 && end !== -1 && end > start) {
-      const slice = sanitized.slice(start, end + 1);
-      return extractJsonObject<T>(slice);
-    }
-    throw new Error('LLM response is not valid JSON.');
-  }
-};
 
 export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> {
   constructor(config: Omit<BaseAgentConfig, 'kind'> = {}) {
@@ -210,7 +191,7 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       temperature: 0.1,
       responseMimeType: 'application/json',
     });
-    const parsed = parseJsonSafe<UpdateLlmResponse>(completion.output);
+    const parsed = this.parseJsonSafe<UpdateLlmResponse>(completion.output);
     const sampleForRender =
       typeof input.candidateSamples?.[0] === 'string'
         ? input.candidateSamples[0]

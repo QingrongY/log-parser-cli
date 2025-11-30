@@ -13,6 +13,7 @@ import {
   type BaseAgentConfig,
   type LlmClient,
 } from './types.js';
+import { extractJsonObject } from './utils/json.js';
 
 class NullLogger implements AgentLogger {
   constructor(_agentName: string) {}
@@ -89,6 +90,48 @@ export abstract class BaseAgent<TInput, TOutput> {
   protected composePrompt(userInstruction: string, extraContext?: string): string {
     const contextBlock = extraContext ? `\n\nContext:\n${extraContext}` : '';
     return `${userInstruction}\n\nShared background knowledge:\n${this.sharedKnowledge}${contextBlock}`;
+  }
+
+  protected parseJsonSafe<T>(text: string): T {
+    const sanitized = this.sanitizeJsonish(text);
+    const cleaned = sanitized.trim();
+    if (!cleaned) {
+      throw new Error('LLM returned empty response.');
+    }
+
+    const fencedMatch = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    const candidate = fencedMatch ? fencedMatch[1] : cleaned;
+    const start = candidate.indexOf('{');
+    const end = candidate.lastIndexOf('}');
+
+    if (start === -1 || end === -1 || end <= start) {
+      throw new Error('Unable to locate JSON object in LLM response.');
+    }
+
+    const jsonText = candidate.slice(start, end + 1);
+
+    try {
+      return JSON.parse(jsonText) as T;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      this.logger.error(`JSON parse failed: ${message}`, {
+        originalLength: text.length,
+        sanitizedLength: sanitized.length,
+        jsonTextPreview: jsonText.substring(0, 200),
+        jsonTextSample: this.debugShowControlChars(jsonText.substring(0, 100)),
+      });
+      throw new Error(`LLM response is not valid JSON: ${message}`);
+    }
+  }
+
+  private debugShowControlChars(text: string): string {
+    return text.replace(/[\u0000-\u001f]/g, (ch) =>
+      `<0x${ch.charCodeAt(0).toString(16).padStart(2, '0')}>`
+    );
+  }
+
+  private sanitizeJsonish(text: string): string {
+    return text.replace(/```(?:json)?/gi, '');
   }
 
   protected abstract handle(

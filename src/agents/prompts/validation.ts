@@ -35,7 +35,7 @@ export const buildValidationPrompt = ({ sample, variables }: ValidationPromptOpt
   return [
     `Shared knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
     'Given the raw log sample and extracted variables, decide if any variable is actually STRUCTURE (fixed text) or mixes STRUCTURE with BUSINESS DATA. Treat sentences/constant fragments as STRUCTURE.',
-    '',
+    'In particular, the mistake of treating the entire text as a message.',
     `Raw sample:\n${sample}`,
     '',
     'Variables:',

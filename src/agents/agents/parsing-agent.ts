@@ -59,25 +59,6 @@ const PARSING_RESPONSE_SCHEMA: Record<string, unknown> = {
   },
 };
 
-const sanitizeJsonish = (text: string): string =>
-  text
-    .replace(/```(?:json)?/gi, '')
-    .replace(/[\u0000-\u001f]/g, (ch) => `\\u${ch.charCodeAt(0).toString(16).padStart(4, '0')}`);
-
-const parseJsonSafe = <T>(text: string): T => {
-  const sanitized = sanitizeJsonish(text);
-  try {
-    return extractJsonObject<T>(sanitized);
-  } catch {
-    const start = sanitized.indexOf('{');
-    const end = sanitized.lastIndexOf('}');
-    if (start !== -1 && end !== -1 && end > start) {
-      const slice = sanitized.slice(start, end + 1);
-      return extractJsonObject<T>(slice);
-    }
-    throw new ParsingFailureError('LLM returned non-JSON response.', { llmRaw: safeSerialize(text) });
-  }
-};
 
 export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutput> {
   constructor(config: Omit<BaseAgentConfig, 'kind'> = {}) {
@@ -156,7 +137,7 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmRaw: safeSerialize(completion.raw),
         });
       }
-      const parsed = parseJsonSafe<ParsingLlmResponse>(completion.output);
+      const parsed = this.parseJsonSafe<ParsingLlmResponse>(completion.output);
       if (!parsed.template) {
         throw new ParsingFailureError('LLM response missing template with placeholders.', {
           llmOutput: completion.output,
@@ -302,7 +283,14 @@ const parseTemplateSegments = (
   return segments;
 };
 
-const escapeRegex = (text: string): string => text.replace(REGEX_SPECIAL, '\\$&');
+const escapeRegex = (text: string): string => {
+  let escaped = text.replace(REGEX_SPECIAL, '\\$&');
+  escaped = escaped.replace(/[\u0000-\u001f\u007f-\u009f]/g, (ch) => {
+    const hex = ch.charCodeAt(0).toString(16).padStart(2, '0');
+    return `\\x${hex}`;
+  });
+  return escaped;
+};
 
 const sanitizeVariableName = (name: string): string => {
   const cleaned = name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_');
