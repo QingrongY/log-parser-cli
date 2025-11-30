@@ -50,21 +50,7 @@ export class ValidationAgent extends BaseAgent<ValidationAgentInput, ValidationA
   }
 
   private assessLocally(variables: Record<string, string>): TemplateValidationDiagnostics[] {
-    const issues: TemplateValidationDiagnostics[] = [];
-    const tsPattern = /^timestamp\d*$/i;
-    for (const [name, value] of Object.entries(variables)) {
-      if (typeof value !== 'string') continue;
-      if (tsPattern.test(name)) {
-        continue;
-      }
-      if (value.includes(' ')) {
-        issues.push({
-          sample: `${name}:${value}`,
-          reason: `${name} contains spaces and is likely STRUCTURE, timestamp names are exempt.`,
-        });
-      }
-    }
-    return issues;
+    // No local rejection; accept all variables.
+    return [];
   }
 }
-

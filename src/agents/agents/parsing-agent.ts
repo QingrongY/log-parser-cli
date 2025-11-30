@@ -59,6 +59,26 @@ const PARSING_RESPONSE_SCHEMA: Record<string, unknown> = {
   },
 };
 
+const sanitizeJsonish = (text: string): string =>
+  text
+    .replace(/```(?:json)?/gi, '')
+    .replace(/[\u0000-\u001f]/g, (ch) => `\\u${ch.charCodeAt(0).toString(16).padStart(4, '0')}`);
+
+const parseJsonSafe = <T>(text: string): T => {
+  const sanitized = sanitizeJsonish(text);
+  try {
+    return extractJsonObject<T>(sanitized);
+  } catch {
+    const start = sanitized.indexOf('{');
+    const end = sanitized.lastIndexOf('}');
+    if (start !== -1 && end !== -1 && end > start) {
+      const slice = sanitized.slice(start, end + 1);
+      return extractJsonObject<T>(slice);
+    }
+    throw new ParsingFailureError('LLM returned non-JSON response.', { llmRaw: safeSerialize(text) });
+  }
+};
+
 export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutput> {
   constructor(config: Omit<BaseAgentConfig, 'kind'> = {}) {
     super({ kind: 'parsing', ...config });
@@ -128,7 +148,6 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       systemPrompt: PARSING_SYSTEM_PROMPT,
       temperature: 0.1,
       responseMimeType: 'application/json',
-      responseSchema: PARSING_RESPONSE_SCHEMA,
     });
 
     try {
@@ -137,7 +156,7 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmRaw: safeSerialize(completion.raw),
         });
       }
-      const parsed = extractJsonObject<ParsingLlmResponse>(completion.output);
+      const parsed = parseJsonSafe<ParsingLlmResponse>(completion.output);
       if (!parsed.template) {
         throw new ParsingFailureError('LLM response missing template with placeholders.', {
           llmOutput: completion.output,
@@ -338,20 +357,20 @@ const inferRegexForValue = (value: string): string => {
   }
 
   const parts: string[] = [];
-  let inAlnumRun = false;
+  let inRun = false;
 
   const flushRun = (): void => {
-    if (inAlnumRun) {
-      parts.push('[A-Za-z0-9]+');
-      inAlnumRun = false;
+    if (inRun) {
+      parts.push('[A-Za-z0-9_/-]+');
+      inRun = false;
     }
   };
 
   for (const ch of value) {
-    if (/[A-Za-z0-9]/.test(ch)) {
-      if (!inAlnumRun) {
+    if (/[A-Za-z0-9_/-]/.test(ch)) {
+      if (!inRun) {
         flushRun();
-        inAlnumRun = true;
+        inRun = true;
       }
       continue;
     }

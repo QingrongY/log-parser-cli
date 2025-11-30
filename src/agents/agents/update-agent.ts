@@ -52,6 +52,26 @@ interface UpdateLlmResponse {
   explain?: string;
 }
 
+const sanitizeJsonish = (text: string): string =>
+  text
+    .replace(/```(?:json)?/gi, '')
+    .replace(/[\u0000-\u001f]/g, (ch) => `\\u${ch.charCodeAt(0).toString(16).padStart(4, '0')}`);
+
+const parseJsonSafe = <T>(text: string): T => {
+  const sanitized = sanitizeJsonish(text);
+  try {
+    return extractJsonObject<T>(sanitized);
+  } catch {
+    const start = sanitized.indexOf('{');
+    const end = sanitized.lastIndexOf('}');
+    if (start !== -1 && end !== -1 && end > start) {
+      const slice = sanitized.slice(start, end + 1);
+      return extractJsonObject<T>(slice);
+    }
+    throw new Error('LLM response is not valid JSON.');
+  }
+};
+
 export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> {
   constructor(config: Omit<BaseAgentConfig, 'kind'> = {}) {
     super({ kind: 'update', ...config });
@@ -184,103 +204,66 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       })),
     });
 
-    try {
-      const completion = await this.llmClient!.complete({
-        prompt,
-        systemPrompt: UPDATE_SYSTEM_PROMPT,
-        temperature: 0.1,
-        responseMimeType: 'application/json',
-        responseSchema: UPDATE_RESPONSE_SCHEMA,
-      });
-      const parsed = extractJsonObject<UpdateLlmResponse>(completion.output);
-      const sampleForRender =
-        typeof input.candidateSamples?.[0] === 'string'
-          ? input.candidateSamples[0]
-          : typeof input.template.metadata?.sample === 'string'
-            ? (input.template.metadata.sample as string)
-            : input.template.placeholderTemplate;
-      const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sampleForRender);
-      const normalizedPattern = normalizeRegexPattern(pattern);
-      ensureValidRegex(normalizedPattern);
-      const note = parsed.explain ?? 'LLM conflict resolution';
+    const completion = await this.llmClient!.complete({
+      prompt,
+      systemPrompt: UPDATE_SYSTEM_PROMPT,
+      temperature: 0.1,
+      responseMimeType: 'application/json',
+    });
+    const parsed = parseJsonSafe<UpdateLlmResponse>(completion.output);
+    const sampleForRender =
+      typeof input.candidateSamples?.[0] === 'string'
+        ? input.candidateSamples[0]
+        : typeof input.template.metadata?.sample === 'string'
+          ? (input.template.metadata.sample as string)
+          : input.template.placeholderTemplate;
+    const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sampleForRender);
+    const normalizedPattern = normalizeRegexPattern(pattern);
+    ensureValidRegex(normalizedPattern);
+    const note = parsed.explain ?? 'LLM conflict resolution';
 
-      if (parsed.action === 'Modify candidate') {
-        return {
-          status: 'success',
-          output: {
-            action: 'retry',
-            template: {
-              ...input.template,
-              placeholderTemplate: parsed.template,
-              placeholderVariables: parsed.variables,
-              pattern: normalizedPattern,
-              variables: Object.keys(parsed.variables ?? {}),
-            },
-            reason: note,
-          },
-        };
-      }
-
-      if (parsed.action === 'Modify existing') {
-        const adjustedTemplate: LogTemplateDefinition = {
-          ...input.template,
-          placeholderTemplate: parsed.template,
-          placeholderVariables: parsed.variables,
-          pattern: normalizedPattern,
-          variables: Object.keys(parsed.variables ?? {}),
-        };
-        const replacedIds = conflicts
-          .map((entry) => entry.template.id)
-          .filter((id): id is string => typeof id === 'string' && id.length > 0);
-        if (replacedIds.length === 0) {
-          return {
-            status: 'needs-input',
-            issues: ['LLM suggested modifying existing templates but no template IDs were provided.'],
-            output: {
-              action: 'conflict',
-              reason: 'missing-template-ids',
-              template: input.template,
-              conflictingTemplates: conflicts.map((entry) => entry.template),
-            },
-          };
-        }
-        return {
-          status: 'success',
-          output: {
-            action: 'updated',
-            template: adjustedTemplate,
-            replacedTemplateIds: replacedIds,
-            reason: note,
-          },
-        };
-      }
-
+    if (parsed.action === 'Modify candidate') {
       return {
-        status: 'needs-input',
-        issues: ['LLM response was invalid for conflict resolution.'],
+        status: 'success',
         output: {
-          action: 'conflict',
-          reason: 'llm-invalid-response',
-          template: input.template,
-          conflictingTemplates: conflicts.map((entry) => entry.template),
-        },
-      };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      this.logger.warn('LLM update resolution failed.', {
-        message,
-        runId: context.runId,
-      });
-      return {
-        status: 'needs-input',
-        issues: ['LLM conflict resolution failed; manual review required.'],
-        output: {
-          action: 'conflict',
-          reason: 'llm-error',
-          template: input.template,
-          conflictingTemplates: conflicts.map((entry) => entry.template),
+          action: 'retry',
+          template: {
+            ...input.template,
+            placeholderTemplate: parsed.template,
+            placeholderVariables: parsed.variables,
+            pattern: normalizedPattern,
+            variables: Object.keys(parsed.variables ?? {}),
+          },
+          reason: note,
         },
       };
     }
+
+    if (parsed.action === 'Modify existing') {
+      const adjustedTemplate: LogTemplateDefinition = {
+        ...input.template,
+        placeholderTemplate: parsed.template,
+        placeholderVariables: parsed.variables,
+        pattern: normalizedPattern,
+        variables: Object.keys(parsed.variables ?? {}),
+      };
+      const replacedIds = conflicts
+        .map((entry) => entry.template.id)
+        .filter((id): id is string => typeof id === 'string' && id.length > 0);
+      if (replacedIds.length === 0) {
+        throw new Error('LLM suggested modifying existing templates but no template IDs were provided.');
+      }
+      return {
+        status: 'success',
+        output: {
+          action: 'updated',
+          template: adjustedTemplate,
+          replacedTemplateIds: replacedIds,
+          reason: note,
+        },
+      };
+    }
+
+    throw new Error('LLM response was invalid for conflict resolution.');
   }
 }

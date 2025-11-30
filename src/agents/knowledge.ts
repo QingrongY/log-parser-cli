@@ -5,15 +5,15 @@
  */
 
 export const COMMON_LOG_PARSER_KNOWLEDGE = `
-- BUSINESS DATA (variables) are instance-specific values such as timestamps, numbers,
-  user or device identifiers, names, IP or MAC addresses, paths, IDs, and JSON payloads. 
+- BUSINESS DATA (variables) are dynamic, instance-specific values including timestamps, numbers,
+  identifiers, named entities, addresses, paths, URLs, processes, files, and structured payloads such as JSON or XML. 
   They come from unbounded domains and replacing them does not change the semantic meaning of the event.
   Note1: Timestamps in any format (e.g., "Jun 15 12:12:34", ISO "2023-07-16 00:00:02", or AM/PM formats) must always be captured as a single variable "timestamp" (use timestamp1, timestamp2... if multiple).
   Note2: When the same type of BUSINESS DATA appears multiple times in a single log entry, use numbered variable names to avoid duplication (e.g., "ip1", "ip2").
   Note3: Do not use "message" as a variable; preserve any messages as literal text and extract only internal BUSINESS DATA.
-  Note4: Except for timestamps, BUSINESS DATA should be single elements without spaces; multi-word phrases are typically STRUCTURE.
-- STRUCTURE (constants) are system-defined tokens such as event skeletons,
-  module names, protocol keywords, message, and syntactic separators (colons, brackets, pipes).
+- STRUCTURE (constants) are system-defined tokens such as event skeletons, methods, 
+  module names, protocol keywords, static message text, and syntactic separators (colons, brackets, pipes).
+  Generic natural language descriptions are STRUCTURE, whereas specific values or entities named within them are BUSINESS DATA.
   They draw from finite sets and altering them would change what the log entry represents.
 The final goal is to preserve STRUCTURE as literal text and capture BUSINESS DATA.
 - Template format rules:
