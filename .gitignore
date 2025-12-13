@@ -56,4 +56,11 @@ baseline/logparser/
 baseline/toolchains/
 evaluation/results/
 evaluation/alignments/
+benchmark/baseline/output/
+benchmark/baseline/results/
+benchmark/baseline/logparser/
+benchmark/evaluation/
+benchmark/ours/*/reports/
+benchmark/ours/*/template-libraries/
+benchmark/ours/*/log-chunks/
 nul
