@@ -12,6 +12,9 @@ build/
 *.d.ts
 !dist/**/*
 !src/types/*.d.ts
+!evaluation/**/*.js
+!baseline/**/*.js
+!scripts/**/*.js
 
 # IDE
 .vscode/
@@ -43,3 +46,14 @@ coverage/
 # Misc
 *.tgz
 .cache/
+
+# Data and results
+datasets/
+artifacts/
+baseline/output/
+baseline/results/
+baseline/logparser/
+baseline/toolchains/
+evaluation/results/
+evaluation/alignments/
+nul
