@@ -191,6 +191,12 @@ export class UpdateAgent extends BaseAgent<UpdateAgentInput, UpdateAgentOutput> 
       temperature: 0.1,
       responseMimeType: 'application/json',
     });
+
+    this.logger.debug('Update agent LLM response', {
+      outputLength: completion.output?.length,
+      outputPreview: completion.output?.substring(0, 200),
+    });
+
     const parsed = this.parseJsonSafe<UpdateLlmResponse>(completion.output);
     const sampleForRender =
       typeof input.candidateSamples?.[0] === 'string'

@@ -114,13 +114,29 @@ export abstract class BaseAgent<TInput, TOutput> {
       return JSON.parse(jsonText) as T;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      this.logger.error(`JSON parse failed: ${message}`, {
+      const errorPos = message.match(/position (\d+)/)?.[1];
+      const pos = errorPos ? parseInt(errorPos) : -1;
+
+      const debugInfo = {
+        agent: this.name,
         originalLength: text.length,
         sanitizedLength: sanitized.length,
-        jsonTextPreview: jsonText.substring(0, 200),
-        jsonTextSample: this.debugShowControlChars(jsonText.substring(0, 100)),
-      });
-      throw new Error(`LLM response is not valid JSON: ${message}`);
+        jsonTextPreview: jsonText.substring(0, 300),
+        jsonTextSample: this.debugShowControlChars(jsonText.substring(0, 150)),
+        errorPosition: errorPos,
+        contextAroundError: pos > 0 ? this.debugShowControlChars(jsonText.substring(Math.max(0, pos - 30), pos + 30)) : undefined,
+      };
+
+      this.logger.error(`JSON parse failed in ${this.name}: ${message}`, debugInfo);
+
+      const errorDetails = [
+        message,
+        `Agent: ${this.name}`,
+        `LLM output (first 100 chars): ${this.debugShowControlChars(text.substring(0, 100))}`,
+        errorPos ? `Context around error pos ${errorPos}: ${this.debugShowControlChars(jsonText.substring(Math.max(0, pos - 30), Math.min(jsonText.length, pos + 30)))}` : '',
+      ].filter(Boolean).join('\n');
+
+      throw new Error(errorDetails);
     }
   }
 
@@ -131,7 +147,15 @@ export abstract class BaseAgent<TInput, TOutput> {
   }
 
   private sanitizeJsonish(text: string): string {
-    return text.replace(/```(?:json)?/gi, '');
+    let sanitized = text.replace(/```(?:json)?/gi, '');
+    sanitized = sanitized.replace(/[\u0000-\u001f]/g, (ch) => {
+      const code = ch.charCodeAt(0);
+      if (code === 0x0a || code === 0x0d || code === 0x09) {
+        return ch;
+      }
+      return `\\u${code.toString(16).padStart(4, '0')}`;
+    });
+    return sanitized;
   }
 
   protected abstract handle(
