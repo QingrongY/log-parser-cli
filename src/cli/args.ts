@@ -20,10 +20,11 @@ export interface RunnerOptions {
 }
 
 export const parseArgs = (argv: string[]): RunnerOptions => {
+  const benchRoot = 'benchmark';
   const options: RunnerOptions = {
     inputPath: '',
     variableHints: [],
-    outputDir: resolve(process.cwd(), 'artifacts/log-parser'),
+    outputDir: resolve(process.cwd(), `${benchRoot}/log-parser`),
   };
 
   for (let i = 0; i < argv.length; i += 1) {

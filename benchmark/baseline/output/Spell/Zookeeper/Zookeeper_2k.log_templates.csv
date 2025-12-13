@@ -1,0 +1,196 @@
+EventId,EventTemplate,Occurrences
+c1c0e25e,2015-07-29 17 41 44 747 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 FastLeaderElection@774] - Notification time out 3200,1
+34fc74a8,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.11 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11 <*>,33
+7c88d61d,2015-07-29 19 <*> <*> <*> - WARN [SendWorker <*> QuorumCnxManager$SendWorker@688] - Send worker leaving thread,262
+21da1204,<*> 19 <*> <*> <*> - WARN [SendWorker <*> QuorumCnxManager$SendWorker@679] - Interrupted while waiting for message on queue,314
+ce0e18a1,2015-07-29 19 <*> <*> <*> - WARN [RecvWorker 188978561024 QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024 my id <*> error,289
+bfa816c6,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.11 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13 <*>,38
+4e8ab3c8,2015-07-29 19 <*> <*> <*> - WARN [RecvWorker 188978561024 QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker,265
+6e0f595c,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.11 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12 <*>,26
+31140f46,2015-07-29 19 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+a8d2daab,<*> <*> <*> <*> <*> - WARN [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@349] - caught end of stream exception,37
+6ba9661d,2015-07-29 19 54 <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 <*> - Client attempting to <*> session <*> at /10.10.34.13 <*>,2
+86bf6568,<*> 21 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at <*>,11
+b30bb176,2015-07-29 21 34 <*> <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+4005b0cf,2015-07-29 21 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,4
+87afcd94,2015-07-29 23 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,2
+5349d991,2015-07-29 23 44 28 903 - ERROR [CommitProcessor 1 NIOServerCnxn@180] - Unexpected Exception,1
+6ce59894,2015-07-29 23 52 <*> <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+b4289d29,2015-07-29 <*> 52 <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,5
+3a56355c,2015-07-30 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11 <*>,8
+fc8ba549,2015-07-30 14 <*> <*> <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout <*> for client /10.10.34.11 <*>,2
+6bd9d38b,2015-07-30 <*> <*> 21 <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,2
+73aa698a,2015-07-30 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at <*>,15
+e46613e6,2015-07-30 <*> <*> <*> <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client /10.10.34.11 <*>,2
+51971255,2015-07-30 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11 <*> which had sessionid <*>,8
+468a7c00,<*> <*> <*> <*> <*> - WARN [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@793] - Connection request from old client <*> <*> will be dropped if server is in r-o mode,39
+c7283b85,2015-07-30 16 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,2
+d87cb45a,2015-07-30 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12 <*> which had sessionid <*>,4
+6b423cae,<*> 17 <*> <*> 816 - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+4a05b0a0,2015-07-30 17 43 58 186 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment user.dir /,1
+dc05ed6b,2015-07-30 <*> <*> <*> <*> - WARN [WorkerSender[myid 1] QuorumCnxManager@368] - Cannot open channel to <*> at election address <*> 3888,3
+57e83c21,2015-07-30 <*> <*> <*> <*> - INFO [ProcessThread(sid 1 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,7
+675300f1,2015-07-30 <*> <*> <*> <*> - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded,10
+1eff5503,2015-07-30 23 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,2
+e812fcb8,2015-07-30 23 43 22 414 - WARN [LearnerHandler-/10.10.34.12 35276 LearnerHandler@575] - ******* GOODBYE /10.10.34.12 35276 ********,1
+14a74682,2015-07-30 23 43 23 613 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 QuorumPeer@670] - LOOKING,1
+750ff2d7,<*> <*> <*> <*> <*> - WARN [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 QuorumCnxManager@368] - Cannot open channel to <*> at election address <*> 3888,79
+4a46d84e,2015-07-30 23 49 40 005 - WARN [RecvWorker 3 QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker,1
+8992555a,<*> 23 <*> <*> <*> - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 FastLeaderElection@774] - Notification time out 60000,2
+e9c8433a,<*> <*> 17 52 <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+adfdbced,2015-07-31 11 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,4
+32fdeeb9,2015-07-31 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12 <*>,2
+14dd31b1,2015-07-31 15 31 40 971 - INFO [Thread-1 QuorumCnxManager$Listener@486] - My election bind port 0.0.0.0/0.0.0.0 3888,1
+ffce827d,2015-07-31 15 31 40 999 - INFO [WorkerSender[myid 1] QuorumCnxManager@190] - Have smaller server identifier so dropping the connection (2 1),1
+b55018db,2015-07-31 15 31 42 213 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 QuorumPeer@738] - FOLLOWING,1
+0deb49fe,2015-07-31 19 30 07 398 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 QuorumPeer@670] - LOOKING,1
+57cb96e6,2015-07-31 19 30 07 403 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 FastLeaderElection@740] - New election. My id 1 proposed zxid 0x700000000,1
+c51e3d01,2015-07-31 19 30 07 445 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment host.name mesos-master-1,1
+fd56c46f,2015-07-31 19 30 07 452 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Follower@63] - FOLLOWING - LEADER ELECTION TOOK - 49,1
+baa31d31,2015-07-31 21 <*> <*> <*> - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+ffc2fc52,2015-07-31 21 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,3
+9a195da7,2015-07-31 21 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+850c8e00,2015-08-07 07 27 <*> <*> - INFO [WorkerReceiver[myid <*> FastLeaderElection@542] - Notification 3 (n.leader) 0x700000197 (n.zxid) 0x1 (n.round) <*> (n.state) 3 (n.sid) 0x7 (n.peerEPoch) LOOKING (my state),2
+b6ab1260,2015-08-07 07 27 47 650 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Follower@63] - FOLLOWING - LEADER ELECTION TOOK - 238,1
+b97b714c,2015-08-10 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at <*>,3
+04f43825,2015-08-10 18 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+7601c8b2,2015-08-10 18 <*> <*> <*> - INFO [CommitProcessor <*> ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client /10.10.34.11 <*>,2
+16f53642,2015-08-10 18 23 49 901 - INFO [main DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3,1
+24f25e1d,2015-08-10 18 23 50 332 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment java.vendor Oracle Corporation,1
+88adfebd,2015-08-10 18 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 Learner@107] - Revalidating client <*>,3
+b061809a,2015-08-10 18 23 52 <*> - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+d40d5ea2,2015-08-10 18 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@832] - Client attempting to renew session <*> at <*>,2
+4772eb76,2015-08-10 18 25 22 <*> - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment <*>,2
+241fc72b,2015-08-18 16 09 13 285 - INFO [/10.10.34.11 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12 34051,1
+810ce072,2015-08-18 16 09 15 099 - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment os.name Linux,1
+63fcc865,2015-08-20 13 28 51 889 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11 54839,1
+96294dee,2015-08-20 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12 <*>,3
+dd996128,<*> <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> (no session established for client),4
+ea2a9e25,2015-08-20 17 <*> <*> <*> - WARN [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@354] - Exception causing close of session 0x0 due to java.io.IOException ZooKeeperServer not running,3
+d0f27b92,2015-08-20 17 14 <*> <*> - INFO [WorkerReceiver[myid <*> FastLeaderElection@542] - Notification <*> (n.leader) <*> (n.zxid) 0x2 (n.round) LOOKING (n.state) <*> (n.sid) 0xb (n.peerEPoch) <*> (my state),4
+f82ca53e,2015-08-20 17 22 22 288 - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session 0x14f4a6318b80005 with negotiated timeout 10000 for client /10.10.34.11 56492,1
+f06a18f1,2015-08-20 17 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,3
+2f466f06,2015-08-20 19 02 23 456 - INFO [CommitProcessor 1 ZooKeeperServer@595] - Established session 0x14f4a6318b80022 with negotiated timeout 10000 for client /10.10.34.30 43272,1
+d8836f7f,2015-08-20 19 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+0e68eeab,2015-08-21 15 55 <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,2
+35d8354b,2015-08-24 15 26 54 494 - INFO [main QuorumPeer@913] - tickTime set to 2000,1
+cb22f1b6,<*> <*> <*> <*> <*> - WARN [WorkerSender[myid 1] QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13 3888,2
+dcf2e346,2015-08-24 <*> <*> <*> <*> - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 FastLeaderElection@774] - Notification time out 60000,18
+8d34c4c8,2015-08-25 <*> <*> <*> <*> - INFO [QuorumPeer[myid 1]/0 0 0 0 0 0 0 0 2181 FastLeaderElection@774] - Notification time out 60000,16
+509f8cb1,2015-08-25 11 20 12 465 - WARN [RecvWorker 3 QuorumCnxManager$RecvWorker@762] - Connection broken for id 3 my id 1 error,1
+3bd89217,2015-07-29 17 42 30 405 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment java.vendor Oracle Corporation,1
+3c8cd3bd,2015-07-29 19 <*> <*> <*> - ERROR <*> <*> LearnerHandler@562] - Unexpected exception causing shutdown while sock still open,12
+cfe3b6ea,2015-07-29 19 04 30 989 - WARN [LearnerHandler-/10.10.34.11 52264 LearnerHandler@575] - ******* GOODBYE /10.10.34.11 52264 ********,1
+88806dd0,2015-07-29 19 13 46 128 - WARN [LearnerHandler-/10.10.34.11 52308 LearnerHandler@575] - ******* GOODBYE /10.10.34.11 52308 ********,1
+9ac0e6b1,2015-07-29 19 14 <*> <*> - WARN [LearnerHandler-/10.10.34.12 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.12 <*> ********,2
+8370428b,2015-07-29 19 <*> 56 <*> - WARN [LearnerHandler-/10.10.34.13 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.13 <*> ********,3
+f99f6b78,2015-07-29 19 16 <*> <*> - WARN [LearnerHandler-/10.10.34.11 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.11 <*> ********,3
+2ed7b82a,2015-07-29 19 16 <*> <*> - WARN [LearnerHandler-/10.10.34.12 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.12 <*> ********,2
+1853b998,2015-07-29 19 18 26 565 - WARN [LearnerHandler-/10.10.34.13 57502 LearnerHandler@575] - ******* GOODBYE /10.10.34.13 57502 ********,1
+8b31354d,2015-07-29 19 <*> 56 <*> - WARN [LearnerHandler-/10.10.34.11 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.11 <*> ********,2
+dfa2e2ee,2015-07-29 19 18 56 457 - WARN [LearnerHandler-/10.10.34.12 59406 LearnerHandler@575] - ******* GOODBYE /10.10.34.12 59406 ********,1
+86ec0fd2,2015-07-29 19 <*> 16 <*> - WARN [LearnerHandler-/10.10.34.13 <*> LearnerHandler@575] - ******* GOODBYE /10.10.34.13 <*> ********,2
+7ac8ceb4,2015-07-29 19 21 <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,7
+59f76d59,2015-07-29 19 22 <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,6
+320f620c,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12 <*>,28
+2cd55978,2015-07-29 19 24 <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,9
+1f425e02,2015-07-29 19 25 <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,2
+d814bfd1,2015-07-29 19 26 <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,5
+a5f7b20a,2015-07-29 19 27 53 <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,2
+9b246283,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11 <*>,18
+2423808f,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13 <*>,15
+b1e192ca,2015-07-29 19 37 27 222 - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid 0x34ed93485090001 type create cxid 0x55b8bb0f zxid 0x100000010 txntype -1 reqpath n/a Error Path /home/curi/.zookeeper Error KeeperErrorCode NodeExists for /home/curi/.zookeeper,1
+9b60a744,2015-07-29 19 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,4
+b2204650,2015-07-29 <*> <*> <*> <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,11
+a89bfd8c,2015-07-29 19 <*> 54 <*> - INFO [WorkerReceiver[myid <*> FastLeaderElection@542] - Notification 3 (n.leader) 0x10000006b (n.zxid) 0x2 (n.round) LOOKING (n.state) 3 (n.sid) 0x1 (n.peerEPoch) <*> (my state),2
+c6e05980,2015-07-29 20 15 01 897 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11 51168,1
+fef11657,2015-07-29 <*> <*> <*> <*> - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded,5
+6ecbcaa3,2015-07-29 23 44 25 464 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.35 38016,1
+2264ddd7,2015-07-29 23 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at <*>,3
+1ca66b1d,2015-07-30 <*> <*> <*> 000 - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 20000ms exceeded,2
+57e806c8,2015-07-30 <*> <*> <*> <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,11
+0a138776,2015-07-30 15 <*> <*> <*> - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,3
+353f18cf,2015-07-30 <*> 35 <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,2
+35158c51,2015-07-30 16 <*> <*> <*> - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,3
+d283f6ad,2015-07-30 <*> 18 18 <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+c8b772df,2015-07-30 17 57 44 121 - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13 33209,1
+008369e3,2015-07-30 <*> <*> <*> <*> - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client /10.10.34.13 <*>,2
+ed574a00,2015-07-30 19 <*> <*> <*> - INFO [CommitProcessor <*> ZooKeeperServer@595] - Established session <*> with negotiated timeout 20000 for client /10.10.34.11 <*>,2
+fb850082,2015-07-30 21 03 49 284 - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session 0x24ede63a01b006c with negotiated timeout 10000 for client /10.10.34.40 47637,1
+1ea895d9,2015-07-30 23 46 27 304 - INFO [main QuorumPeerMain@127] - Starting quorum peer,1
+ad8b7a3c,2015-07-30 23 46 31 590 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 FileTxnSnapLog@240] - Snapshotting 0x300000dcd to /var/lib/zookeeper/version-2/snapshot.300000dcd,1
+3de48b4c,2015-07-31 <*> <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at <*>,4
+7e949bbc,2015-07-31 00 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+e66fb80c,2015-07-31 <*> <*> <*> <*> - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded,12
+d437eb84,2015-07-31 00 17 <*> <*> - INFO [CommitProcessor <*> ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+a68ba7c0,2015-07-31 <*> <*> <*> <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,9
+97cfc778,2015-07-31 00 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,3
+8e95dc2a,2015-07-31 15 31 15 575 - INFO [main DatadirCleanupManager@79] - autopurge.purgeInterval set to 0,1
+1344917b,2015-07-31 15 31 41 457 - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11 59599,1
+273f7b90,2015-07-31 15 36 21 074 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 FileTxnSnapLog@240] - Snapshotting 0x50000062e to /var/lib/zookeeper/version-2/snapshot.50000062e,1
+230f3e5f,2015-07-31 15 36 24 570 - INFO [LearnerHandler-/10.10.34.13 59348 LearnerHandler@263] - Follower sid 3 info org.apache.zookeeper.server.quorum.QuorumPeer$QuorumServer@33557fe4,1
+29eea6f2,2015-07-31 21 23 12 518 - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session 0x24ee30a54f5001c with negotiated timeout 10000 for client /10.10.34.32 45013,1
+31208c8b,2015-07-31 21 32 06 <*> - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session <*> with negotiated timeout <*> for client /10.10.34.11 <*>,2
+00394041,2015-08-07 07 27 35 422 - WARN [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13 3888,1
+e53d8a08,2015-08-10 18 25 25 <*> - INFO [main <*> - <*> set to <*>,2
+d5d13b95,2015-08-10 18 25 25 413 - INFO [/10.10.34.12 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13 44925,1
+ea5a37db,2015-08-10 18 25 25 673 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 QuorumPeer@738] - FOLLOWING,1
+e3248720,2015-08-10 18 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11 <*>,2
+559e314a,2015-08-10 18 26 03 376 - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session 0x24f1724b8af0009 with negotiated timeout 10000 for client /10.10.34.21 44834,1
+e5e86fca,2015-08-18 16 09 18 789 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment java.class.path /etc/zookeeper/conf /usr/share/java/jline.jar /usr/share/java/log4j-1.2.jar /usr/share/java/xercesImpl.jar /usr/share/java/xmlParserAPIs.jar /usr/share/java/netty.jar /usr/share/java/slf4j-api.jar /usr/share/java/slf4j-log4j12.jar /usr/share/java/zookeeper.jar,1
+1a3389b0,2015-08-18 16 09 18 900 - INFO [LearnerHandler-/10.10.34.11 49928 Leader@598] - Have quorum of supporters; starting up and setting last processed zxid 0xb00000000,1
+6c8b4b5e,2015-08-18 16 09 22 982 - INFO [WorkerReceiver[myid 2] FastLeaderElection@542] - Notification 2 (n.leader) 0xa0000009a (n.zxid) 0x1 (n.round) FOLLOWING (n.state) 1 (n.sid) 0xa (n.peerEPoch) LEADING (my state),1
+98d9b9f9,<*> 16 <*> <*> <*> - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded,2
+1c5a44c0,2015-08-18 16 09 30 <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,2
+a12cd839,2015-08-20 <*> <*> <*> <*> - INFO [SessionTracker ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded,6
+920aeecc,2015-08-20 <*> <*> <*> <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,4
+db2babeb,2015-08-20 17 12 29 085 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 FinalRequestProcessor@415] - shutdown of request processor complete,1
+d18dc0d9,2015-08-20 17 14 13 880 - WARN [LearnerHandler-/10.10.34.13 42241 Leader@576] - First is 0x0,1
+82f93d96,2015-08-20 17 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client <*> <*> which had sessionid <*>,3
+52ed8edf,2015-08-20 17 24 <*> <*> - INFO [CommitProcessor 2 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+4ade0bf4,2015-08-21 15 55 09 796 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.21 53818,1
+038c2cb9,2015-08-24 10 21 44 000 - INFO [SessionTracker ZooKeeperServer@325] - Expiring session 0x34f4a63146b0048 timeout of 10000ms exceeded,1
+6e7935c9,2015-08-25 11 14 51 514 - INFO [main DatadirCleanupManager@79] - autopurge.purgeInterval set to 0,1
+35b61f7a,2015-08-25 11 14 51 662 - INFO [main FileSnap@83] - Reading snapshot /var/lib/zookeeper/version-2/snapshot.b00000084,1
+c6e5b6dd,2015-08-25 11 14 53 074 - INFO [LearnerHandler-/10.10.34.11 32976 LearnerHandler@395] - Sending DIFF,1
+18ff6e23,2015-08-25 11 15 04 735 - INFO [SessionTracker ZooKeeperServer@325] - Expiring session 0x24f4a631df90029 timeout of 10000ms exceeded,1
+f5159fc5,2015-08-25 11 15 04 <*> - INFO [ProcessThread(sid 2 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid <*>,2
+696ab6b3,2015-08-25 11 26 27 861 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 QuorumPeer@670] - LOOKING,1
+4773ae11,2015-08-25 11 26 28 145 - INFO [QuorumPeer[myid 2]/0 0 0 0 0 0 0 0 2181 Learner@325] - Getting a snapshot from leader,1
+150893e0,2015-07-29 17 42 53 528 - WARN [WorkerSender[myid 3] QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12 3888,1
+9f8146f0,2015-07-29 17 43 <*> <*> - INFO [WorkerReceiver[myid 3] FastLeaderElection@542] - Notification 3 (n.leader) 0x0 (n.zxid) 0x1 (n.round) LOOKING (n.state) 3 (n.sid) 0x0 (n.peerEPoch) LOOKING (my state),2
+71c3a512,2015-07-29 19 21 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,6
+7f14d44f,2015-07-29 19 22 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,8
+36839a25,2015-07-29 19 23 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,6
+bd05d49a,2015-07-29 19 24 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,5
+05752714,2015-07-29 19 25 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,9
+b430c603,2015-07-29 19 26 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,9
+e1cec843,2015-07-29 19 27 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,5
+3f62d16d,2015-07-29 19 28 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,8
+7ce47ba2,2015-07-29 19 29 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,10
+fbfd394e,2015-07-29 19 30 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,6
+23e90720,2015-07-29 19 31 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,5
+85ec759f,2015-07-29 19 32 <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request <*>,6
+dec12a67,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11 <*>,11
+69f3fc56,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12 <*>,4
+163b023b,2015-07-29 19 <*> <*> <*> - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13 <*>,7
+ec0a94f0,2015-07-29 21 01 45 071 - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session 0x34ed9ac1c1e0007 with negotiated timeout 10000 for client /10.10.34.12 59224,1
+ea1d61f3,2015-07-29 23 <*> <*> <*> - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+35b89011,2015-07-30 <*> <*> <*> <*> - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client /10.10.34.11 <*>,3
+9d74d263,2015-07-30 17 <*> <*> <*> - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from <*>,4
+52115316,2015-07-30 17 40 45 765 - WARN [RecvWorker 1 QuorumCnxManager$RecvWorker@762] - Connection broken for id 1 my id 3 error,1
+16f8b579,2015-07-30 17 57 38 413 - INFO [QuorumPeer[myid 3]/0 0 0 0 0 0 0 0 2181 QuorumPeer@670] - LOOKING,1
+ef618c34,2015-07-30 17 57 38 440 - INFO [WorkerReceiver[myid 3] FastLeaderElection@542] - Notification 3 (n.leader) 0x100001564 (n.zxid) 0x3 (n.round) FOLLOWING (n.state) 3 (n.sid) 0x2 (n.peerEPoch) FOLLOWING (my state),1
+8084c26a,2015-07-30 19 35 00 326 - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session 0x34ede65503f0027 with negotiated timeout 10000 for client /10.10.34.12 56359,1
+f4a7d04d,2015-07-30 19 59 02 549 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13 50224,1
+d009719f,2015-07-30 21 01 49 990 - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session 0x34ede65503f0058 with negotiated timeout 20000 for client /10.10.34.11 51967,1
+59f1eccf,<*> 23 <*> <*> <*> - INFO [main QuorumPeer@933] - minSessionTimeout set to -1,2
+1c585a20,2015-07-30 23 52 57 <*> - INFO [QuorumPeer[myid 3]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment <*>,2
+4c2ac65e,2015-07-31 00 <*> <*> <*> - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session <*> with negotiated timeout 10000 for client <*>,2
+9fb6043c,2015-07-31 15 15 17 186 - INFO [/10.10.34.13 3888 QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11 53230,1
+3278b92f,2015-07-31 15 36 23 865 - INFO [QuorumPeer[myid 3]/0 0 0 0 0 0 0 0 2181 Environment@100] - Server environment java.home /usr/lib/jvm/java-7-openjdk-amd64/jre,1
+4bfdd4c8,2015-07-31 15 36 23 884 - INFO [QuorumPeer[myid 3]/0 0 0 0 0 0 0 0 2181 Learner@325] - Getting a snapshot from leader,1
+2df4cc92,2015-07-31 21 32 19 994 - INFO [CommitProcessor 3 ZooKeeperServer@595] - Established session 0x34ee30a5c53002b with negotiated timeout 10000 for client /10.10.34.42 37429,1
+c447a27c,2015-08-10 17 53 14 914 - INFO [NIOServerCxn.Factory 0.0.0.0/0.0.0.0 2181 NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12 33342 which had sessionid 0x34f0557885e0002,1
+73876486,2015-08-10 18 12 34 001 - INFO [SessionTracker ZooKeeperServer@325] - Expiring session 0x14f05578bd8000f timeout of 10000ms exceeded,1
+c413c120,2015-08-10 18 12 34 004 - INFO [ProcessThread(sid 3 cport -1) PrepRequestProcessor@476] - Processed session termination for sessionid 0x24f0557806a0010,1

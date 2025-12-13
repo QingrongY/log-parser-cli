@@ -1,0 +1,1251 @@
+EventId,EventTemplate,Occurrences
+7f6f7801,"2015-07-29 17:41:44,747 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 3200",1
+c1987214,"2015-07-29 19:04:12,394 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45307",1
+82322d5a,"2015-07-29 19:04:29,071 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,2015-07-29 <*> - WARN [SendWorker:188978561024:QuorumCnxManager$SendWorker@679] - Interrupted while waiting for message on queue,313
+448f479f,"2015-07-29 19:13:17,524 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 <*> - WARN [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024, my id = 1, error =",94
+7c480c60,"2015-07-29 19:13:24,370 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:57707",1
+c5424fda,"2015-07-29 19:13:37,626 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:13:44,301 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+a0a9c9ab,"2015-07-29 19:13:54,220 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45382",1
+78dd6870,"2015-07-29 19:14:07,559 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:14:07,653 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+891c934e,"2015-07-29 19:14:24,329 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:14:44,256 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45440",94
+c985b95f,"2015-07-29 19:14:47,593 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+0a337048,"2015-07-29 19:14:54,354 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+f8a47cdf,"2015-07-29 19:15:37,647 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3bfed9e9,"2015-07-29 19:15:37,648 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:15:57,854 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:57895",313
+0b91cc97,"2015-07-29 19:16:07,659 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+f0e15725,"2015-07-29 19:16:27,865 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+f99166e9,"2015-07-29 19:16:44,440 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47727",1
+c985b95f,"2015-07-29 19:17:57,939 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58035",313
+50a0933d,"2015-07-29 19:17:57,955 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+ab09eb9f,"2015-07-29 19:18:07,748 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:18:07,756 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+ea034923,"2015-07-29 19:18:14,511 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47838",1
+c985b95f,"2015-07-29 19:18:37,770 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c985b95f,"2015-07-29 19:18:47,785 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+33ec0ccd,"2015-07-29 19:18:54,534 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:18:57,988 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c5424fda,"2015-07-29 19:19:04,661 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58116",94
+c985b95f,"2015-07-29 19:21:36,502 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:45957",313
+44c932af,"2015-07-29 19:21:39,846 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:21:43,389 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+8a5d3d95,"2015-07-29 19:21:46,537 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:21:46,728 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58303",313
+c985b95f,"2015-07-29 19:21:49,960 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48096",313
+c985b95f,"2015-07-29 19:21:53,209 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:21:53,220 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c985b95f,"2015-07-29 19:21:53,414 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:21:56,644 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+8e6c14c2,"2015-07-29 19:21:56,756 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+fcd6372c,"2015-07-29 19:21:59,997 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:22:03,324 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48141",313
+ad7240ff,"2015-07-29 19:22:03,337 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+50acb244,"2015-07-29 19:22:03,439 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+10f3c8c8,"2015-07-29 19:22:16,799 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:22:20,143 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58421",313
+c985b95f,"2015-07-29 19:22:23,289 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+20ac143c,"2015-07-29 19:22:23,379 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+363ff88f,"2015-07-29 19:22:26,617 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46128",1
+cd919e0b,"2015-07-29 19:22:26,734 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:22:26,829 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+cdd38c31,"2015-07-29 19:22:26,830 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58452",1
+f4f3f045,"2015-07-29 19:22:29,975 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+ee06cff0,"2015-07-29 19:22:36,642 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:22:36,659 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46173",313
+c5424fda,"2015-07-29 19:22:40,083 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48280",94
+d5ea6094,"2015-07-29 19:22:43,421 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+72ab31cb,"2015-07-29 19:22:56,689 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:23:00,131 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+5801adca,"2015-07-29 19:23:00,237 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:58565",1
+abcf69b8,"2015-07-29 19:23:03,387 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+8f529ac0,"2015-07-29 19:23:03,464 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cb4a304f,"2015-07-29 19:23:03,590 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c4eb4f97,"2015-07-29 19:23:06,729 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:23:13,491 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:23:16,755 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+117772c3,"2015-07-29 19:23:16,848 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48413",1
+d4a34d12,"2015-07-29 19:23:16,937 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+82db246a,"2015-07-29 19:23:20,094 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46329",1
+c13a94fb,"2015-07-29 19:23:20,173 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+9349fa22,"2015-07-29 19:23:20,278 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+d0f6eb19,"2015-07-29 19:23:30,110 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46360",1
+1f42a74f,"2015-07-29 19:23:30,320 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:23:33,553 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c985b95f,"2015-07-29 19:23:46,827 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46424",313
+c985b95f,"2015-07-29 19:23:46,830 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+86324ec5,"2015-07-29 19:23:46,917 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+572e04fd,"2015-07-29 19:23:53,488 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46440",1
+0d3841b5,"2015-07-29 19:23:56,838 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:24:03,725 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+f44c5521,"2015-07-29 19:24:07,062 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+9426e4c9,"2015-07-29 19:24:10,286 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48600",1
+c985b95f,"2015-07-29 19:24:13,542 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:24:13,553 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46519",313
+b053f222,"2015-07-29 19:24:16,883 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+4b293aad,"2015-07-29 19:24:16,987 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+40b3145e,"2015-07-29 19:24:20,217 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+47419392,"2015-07-29 19:24:20,413 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:24:20,431 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:24:23,563 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46552",313
+24c4eff7,"2015-07-29 19:24:37,012 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+4cf311a3,"2015-07-29 19:24:50,374 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:25:03,663 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+a8e9b20d,"2015-07-29 19:25:03,744 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+85f5c672,"2015-07-29 19:25:03,857 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59016",1
+c5424fda,"2015-07-29 19:25:07,003 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c985b95f,"2015-07-29 19:25:07,079 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c985b95f,"2015-07-29 19:25:07,102 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:25:07,107 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48811",313
+c5424fda,"2015-07-29 19:25:10,536 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59037",94
+1dfc95e2,"2015-07-29 19:25:10,539 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:25:13,695 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c5424fda,"2015-07-29 19:25:13,874 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+9b4935c5,"2015-07-29 19:25:17,021 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+87da4a9b,"2015-07-29 19:25:23,889 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59078",1
+5e91cc2a,"2015-07-29 19:25:27,242 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+27c9660a,"2015-07-29 19:25:30,398 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46798",1
+4a05f58c,"2015-07-29 19:25:30,571 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+a8164e52,"2015-07-29 19:25:37,062 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46812",1
+2688ce9f,"2015-07-29 19:25:37,257 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59130",1
+c5424fda,"2015-07-29 19:25:37,259 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+855bcefa,"2015-07-29 19:25:40,484 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48922",1
+f98755ac,"2015-07-29 19:25:40,600 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+5abdba18,"2015-07-29 19:25:47,102 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+34f4a7b0,"2015-07-29 19:25:50,537 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:27:55,066 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47327",313
+2c2f28e0,"2015-07-29 19:27:58,827 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47351",1
+56d3fa3b,"2015-07-29 19:28:02,167 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47366",1
+c985b95f,"2015-07-29 19:28:08,431 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47390",313
+c5424fda,"2015-07-29 19:28:08,636 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59614",94
+c5424fda,"2015-07-29 19:28:12,190 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+7c48a122,"2015-07-29 19:28:15,221 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:28:18,661 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+a0e60cd0,"2015-07-29 19:28:21,902 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:28:28,473 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47472",94
+2ff33131,"2015-07-29 19:28:32,018 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59689",1
+c5424fda,"2015-07-29 19:28:35,160 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:28:35,361 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59706",313
+ae051ef7,"2015-07-29 19:28:38,703 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59722",1
+b670f46c,"2015-07-29 19:28:41,841 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+90ef64ab,"2015-07-29 19:28:41,844 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47540",1
+c5424fda,"2015-07-29 19:28:48,527 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47571",94
+7720ceff,"2015-07-29 19:28:58,547 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47615",1
+3b2814d1,"2015-07-29 19:29:01,988 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49588",1
+c985b95f,"2015-07-29 19:29:08,571 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:29:08,668 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49610",94
+c985b95f,"2015-07-29 19:29:08,670 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+937eb6c5,"2015-07-29 19:29:08,671 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+ac8c167a,"2015-07-29 19:29:12,115 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:29:12,115 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c414bb77,"2015-07-29 19:29:15,349 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+81515aa9,"2015-07-29 19:29:15,349 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+5cb4e5d4,"2015-07-29 19:29:18,798 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8c625deb,"2015-07-29 19:29:21,933 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3467682f,"2015-07-29 19:29:22,033 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8ff65295,"2015-07-29 19:29:22,136 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+ae4096d0,"2015-07-29 19:29:22,340 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+81989d78,"2015-07-29 19:29:25,274 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+1bc8a881,"2015-07-29 19:29:28,612 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:29:32,056 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:29:35,500 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:59925",313
+c985b95f,"2015-07-29 19:29:38,843 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:29:45,414 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+45cd1cf4,"2015-07-29 19:29:45,522 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:29:58,673 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c5424fda,"2015-07-29 19:29:58,779 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:30:02,019 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47885",313
+f5727eec,"2015-07-29 19:30:02,117 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49806",1
+c5424fda,"2015-07-29 19:30:05,458 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c5424fda,"2015-07-29 19:30:15,586 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60070",94
+77a8c529,"2015-07-29 19:30:22,162 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c66bceb4,"2015-07-29 19:30:25,405 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+9fdde838,"2015-07-29 19:30:25,608 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+0599ac25,"2015-07-29 19:30:25,609 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+539d6d7d,"2015-07-29 19:30:38,760 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+bfffc27a,"2015-07-29 19:30:38,863 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49940",1
+3cd2b82b,"2015-07-29 19:30:42,315 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8d54a599,"2015-07-29 19:30:45,653 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+e1a67dbc,"2015-07-29 19:30:48,785 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7fb528eb,"2015-07-29 19:30:48,997 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c7fce60a,"2015-07-29 19:31:02,243 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+263181a3,"2015-07-29 19:31:02,352 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:31:02,353 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:31:08,823 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:31:08,922 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50043",94
+007922e6,"2015-07-29 19:31:15,504 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:31:32,214 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+3342473e,"2015-07-29 19:31:32,420 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+937a6d62,"2015-07-29 19:31:39,095 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60366",1
+379c6f7c,"2015-07-29 19:31:49,006 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:31:49,116 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c5424fda,"2015-07-29 19:31:52,456 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+28d714e8,"2015-07-29 19:31:55,588 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:31:55,590 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48289",94
+f2812cf0,"2015-07-29 19:31:55,793 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60423",1
+fc3621fa,"2015-07-29 19:32:02,269 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+bfd1b5fe,"2015-07-29 19:32:02,363 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+675ff649,"2015-07-29 19:32:02,367 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:32:05,705 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+0f058cfd,"2015-07-29 19:32:08,955 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:32:12,503 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60489",313
+c985b95f,"2015-07-29 19:32:18,976 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+26a63a6f,"2015-07-29 19:32:29,085 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50332",1
+c985b95f,"2015-07-29 19:32:29,085 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+698381d7,"2015-07-29 19:32:35,764 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50354",1
+c985b95f,"2015-07-29 19:32:42,357 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+f2b07cdf,"2015-07-29 19:32:42,443 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+2297a472,"2015-07-29 19:32:42,557 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:32:49,042 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48503",94
+b0b1db6b,"2015-07-29 19:32:59,143 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50434",1
+39e432f7,"2015-07-29 19:33:02,398 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48563",1
+5f3af6e5,"2015-07-29 19:33:09,170 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+4000045c,"2015-07-29 19:33:12,423 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48609",1
+c985b95f,"2015-07-29 19:33:12,627 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+29980939,"2015-07-29 19:33:13,727 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48612",1
+c985b95f,"2015-07-29 19:33:13,728 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:33:15,853 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+0641fa46,"2015-07-29 19:33:15,965 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60717",1
+c5424fda,"2015-07-29 19:33:19,190 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+01947e6d,"2015-07-29 19:33:19,303 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60726",1
+c5424fda,"2015-07-29 19:33:22,441 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+a3520709,"2015-07-29 19:33:22,532 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50526",1
+2a9e47f3,"2015-07-29 19:33:25,872 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+eb62bf7f,"2015-07-29 19:33:25,983 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60750",1
+2fb34b73,"2015-07-29 19:33:29,212 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:33:29,212 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50546",313
+11b21900,"2015-07-29 19:33:29,326 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+356f3fdc,"2015-07-29 19:33:32,459 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c5424fda,"2015-07-29 19:33:39,140 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+cf76d626,"2015-07-29 19:33:39,344 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:33:42,574 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+77b2f8a5,"2015-07-29 19:33:42,575 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50597",1
+a9bf5045,"2015-07-29 19:33:46,025 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+110870ac,"2015-07-29 19:33:46,026 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3f9d759b,"2015-07-29 19:33:49,162 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:33:49,364 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60834",313
+c85247c9,"2015-07-29 19:33:52,595 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50633",1
+3b4e7240,"2015-07-29 19:33:55,843 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:33:55,844 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+e42c14cc,"2015-07-29 19:33:55,935 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+02c3950b,"2015-07-29 19:33:59,385 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:34:05,862 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48814",313
+96bbdca0,"2015-07-29 19:34:05,863 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48817",1
+0156280e,"2015-07-29 19:34:06,067 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:34:12,634 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+1817f1ae,"2015-07-29 19:34:12,742 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+09d5f76c,"2015-07-29 19:34:12,745 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60918",1
+17543792,"2015-07-29 19:34:15,884 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+260c1dc7,"2015-07-29 19:34:16,089 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+786eb666,"2015-07-29 19:34:26,102 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+00361308,"2015-07-29 19:34:29,246 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+90eb24f9,"2015-07-29 19:34:29,448 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60984",1
+c985b95f,"2015-07-29 19:34:32,782 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c5424fda,"2015-07-29 19:34:32,788 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:60996",94
+5cd8e5b0,"2015-07-29 19:34:42,809 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+4c8a8893,"2015-07-29 19:34:46,038 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:34:52,717 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:50849",313
+c985b95f,"2015-07-29 19:34:55,969 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49023",313
+872c095b,"2015-07-29 19:35:02,846 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:35:06,078 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c5424fda,"2015-07-29 19:35:09,526 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:32891",94
+10b6a3ec,"2015-07-29 19:35:16,098 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+f3fff848,"2015-07-29 19:35:19,544 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:32924",1
+c5424fda,"2015-07-29 19:35:29,368 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+c985b95f,"2015-07-29 19:35:29,458 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+e47f5163,"2015-07-29 19:35:42,928 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33010",1
+c985b95f,"2015-07-29 19:35:46,073 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49204",313
+c5424fda,"2015-07-29 19:35:49,417 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",94
+7b2ab3a0,"2015-07-29 19:35:49,498 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:51050",1
+c985b95f,"2015-07-29 19:35:56,178 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+12b837e9,"2015-07-29 19:35:56,180 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+d30a463b,"2015-07-29 19:36:02,861 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:51104",1
+8ddc89cf,"2015-07-29 19:36:09,456 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:36:09,645 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c985b95f,"2015-07-29 19:36:16,136 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:36:19,480 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+5abea930,"2015-07-29 19:36:22,901 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:36:26,155 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+7bb518ee,"2015-07-29 19:36:26,156 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+357903fd,"2015-07-29 19:36:26,157 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c5424fda,"2015-07-29 19:36:26,349 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33165",94
+d5099d89,"2015-07-29 19:36:32,920 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+4b045ca9,"2015-07-29 19:36:36,365 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33198",1
+c985b95f,"2015-07-29 19:36:39,597 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+f231cbcb,"2015-07-29 19:36:43,049 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33225",1
+087e021c,"2015-07-29 19:36:49,620 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:36:49,730 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33250",313
+8cb18d3d,"2015-07-29 19:36:49,735 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33255",1
+b2ac68c2,"2015-07-29 19:36:53,074 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33266",1
+01225f71,"2015-07-29 19:36:56,302 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:51296",1
+c5424fda,"2015-07-29 19:36:59,746 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33282",94
+cd7a2713,"2015-07-29 19:37:12,920 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49518",1
+c5424fda,"2015-07-29 19:37:13,114 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c5424fda,"2015-07-29 19:37:19,676 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+feeec7f2,"2015-07-29 19:37:19,683 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:51380",1
+c985b95f,"2015-07-29 19:52:04,792 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.18:42772 which had sessionid 0x14ed93111f20005",313
+8b4e119f,2015-07-29 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,1
+2b8f465f,"2015-07-29 19:52:09,519 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:45542 which had sessionid 0x14ed93111f20002",1
+c5424fda,"2015-07-29 19:54:13,615 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@832] - Client attempting to renew session 0x24ed93119420016 at /10.10.34.13:37115",94
+c985b95f,"2015-07-29 19:54:45,337 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:37106 which had sessionid 0x14ed93111f20010",313
+934b6e6f,"2015-07-29 21:01:41,504 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.19:33425",1
+cf298526,"2015-07-29 21:34:45,452 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f20027 with negotiated timeout 10000 for client /10.10.34.13:37177",1
+7b7e73fa,"2015-07-29 21:34:48,285 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f2002b with negotiated timeout 10000 for client /10.10.34.22:47073",1
+a5d7c05d,"2015-07-29 21:39:24,986 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:37196",1
+c985b95f,"2015-07-29 21:39:28,234 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.26:56952",313
+25694863,"2015-07-29 23:44:21,576 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:49557 which had sessionid 0x14ed93111f20048",1
+c5424fda,"2015-07-29 23:44:28,903 - ERROR [CommitProcessor:1:NIOServerCnxn@180] - Unexpected Exception:",94
+c985b95f,"2015-07-29 23:52:08,962 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f2005b with negotiated timeout 10000 for client /10.10.34.28:52117",313
+c5424fda,"2015-07-29 23:52:09,163 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.30:38562",94
+b9e3f65f,"2015-07-29 23:52:09,783 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.36:32876",1
+c985b95f,"2015-07-29 23:52:09,785 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f2005f with negotiated timeout 10000 for client /10.10.34.36:32876",313
+7f4e9709,"2015-07-30 13:47:25,927 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:45997",1
+5adf2f77,"2015-07-30 14:42:40,474 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:49346",1
+c985b95f,"2015-07-30 14:47:15,835 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f20079 with negotiated timeout 20000 for client /10.10.34.11:49800",313
+c5424fda,"2015-07-30 14:52:21,906 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.29:39382 which had sessionid 0x14ed93111f2005d",94
+c5424fda,"2015-07-30 14:52:36,477 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f2007c with negotiated timeout 10000 for client /10.10.34.11:50276",94
+e8cf514c,"2015-07-30 14:53:21,340 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:50286",1
+3eecd183,"2015-07-30 15:00:24,824 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:50301",1
+af7cd871,"2015-07-30 15:00:24,825 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f20082 with negotiated timeout 10000 for client /10.10.34.11:50301",1
+c5424fda,"2015-07-30 15:23:21,827 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:50402",94
+9b94aeec,"2015-07-30 15:35:04,462 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.20:56414",1
+c985b95f,"2015-07-30 15:41:40,669 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:50940 which had sessionid 0x14ed93111f20099",313
+c5424fda,"2015-07-30 16:09:17,019 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:52893 which had sessionid 0x14ed93111f2009b",94
+c985b95f,2015-07-30 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,313
+4452622b,"2015-07-30 16:12:02,180 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.29:39387",1
+eee613f8,"2015-07-30 16:18:34,053 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:53821",1
+139bd94e,"2015-07-30 16:18:34,149 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:45668",1
+c69da8f0,"2015-07-30 16:21:28,258 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:45675",1
+deb8fa70,"2015-07-30 16:44:26,593 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:45682 which had sessionid 0x14ed93111f200cd",1
+c5424fda,"2015-07-30 17:06:34,257 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:45697 which had sessionid 0x14ed93111f200d6",94
+c985b95f,"2015-07-30 17:06:40,616 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:54632",313
+f3caf415,"2015-07-30 17:06:40,816 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ed93111f200df with negotiated timeout 10000 for client /10.10.34.13:37467",1
+c985b95f,2015-07-30 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,313
+ce5d8860,"2015-07-30 17:13:32,714 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:54738",1
+c5424fda,"2015-07-30 17:36:31,976 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:54983 which had sessionid 0x14ed93111f200f0",94
+c5424fda,"2015-07-30 17:43:58,186 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:user.dir=/",94
+c985b95f,2015-07-30 <*> - WARN [WorkerSender[myid=1]:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888,313
+c5424fda,"2015-07-30 18:18:01,981 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:43125",94
+ded022b3,"2015-07-30 18:18:02,003 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ede63a5a70002",1
+affd78c1,"2015-07-30 18:18:30,005 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ede65503f0010",1
+c985b95f,"2015-07-30 19:50:32,001 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ede63a5a70023",313
+c985b95f,"2015-07-30 19:59:08,004 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ede65503f002b",313
+c5424fda,"2015-07-30 20:06:34,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ede63a01b003b, timeout of 10000ms exceeded",94
+cc6ee1d4,"2015-07-30 20:06:34,003 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24ede63a01b003b",1
+c5424fda,"2015-07-30 20:13:46,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ede65503f0036, timeout of 10000ms exceeded",94
+c985b95f,"2015-07-30 20:13:46,004 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ede65503f0039",313
+dc925dce,"2015-07-30 20:34:58,003 - INFO  [ProcessThread(sid:1 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ede63a5a7003a",1
+446bef23,"2015-07-30 21:03:35,468 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:38088 which had sessionid 0x14ede63a5a70048",1
+778ac5f6,"2015-07-30 21:03:44,634 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ede63a5a7004b with negotiated timeout 10000 for client /10.10.34.11:40489",1
+c985b95f,"2015-07-30 21:03:47,578 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.21:37904",313
+c8cf4ecb,"2015-07-30 23:03:42,133 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.17:51214 which had sessionid 0x14ede63a5a70053",1
+c5424fda,"2015-07-30 23:03:52,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ede65503f005c, timeout of 10000ms exceeded",94
+c5424fda,"2015-07-30 23:03:54,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ede63a01b0062, timeout of 10000ms exceeded",94
+b09e719f,"2015-07-30 23:43:22,414 - WARN  [LearnerHandler-/10.10.34.12:35276:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:35276 ********",1
+c985b95f,"2015-07-30 23:43:23,613 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumPeer@670] - LOOKING",313
+9563efaa,"2015-07-30 23:44:04,784 - WARN  [WorkerSender[myid=1]:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888",1
+c985b95f,"2015-07-30 23:44:58,183 - WARN  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888",313
+c5424fda,"2015-07-30 23:49:40,005 - WARN  [RecvWorker:3:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c5424fda,"2015-07-30 23:52:26,272 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+7ac39d13,2015-07-31 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,1
+1c9e4d15,"2015-07-31 00:17:52,585 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14edfaa86f60013 with negotiated timeout 10000 for client /10.10.34.27:44600",1
+c985b95f,2015-07-31 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,313
+29701119,"2015-07-31 11:01:40,975 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:54485 which had sessionid 0x14edfaa86f60021",1
+908b98a7,"2015-07-31 11:01:54,714 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:34568",1
+c40b9fe3,"2015-07-31 15:31:40,971 - INFO  [Thread-1:QuorumCnxManager$Listener@486] - My election bind port: 0.0.0.0/0.0.0.0:3888",1
+c5424fda,"2015-07-31 15:31:40,999 - INFO  [WorkerSender[myid=1]:QuorumCnxManager@190] - Have smaller server identifier, so dropping the connection: (2, 1)",94
+fc46e622,"2015-07-31 15:31:42,213 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumPeer@738] - FOLLOWING",1
+c5424fda,"2015-07-31 15:33:29,640 - WARN  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888",94
+ad4afb98,"2015-07-31 19:30:07,398 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumPeer@670] - LOOKING",1
+3fe3977e,"2015-07-31 19:30:07,403 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@740] - New election. My id =  1, proposed zxid=0x700000000",1
+c985b95f,"2015-07-31 19:30:07,445 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:host.name=mesos-master-1",313
+27845c30,"2015-07-31 19:30:07,452 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Follower@63] - FOLLOWING - LEADER ELECTION TOOK - 49",1
+c76bc6c3,"2015-07-31 21:11:05,474 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ee3e057ed000c with negotiated timeout 10000 for client /10.10.34.37:49834",1
+058b50b1,"2015-07-31 21:23:08,968 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:40061",1
+c5424fda,"2015-07-31 21:23:08,969 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:40061",94
+81d80bcb,"2015-07-31 21:32:18,390 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14ee3e057ed002c with negotiated timeout 10000 for client /10.10.34.19:43049",1
+c985b95f,"2015-07-31 21:32:20,131 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.40:58713",313
+60f918d7,"2015-07-31 21:44:41,270 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:59661 which had sessionid 0x14ee3e057ed0027",1
+c5424fda,"2015-08-07 07:27:47,425 - INFO  [WorkerReceiver[myid=1]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x700000197 (n.zxid), 0x1 (n.round), LEADING (n.state), 3 (n.sid), 0x7 (n.peerEPoch), LOOKING (my state)",94
+def3e199,"2015-08-07 07:27:47,650 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Follower@63] - FOLLOWING - LEADER ELECTION TOOK - 238",1
+4d02d192,"2015-08-10 17:52:39,654 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14f05578bd80002 with negotiated timeout 10000 for client /10.10.34.12:46262",1
+4ac0a3af,2015-08-10 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,1
+4ccda468,"2015-08-10 17:53:22,767 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.15:54175",1
+c5424fda,2015-08-10 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,94
+c985b95f,"2015-08-10 18:12:23,970 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.19:57338 which had sessionid 0x14f05578bd8000d",313
+c5424fda,"2015-08-10 18:13:25,200 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14f05578bd80020 with negotiated timeout 10000 for client /10.10.34.11:38390",94
+1ca487cb,"2015-08-10 18:23:49,901 - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3",1
+ee88ad60,"2015-08-10 18:23:50,332 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.vendor=Oracle Corporation",1
+457ad0d3,"2015-08-10 18:23:52,646 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:Learner@107] - Revalidating client: 0x14f05578bd80018",1
+43770995,"2015-08-10 18:23:52,649 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:ZooKeeperServer@595] - Established session 0x14f05578bd80016 with negotiated timeout 10000 for client /10.10.34.13:38490",1
+c5424fda,"2015-08-10 18:23:52,650 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:ZooKeeperServer@595] - Established session 0x14f05578bd80013 with negotiated timeout 10000 for client /10.10.34.11:38530",94
+c985b95f,"2015-08-10 18:23:52,653 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@832] - Client attempting to renew session 0x14f05578bd8001b at /10.10.34.20:56374",313
+c985b95f,"2015-08-10 18:25:22,080 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:zookeeper.version=3.4.5--1, built on 06/10/2013 17:26 GMT",313
+f3341af6,"2015-08-10 18:25:22,082 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:user.name=zookeeper",1
+9ae17564,"2015-08-10 18:25:24,332 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:Learner@107] - Revalidating client: 0x14f05578bd80013",1
+89d36cbc,"2015-08-10 18:27:49,007 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:46331 which had sessionid 0x14f1724a6e80004",1
+f92bf9fa,"2015-08-18 16:09:13,285 - INFO  [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:34051",1
+c985b95f,"2015-08-18 16:09:15,099 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:os.name=Linux",313
+caa92da1,"2015-08-20 13:28:51,889 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:54839",1
+35968710,"2015-08-20 13:28:51,983 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:58349",1
+c8927a27,"2015-08-20 17:12:29,467 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:56471 (no session established for client)",1
+553416cc,2015-08-20 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@354] - Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServer not running,1
+c130d4f1,"2015-08-20 17:14:12,326 - INFO  [WorkerReceiver[myid=1]:FastLeaderElection@542] - Notification: 2 (n.leader), 0xb00000084 (n.zxid), 0x2 (n.round), LOOKING (n.state), 1 (n.sid), 0xb (n.peerEPoch), LOOKING (my state)",1
+c985b95f,"2015-08-20 17:14:23,824 - INFO  [WorkerReceiver[myid=1]:FastLeaderElection@542] - Notification: 3 (n.leader), 0xb0000007b (n.zxid), 0x2 (n.round), LOOKING (n.state), 3 (n.sid), 0xb (n.peerEPoch), FOLLOWING (my state)",313
+c5424fda,"2015-08-20 17:22:22,288 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14f4a6318b80005 with negotiated timeout 10000 for client /10.10.34.11:56492",94
+cb134a35,"2015-08-20 17:24:06,873 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:58913",1
+c5424fda,"2015-08-20 17:24:07,582 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.18:36934",94
+b04e3db0,"2015-08-20 17:24:07,816 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14f4a6318b80013 with negotiated timeout 10000 for client /10.10.34.20:43137",1
+c5424fda,"2015-08-20 19:02:23,456 - INFO  [CommitProcessor:1:ZooKeeperServer@595] - Established session 0x14f4a6318b80022 with negotiated timeout 10000 for client /10.10.34.30:43272",94
+195a4519,"2015-08-20 19:32:55,963 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.35:48997 which had sessionid 0x14f4a6318b80024",1
+c985b95f,2015-08-20 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,313
+c5424fda,"2015-08-20 19:33:02,860 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:58917 which had sessionid 0x14f4a6318b80018",94
+c5424fda,2015-08-21 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,94
+904f1205,"2015-08-21 15:55:07,600 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.30:43278",1
+73e5aa46,"2015-08-21 15:55:14,153 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.14:46136",1
+0e56f87a,"2015-08-24 15:26:54,494 - INFO  [main:QuorumPeer@913] - tickTime set to 2000",1
+c985b95f,"2015-08-24 15:27:03,681 - WARN  [WorkerSender[myid=1]:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888",313
+b827c1d5,2015-08-24 <*> - WARN [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888,2
+b827c1d5,"2015-08-24 15:36:13,663 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",2
+6533becb,2015-08-24 <*> - WARN [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888,1
+6ee53b1f,"2015-08-24 15:51:13,708 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+b2590602,"2015-08-24 16:02:13,739 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-24 16:11:13,765 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+2f7354d4,"2015-08-24 18:02:14,063 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+f286e048,"2015-08-24 18:04:14,068 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+09f7a3fc,"2015-08-24 18:41:14,170 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-24 18:47:14,187 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+ad870e79,"2015-08-24 19:45:14,327 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+5653860f,"2015-08-24 19:55:14,351 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c985b95f,"2015-08-24 21:11:14,529 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+c985b95f,"2015-08-24 22:04:14,650 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+7a31b6da,"2015-08-24 22:09:14,662 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c8a93832,"2015-08-24 22:25:14,698 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-24 22:49:14,750 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+d38e8afd,"2015-08-24 23:04:14,782 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c985b95f,"2015-08-24 23:25:14,825 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+a33ebe94,"2015-08-24 23:26:14,827 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,2015-08-25 <*> - WARN [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888,94
+8ca158e8,2015-08-25 <*> - WARN [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888,1
+82902617,"2015-08-25 00:23:14,943 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c985b95f,"2015-08-25 00:42:14,982 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+c5424fda,"2015-08-25 01:12:15,044 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+727d7176,"2015-08-25 01:45:15,113 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-25 02:09:15,162 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+c6d861f2,"2015-08-25 03:29:15,325 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c985b95f,"2015-08-25 03:54:15,375 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+169f65e0,"2015-08-25 04:14:15,416 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-25 05:08:15,525 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+38f8dff4,"2015-08-25 05:09:15,527 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+940b04ac,"2015-08-25 05:58:15,626 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c985b95f,"2015-08-25 07:04:15,758 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+0b466454,"2015-08-25 08:29:15,928 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+534427a1,"2015-08-25 08:33:15,936 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+c5424fda,"2015-08-25 09:16:16,022 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",94
+c985b95f,"2015-08-25 10:42:16,195 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",313
+9e485809,"2015-08-25 10:50:16,211 - INFO  [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000",1
+1bb5440d,"2015-08-25 11:20:12,465 - WARN  [RecvWorker:3:QuorumCnxManager$RecvWorker@762] - Connection broken for id 3, my id = 1, error =",1
+0c7a652d,"2015-08-25 11:21:22,561 - WARN  [WorkerSender[myid=1]:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888",1
+c985b95f,"2015-07-29 17:42:30,405 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.vendor=Oracle Corporation",313
+d1d853b7,"2015-07-29 19:03:35,413 - ERROR [LearnerHandler-/10.10.34.11:52225:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",1
+dd62b168,"2015-07-29 19:03:54,584 - ERROR [LearnerHandler-/10.10.34.11:52241:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",1
+e614ce3b,"2015-07-29 19:04:30,989 - WARN  [LearnerHandler-/10.10.34.11:52264:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52264 ********",1
+c985b95f,"2015-07-29 19:04:30,989 - ERROR [LearnerHandler-/10.10.34.11:52265:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",313
+c985b95f,"2015-07-29 19:04:40,999 - ERROR [LearnerHandler-/10.10.34.11:52273:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",313
+c985b95f,"2015-07-29 19:13:46,128 - WARN  [LearnerHandler-/10.10.34.11:52308:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52308 ********",313
+b50aa2a8,"2015-07-29 19:14:06,236 - WARN  [LearnerHandler-/10.10.34.12:59060:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:59060 ********",1
+c5424fda,"2015-07-29 19:14:46,264 - WARN  [LearnerHandler-/10.10.34.12:59103:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:59103 ********",94
+097b0e52,"2015-07-29 19:14:56,371 - WARN  [LearnerHandler-/10.10.34.13:57247:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57247 ********",1
+c5424fda,"2015-07-29 19:15:16,204 - ERROR [LearnerHandler-/10.10.34.11:52419:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",94
+f0e976ed,"2015-07-29 19:15:56,423 - WARN  [LearnerHandler-/10.10.34.13:57319:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57319 ********",1
+f1c5dd5b,"2015-07-29 19:16:06,243 - WARN  [LearnerHandler-/10.10.34.11:52476:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52476 ********",1
+ce43a73b,"2015-07-29 19:16:06,336 - WARN  [LearnerHandler-/10.10.34.12:59203:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:59203 ********",1
+189a63fb,"2015-07-29 19:16:16,339 - WARN  [LearnerHandler-/10.10.34.12:59211:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:59211 ********",1
+c5424fda,"2015-07-29 19:16:26,268 - WARN  [LearnerHandler-/10.10.34.11:52502:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52502 ********",94
+901279d5,"2015-07-29 19:16:26,447 - ERROR [LearnerHandler-/10.10.34.13:57354:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",1
+c5424fda,"2015-07-29 19:17:36,507 - ERROR [LearnerHandler-/10.10.34.13:57438:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",94
+608795a8,"2015-07-29 19:17:56,522 - WARN  [LearnerHandler-/10.10.34.13:57458:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57458 ********",1
+c985b95f,"2015-07-29 19:18:26,565 - WARN  [LearnerHandler-/10.10.34.13:57502:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57502 ********",313
+c985b95f,"2015-07-29 19:18:56,377 - WARN  [LearnerHandler-/10.10.34.11:52703:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52703 ********",313
+099630e6,"2015-07-29 19:18:56,457 - WARN  [LearnerHandler-/10.10.34.12:59406:LearnerHandler@575] - ******* GOODBYE /10.10.34.12:59406 ********",1
+c5424fda,"2015-07-29 19:20:16,690 - ERROR [LearnerHandler-/10.10.34.12:59455:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",94
+c5424fda,"2015-07-29 19:20:16,794 - WARN  [LearnerHandler-/10.10.34.13:57580:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57580 ********",94
+f0da61b1,"2015-07-29 19:20:36,704 - ERROR [LearnerHandler-/10.10.34.12:59480:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",1
+c985b95f,"2015-07-29 19:20:46,814 - ERROR [LearnerHandler-/10.10.34.13:57617:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",313
+2f994617,"2015-07-29 19:20:56,605 - ERROR [LearnerHandler-/10.10.34.11:52814:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",1
+c985b95f,"2015-07-29 19:20:56,608 - WARN  [LearnerHandler-/10.10.34.11:52818:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52818 ********",313
+41f717ca,"2015-07-29 19:21:16,619 - WARN  [LearnerHandler-/10.10.34.11:52844:LearnerHandler@575] - ******* GOODBYE /10.10.34.11:52844 ********",1
+d231de41,"2015-07-29 19:21:16,835 - WARN  [LearnerHandler-/10.10.34.13:57653:LearnerHandler@575] - ******* GOODBYE /10.10.34.13:57653 ********",1
+c5424fda,"2015-07-29 19:21:26,625 - ERROR [LearnerHandler-/10.10.34.11:52855:LearnerHandler@562] - Unexpected exception causing shutdown while sock still open",94
+eb10c055,"2015-07-29 19:21:31,738 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:21:31,836 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:54788",313
+a706e20f,"2015-07-29 <*> - WARN [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024, my id = 2, error =",1
+c5424fda,"2015-07-29 19:21:35,284 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42624",94
+b9a2fec3,"2015-07-29 19:21:35,292 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:21:38,625 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42634",313
+c5424fda,"2015-07-29 19:21:41,969 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",94
+c985b95f,"2015-07-29 19:21:41,976 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+3f70a4cb,"2015-07-29 19:21:45,107 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c360bfe8,"2015-07-29 19:21:45,109 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+b2ab7377,"2015-07-29 19:21:45,200 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:54830",1
+61de837f,"2015-07-29 19:21:48,542 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+1d3bf1c9,"2015-07-29 19:21:51,886 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:54857",1
+512a7515,"2015-07-29 19:21:51,887 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",3
+9d46beab,"2015-07-29 19:21:58,680 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+dba97d93,"2015-07-29 19:22:01,826 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8d2a1faf,"2015-07-29 19:22:05,161 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c6588397,"2015-07-29 19:22:08,591 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+5da5b02a,"2015-07-29 19:22:08,703 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42747",1
+9903f016,"2015-07-29 19:22:21,958 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c33dd1f9,"2015-07-29 19:22:25,203 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58282",1
+a7e4dbc1,"2015-07-29 19:22:25,295 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cab8dd99,"2015-07-29 19:22:28,748 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42813",1
+1268775f,"2015-07-29 19:22:28,749 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+33067bfc,"2015-07-29 19:22:42,000 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+0f3ea5af,"2015-07-29 19:22:48,794 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42885",1
+1e979a65,"2015-07-29 19:22:55,483 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42917",1
+82e5fe82,"2015-07-29 19:22:58,823 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:42926",1
+e89c75cd,"2015-07-29 19:22:58,824 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+bef307b2,"2015-07-29 19:23:08,841 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+54431aef,"2015-07-29 19:23:18,864 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+71befcd4,"2015-07-29 19:23:25,546 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+30399255,"2015-07-29 19:23:38,924 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+f7902fa5,"2015-07-29 19:23:45,608 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+120f0c92,"2015-07-29 19:23:48,945 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+2d897eac,"2015-07-29 19:23:52,080 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+311edfa7,"2015-07-29 19:23:52,166 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55289",1
+5e5cd6af,"2015-07-29 19:23:52,167 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+d9690ba3,"2015-07-29 19:23:55,508 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+95f9d1be,"2015-07-29 19:24:02,115 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58635",1
+7b03fcfc,"2015-07-29 19:24:05,462 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58652",17
+f829d1eb,"2015-07-29 19:24:05,530 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+7d3f2718,"2015-07-29 19:24:08,871 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55346",1
+8f07e807,"2015-07-29 19:24:12,334 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7b03fcfc,"2015-07-29 19:24:19,011 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",17
+7b03fcfc,"2015-07-29 19:24:25,680 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43233",17
+4269f355,"2015-07-29 19:24:25,681 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7b03fcfc,"2015-07-29 19:24:28,942 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",17
+08afcebc,"2015-07-29 19:24:29,022 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7b03fcfc,"2015-07-29 19:24:35,703 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",17
+16193302,"2015-07-29 19:24:38,851 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58764",1
+25e0f569,"2015-07-29 19:24:42,397 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+61002913,"2015-07-29 19:24:45,532 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58787",1
+2a6c9820,"2015-07-29 19:24:45,647 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",20
+a3774652,"2015-07-29 19:24:52,417 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+2a6c9820,"2015-07-29 19:24:55,555 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58823",20
+797322f0,"2015-07-29 19:24:55,669 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7336717d,"2015-07-29 19:24:58,991 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+7b03fcfc,"2015-07-29 19:24:59,099 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43358",17
+402c7ab7,"2015-07-29 19:25:02,441 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",2
+87cf2237,"2015-07-29 19:25:05,591 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:58865",1
+f7079f2f,"2015-07-29 19:25:05,661 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55548",1
+12805a8d,"2015-07-29 19:25:15,695 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+2a6c9820,"2015-07-29 19:25:15,711 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",20
+108fb91b,"2015-07-29 19:25:15,803 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+7b03fcfc,"2015-07-29 19:25:19,035 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",17
+78733b6e,"2015-07-29 19:25:25,630 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+0b3519b0,"2015-07-29 19:25:29,166 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+9fd6721b,"2015-07-29 19:25:32,397 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55648",1
+6d7fc61e,"2015-07-29 19:25:32,505 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8b046c4f,"2015-07-29 19:25:39,080 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+2a6c9820,"2015-07-29 19:25:42,340 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",20
+4d75cf7e,"2015-07-29 19:25:49,016 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+7b03fcfc,"2015-07-29 19:25:57,870 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43557",17
+2a6c9820,"2015-07-29 19:26:04,443 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",20
+475fa800,"2015-07-29 19:26:07,781 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+7b03fcfc,"2015-07-29 19:26:07,890 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",17
+a1c456dc,"2015-07-29 19:26:11,228 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43606",1
+9ff3ea1a,"2015-07-29 19:26:14,363 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+02d25d4d,"2015-07-29 19:26:17,799 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55803",1
+70776868,"2015-07-29 19:26:17,801 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3fcb1c18,"2015-07-29 19:26:17,908 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3434c2d1,"2015-07-29 19:26:21,040 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+48781a93,"2015-07-29 19:26:34,606 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43693",1
+402c7ab7,"2015-07-29 19:26:44,416 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",2
+e5ae0347,"2015-07-29 19:26:44,418 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+ba01b19d,"2015-07-29 19:26:44,625 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43730",1
+dbb6c0fc,"2015-07-29 19:26:47,753 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59250",1
+7f00d1d4,"2015-07-29 19:26:51,197 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:55929",1
+8b03c9bd,"2015-07-29 19:26:54,644 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",10
+e02a3239,"2015-07-29 19:26:57,875 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+725d16b9,"2015-07-29 19:26:57,983 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",6
+725d16b9,"2015-07-29 19:27:01,216 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",6
+8b03c9bd,"2015-07-29 19:27:09,111 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",10
+e56c06fa,"2015-07-29 19:27:17,809 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+dc7b38c3,"2015-07-29 19:27:18,022 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8b03c9bd,"2015-07-29 19:27:21,149 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",10
+8b03c9bd,"2015-07-29 19:27:24,496 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59416",10
+e139450d,"2015-07-29 19:27:27,838 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+e82438a9,"2015-07-29 19:27:27,928 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56057",1
+51e6ed3c,"2015-07-29 19:27:53,657 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59489",1
+46179bf8,"2015-07-29 19:27:53,761 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56093",1
+480074d4,"2015-07-29 19:27:53,861 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:43921",1
+08932486,"2015-07-29 19:28:00,339 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59513",1
+662a0cf2,"2015-07-29 19:28:07,021 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+04d27ea4,"2015-07-29 19:28:10,464 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56154",1
+08e6fbf1,"2015-07-29 19:28:13,703 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c61a79a4,"2015-07-29 19:28:17,144 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56173",1
+419fcfc4,"2015-07-29 19:28:20,797 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8b03c9bd,"2015-07-29 19:28:23,927 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",10
+8b03c9bd,"2015-07-29 19:28:27,167 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",10
+725d16b9,"2015-07-29 19:28:30,509 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",6
+57a383be,"2015-07-29 19:28:33,750 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59657",1
+cdea11d3,"2015-07-29 19:28:33,951 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+1809b99c,"2015-07-29 19:28:40,431 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59688",1
+3046b47b,"2015-07-29 19:28:40,533 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+9bbf4aed,"2015-07-29 19:28:43,772 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59703",1
+1dd6919e,"2015-07-29 19:28:43,871 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56270",1
+2573fd70,"2015-07-29 19:28:57,235 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56322",6
+17b1fbd9,"2015-07-29 19:28:57,236 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+5fc9a59c,"2015-07-29 19:29:00,478 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59783",6
+e774ef34,"2015-07-29 19:29:00,577 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56339",1
+2573fd70,"2015-07-29 19:29:03,816 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",6
+2573fd70,"2015-07-29 19:29:04,018 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",6
+da51d553,"2015-07-29 19:29:04,027 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+faee2a03,"2015-07-29 19:29:10,495 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+b5119033,"2015-07-29 19:29:17,176 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59852",1
+1a22fbde,"2015-07-29 19:29:17,382 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+5f784112,"2015-07-29 19:29:17,388 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+df3a1669,"2015-07-29 19:29:23,959 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+a91827d1,"2015-07-29 19:29:23,962 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+830c5d3d,"2015-07-29 19:29:27,199 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59897",1
+2921de3d,"2015-07-29 19:29:27,298 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56426",1
+aec8692b,"2015-07-29 19:29:30,639 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+2573fd70,"2015-07-29 19:29:40,664 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56483",6
+f3e8e954,"2015-07-29 19:29:43,899 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59968",1
+b1458ca7,"2015-07-29 19:29:47,343 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+bc8edf7b,"2015-07-29 19:29:50,793 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+dbb6e75f,"2015-07-29 19:29:54,022 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3bb7e4de,"2015-07-29 19:29:54,133 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+888208d4,"2015-07-29 19:29:54,134 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+fa0aa102,"2015-07-29 19:29:57,472 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",3
+d1877ee9,"2015-07-29 19:29:57,474 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+9bca9c2a,"2015-07-29 19:30:00,814 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+4fd57288,"2015-07-29 19:30:04,152 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44387",1
+8993f951,"2015-07-29 19:30:07,289 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+69d60cf3,"2015-07-29 19:30:10,625 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:60068",1
+a990aee0,"2015-07-29 19:30:10,728 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+e486c895,"2015-07-29 19:30:10,729 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+e9eeae03,"2015-07-29 19:30:13,966 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+b193f083,"2015-07-29 19:30:20,857 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",2
+1871bc00,"2015-07-29 19:30:23,995 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+25440809,"2015-07-29 19:30:27,429 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56644",2
+d9dce3b3,"2015-07-29 19:30:37,451 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+dee4a9c5,"2015-07-29 19:30:37,451 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+ef602ced,"2015-07-29 19:30:47,372 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+83d456fc,"2015-07-29 19:30:47,582 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+6db94737,"2015-07-29 19:30:50,712 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:60213",13
+35f439b4,"2015-07-29 19:30:50,923 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44558",1
+c1fd360c,"2015-07-29 19:30:54,053 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+5d886538,"2015-07-29 19:30:57,395 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c1fd360c,"2015-07-29 19:30:57,492 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+c1fd360c,"2015-07-29 19:31:00,739 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+a48ae5e5,"2015-07-29 19:31:07,510 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56786",1
+c1fd360c,"2015-07-29 19:31:07,513 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+e015878e,"2015-07-29 19:31:14,096 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+6db94737,"2015-07-29 19:31:17,534 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56830",13
+c1fd360c,"2015-07-29 19:31:20,785 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+6db94737,"2015-07-29 19:31:20,871 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56834",13
+6db94737,"2015-07-29 19:31:27,555 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",13
+c1fd360c,"2015-07-29 19:31:27,667 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+6b8e681b,"2015-07-29 19:31:34,139 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+2cc33edb,"2015-07-29 19:31:41,026 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c1fd360c,"2015-07-29 19:31:47,597 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56935",24
+6db94737,"2015-07-29 19:31:50,937 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",13
+6230830e,"2015-07-29 19:31:51,046 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+1fea5f4d,"2015-07-29 19:31:51,049 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c1fd360c,"2015-07-29 19:31:54,276 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:56959",24
+c1fd360c,"2015-07-29 19:31:57,726 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44795",24
+c1fd360c,"2015-07-29 19:32:00,861 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+c1fd360c,"2015-07-29 19:32:07,546 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+6db94737,"2015-07-29 19:32:11,086 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44842",13
+c1fd360c,"2015-07-29 19:32:14,227 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+1dc94786,"2015-07-29 19:32:14,431 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+941d4318,"2015-07-29 19:32:17,565 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c1fd360c,"2015-07-29 19:32:17,766 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44866",24
+c1fd360c,"2015-07-29 19:32:17,777 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+c1fd360c,"2015-07-29 19:32:21,111 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44879",24
+c1fd360c,"2015-07-29 19:32:21,114 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+6db94737,"2015-07-29 19:32:27,585 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:60575",13
+6064b177,"2015-07-29 19:32:27,586 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c1fd360c,"2015-07-29 19:32:31,017 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+2f4d4bc8,"2015-07-29 19:32:37,607 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+6db94737,"2015-07-29 19:32:40,947 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",13
+239a8bfb,"2015-07-29 19:32:41,038 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c1fd360c,"2015-07-29 19:32:50,970 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",24
+6db94737,"2015-07-29 19:32:51,174 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44989",13
+c1fd360c,"2015-07-29 19:32:51,176 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+9e217742,"2015-07-29 19:32:54,510 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+6db94737,"2015-07-29 19:33:01,078 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57197",13
+6db94737,"2015-07-29 19:33:08,980 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",13
+c1fd360c,"2015-07-29 19:33:14,438 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+6db94737,"2015-07-29 19:33:21,121 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",13
+c1fd360c,"2015-07-29 19:33:21,122 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+bc6c6a12,"2015-07-29 19:33:31,146 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c1fd360c,"2015-07-29 19:33:31,146 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57309",24
+78ba0c4c,"2015-07-29 19:33:31,147 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+6db94737,"2015-07-29 19:33:44,413 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",13
+0a631bb4,"2015-07-29 19:33:44,508 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+61e76f8b,"2015-07-29 19:33:47,846 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c1fd360c,"2015-07-29 19:33:54,435 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+c1fd360c,"2015-07-29 19:33:54,525 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",24
+3b865eb2,"2015-07-29 19:33:57,773 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:60936",21
+dbdfb7a1,"2015-07-29 19:34:04,656 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+ad785ea0,"2015-07-29 19:34:07,797 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+dbdfb7a1,"2015-07-29 19:34:07,996 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+dbdfb7a1,"2015-07-29 19:34:11,226 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57449",19
+8fe5024e,"2015-07-29 19:34:11,335 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45275",1
+dbdfb7a1,"2015-07-29 19:34:14,680 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45295",19
+2a62a958,"2015-07-29 19:34:21,249 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+ccc8b3a2,"2015-07-29 19:34:24,586 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57495",1
+3b865eb2,"2015-07-29 19:34:24,697 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+dbdfb7a1,"2015-07-29 19:34:24,699 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+bbcc68a2,"2015-07-29 19:34:27,838 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3b865eb2,"2015-07-29 19:34:27,928 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+3b865eb2,"2015-07-29 19:34:28,035 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45334",21
+3b865eb2,"2015-07-29 19:34:28,037 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",21
+dbdfb7a1,"2015-07-29 19:34:31,268 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57523",19
+3b865eb2,"2015-07-29 19:34:34,517 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:32868",21
+e6c205c8,"2015-07-29 19:34:37,859 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3b865eb2,"2015-07-29 19:34:44,742 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+3b865eb2,"2015-07-29 19:34:48,076 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45406",21
+3b865eb2,"2015-07-29 19:34:54,649 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+95b4d0db,"2015-07-29 19:35:01,238 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:32964",1
+dbdfb7a1,"2015-07-29 19:35:04,781 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+17d741e0,"2015-07-29 19:35:14,605 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+dbdfb7a1,"2015-07-29 19:35:14,692 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+dbdfb7a1,"2015-07-29 19:35:14,798 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+dbdfb7a1,"2015-07-29 19:35:14,801 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45509",19
+78d7cf80,"2015-07-29 19:35:17,946 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+b35cb016,"2015-07-29 19:35:18,136 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3b865eb2,"2015-07-29 19:35:24,822 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+dbdfb7a1,"2015-07-29 19:35:28,160 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",19
+dbdfb7a1,"2015-07-29 19:35:31,307 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+0e9b25db,"2015-07-29 19:35:34,735 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+dbdfb7a1,"2015-07-29 19:35:41,328 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+3b865eb2,"2015-07-29 19:35:41,411 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",21
+3b865eb2,"2015-07-29 19:35:41,523 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",21
+dbdfb7a1,"2015-07-29 19:35:44,864 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+b1302996,"2015-07-29 19:35:48,007 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:33138",1
+3b865eb2,"2015-07-29 19:35:54,882 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45651",21
+3b865eb2,"2015-07-29 19:36:01,368 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:33186",21
+dbdfb7a1,"2015-07-29 19:36:01,453 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+dbdfb7a1,"2015-07-29 19:36:04,906 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",19
+3b865eb2,"2015-07-29 19:36:14,809 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57889",21
+dbdfb7a1,"2015-07-29 19:36:18,070 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:33246",19
+18e1bfea,"2015-07-29 19:36:18,151 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57904",1
+a46226f2,"2015-07-29 19:36:18,265 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45738",1
+3b865eb2,"2015-07-29 19:36:21,410 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:33257",21
+3b865eb2,"2015-07-29 19:36:21,414 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",21
+3b865eb2,"2015-07-29 19:36:24,752 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+cdb3f406,"2015-07-29 19:36:24,834 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+dbdfb7a1,"2015-07-29 19:36:28,284 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45770",19
+dbdfb7a1,"2015-07-29 19:36:34,771 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:33305",19
+3b865eb2,"2015-07-29 19:36:34,853 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57965",21
+3b865eb2,"2015-07-29 19:36:34,962 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+876e03a3,"2015-07-29 19:36:38,193 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:57977",1
+03463c92,"2015-07-29 19:36:48,327 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3b865eb2,"2015-07-29 19:36:51,671 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",21
+ccdf48b2,"2015-07-29 19:36:54,812 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+9e617af6,"2015-07-29 19:36:55,011 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+0c9d1c51,"2015-07-29 19:36:58,153 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+f968e5ac,"2015-07-29 19:37:08,362 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+958ccefd,"2015-07-29 19:37:11,703 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45923",1
+669b6753,"2015-07-29 19:37:21,538 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+46f71b1a,"2015-07-29 19:37:27,222 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x34ed93485090001 type:create cxid:0x55b8bb0f zxid:0x100000010 txntype:-1 reqpath:n/a Error Path:/home/curi/.zookeeper Error:KeeperErrorCode = NodeExists for /home/curi/.zookeeper",1
+c15736c6,"2015-07-29 19:48:30,969 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.16:56610",1
+020b5f0f,"2015-07-29 19:52:16,002 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: <*>",1
+0620d3cb,"2015-07-29 19:52:20,004 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f20000",1
+f4cb077f,"2015-07-29 19:52:20,581 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:50822",1
+d9f0a3eb,"2015-07-29 19:53:12,538 - WARN  [SendWorker:3:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3e371825,2015-07-29 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,1
+c3490704,"2015-07-29 19:54:05,544 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.13:37229",1
+af858bae,"2015-07-29 19:56:54,754 - INFO  [WorkerReceiver[myid=2]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x10000006b (n.zxid), 0x2 (n.round), LOOKING (n.state), 3 (n.sid), 0x1 (n.peerEPoch), LEADING (my state)",1
+f20f6a48,"2015-07-29 19:57:37,058 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:50926",1
+c5078a26,"2015-07-29 20:15:01,897 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:51168",1
+8502c375,"2015-07-29 20:39:58,002 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24ed9311942000c",1
+dc62b304,"2015-07-29 21:01:43,687 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.21:51245",1
+e133d2b6,"2015-07-29 21:34:47,357 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:54610",1
+4516525a,"2015-07-29 21:34:48,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14ed93111f20020, timeout of 10000ms exceeded",1
+f284b505,"2015-07-29 21:34:48,003 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24ed93119420021",1
+ff1c5736,"2015-07-29 21:36:24,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ed93119420033, timeout of 10000ms exceeded",1
+d9903789,"2015-07-29 21:36:26,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ed9311942002a, timeout of 10000ms exceeded",1
+a9e22ec7,"2015-07-29 21:39:29,974 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.27:32782",1
+2f6b4143,"2015-07-29 21:41:34,002 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f2003f",1
+c7cdb67a,"2015-07-29 23:05:07,344 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.28:37304 which had sessionid 0x24ed9311942004f",1
+d4cd358b,"2015-07-29 23:05:16,002 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0021",1
+6aad6c7a,"2015-07-29 23:05:18,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ed9ac1c1e002b, timeout of 10000ms exceeded",1
+f61c9f65,"2015-07-29 23:43:04,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f20046",1
+bbb5a3c6,"2015-07-29 23:44:24,329 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0030",1
+1bbd0327,"2015-07-29 23:44:25,464 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.35:38016",1
+1b324d30,"2015-07-29 23:44:25,695 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f2004f",1
+86a5dc24,"2015-07-29 23:49:40,337 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:53468",1
+a8ad290b,"2015-07-29 23:50:50,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ed9ac1c1e0033, timeout of 10000ms exceeded",1
+cca2dd22,"2015-07-29 23:50:50,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f20050",96
+d83ccca1,"2015-07-29 23:52:10,300 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.17:46387",1
+46e5909f,"2015-07-30 13:34:19,139 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:48701",1
+cca2dd22,"2015-07-30 14:09:14,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14ed93111f20068, timeout of 20000ms exceeded",96
+fa77e552,"2015-07-30 14:38:08,000 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24ed93119420073",1
+cca2dd22,"2015-07-30 14:52:23,211 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:37335 which had sessionid 0x24ed93119420065",96
+3930b9ef,"2015-07-30 14:52:27,546 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:53520 which had sessionid 0x24ed9311942005f",1
+5324a59f,"2015-07-30 15:13:13,987 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e005e",1
+c985b95f,"2015-07-30 15:13:52,745 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed9311942007e with negotiated timeout 10000 for client /10.10.34.12:54673",313
+786c690c,"2015-07-30 15:18:48,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ed9ac1c1e0065, timeout of 20000ms exceeded",1
+de198946,"2015-07-30 15:24:39,217 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:53857 which had sessionid 0x24ed93119420082",1
+aa8cf918,"2015-07-30 15:35:06,129 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:54078",1
+a1e293e6,"2015-07-30 15:35:06,939 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.18:40006",1
+c985b95f,"2015-07-30 15:35:06,940 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed9311942008c with negotiated timeout 10000 for client /10.10.34.18:40006",313
+9643593d,"2015-07-30 15:35:08,822 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed93119420091 with negotiated timeout 10000 for client /10.10.34.40:47629",1
+1ae8ebb6,"2015-07-30 15:35:20,505 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:54134",1
+cca2dd22,"2015-07-30 15:38:12,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24ed93119420094",96
+08d86624,"2015-07-30 16:00:22,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0081",1
+b8ebab52,"2015-07-30 16:00:30,000 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0080",1
+570eaa00,"2015-07-30 16:11:46,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ed9ac1c1e007f, timeout of 10000ms exceeded",1
+cca2dd22,"2015-07-30 16:11:48,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ed9311942008e, timeout of 10000ms exceeded",96
+079e07f1,"2015-07-30 16:11:48,004 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: <*>",1
+cca2dd22,"2015-07-30 16:12:05,225 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed931194200a4 with negotiated timeout 10000 for client /10.10.34.32:39275",96
+4369805b,"2015-07-30 16:12:05,640 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed931194200a7 with negotiated timeout 10000 for client /10.10.34.36:45209",1
+cca2dd22,"2015-07-30 16:12:14,000 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0085",96
+c985b95f,"2015-07-30 16:18:18,839 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.21:51262 which had sessionid 0x24ed931194200a0",313
+cca2dd22,"2015-07-30 16:18:30,003 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14ed93111f200a7",96
+ab6f9378,"2015-07-30 16:18:34,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14ed93111f2009f, timeout of 10000ms exceeded",1
+837214ae,"2015-07-30 16:18:34,003 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e0083",1
+60ef58c5,"2015-07-30 16:18:39,030 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ed931194200af with negotiated timeout 10000 for client /10.10.34.16:56646",1
+0b48f645,"2015-07-30 16:21:28,000 - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded",1
+cca2dd22,"2015-07-30 16:49:18,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14ed93111f200d2, timeout of 10000ms exceeded",96
+7b87e09a,"2015-07-30 16:49:18,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ed9ac1c1e00ae",1
+cae000d0,"2015-07-30 17:12:00,363 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.13:37600",1
+59db85da,"2015-07-30 17:49:05,204 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:52866",1
+cca2dd22,"2015-07-30 17:57:44,121 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:33209",96
+64e46d07,"2015-07-30 18:18:02,134 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ede63a01b000a with negotiated timeout 10000 for client /10.10.34.13:52286",1
+c985b95f,"2015-07-30 18:18:19,328 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.20:49010 which had sessionid 0x24ede63a01b000e",313
+cca2dd22,"2015-07-30 18:18:28,772 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:53422",96
+cca2dd22,"2015-07-30 19:19:12,775 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ede63a01b0027 with negotiated timeout 10000 for client /10.10.34.13:52301",96
+672f9a3f,"2015-07-30 19:19:56,251 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ede63a01b002a with negotiated timeout 20000 for client /10.10.34.11:54338",1
+fd0b63ec,"2015-07-30 19:35:00,506 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:52310",1
+cca2dd22,"2015-07-30 19:35:08,093 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:54576",96
+cca2dd22,"2015-07-30 21:03:49,284 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ede63a01b006c with negotiated timeout 10000 for client /10.10.34.40:47637",96
+c985b95f,"2015-07-30 23:46:27,304 - INFO  [main:QuorumPeerMain@127] - Starting quorum peer",313
+971e1bdc,"2015-07-30 23:46:31,590 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:FileTxnSnapLog@240] - Snapshotting: 0x300000dcd to /var/lib/zookeeper/version-2/snapshot.300000dcd",1
+cca2dd22,"2015-07-31 00:02:57,176 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.35:59458",96
+c985b95f,"2015-07-31 00:16:10,015 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.37:32918 which had sessionid 0x24edfaa8717000c",313
+c985b95f,"2015-07-31 00:16:20,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34edfaa9c22000d, timeout of 10000ms exceeded",313
+eb43e2b9,"2015-07-31 00:16:22,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24edfaa87170002, timeout of 10000ms exceeded",1
+c985b95f,"2015-07-31 00:17:51,716 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:57796",313
+c985b95f,"2015-07-31 00:17:52,857 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24edfaa87170018 with negotiated timeout 10000 for client /10.10.34.21:42521",313
+60e0e886,"2015-07-31 00:18:58,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24edfaa87170010, timeout of 10000ms exceeded",1
+c985b95f,"2015-07-31 00:19:19,100 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.24:45152 which had sessionid 0x24edfaa8717001a",313
+c985b95f,"2015-07-31 00:19:30,005 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14edfaa86f60019",313
+abe97cb0,"2015-07-31 00:19:37,087 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:54230",1
+c985b95f,"2015-07-31 00:19:39,077 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.34:56149",313
+9ce777f8,"2015-07-31 11:01:06,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34edfaa9c220022, timeout of 10000ms exceeded",1
+c985b95f,"2015-07-31 11:01:06,003 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14edfaa86f6002d",313
+cca2dd22,"2015-07-31 11:01:06,006 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24edfaa8717002d",96
+fd8c1610,"2015-07-31 11:01:08,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14edfaa86f6002a, timeout of 10000ms exceeded",1
+28cb09a7,"2015-07-31 11:01:41,894 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:45817 which had sessionid 0x24edfaa87170022",1
+c985b95f,"2015-07-31 11:01:55,633 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:54235",313
+fb81450e,"2015-07-31 11:07:42,356 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:54237 which had sessionid 0x24edfaa87170035",1
+e860c7fa,"2015-07-31 11:07:52,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14edfaa86f60031, timeout of 10000ms exceeded",1
+c985b95f,"2015-07-31 11:09:03,412 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.40:42622",313
+b98cad28,"2015-07-31 12:57:10,007 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: <*>",1
+c985b95f,"2015-07-31 15:31:15,575 - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0",313
+9bfdb64c,"2015-07-31 15:31:41,457 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:59599",1
+665f2110,"2015-07-31 15:36:21,074 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:FileTxnSnapLog@240] - Snapshotting: 0x50000062e to /var/lib/zookeeper/version-2/snapshot.50000062e",1
+cca2dd22,"2015-07-31 15:36:24,570 - INFO  [LearnerHandler-/10.10.34.13:59348:LearnerHandler@263] - Follower sid: 3 : info : org.apache.zookeeper.server.quorum.QuorumPeer$QuorumServer@33557fe4",96
+ecb3bb9b,"2015-07-31 19:02:04,304 - WARN  [SendWorker:1:QuorumCnxManager$SendWorker@679] - Interrupted while waiting for message on queue",1
+8b8ec3a9,"2015-07-31 21:22:52,022 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.27:36125 which had sessionid 0x24ee30a54f5000e",1
+c985b95f,"2015-07-31 21:23:04,002 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ee30a5c53000a",313
+c985b95f,"2015-07-31 21:23:12,518 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ee30a54f5001c with negotiated timeout 10000 for client /10.10.34.32:45013",313
+cca2dd22,"2015-07-31 21:24:52,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ee30a54f50017, timeout of 10000ms exceeded",96
+a6fd49ed,"2015-07-31 21:24:54,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ee30a54f5001d, timeout of 10000ms exceeded",1
+744384f5,"2015-07-31 21:24:54,005 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: <*>",1
+c985b95f,"2015-07-31 21:25:02,006 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34ee30a5c530011",313
+2c716fbd,"2015-07-31 21:32:06,109 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ee30a54f5001e with negotiated timeout 20000 for client /10.10.34.11:45101",1
+d7b44aee,"2015-07-31 21:32:06,121 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24ee30a54f5001f with negotiated timeout 10000 for client /10.10.34.11:45102",1
+f222a821,"2015-07-31 21:32:18,940 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.25:44785",1
+a4e8ca55,"2015-07-31 21:32:20,163 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.41:45882",1
+cca2dd22,"2015-07-31 21:44:42,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ee30a54f50025, timeout of 10000ms exceeded",96
+78d92b1b,"2015-07-31 21:44:44,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24ee30a54f50027, timeout of 10000ms exceeded",1
+6168cce7,"2015-07-31 21:44:44,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14ee3e057ed002a, timeout of 10000ms exceeded",1
+66c0d56e,"2015-07-31 21:44:46,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34ee30a5c53002a, timeout of 10000ms exceeded",1
+aff8009c,"2015-08-07 07:27:35,422 - WARN  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888",1
+48cc94f4,"2015-08-10 18:12:47,212 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:50990",1
+cca2dd22,"2015-08-10 18:12:48,994 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24f0557806a001e with negotiated timeout 10000 for client /10.10.34.11:51000",96
+cca2dd22,"2015-08-10 18:23:56,268 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:Learner@107] - Revalidating client: 0x24f0557806a001c",96
+c985b95f,"2015-08-10 18:25:25,206 - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0",313
+e795f137,"2015-08-10 18:25:25,239 - INFO  [main:QuorumPeer@944] - maxSessionTimeout set to -1",1
+676ad89b,"2015-08-10 18:25:25,413 - INFO  [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44925",1
+c985b95f,"2015-08-10 18:25:25,673 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumPeer@738] - FOLLOWING",313
+5a64bf66,"2015-08-10 18:25:27,951 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:51260",1
+1a67555a,"2015-08-10 18:25:27,964 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@832] - Client attempting to renew session 0x24f0557806a0020 at /10.10.34.17:55969",1
+7944659d,"2015-08-10 18:25:52,537 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:36187 which had sessionid 0x24f0557806a001b",1
+0ce5ff5f,"2015-08-10 18:26:03,376 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24f1724b8af0009 with negotiated timeout 10000 for client /10.10.34.21:44834",1
+c985b95f,"2015-08-10 18:35:11,692 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:51562",313
+8dd9da98,"2015-08-18 16:09:18,789 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.class.path=/etc/zookeeper/conf:/usr/share/java/jline.jar:/usr/share/java/log4j-1.2.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/xmlParserAPIs.jar:/usr/share/java/netty.jar:/usr/share/java/slf4j-api.jar:/usr/share/java/slf4j-log4j12.jar:/usr/share/java/zookeeper.jar",1
+848f9fb4,"2015-08-18 16:09:18,900 - INFO  [LearnerHandler-/10.10.34.11:49928:Leader@598] - Have quorum of supporters; starting up and setting last processed zxid: 0xb00000000",1
+cca2dd22,"2015-08-18 16:09:22,982 - INFO  [WorkerReceiver[myid=2]:FastLeaderElection@542] - Notification: 2 (n.leader), 0xa0000009a (n.zxid), 0x1 (n.round), FOLLOWING (n.state), 1 (n.sid), 0xa (n.peerEPoch), LEADING (my state)",96
+cca2dd22,"2015-08-18 16:09:30,004 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14f1724a6e80011, timeout of 10000ms exceeded",96
+cca2dd22,"2015-08-18 16:09:30,009 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34f1724a35e000c",96
+c985b95f,"2015-08-18 16:09:30,013 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14f1724a6e8000d",313
+cca2dd22,"2015-08-20 13:12:40,288 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.12:36322",96
+38492292,"2015-08-20 13:13:18,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14f3fdae8ba0002, timeout of 10000ms exceeded",1
+3633d384,"2015-08-20 13:13:20,001 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14f3fdae8ba0001",1
+cca2dd22,"2015-08-20 17:12:28,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24f3fdaf738000a, timeout of 10000ms exceeded",96
+a9dd9c96,"2015-08-20 17:12:29,085 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:FinalRequestProcessor@415] - shutdown of request processor complete",1
+4a807331,"2015-08-20 17:12:45,757 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:36358",1
+26a883d8,"2015-08-20 17:13:23,515 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:36401 (no session established for client)",1
+c985b95f,"2015-08-20 17:14:13,880 - WARN  [LearnerHandler-/10.10.34.13:42241:Leader@576] - First is 0x0",313
+428ebd5f,"2015-08-20 <*> - INFO [WorkerReceiver[myid=2]:FastLeaderElection@542] - Notification: 1 (n.leader), 0xb0000007b (n.zxid), 0x2 (n.round), LOOKING (n.state), 1 (n.sid), 0xb (n.peerEPoch), LEADING (my state)",1
+2da99a0d,"2015-08-20 17:14:24,000 - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session <*> timeout of 10000ms exceeded",1
+f064582e,"2015-08-20 17:23:54,127 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.19:60483 which had sessionid 0x24f4a631df90002",1
+cca2dd22,"2015-08-20 17:24:04,002 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24f4a631df90002, timeout of 10000ms exceeded",96
+e7dea057,"2015-08-20 17:24:09,157 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24f4a631df9000e with negotiated timeout 10000 for client /10.10.34.16:53681",1
+cca2dd22,"2015-08-20 17:24:10,005 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34f4a63146b000f",96
+212de4c8,"2015-08-20 17:24:10,007 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14f4a6318b80004",1
+78928f3c,"2015-08-20 17:24:11,330 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.40:39952",1
+c985b95f,"2015-08-20 17:24:11,333 - INFO  [CommitProcessor:2:ZooKeeperServer@595] - Established session 0x24f4a631df90016 with negotiated timeout 10000 for client /10.10.34.40:39952",313
+3f112b4a,"2015-08-20 17:26:25,623 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:34266 which had sessionid 0x24f4a631df9000a",1
+35923c33,"2015-08-20 17:26:25,718 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:36890 which had sessionid 0x24f4a631df9000b",1
+5579777b,"2015-08-20 19:32:56,125 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.15:59330 which had sessionid 0x24f4a631df9001d",1
+dd25949f,"2015-08-20 19:33:16,003 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14f4a6318b80019",1
+119d46ed,"2015-08-21 15:55:09,796 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.21:53818",1
+4d470511,"2015-08-24 10:21:44,000 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34f4a63146b0048, timeout of 10000ms exceeded",1
+cca2dd22,"2015-08-25 11:14:51,514 - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0",96
+954440d2,"2015-08-25 11:14:51,662 - INFO  [main:FileSnap@83] - Reading snapshot /var/lib/zookeeper/version-2/snapshot.b00000084",1
+fe4d6dc5,"2015-08-25 11:14:53,074 - INFO  [LearnerHandler-/10.10.34.11:32976:LearnerHandler@395] - Sending DIFF",1
+e322f566,"2015-08-25 11:15:04,735 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24f4a631df90029, timeout of 10000ms exceeded",1
+a4c1530a,"2015-08-25 11:15:04,743 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x34f4a63146b003c",1
+cca2dd22,"2015-08-25 11:15:04,750 - INFO  [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x14f4a6318b8002f",96
+696bf311,"2015-08-25 11:26:27,861 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumPeer@670] - LOOKING",1
+2c05f682,"2015-08-25 11:26:28,145 - INFO  [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Learner@325] - Getting a snapshot from leader",1
+0d6a242b,"2015-07-29 17:42:53,528 - WARN  [WorkerSender[myid=3]:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888",1
+d48f06b6,"2015-07-29 <*> - INFO [WorkerReceiver[myid=3]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x0 (n.zxid), 0x1 (n.round), LOOKING (n.state), 3 (n.sid), 0x0 (n.peerEPoch), LOOKING (my state)",1
+81ba265c,"2015-07-29 <*> - WARN [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024, my id = 3, error =",1
+29eda877,"2015-07-29 19:21:35,823 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:21:36,029 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+cca2dd22,"2015-07-29 19:21:39,171 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+9e98a955,"2015-07-29 19:21:39,364 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:21:42,521 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+9813f7e6,"2015-07-29 19:21:42,707 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8d9492a2,"2015-07-29 19:21:42,709 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44219",1
+28da7bc3,"2015-07-29 19:21:45,845 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:21:45,851 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46538",96
+c985b95f,"2015-07-29 19:21:52,735 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44256",313
+c985b95f,"2015-07-29 19:21:56,074 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+3f2bb6fb,"2015-07-29 19:22:02,551 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46592",1
+a67cd13b,"2015-07-29 19:22:02,761 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+d0e8fb56,"2015-07-29 19:22:05,991 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+af1d7bdd,"2015-07-29 19:22:09,447 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:22:19,469 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+ea7ca371,"2015-07-29 19:22:22,700 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:22:22,812 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+cca2dd22,"2015-07-29 19:22:26,040 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47103",96
+ef4283dc,"2015-07-29 19:22:26,151 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44377",1
+c985b95f,"2015-07-29 19:22:29,382 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+fb61fa6b,"2015-07-29 19:22:32,643 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:22:35,982 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46722",313
+70aba714,"2015-07-29 19:22:39,515 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+718c49ad,"2015-07-29 19:22:42,737 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47157",1
+c8d8a131,"2015-07-29 19:22:46,105 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47180",1
+598fc1ee,"2015-07-29 19:22:52,691 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+b4ed77b7,"2015-07-29 19:23:06,057 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:23:09,379 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+4ca2c382,"2015-07-29 19:23:09,396 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46842",1
+c985b95f,"2015-07-29 19:23:09,473 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47258",313
+82615685,"2015-07-29 19:23:12,817 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:23:19,515 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47300",313
+a77b1851,"2015-07-29 19:23:19,600 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+a1eec3d3,"2015-07-29 19:23:26,282 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:23:26,298 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44590",313
+c1131cee,"2015-07-29 19:23:29,442 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:46914",1
+cca2dd22,"2015-07-29 19:23:36,118 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+cca2dd22,"2015-07-29 19:23:36,221 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+0d0e4398,"2015-07-29 19:23:39,463 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:23:42,806 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+3d19e1ce,"2015-07-29 19:23:42,873 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47373",1
+c985b95f,"2015-07-29 19:23:42,884 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+53a6d4e4,"2015-07-29 19:23:42,999 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+dd10b26f,"2015-07-29 19:23:59,517 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:24:02,927 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+f78805fb,"2015-07-29 19:24:02,942 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3d129354,"2015-07-29 19:24:06,289 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+816028ff,"2015-07-29 19:24:06,382 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44732",1
+cca2dd22,"2015-07-29 19:24:09,728 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+12118910,"2015-07-29 19:24:13,071 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:24:16,291 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+cca2dd22,"2015-07-29 19:24:16,410 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+cca2dd22,"2015-07-29 19:24:26,230 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+0ef191ec,"2015-07-29 19:24:26,239 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:24:29,570 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+2515a715,"2015-07-29 19:24:29,592 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+59b26ddc,"2015-07-29 19:24:29,755 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44813",1
+c5965c7a,"2015-07-29 19:24:36,245 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47145",1
+c985b95f,"2015-07-29 19:24:36,247 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+9aef2660,"2015-07-29 19:24:39,704 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+4d58d6fd,"2015-07-29 19:24:46,275 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+0a97b4b2,"2015-07-29 19:24:46,284 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+7d03a505,"2015-07-29 19:24:49,624 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:24:49,725 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47623",313
+44364b97,"2015-07-29 19:24:49,811 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+1003ed8b,"2015-07-29 19:24:53,035 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+031dbbc1,"2015-07-29 19:24:53,066 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47635",1
+c985b95f,"2015-07-29 19:24:59,647 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+7f079780,"2015-07-29 19:25:13,018 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47287",1
+16d177a5,"2015-07-29 19:25:13,080 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:25:16,540 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44990",96
+37c7c4e6,"2015-07-29 19:25:26,556 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45020",1
+c9110f4d,"2015-07-29 19:25:26,557 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:25:29,812 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47767",313
+cca2dd22,"2015-07-29 19:25:36,392 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47367",96
+ee08bcdc,"2015-07-29 19:25:36,572 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45053",1
+c985b95f,"2015-07-29 19:25:36,585 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:25:39,729 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c985b95f,"2015-07-29 19:25:43,145 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+cca2dd22,"2015-07-29 19:25:55,268 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+a84efb8c,"2015-07-29 19:25:58,399 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+aae8f8ee,"2015-07-29 19:26:01,736 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:26:01,947 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+c985b95f,"2015-07-29 19:26:15,102 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+9de73b62,"2015-07-29 19:26:16,412 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47512",1
+fdb34fda,"2015-07-29 19:26:18,433 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47515",1
+4ca9cf15,"2015-07-29 19:26:18,534 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47931",1
+4a8348c7,"2015-07-29 19:26:21,874 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+30653cfc,"2015-07-29 19:26:25,214 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:47954",1
+d992899c,"2015-07-29 19:26:31,792 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:26:35,235 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+da150b6a,"2015-07-29 19:26:38,476 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:47613",1
+c985b95f,"2015-07-29 19:26:38,683 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+4cb2604a,"2015-07-29 19:26:45,151 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+79b89245,"2015-07-29 19:26:48,698 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45309",1
+cca2dd22,"2015-07-29 19:26:51,831 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+aa8923f9,"2015-07-29 19:26:51,929 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48047",1
+101fd735,"2015-07-29 19:26:51,929 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48048",1
+dd84d902,"2015-07-29 19:26:55,270 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+304d9596,"2015-07-29 19:26:58,715 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45343",1
+d0ec6402,"2015-07-29 19:27:05,187 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:27:05,289 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+c985b95f,"2015-07-29 19:27:12,075 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45392",313
+ac4fbd86,"2015-07-29 19:27:16,526 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:27:18,756 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+f052edf7,"2015-07-29 19:27:18,758 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45424",1
+f7f7ac36,"2015-07-29 19:27:21,885 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:27:21,894 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+ace1f5b5,"2015-07-29 19:27:25,322 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+5952e5d4,"2015-07-29 19:27:25,433 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45439",1
+cca2dd22,"2015-07-29 19:27:51,255 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+ee556e6e,"2015-07-29 19:27:54,494 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48218",1
+ce6e7930,"2015-07-29 19:27:57,837 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48235",1
+d41ac995,"2015-07-29 19:28:01,176 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:28:01,179 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+75a3d336,"2015-07-29 19:28:04,517 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48257",1
+ee836aaa,"2015-07-29 19:28:04,616 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:28:04,619 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45532",96
+cca2dd22,"2015-07-29 19:28:21,118 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48000",96
+cd6c3789,"2015-07-29 19:28:31,140 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+a817c62f,"2015-07-29 19:28:34,481 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+6e7bb7b2,"2015-07-29 19:28:34,893 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:28:37,820 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48067",96
+61ce6553,"2015-07-29 19:28:37,825 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8777a71c,"2015-07-29 19:28:38,023 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45644",1
+08c6bf2c,"2015-07-29 19:28:51,288 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48426",1
+c985b95f,"2015-07-29 19:28:51,387 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45695",313
+cca2dd22,"2015-07-29 19:28:54,529 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+d509040c,"2015-07-29 19:28:57,969 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+86873abb,"2015-07-29 19:29:01,308 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48457",1
+cd6c5e76,"2015-07-29 19:29:01,309 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:29:04,546 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48189",313
+777af0d4,"2015-07-29 19:29:04,757 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45745",1
+cca2dd22,"2015-07-29 19:29:04,958 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+5811ac9d,"2015-07-29 19:29:07,993 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:29:11,333 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+c2bac60c,"2015-07-29 19:29:11,438 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:29:17,913 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48254",313
+372c184b,"2015-07-29 19:29:27,931 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:29:28,037 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+628744b8,"2015-07-29 19:29:38,163 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+d07eb0d0,"2015-07-29 19:29:38,164 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+dcb60a2a,"2015-07-29 19:29:41,298 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+3f164734,"2015-07-29 19:29:44,636 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48373",1
+cca2dd22,"2015-07-29 19:29:48,077 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+8eb03f17,"2015-07-29 19:29:48,181 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:45894",1
+c985b95f,"2015-07-29 19:29:51,315 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48394",313
+04c9fcdc,"2015-07-29 19:29:51,524 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+465a4818,"2015-07-29 19:29:51,525 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:29:58,000 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48420",313
+d09374ed,"2015-07-29 19:30:01,439 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+82807baa,"2015-07-29 19:30:11,459 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:30:14,700 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48478",96
+8ad4942f,"2015-07-29 19:30:21,380 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48502",1
+f4aec39a,"2015-07-29 19:30:21,482 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48751",1
+afca0735,"2015-07-29 19:30:24,725 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+428e7783,"2015-07-29 19:30:38,183 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:48811",1
+34b9acb5,"2015-07-29 19:30:38,295 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46083",1
+cca2dd22,"2015-07-29 19:30:41,426 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+874d87c0,"2015-07-29 19:30:41,635 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+033e9c7b,"2015-07-29 19:30:44,766 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:30:48,107 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48602",96
+c985b95f,"2015-07-29 19:30:48,310 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46110",313
+06aed1cb,"2015-07-29 19:30:51,658 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+3a721697,"2015-07-29 19:30:54,996 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46143",1
+c985b95f,"2015-07-29 19:30:54,997 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+cca2dd22,"2015-07-29 19:31:05,011 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46170",96
+b24eba62,"2015-07-29 19:31:08,148 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:48672",1
+cca2dd22,"2015-07-29 19:31:08,148 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+c985b95f,"2015-07-29 19:31:18,265 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+5abbff05,"2015-07-29 19:31:31,530 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+4283c3ac,"2015-07-29 19:31:41,554 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:31:45,098 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+bcc5be80,"2015-07-29 19:31:51,573 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:31:51,669 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49076",313
+c985b95f,"2015-07-29 19:31:58,342 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:32:05,145 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:32:11,710 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+cca2dd22,"2015-07-29 19:32:11,814 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46410",96
+6357c340,"2015-07-29 19:32:15,050 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+8b2dfbb3,"2015-07-29 19:32:25,174 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46458",1
+34d5709f,"2015-07-29 19:32:28,407 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49206",1
+c985b95f,"2015-07-29 19:32:31,747 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49218",313
+b01094a2,"2015-07-29 19:32:38,536 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:32:41,677 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+37d91eff,"2015-07-29 19:32:45,020 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:32:45,025 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+cca2dd22,"2015-07-29 19:32:48,442 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49270",96
+0bb7f9b2,"2015-07-29 19:32:51,698 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:32:51,906 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46563",313
+cca2dd22,"2015-07-29 19:32:58,378 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49095",96
+c985b95f,"2015-07-29 19:32:58,471 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49316",313
+052d98a2,"2015-07-29 19:33:01,720 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+c985b95f,"2015-07-29 19:33:05,059 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:33:05,144 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:33:05,153 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+3237c6a2,"2015-07-29 19:33:11,947 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+15ec8620,"2015-07-29 19:33:18,420 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49183",1
+c985b95f,"2015-07-29 19:33:25,100 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+c985b95f,"2015-07-29 19:33:25,102 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49215",313
+06c6948d,"2015-07-29 19:33:25,297 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+17668dd9,"2015-07-29 19:33:28,646 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46694",1
+8d5bf4a8,"2015-07-29 19:33:31,786 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:33:31,872 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+c985b95f,"2015-07-29 19:33:41,895 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+3da9e418,"2015-07-29 19:33:45,140 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49283",1
+f6289cb3,"2015-07-29 19:33:45,235 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+5673a3ef,"2015-07-29 19:33:48,482 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49300",1
+c985b95f,"2015-07-29 19:33:51,917 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+cca2dd22,"2015-07-29 19:33:55,162 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+30976094,"2015-07-29 19:33:58,503 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+93914f03,"2015-07-29 19:34:05,182 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49361",1
+3585e4b1,"2015-07-29 19:34:08,526 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:34:11,864 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49396",313
+c985b95f,"2015-07-29 19:34:18,635 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49598",313
+ea4e17f0,"2015-07-29 19:34:28,569 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+addc6c3a,"2015-07-29 19:34:28,761 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:34:31,903 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49480",313
+d44036a5,"2015-07-29 19:34:31,913 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+448413b0,"2015-07-29 19:34:32,107 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:46922",1
+7175419c,"2015-07-29 19:34:38,676 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49670",1
+5f232308,"2015-07-29 19:34:41,929 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:34:41,936 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+cca2dd22,"2015-07-29 19:34:45,265 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+cca2dd22,"2015-07-29 19:34:51,956 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49566",96
+2d080462,"2015-07-29 19:34:52,035 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:34:52,036 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+68d731d2,"2015-07-29 19:34:55,378 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+bd60a48e,"2015-07-29 19:34:58,636 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49590",1
+cca2dd22,"2015-07-29 19:35:02,168 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47032",96
+c11d7dd2,"2015-07-29 19:35:12,075 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49786",1
+e9e6b6a9,"2015-07-29 19:35:15,420 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+e90c809b,"2015-07-29 19:35:18,677 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49662",1
+d2998b99,"2015-07-29 19:35:22,095 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49822",1
+b26fd317,"2015-07-29 19:35:25,550 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47115",1
+bb08b75e,"2015-07-29 19:35:38,717 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:35:48,930 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47199",313
+086de725,"2015-07-29 19:35:58,950 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47234",1
+cca2dd22,"2015-07-29 19:36:05,518 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",96
+c985b95f,"2015-07-29 19:36:08,857 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:49993",313
+cca2dd22,"2015-07-29 19:36:12,304 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+cca2dd22,"2015-07-29 19:36:12,311 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47282",96
+e351de87,"2015-07-29 19:36:15,454 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+c985b95f,"2015-07-29 19:36:15,651 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",313
+cca2dd22,"2015-07-29 19:36:22,134 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49880",96
+4ea872af,"2015-07-29 19:36:22,333 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",1
+cca2dd22,"2015-07-29 19:36:28,819 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+cd455ee6,"2015-07-29 19:36:29,010 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47340",1
+c985b95f,"2015-07-29 19:36:29,011 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47342",313
+92bcef3c,"2015-07-29 19:36:35,499 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49938",1
+c985b95f,"2015-07-29 19:36:38,838 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49949",313
+97791e6a,"2015-07-29 19:36:42,177 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:49957",1
+cca2dd22,"2015-07-29 19:36:48,859 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+a89890a8,"2015-07-29 19:37:02,404 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47454",1
+cca2dd22,"2015-07-29 19:37:02,415 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47464",96
+cca2dd22,"2015-07-29 19:37:08,902 - WARN  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread",96
+c985b95f,"2015-07-29 19:37:09,091 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",313
+cca2dd22,"2015-07-29 19:37:12,435 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:47500",96
+e84a2338,"2015-07-29 19:37:19,003 - WARN  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker",1
+cca2dd22,"2015-07-29 19:53:54,912 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:54265 (no session established for client)",96
+3c52bc44,"2015-07-29 19:54:00,915 - INFO  [WorkerReceiver[myid=3]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x10000006b (n.zxid), 0x2 (n.round), LOOKING (n.state), 3 (n.sid), 0x1 (n.peerEPoch), LOOKING (my state)",1
+380e4981,"2015-07-29 19:55:01,647 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:54294 (no session established for client)",1
+951bbc91,"2015-07-29 19:55:02,980 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:54298",1
+cca2dd22,"2015-07-29 19:55:19,655 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:54310",96
+4bb07546,"2015-07-29 21:01:45,071 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ed9ac1c1e0007 with negotiated timeout 10000 for client /10.10.34.12:59224",1
+e80cca4e,"2015-07-29 21:34:46,432 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:59235",1
+cca2dd22,"2015-07-29 21:34:47,040 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.17:51260",96
+c985b95f,"2015-07-29 23:02:33,103 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.38:43508",313
+9dc9a80b,"2015-07-29 23:42:53,384 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ed9ac1c1e002e with negotiated timeout 10000 for client /10.10.34.42:39469",1
+c985b95f,"2015-07-29 23:44:22,733 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ed9ac1c1e0036 with negotiated timeout 10000 for client /10.10.34.36:37583",313
+51bd5bcd,"2015-07-29 23:44:23,034 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.39:45022",1
+c985b95f,"2015-07-29 23:52:09,561 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.41:54923",313
+d1825aa5,"2015-07-30 14:38:37,500 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:35811",1
+cca2dd22,"2015-07-30 14:52:35,531 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:37021",96
+cca2dd22,"2015-07-30 15:13:40,916 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:59284 which had sessionid 0x34ed9ac1c1e0059",96
+c56c3300,"2015-07-30 15:13:49,197 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.13:54387",1
+c985b95f,"2015-07-30 15:13:54,423 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ed9ac1c1e0064 with negotiated timeout 10000 for client /10.10.34.11:37111",313
+c985b95f,"2015-07-30 15:32:23,858 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:37330",313
+b8aa1699,"2015-07-30 16:18:14,811 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.18:46783 which had sessionid 0x34ed9ac1c1e0086",1
+fe275f8f,"2015-07-30 16:18:36,028 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:40581 which had sessionid 0x34ed9ac1c1e0093",1
+bec73cca,"2015-07-30 16:21:27,293 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:59323",1
+5e0157df,"2015-07-30 16:36:05,149 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:41160 which had sessionid 0x34ed9ac1c1e00a9",1
+94fbb1f8,"2015-07-30 17:11:56,508 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.12:59359",1
+c985b95f,"2015-07-30 17:22:36,450 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:54649",313
+c985b95f,"2015-07-30 17:34:50,730 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.11:41732",313
+cca2dd22,"2015-07-30 17:40:45,765 - WARN  [RecvWorker:1:QuorumCnxManager$RecvWorker@762] - Connection broken for id 1, my id = 3, error =",96
+f7f41a96,"2015-07-30 17:49:01,419 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ed9ac1c1e00d1 with negotiated timeout 10000 for client /10.10.34.11:49255",1
+c985b95f,"2015-07-30 17:57:38,413 - INFO  [QuorumPeer[myid=3]/0:0:0:0:0:0:0:0:2181:QuorumPeer@670] - LOOKING",313
+60ce21d4,"2015-07-30 17:57:38,440 - INFO  [WorkerReceiver[myid=3]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x100001564 (n.zxid), 0x3 (n.round), FOLLOWING (n.state), 3 (n.sid), 0x2 (n.peerEPoch), FOLLOWING (my state)",1
+1d567d23,"2015-07-30 17:58:23,837 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:50180",1
+0b7a65b6,"2015-07-30 19:35:00,232 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ede65503f0025 with negotiated timeout 10000 for client /10.10.34.11:50961",1
+bb87c506,"2015-07-30 19:35:00,326 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ede65503f0027 with negotiated timeout 10000 for client /10.10.34.12:56359",1
+37d275b0,"2015-07-30 19:57:45,009 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ede65503f002d with negotiated timeout 20000 for client /10.10.34.11:51041",1
+06fa23f6,"2015-07-30 19:59:02,357 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:51097",1
+c985b95f,"2015-07-30 19:59:02,549 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.13:50224",313
+00e5626e,"2015-07-30 20:06:22,905 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:51097 which had sessionid 0x34ede65503f002f",1
+99ea9cf8,"2015-07-30 20:06:22,989 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:56372 which had sessionid 0x34ede65503f0030",1
+97e81e78,"2015-07-30 20:14:09,840 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.11:51393",1
+cca2dd22,"2015-07-30 20:36:32,135 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.13:50253",96
+c985b95f,"2015-07-30 21:01:49,990 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ede65503f0058 with negotiated timeout 20000 for client /10.10.34.11:51967",313
+758445de,"2015-07-30 23:52:53,800 - INFO  [main:QuorumPeer@933] - minSessionTimeout set to -1",1
+72a0f991,"2015-07-30 23:52:57,092 - INFO  [QuorumPeer[myid=3]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:os.name=Linux",1
+cca2dd22,"2015-07-30 23:52:57,093 - INFO  [QuorumPeer[myid=3]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:user.name=zookeeper",96
+cca2dd22,"2015-07-31 00:02:53,198 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34edfaa9c220002 with negotiated timeout 10000 for client /10.10.34.11:53000",96
+c0f303db,"2015-07-31 00:02:56,431 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.24:37975",1
+c985b95f,"2015-07-31 00:02:57,579 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.39:51758",313
+83972439,"2015-07-31 00:15:23,611 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:53310 which had sessionid 0x34edfaa9c220012",1
+25b3dcc5,"2015-07-31 00:17:54,495 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34edfaa9c22001e with negotiated timeout 10000 for client /10.10.34.41:51908",1
+c8b47bf4,"2015-07-31 11:07:41,903 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.13:42060 which had sessionid 0x34edfaa9c22002d",1
+cca2dd22,"2015-07-31 11:09:00,683 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34edfaa9c22003a with negotiated timeout 10000 for client /10.10.34.16:42267",96
+9f68060c,"2015-07-31 15:15:17,186 - INFO  [/10.10.34.13:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.11:53230",1
+c985b95f,"2015-07-31 15:36:23,686 - INFO  [main:QuorumPeer@933] - minSessionTimeout set to -1",313
+c985b95f,"2015-07-31 15:36:23,865 - INFO  [QuorumPeer[myid=3]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-7-openjdk-amd64/jre",313
+42d5bb98,"2015-07-31 15:36:23,884 - INFO  [QuorumPeer[myid=3]/0:0:0:0:0:0:0:0:2181:Learner@325] - Getting a snapshot from leader",1
+9a8a20f4,"2015-07-31 21:24:18,366 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.11:59186 which had sessionid 0x34ee30a5c530018",1
+c985b95f,"2015-07-31 21:32:18,447 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /10.10.34.23:51828",313
+33494825,"2015-07-31 21:32:19,994 - INFO  [CommitProcessor:3:ZooKeeperServer@595] - Established session 0x34ee30a5c53002b with negotiated timeout 10000 for client /10.10.34.42:37429",1
+541053d6,"2015-08-07 07:27:46,402 - INFO  [WorkerReceiver[myid=3]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x700000197 (n.zxid), 0x1 (n.round), LOOKING (n.state), 3 (n.sid), 0x7 (n.peerEPoch), LOOKING (my state)",1
+e84923da,"2015-08-10 17:52:39,698 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.13:58180",1
+c985b95f,"2015-08-10 17:53:14,914 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /10.10.34.12:33342 which had sessionid 0x34f0557885e0002",313
+cca2dd22,"2015-08-10 17:53:16,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14f05578bd80006, timeout of 10000ms exceeded",96
+c985b95f,"2015-08-10 18:12:34,001 - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14f05578bd8000f, timeout of 10000ms exceeded",313
+c985b95f,"2015-08-10 18:12:34,004 - INFO  [ProcessThread(sid:3 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24f0557806a0010",313

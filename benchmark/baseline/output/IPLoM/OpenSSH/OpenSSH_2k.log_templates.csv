@@ -1,0 +1,44 @@
+EventId,EventTemplate,Occurrences
+1c8e047e,Dec 10 <*> <*> <*> LabSZ <*> error Received disconnect from 103.99.0.122 14 No more user authentication methods available. [preauth],45
+39b2f54d,Dec 10 <*> <*> <*> LabSZ <*> PAM 5 more authentication failures; logname uid 0 euid 0 tty ssh ruser rhost <*> user root,2
+b0052d22,Dec 10 <*> <*> <*> LabSZ <*> Invalid user <*> from <*>,113
+89681ff3,Dec 10 <*> <*> <*> LabSZ <*> input_userauth_request invalid user <*> [preauth],113
+8acfb94e,Dec 10 <*> <*> <*> LabSZ <*> Connection closed by <*> [preauth],34
+67281647,Dec 10 06 55 46 LabSZ sshd[24200] pam_unix(sshd auth) check pass; user unknown,1
+2619a337,Dec 10 07 <*> <*> LabSZ <*> pam_unix(sshd auth) check pass; user unknown,9
+e52bcd1e,Dec 10 08 <*> <*> LabSZ <*> pam_unix(sshd auth) check pass; user unknown,21
+9abb729e,Dec 10 09 <*> <*> LabSZ <*> pam_unix(sshd auth) check pass; user unknown,73
+2de09121,Dec 10 10 <*> <*> LabSZ <*> pam_unix(sshd auth) check pass; user unknown,18
+12a0192f,Dec 10 11 <*> <*> LabSZ <*> pam_unix(sshd auth) check pass; user unknown,13
+414f87d1,Dec 10 <*> <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*>,11
+cffd5b7f,Dec 10 07 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*>,39
+e1bd9993,Dec 10 08 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*>,6
+b0703398,Dec 10 09 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*>,85
+499b6d9f,Dec 10 10 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*>,166
+d0420a19,Dec 10 11 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> [preauth],129
+399af472,Dec 10 07 <*> <*> LabSZ <*> Failed password for <*> from <*> port <*> ssh2,34
+8398b02d,Dec 10 08 <*> <*> LabSZ <*> Failed password for <*> from <*> port <*> ssh2,3
+8065054e,Dec 10 09 <*> <*> LabSZ <*> <*> password for <*> from <*> port <*> ssh2,61
+846d1ede,Dec 10 10 <*> <*> LabSZ <*> Failed password for <*> from <*> port <*> ssh2,153
+64a0f481,Dec 10 11 <*> <*> LabSZ <*> Failed password for <*> from <*> port <*> ssh2,133
+6fc541b9,Dec 10 <*> <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,3
+5ea42a36,Dec 10 06 55 48 LabSZ sshd[24200] Failed password for invalid user webmaster from 173.234.31.186 port 38926 ssh2,1
+dc8c5efb,Dec 10 07 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,10
+4055b7be,Dec 10 08 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,26
+d474af5f,Dec 10 09 <*> <*> LabSZ <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,78
+24522ad7,Dec 10 10 <*> <*> LabSZ <*> Failed password for invalid user <*> from <*> port <*> ssh2,18
+fbca9944,Dec 10 11 <*> <*> LabSZ <*> Failed password for invalid user <*> from <*> port <*> ssh2,13
+d05656b9,Dec 10 06 55 46 LabSZ sshd[24200] reverse mapping checking getaddrinfo for ns.marryaldkfaczcz.com [173.234.31.186] failed - POSSIBLE BREAK-IN ATTEMPT!,1
+c9f6040f,Dec 10 07 <*> <*> LabSZ <*> reverse mapping checking getaddrinfo for <*> <*> failed - POSSIBLE BREAK-IN ATTEMPT!,4
+5632c5ad,Dec 10 09 <*> <*> LabSZ <*> reverse mapping checking getaddrinfo for customer-187-141-143-180-sta.uninet-ide.com.mx [187.141.143.180] failed - POSSIBLE BREAK-IN ATTEMPT!,80
+37259954,Dec 10 <*> <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*>,110
+4bb6611f,Dec 10 07 13 56 LabSZ sshd[24227] message repeated 5 times [ Failed password for root from 5.36.59.76 port 42393 ssh2],1
+7fc11438,Dec 10 08 39 59 LabSZ sshd[24408] message repeated 5 times [ Failed password for root from 106.5.5.195 port 50719 ssh2],1
+c3cd67c1,Dec 10 08 <*> <*> LabSZ <*> PAM <*> more authentication <*> logname uid 0 euid 0 tty ssh ruser rhost 5.188.10.180,3
+6ce8c6fa,Dec 10 09 <*> <*> LabSZ <*> PAM <*> more authentication <*> logname uid 0 euid 0 tty ssh ruser rhost 185.190.58.151,4
+437059d9,Dec 10 10 14 13 LabSZ sshd[24833] PAM 5 more authentication failures; logname uid 0 euid 0 tty ssh ruser rhost 119.4.203.64,1
+e7fcb516,Dec 10 07 <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*> user <*>,34
+51d24f4e,Dec 10 08 <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*> user <*>,3
+c2a14575,Dec 10 09 <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*> user <*>,60
+8de01f9a,Dec 10 10 <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*> user <*>,154
+c2d65059,Dec 10 11 <*> <*> LabSZ <*> pam_unix(sshd auth) authentication failure; logname uid 0 euid 0 tty ssh ruser rhost <*> user <*>,133

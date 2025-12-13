@@ -1,0 +1,69 @@
+EventId,EventTemplate,Occurrences
+d8684f06,<*> <*> <*> - <*> open through proxy proxy.cse.cuhk.edu.hk:5070 HTTPS,604
+2a2ffe48,"[10.30 <*> <*> - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes sent, <*> bytes received, lifetime <*>",110
+651cc093,"<*> <*> <*> - <*> close, <*> bytes sent, <*> bytes received, lifetime <1 sec",113
+f6c8fd5f,"[10.30 <*> <*> - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <1 sec",25
+7fc57bd6,"[10.30 <*> <*> - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",103
+68cc8ebc,"[10.30 <*> chrome.exe - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes <*> KB) sent, <*> bytes received, lifetime <1 sec",29
+ec700b8b,"[10.30 <*> <*> - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <*>",36
+50d19e24,"[10.30 <*> <*> - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes <*> KB) sent, <*> bytes received, lifetime <*>",56
+cecd6eaa,"[10.30 <*> chrome.exe - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <1 sec",25
+96d9a3f2,"<*> <*> <*> *64 - <*> close, <*> bytes sent, <*> bytes received, lifetime <1 sec",7
+e371c247,<*> <*> <*> - 183.62.156.108:22 open through proxy socks.cse.cuhk.edu.hk:5070 SOCKS5,2
+f9a471e4,"[10.30 <*> <*> - proxy.cse.cuhk.edu.hk:5070 close, <*> bytes <*> KB) sent, <*> bytes <*> MB) received, lifetime <*>",4
+b6c997f7,<*> <*> <*> - <*> error : A connection request was canceled before the completion.,26
+3331e6ca,<*> <*> <*> - <*> error : Could not connect through proxy proxy.cse.cuhk.edu.hk:5070 - Proxy closed the connection unexpectedly.,3
+aece2100,"[10.30 17:40:08] putty.exe - 183.62.156.108:22 close, 89652 bytes (87.5 KB) sent, 599249 bytes (585 KB) received, lifetime 37:51",1
+610e3824,"[10.30 17:48:45] QQ.exe - qqmail.tencent.com:80 close, 336 bytes sent, 2854 bytes (2.78 KB) received, lifetime 00:01",1
+fd3ab826,"[10.30 17:53:43] YodaoDict.exe - impservice.dictapp.youdao.com:80 close, 666 bytes sent, 709 bytes received, lifetime 00:10",1
+7bb17f8a,"<*> <*> <*> - <*> error : Could not connect through proxy proxy.cse.cuhk.edu.hk:5070 - Proxy server cannot establish a connection with the target, status code <*>",9
+cf4ad64b,"[10.30 <*> Skype.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",5
+1cf79a04,"[10.30 18:03:41] Skype.exe - BAYMSGR2012806.gateway.messenger.live.com:443 close, 13155 bytes (12.8 KB) sent, 21737 bytes (21.2 KB) received, lifetime 00:35",1
+6dd8c836,"<*> <*> <*> *64 - <*> error : Could not connect through proxy proxy.cse.cuhk.edu.hk:5070 - Proxy server cannot establish a connection with the target, status code 403",8
+c8eddae9,"[10.30 <*> YodaoDict.exe - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime 00:30",4
+f348cf31,<*> <*> <*> *64 - <*> open through proxy proxy.cse.cuhk.edu.hk:5070 HTTPS,350
+83f5e3c0,"[07.26 <*> chrome.exe *64 - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",111
+7178729c,"[07.26 <*> SogouCloud.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",2
+2ad9eb49,"[07.26 <*> <*> *64 - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",73
+0adf1174,"[07.26 <*> chrome.exe *64 - <*> close, <*> bytes <*> KB) sent, <*> bytes received, lifetime <*>",29
+797a9efb,"[07.26 <*> chrome.exe *64 - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <*>",59
+cf35b453,"[07.26 <*> Dropbox.exe - d.dropbox.com:443 close, 1021 bytes sent, 4906 bytes (4.79 KB) received, lifetime 01:01",2
+78d7c383,"[07.26 <*> chrome.exe *64 - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> MB) received, lifetime <*>",4
+1b840c09,"[07.26 13:46:48] chrome.exe *64 - c.baidu.com:80 close, 1052 bytes (1.02 KB) sent, 113 bytes received, lifetime <1 sec",1
+183c3860,[07.26 <*> chrome.exe *64 - <*> error : A connection request was canceled before the completion.,5
+6bc3e503,"[07.26 <*> WeChat.exe - qbwup.imtt.qq.com:80 close, 494 bytes sent, 208 bytes received, lifetime <*>",11
+bf959b29,"[07.26 14:05:23] SogouCloud.exe - get.sogou.com:80 close, 759 bytes sent, 51462 bytes (50.2 KB) received, lifetime 00:05",1
+6a51861d,"[07.26 <*> SGTool.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",5
+ec12d029,"[07.26 <*> Dropbox.exe - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",11
+80754b6d,"[07.26 <*> Acrobat.exe - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <*>",2
+630d5a87,"[07.26 14:27:34] YodaoDict.exe - cidian.youdao.com:80 close, 2369 bytes (2.31 KB) sent, 1583 bytes (1.54 KB) received, lifetime 02:59",1
+9f06a595,"[07.26 <*> chrome.exe *64 - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <1 sec",4
+b88d9d73,"[07.26 <*> SGTool.exe - <*> close, <*> bytes <*> KB) sent, <*> bytes received, lifetime <*>",2
+38e8f5eb,"[07.26 <*> GitHub.exe - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <*>",13
+ea4910a4,"[07.26 15:43:25] YodaoDict.exe - icauh.youdao.com:80 close, 413 bytes sent, 534 bytes received, lifetime 00:05",1
+d4b6da76,"[07.26 16:11:46] YodaoDict.exe - dict.youdao.com:80 close, 447 bytes sent, 2122 bytes (2.07 KB) received, lifetime 10:01",1
+522cc59c,"[07.26 16:31:50] git-remote-https.exe - proxy.cse.cuhk.edu.hk:5070 close, 999 bytes sent, 4582 bytes (4.47 KB) received, lifetime 00:02",1
+54cc51a7,<*> <*> <*> - <*> error : Could not connect to proxy proxy.cse.cuhk.edu.hk:5070 - Could not resolve proxy.cse.cuhk.edu.hk error 11001,8
+ce819869,<*> <*> chrome.exe *64 - <*> error : Could not connect to proxy proxy.cse.cuhk.edu.hk:5070 - <*> <*> <*> <*> error <*>,26
+c848e9cf,"[07.26 17:30:16] 360AP.exe - intf.zsall.mobilem.360.cn:80 close, 314 bytes sent, 1035 bytes (1.01 KB) received, lifetime 00:30",1
+d8020a35,"[07.26 <*> <*> - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <1 sec",4
+8e173e04,"[07.26 19:00:53] tencentdl.exe - puui.qpic.cn:80 close, <*> bytes sent, <*> bytes <*> KB) received, lifetime 00:01",2
+78c306a2,"[07.26 <*> <*> - <*> close, <*> bytes sent, <*> bytes received, lifetime 00:01",2
+7a223962,"[07.26 19:56:54] SGTool.exe - tc.dl.pinyin.sogoucdn.com:80 close, 1537 bytes (1.50 KB) sent, 7856 bytes (7.67 KB) received, lifetime 01:00",1
+4636e0d7,"[07.27 <*> Dropbox.exe - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",8
+f0beeb6e,"[07.27 <*> YodaoDict.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",2
+bb772867,"[07.27 <*> chrome.exe *64 - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",14
+81a84409,"[07.27 <*> SogouCloud.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime 00:01",2
+2de24c62,"[07.27 <*> SGTool.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",3
+e93e5e01,"[07.27 <*> chrome.exe *64 - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",25
+8369aadb,"[07.27 <*> chrome.exe *64 - <*> close, <*> bytes <*> KB) sent, <*> bytes received, lifetime <*>",4
+4df2baf3,"[07.27 <*> SGTool.exe - tc.dl.pinyin.sogoucdn.com:80 close, 158 bytes sent, <*> bytes <*> KB) received, lifetime <1 sec",2
+987ef3ba,[07.27 <*> Dropbox.exe - <*> error : Could not connect to proxy proxy.cse.cuhk.edu.hk:5070 - connection attempt failed with error 10061,12
+e012a9a9,"[07.27 06:01:12] SGTool.exe - info.pinyin.sogou.com:80 close, 1035 bytes (1.01 KB) sent, 40820 bytes (39.8 KB) received, lifetime 00:30",1
+716a97b3,"[07.27 06:01:20] Dropbox.exe - client-cf.dropbox.com:443 close, 913 bytes sent, 3881 bytes (3.79 KB) received, lifetime 01:00",1
+e369cb09,"[07.27 07:01:28] 360AP.exe - p2.qhimg.com:80 close, 230 bytes sent, 1125 bytes (1.09 KB) received, lifetime 00:09",1
+89d20cb8,"[07.27 <*> SohuNews.exe - <*> close, <*> bytes sent, <*> bytes received, lifetime <*>",4
+37b61342,"[07.27 <*> SohuNews.exe - <*> close, <*> bytes <*> KB) sent, <*> bytes <*> KB) received, lifetime <*>",6
+ca101536,"[07.27 09:48:56] SohuNews.exe - pv.mini.sohu.com:80 close, 512 bytes sent, 15495 bytes (15.1 KB) received, lifetime 00:05",1
+b386bee2,"[07.27 <*> chrome.exe *64 - <*> close, <*> bytes sent, <*> bytes <*> KB) received, lifetime <*>",7
+629e0a92,"[07.27 09:52:33] chrome.exe *64 - r1---sn-i3belnez.googlevideo.com:443 close, 10046 bytes (9.81 KB) sent, 5657896 bytes (5.39 MB) received, lifetime 00:54",1

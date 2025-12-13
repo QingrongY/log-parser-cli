@@ -24,7 +24,7 @@ export const buildParsingPrompt = ({ logLine, variableHints }: ParsingPromptOpti
   return [
     `Shared background knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
     `${hintsSection}.`,
-    'Your task is to mark BUSINESS DATA (variables) directly in the raw log without changing any other text.',
+    'Your task is to mark all BUSINESS DATA (variables) directly in the raw log without changing any other text.',
     'Use control-sequence placeholders for each variable: insert `\\u001b]9;var=<name>\\u0007` where the variable value should go. Do NOT include the value inline.',
     'Provide the marked actual values in a variables map as their literal contents.',
     'Do NOT remove, add, or change any other characters; only replace variable spans with the placeholder marker.',

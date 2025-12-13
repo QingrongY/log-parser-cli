@@ -1,0 +1,27 @@
+EventId,EventTemplate,Occurrences
+efec5197,"17/06/09 20:10:40 INFO executor.CoarseGrainedExecutorBackend: Registered signal handlers for [TERM, HUP, INT]",1
+ad2a7112,"17/06/09  INFO spark.SecurityManager: Changing  acls to: yarn,curi",4
+8e0b674d,"17/06/09  INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(yarn, curi); users with modify permissions: Set(yarn, curi)",2
+cb41a8de,17/06/09 20:10:41 INFO   ,2
+295cebb8,17/06/09 20:10:41 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkExecutorActorSystem@mesos-slave-07:55904],1
+9ce5a03d,17/06/09  INFO util.Utils: Successfully started service  on port ,2
+12f6be9f,17/06/09 20:10:41 INFO storage.DiskBlockManager: Created local directory at /opt/hdfs/nodemanager/usercache/curi/appcache/application_1485248649253_0147/blockmgr-70293f72-844a-4b39-9ad6-fb0ad7e364e4,1
+6f07751b,17/06/09 20:10:41 INFO storage.MemoryStore: MemoryStore started with capacity 17.7 GB,1
+edade951,17/06/09 20:10:42 INFO executor.CoarseGrainedExecutorBackend: Connecting to driver: spark://CoarseGrainedScheduler@10.10.34.11:48069,1
+7bb693e6,17/06/09 20:10:42 INFO     ,3
+6af3ac28,17/06/09 20:10:42 INFO executor.Executor: Starting executor ID 5 on host mesos-slave-07,1
+4d6bf78b,17/06/09 20:10:42 INFO storage.BlockManagerMaster: Registered BlockManager,1
+606ea717,17/06/09  INFO executor.CoarseGrainedExecutorBackend: Got assigned task ,305
+0765d2a1,17/06/09  INFO executor.Executor: Running task  in stage  (TID ,305
+360e2c47,17/06/09  INFO broadcast.TorrentBroadcast: Started reading broadcast variable ,37
+cf4262ae,17/06/09  INFO storage.MemoryStore: Block  stored as  in memory (estimated size   free  KB),149
+79dceb7a,17/06/09  INFO broadcast.TorrentBroadcast: Reading broadcast variable  took  ms,37
+089896c1,"17/06/09  INFO spark.CacheManager: Partition  not found, computing it",75
+9f9420b2,17/06/09  INFO rdd.HadoopRDD: Input split: ,45
+93191702,"17/06/09 20:10:47 INFO Configuration.deprecation:  is deprecated. Instead, use ",5
+656daf5c,17/06/09  INFO python.PythonRunner: Times: total =  boot =  init =  finish = ,375
+fbb70d05,17/06/09  INFO executor.Executor: Finished task  in stage  (TID   bytes result sent to driver,300
+22777e29,17/06/09  INFO storage.BlockManager: Found block  locally,257
+27df3f94,17/06/09  INFO output.FileOutputCommitter: File Output Committer Algorithm version is 1,30
+117843b3,17/06/09  INFO output.FileOutputCommitter: Saved output of task  to ,30
+cfad17c9,17/06/09  INFO mapred.SparkHadoopMapRedUtil:  Committed,30

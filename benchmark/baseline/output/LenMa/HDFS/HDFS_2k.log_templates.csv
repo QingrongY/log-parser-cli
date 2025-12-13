@@ -1,0 +1,36 @@
+EventId,EventTemplate,Occurrences
+8f37b0ae,081109   INFO dfs.DataNode$PacketResponder: PacketResponder  for block  terminating,25
+5762d235,081109   INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: blockMap updated:  is added to  size ,28
+4e125fba,081109   INFO dfs.DataNode$PacketResponder: Received block  of size  from ,32
+b17edebd,081109   INFO dfs.DataNode$DataXceiver: Receiving block  src:  dest: ,24
+4874f9ee,081109   INFO dfs.FSNamesystem: BLOCK* NameSystem.allocateBlock:  ,8
+c0f4ae83,081109  13 INFO dfs.DataBlockScanner: Verification succeeded for ,2
+f583acd9,081109 213837 19 INFO dfs.FSDataset: Deleting block blk_1781953582842324563 file /mnt/hadoop/dfs/data/current/subdir5/blk_1781953582842324563,1
+7ed95a01,081109   INFO dfs.DataNode$DataXceiver:  Served block  to ,9
+5e9b1147,081109   WARN dfs.DataNode$DataXceiver:  exception while serving  to ,21
+ed340cb2,081110   INFO dfs.FSNamesystem: BLOCK* NameSystem.allocateBlock:  ,52
+37da737d,081110   INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: blockMap updated:  is added to  size ,136
+e628b462,081110   INFO dfs.DataNode$PacketResponder: PacketResponder  for block  terminating,129
+8865b13a,081110   INFO dfs.DataNode$DataXceiver: Receiving block  src:  dest: ,132
+9d75d83e,081110   INFO dfs.DataNode$PacketResponder: Received block  of size  from ,129
+768546ac,081110  13 INFO dfs.DataBlockScanner: Verification succeeded for ,15
+1afe9036,081110   INFO dfs.FSNamesystem: BLOCK* NameSystem.delete:  is added to invalidSet of ,122
+9e7bca23,081110   INFO dfs.DataNode$DataXceiver:  Served block  to ,59
+82ea4bf4,081110   WARN dfs.DataNode$DataXceiver:  exception while serving  to ,55
+4440ce19,081110   INFO dfs.FSDataset: Deleting block  file ,133
+edc8ff8a,081110 211541 18 INFO dfs.DataNode: 10.250.15.198:50010 Starting thread to transfer block blk_4292382298896622412 to 10.250.15.240:50010,1
+706a7027,081110  19 INFO dfs.FSNamesystem: BLOCK* ask  to delete ,2
+b4e0d688,081111   INFO dfs.DataNode$DataXceiver:  Served block  to ,12
+59232f68,081111   WARN dfs.DataNode$DataXceiver:  exception while serving  to ,4
+64f53226,081111   INFO dfs.FSNamesystem: BLOCK* NameSystem.delete:  is added to invalidSet of ,102
+7f2074af,081111   INFO dfs.FSDataset: Deleting block  file ,129
+e17e8c2d,081111   INFO dfs.DataNode$PacketResponder: Received block  of size  from ,131
+541c52dd,081111   INFO dfs.FSNamesystem: BLOCK* NameSystem.addStoredBlock: blockMap updated:  is added to  size ,150
+1cbeb8e0,081111   INFO dfs.DataNode$DataXceiver: Receiving block  src:  dest: ,136
+2b6fbef2,081111   INFO dfs.FSNamesystem: BLOCK* NameSystem.allocateBlock:  ,55
+d9278482,081111   INFO dfs.DataNode$PacketResponder: PacketResponder  for block  terminating,157
+d9d2d60b,081111  13 INFO dfs.DataBlockScanner: Verification succeeded for ,3
+1f4a7d18,081111   INFO dfs.DataNode$DataXceiver: Received block  src:  dest:  of size 67108864,2
+91512c02,081111  19 INFO dfs.FSNamesystem: BLOCK* ask  to delete                                                                                                    ,2
+b9b28723,081111 080934 19 INFO dfs.FSNamesystem: BLOCK* ask 10.250.14.38:50010 to replicate blk_-7571492020523929240 to datanode(s) 10.251.122.38:50010,1
+d081f953,081111 091733 19 INFO dfs.FSNamesystem: BLOCK* ask 10.251.126.5:50010 to delete blk_-9016567407076718172 blk_-8695715290502978219 blk_-7168328752988473716 blk_-4355192005224403537 blk_-3757501769775889193 blk_-154600013573668394 blk_167132135416677587 blk_2654596473569751784 blk_5202581916713319258,1

@@ -1,0 +1,7 @@
+EventId,EventTemplate,Occurrences
+f8807217,<*> Dec <*> <*> 2005] [notice] workerEnv.init() ok /etc/httpd/conf/workers2.properties,569
+d8f36ed2,<*> Dec <*> <*> 2005] [error] mod_jk child <*> <*> <*> <*> <*>,370
+51bdfc62,<*> Dec <*> <*> 2005] [notice] jk2_init() Found child <*> in scoreboard slot <*>,836
+51bdfc62,<*> Dec <*> <*> 2005] [error] [client <*> Directory index forbidden by rule: /var/www/html/,836
+51bdfc62,<*> Dec <*> <*> 2005] [error] jk2_init() Can't find child <*> in scoreboard,836
+f8807217,[Mon Dec 05 <*> 2005] [error] mod_jk child <*> <*> <*> <*> <*>,569

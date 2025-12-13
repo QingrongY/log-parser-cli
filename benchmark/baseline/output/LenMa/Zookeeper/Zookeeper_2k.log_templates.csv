@@ -1,0 +1,86 @@
+EventId,EventTemplate,Occurrences
+6d4f9a64,2015-07-29  -   -    ,575
+5a6545a5,2015-07-29  -   -       ,318
+f81c86b9,2015-07-29  -   -           ,291
+dbe9d2dd,2015-07-29  -   -  ,266
+1b9cbe04,2015-07-29  - INFO  -          ,12
+69b34b0c,2015-07-29  -   -     ,18
+6161b337,2015-07-29  -   -        ,21
+779be471,2015-07-30  -   -     ,37
+31d54a55,2015-07-30  - INFO  -          ,40
+01f775fa,2015-07-30  - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at ,19
+df39293b,2015-07-30  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client  will be dropped if server is in r-o mode,17
+9a60bba5,2015-07-30  -   -  ,4
+4f9b7c95,2015-07-30  - WARN  - Cannot open channel to  at election address ,4
+8538fe7a,2015-07-30  - INFO  cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,18
+cc669513,2015-07-30  - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session  timeout of  exceeded,12
+638d2c87,2015-07-30  -   -    ,5
+60c09dc9,2015-07-30  - INFO  - LOOKING,2
+a6c1f918,2015-07-31  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client  will be dropped if server is in r-o mode,10
+7763a0db,2015-07-31  - INFO  -          ,22
+c8ffa8dd,2015-07-31  -   -     ,16
+5ac22f9c,2015-07-31  - INFO  - ,2
+dc5339cf,"2015-07-31 15:33:29,640 - WARN [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888",1
+b15f2a1d,2015-07-31  - INFO  -        ,8
+4cac20b5,2015-07-31  - INFO  - Server ,2
+ae831409,2015-07-31  - INFO  -       ,14
+1e7b1018,"2015-08-07  - INFO  - Notification: 3 (n.leader), 0x700000197 (n.zxid), 0x1 (n.round),  (n.state), 3 (n.sid), 0x7 (n.peerEPoch), LOOKING (my state)",2
+cead3f98,"2015-08-07 07:27:47,650 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Follower@63] - FOLLOWING - LEADER ELECTION TOOK - 238",1
+dfc16049,2015-08-10  - INFO  -          ,10
+62012441,2015-08-10  -   -     ,8
+0af4e493,2015-08-10  - INFO  - Client attempting to    at ,5
+2585d31d,2015-08-10  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client  will be dropped if server is in r-o mode,6
+c854f121,2015-08-10  - INFO  -  set to ,3
+73006137,2015-08-10  - INFO  -   ,4
+24a39e94,"2015-08-10 18:25:22,080 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:zookeeper.version=3.4.5--1, built on 06/10/2013 17:26 GMT",1
+31cf2ee9,"2015-08-10 18:25:22,082 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:user.name=zookeeper",1
+92061f1e,"2015-08-18 16:09:13,285 - INFO [/10.10.34.11:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.12:34051",1
+37b1b97e,"2015-08-18 16:09:15,099 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:os.name=Linux",1
+15e5b13b,2015-08-20  -   -     ,7
+b07d82a3,2015-08-20  - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at ,3
+b0eab6a3,2015-08-20  - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client  (no session established for client),2
+c66f82c6,2015-08-20  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@354] - Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServer not running,3
+5b70ef65,"2015-08-20  - INFO  - Notification:  (n.leader),  (n.zxid), 0x2 (n.round), LOOKING (n.state),  (n.sid), 0xb (n.peerEPoch),  (my state)",4
+259274f7,2015-08-20  - INFO  -          ,11
+eab7e8ff,2015-08-21  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client  will be dropped if server is in r-o mode,2
+a38af442,2015-08-21  - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from ,2
+1104fac1,2015-08-24  - INFO  -    ,19
+87b9a14a,2015-08-24  - WARN  - Cannot open channel to  at election address ,38
+5a58a127,2015-08-25  - WARN  - Cannot open channel to  at election address ,41
+38595230,2015-08-25  - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: 60000,17
+faddce70,"2015-08-25 11:20:12,465 - WARN [RecvWorker:3:QuorumCnxManager$RecvWorker@762] - Connection broken for id 3, my id = 1, error =",1
+91abdb00,"2015-07-29 17:42:30,405 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.vendor=Oracle Corporation",1
+128f012e,"2015-07-29 19:37:27,222 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x34ed93485090001 type:create cxid:0x55b8bb0f zxid:0x100000010 txntype:-1 reqpath:n/a Error Path:/home/curi/.zookeeper Error:KeeperErrorCode = NodeExists for /home/curi/.zookeeper",1
+341cd522,2015-07-29  - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,11
+cf1c5aad,2015-07-29  - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client  will be dropped if server is in r-o mode,4
+ab9f9a07,"2015-07-29  - INFO  - Notification: 3 (n.leader),  (n.zxid),  (n.round), LOOKING (n.state), 3 (n.sid),  (n.peerEPoch),  (my state)",4
+08b748ad,"2015-07-30 23:46:27,304 - INFO [main:QuorumPeerMain@127] - Starting quorum peer",1
+2462e503,2015-07-31  - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,9
+db34bdea,"2015-07-31 15:31:15,575 - INFO [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0",1
+bb52af06,2015-07-31  - INFO  -    ,4
+7f0135cb,"2015-07-31 19:02:04,304 - WARN [SendWorker:1:QuorumCnxManager$SendWorker@679] - Interrupted while waiting for message on queue",1
+4fa8a733,"2015-08-07 07:27:35,422 - WARN [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumCnxManager@368] - Cannot open channel to 3 at election address /10.10.34.13:3888",1
+c49013ea,"2015-08-10 18:25:25,413 - INFO [/10.10.34.12:3888:QuorumCnxManager$Listener@493] - Received connection request /10.10.34.13:44925",1
+8f84178a,"2015-08-10 18:25:25,673 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumPeer@738] - FOLLOWING",1
+59abfccf,"2015-08-18 16:09:18,789 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:java.class.path=/etc/zookeeper/conf:/usr/share/java/jline.jar:/usr/share/java/log4j-1.2.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/xmlParserAPIs.jar:/usr/share/java/netty.jar:/usr/share/java/slf4j-api.jar:/usr/share/java/slf4j-log4j12.jar:/usr/share/java/zookeeper.jar",1
+c6d4e0bb,"2015-08-18 16:09:18,900 - INFO [LearnerHandler-/10.10.34.11:49928:Leader@598] - Have quorum of supporters; starting up and setting last processed zxid: 0xb00000000",1
+9267acfa,"2015-08-18 16:09:22,982 - INFO [WorkerReceiver[myid=2]:FastLeaderElection@542] - Notification: 2 (n.leader), 0xa0000009a (n.zxid), 0x1 (n.round), FOLLOWING (n.state), 1 (n.sid), 0xa (n.peerEPoch), LEADING (my state)",1
+bb976f21,"2015-08-18 16:09:30,004 - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session 0x14f1724a6e80011, timeout of 10000ms exceeded",1
+b38388d6,2015-08-18  - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,2
+c23d75ed,2015-08-20  - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session  timeout of 10000ms exceeded,6
+335cc602,2015-08-20  - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,4
+b57b2a4b,"2015-08-20 17:14:13,880 - WARN [LearnerHandler-/10.10.34.13:42241:Leader@576] - First is 0x0",1
+a93f1b15,"2015-08-21 15:55:09,796 - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /10.10.34.21:53818",1
+75e18e33,"2015-08-24 10:21:44,000 - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session 0x34f4a63146b0048, timeout of 10000ms exceeded",1
+525e8395,"2015-08-25 11:14:51,514 - INFO [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0",1
+b2d4d074,"2015-08-25 11:14:51,662 - INFO [main:FileSnap@83] - Reading snapshot /var/lib/zookeeper/version-2/snapshot.b00000084",1
+06344a8f,"2015-08-25 11:14:53,074 - INFO [LearnerHandler-/10.10.34.11:32976:LearnerHandler@395] - Sending DIFF",1
+5a77ffd4,"2015-08-25 11:15:04,735 - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session 0x24f4a631df90029, timeout of 10000ms exceeded",1
+7c220b35,2015-08-25  - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: ,2
+2927772f,"2015-08-25 11:26:27,861 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:QuorumPeer@670] - LOOKING",1
+55093c0a,"2015-08-25 11:26:28,145 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:Learner@325] - Getting a snapshot from leader",1
+8dd71d79,"2015-07-29 17:42:53,528 - WARN [WorkerSender[myid=3]:QuorumCnxManager@368] - Cannot open channel to 2 at election address /10.10.34.12:3888",1
+894a18a2,"2015-07-30 17:40:45,765 - WARN [RecvWorker:1:QuorumCnxManager$RecvWorker@762] - Connection broken for id 1, my id = 3, error =",1
+dd46b81a,"2015-07-30 17:57:38,440 - INFO [WorkerReceiver[myid=3]:FastLeaderElection@542] - Notification: 3 (n.leader), 0x100001564 (n.zxid), 0x3 (n.round), FOLLOWING (n.state), 3 (n.sid), 0x2 (n.peerEPoch), FOLLOWING (my state)",1
+9c144dc4,2015-08-10  - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session  timeout of 10000ms exceeded,2
+ad651573,"2015-08-10 18:12:34,004 - INFO [ProcessThread(sid:3 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x24f0557806a0010",1

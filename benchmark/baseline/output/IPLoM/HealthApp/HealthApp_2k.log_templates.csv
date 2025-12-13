@@ -1,0 +1,37 @@
+EventId,EventTemplate,Occurrences
+ee8c6e49,20171223-22 19 58 <*> <*> <*> <*> <*> <*> <*>,17
+67ae95b0,20171223-22 19 58 <*> <*> <*> <*> <*> <*> <*> <*>,19
+912ea3eb,20171223-22 19 58 <*> no such data in db type is 1 deviceCode is 0,2
+23e2017e,<*> <*> <*> <*> hiSyncOption HiSyncOption{syncAction <*> syncMethod 2 syncScope 0 syncDataType 20000 syncModel 2 pushAction 0} app 1 who 1,5
+54737b98,20171223-22 <*> <*> <*>,3
+4be3fd10,20171223-23 32 28 796|HiH_HiBroadcastUtil|30002312|sendSyncFailedBroadcast,1
+e211d885,20171224-0 <*> <*> <*>,8
+9dc8e699,20171223-22 <*> <*> <*> <*>,319
+d877495b,20171223-23 <*> <*> <*> <*>,137
+44d2ccb6,20171224-0 <*> <*> <*> <*>,51
+0f620298,20171223-22 <*> <*> <*> <*> <*>,553
+c7729357,20171223-23 <*> <*> <*> <*> <*>,283
+151e9f18,20171224-0 <*> <*> <*> <*> <*>,127
+e1c89e18,20171224-1 <*> <*> <*> action android.intent.action.TIME_TICK,3
+c126f114,20171223-22 <*> <*> <*> <*> <*> <*> <*>,297
+15d36aa6,20171223-23 <*> <*> <*> <*> <*> <*> <*>,105
+bacec47a,<*> 32 28 <*> the <*> switch is open start push <*> data!,6
+a303e9e8,20171223-22 19 58 <*> size <*> app 1 One Data Type <*> packageName com.huawei.health writeStatType 0,2
+6dcf4df7,20171224-0 32 28 799|HiH_HiSyncControl|30002312|checkCurrentDay a new day comes reset basicSyncCondition currentDay is 20171224 oldDay is 20171223,1
+393d0e4c,20171223-22 15 35 23|Step_StandReportReceiver|30002312|screen status unknown think screen on,1
+4da6e831,20171223-22 19 58 <*> <*> <*> <*> <*> <*>,7
+b6b67516,20171223-22 19 58 <*> <*> <*> <*>,5
+7813e442,20171223-22 31 59 725|Step_LSC|30002312|timeStamp back extendReportTimeStamp 1514039575000,1
+471cf3ce,20171223-22 32 28 <*> <*> is <*>,2
+e5de0835,20171223-22 39 25 406|Step_LSC|30002312|timeStamp back extendReportTimeStamp 1514039977000,1
+3b761867,20171223-22 53 1 320|Step_LSC|30002312|timeStamp back extendReportTimeStamp 1514040836000,1
+4e10902e,20171223-23 14 24 499|Step_LSC|30002312|timeStamp back extendReportTimeStamp 1514042082000,1
+f5eb7c0c,20171223-23 17 41 100|Step_LSC|30002312|timeStamp back extendReportTimeStamp 1514042265000,1
+da2a8b51,20171223-23 32 28 <*> <*> is <*>,2
+7296a64d,20171224-0 0 0 234|Step_StandStepDataManager|30002312|reload 3786 restar 0,1
+cc6b346e,20171224-0 32 28 <*> <*> is <*>,2
+8a05d78c,20171224-0 <*> <*> <*> <*> <*> <*> <*>,25
+b6ae7e35,20171224-0 32 28 <*> the <*> is true,2
+5845317a,20171224-0 32 28 806|HiH_HiSyncControl|30002312|ifCanSync not! no cloud version,1
+8e8d53a4,20171223-22 19 58 <*> type <*> time 1513958400000 statClient 2 who is 1,4
+71c9043f,20171223-22 19 58 <*> the <*> switch is open start push <*> data!,4

@@ -1,0 +1,43 @@
+EventId,EventTemplate,Occurrences
+df551f3e,<*> <*> - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@774] - Notification time out: <*>,37
+2297b3e0,<*> <*> - INFO <*> - Received connection request <*>,299
+3e3d3796,2015-07-29 <*> - WARN <*> - Send worker leaving thread,262
+21b7b04f,<*> <*> - WARN <*> - Interrupted while waiting for message on queue,314
+56f8b991,<*> <*> - WARN <*> - Connection broken for id <*> my id = <*> error =,291
+a05fefa7,<*> <*> - WARN <*> - Interrupting SendWorker,266
+be5ccfae,<*> <*> - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client <*> which had sessionid <*>,44
+4817ab0c,<*> <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception,37
+f4a594c3,<*> <*> - INFO <*> - Client attempting to <*> <*> <*> at <*>,44
+97ad8065,<*> <*> - INFO <*> - Established session <*> with negotiated timeout <*> for client <*>,50
+71ad88cc,<*> <*> - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from <*>,48
+1268775f,"2015-07-29 23:44:28,903 - ERROR [CommitProcessor:1:NIOServerCnxn@180] - Unexpected Exception:",1
+b6a8034c,<*> <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client <*> will be dropped if server is in r-o mode,39
+b4a4717d,<*> <*> - INFO <*> - Server <*>,8
+115c97c2,<*> <*> - WARN <*> - Cannot open channel to <*> at election address <*>,86
+7de4cde4,<*> <*> - INFO <*> cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: <*>,47
+0e2c0053,<*> <*> - INFO [SessionTracker:ZooKeeperServer@325] - Expiring session <*> timeout of <*> exceeded,40
+6de6e60c,<*> <*> - WARN <*> - ******* GOODBYE <*> ********,19
+542ebe08,<*> <*> - INFO <*> - LOOKING,4
+c36cabb7,"2015-07-31 15:31:40,971 - INFO [Thread-1:QuorumCnxManager$Listener@486] - My election bind port: 0.0.0.0/0.0.0.0:3888",1
+de3c49a5,"2015-07-31 15:31:40,999 - INFO [WorkerSender[myid=1]:QuorumCnxManager@190] - Have smaller server identifier, so dropping the connection: (2, 1)",1
+768324a8,<*> <*> - INFO <*> - FOLLOWING,2
+d4890f6f,"2015-07-31 19:30:07,403 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:FastLeaderElection@740] - New election. My id = 1, proposed zxid=0x700000000",1
+3cae9966,<*> <*> - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Follower@63] - FOLLOWING - LEADER ELECTION TOOK - <*>,2
+eeb26e55,"<*> <*> - INFO <*> - Notification: <*> (n.leader), <*> (n.zxid), <*> (n.round), <*> (n.state), <*> (n.sid), <*> (n.peerEPoch), <*> (my state)",12
+bd11d395,<*> <*> - INFO <*> - <*> set to <*>,8
+6a292086,<*> <*> - INFO <*> - Server environment:java.vendor=Oracle Corporation,2
+1b5f603b,2015-08-10 <*> - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:Learner@107] - Revalidating client: <*>,3
+05180d07,"2015-08-10 18:25:22,080 - INFO [QuorumPeer[myid=1]/0:0:0:0:0:0:0:0:2181:Environment@100] - Server environment:zookeeper.version=3.4.5--1, built on 06/10/2013 17:26 GMT",1
+adaf1c21,<*> <*> - INFO [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client <*> (no session established for client),4
+fa0aa102,2015-08-20 <*> - WARN [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@354] - Exception causing close of session 0x0 due to java.io.IOException: ZooKeeperServer not running,3
+ed9fac79,2015-07-29 <*> - ERROR <*> - Unexpected exception causing shutdown while sock still open,12
+421a6695,"2015-07-29 19:37:27,222 - INFO [ProcessThread(sid:2 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x34ed93485090001 type:create cxid:0x55b8bb0f zxid:0x100000010 txntype:-1 reqpath:n/a Error Path:/home/curi/.zookeeper Error:KeeperErrorCode = NodeExists for /home/curi/.zookeeper",1
+b590d508,"2015-07-30 23:46:27,304 - INFO [main:QuorumPeerMain@127] - Starting quorum peer",1
+a04de259,<*> <*> - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:FileTxnSnapLog@240] - Snapshotting: <*> to <*>,2
+750e7178,"2015-07-31 15:36:24,570 - INFO [LearnerHandler-/10.10.34.13:59348:LearnerHandler@263] - Follower sid: 3 : info : org.apache.zookeeper.server.quorum.QuorumPeer$QuorumServer@33557fe4",1
+2889fb8b,"2015-08-18 16:09:18,900 - INFO [LearnerHandler-/10.10.34.11:49928:Leader@598] - Have quorum of supporters; starting up and setting last processed zxid: 0xb00000000",1
+db584222,"2015-08-20 17:12:29,085 - INFO [QuorumPeer[myid=2]/0:0:0:0:0:0:0:0:2181:FinalRequestProcessor@415] - shutdown of request processor complete",1
+62fd18ff,"2015-08-20 17:14:13,880 - WARN [LearnerHandler-/10.10.34.13:42241:Leader@576] - First is 0x0",1
+0cec0e1c,"2015-08-25 11:14:51,662 - INFO [main:FileSnap@83] - Reading snapshot /var/lib/zookeeper/version-2/snapshot.b00000084",1
+ece13337,"2015-08-25 11:14:53,074 - INFO [LearnerHandler-/10.10.34.11:32976:LearnerHandler@395] - Sending DIFF",1
+67210ca7,<*> <*> - INFO <*> - Getting a snapshot from leader,2

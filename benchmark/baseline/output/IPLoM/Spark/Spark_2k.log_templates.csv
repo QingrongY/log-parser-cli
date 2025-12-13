@@ -1,0 +1,41 @@
+EventId,EventTemplate,Occurrences
+d7e15b87,17/06/09 20 10 <*> INFO <*> <*> <*>,33
+6c306540,17/06/09 20 10 <*> INFO spark.SecurityManager SecurityManager authentication disabled; ui acls disabled; users with view permissions Set(yarn curi); users with modify permissions Set(yarn curi),2
+698cd9b8,17/06/09 20 10 <*> INFO <*> <*> <*> <*> <*>,298
+7332a372,17/06/09 20 11 <*> INFO <*> <*> <*> <*> <*>,267
+16fec0df,17/06/09 20 <*> <*> INFO <*> <*> <*> <*> <*> <*>,38
+74a09af9,17/06/09 20 10 <*> INFO <*> <*> <*> <*> <*> <*> <*>,51
+f1d94c6f,17/06/09 20 11 <*> INFO <*> <*> <*> <*> <*> <*> <*>,80
+21f86cc2,17/06/09 20 10 <*> INFO <*> <*> <*> <*> <*> <*> <*> <*>,66
+ad54054f,17/06/09 20 11 <*> INFO broadcast.TorrentBroadcast Reading broadcast variable <*> took <*> ms,5
+5bedff12,17/06/09 20 10 41 INFO Remoting Remoting started; listening on addresses [akka.tcp //sparkExecutorActorSystem@mesos-slave-07 55904],1
+9b4faca5,17/06/09 20 10 45 INFO executor.Executor Running task <*> in stage 0.0 (TID <*>,5
+93bdaae3,17/06/09 20 10 52 INFO executor.Executor Running task <*> in stage <*> (TID <*>,10
+153ab4e3,17/06/09 20 10 53 INFO executor.Executor Running task <*> in stage <*> (TID <*>,25
+351abce9,17/06/09 20 10 54 INFO executor.Executor Running task <*> in stage <*> (TID <*>,25
+d1731957,17/06/09 20 10 55 INFO executor.Executor Running task <*> in stage <*> (TID <*>,30
+8f225506,17/06/09 20 10 56 INFO executor.Executor Running task <*> in stage <*> (TID <*>,25
+6f8e89fe,17/06/09 20 10 57 INFO executor.Executor Running task <*> in stage 24.0 (TID <*>,15
+8bc9ce44,17/06/09 20 10 58 INFO executor.Executor Running task <*> in stage <*> (TID <*>,15
+bfb116e5,17/06/09 20 11 07 INFO executor.Executor Running task <*> in stage 26.0 (TID <*>,10
+8d712ce3,17/06/09 20 11 08 INFO executor.Executor Running task <*> in stage <*> (TID <*>,38
+14678b9f,17/06/09 20 11 09 INFO executor.Executor Running task <*> in stage <*> (TID <*>,37
+741ed308,17/06/09 20 11 10 INFO executor.Executor Running task <*> in stage <*> (TID <*>,55
+7c22f26f,17/06/09 20 11 11 INFO executor.Executor Running task <*> in stage 29.0 (TID <*>,15
+406496a5,17/06/09 20 10 48 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,10
+73af05f8,17/06/09 20 10 52 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,10
+74427ba1,17/06/09 20 10 53 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,30
+936fcb24,17/06/09 20 10 54 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,30
+6b8a166b,17/06/09 20 10 55 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,35
+c30c2c58,17/06/09 20 10 56 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,40
+d807e6b7,17/06/09 20 10 57 INFO <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,25
+c8cfb853,17/06/09 20 10 58 INFO <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,25
+da478808,17/06/09 20 10 59 INFO <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,10
+995c341c,17/06/09 20 11 07 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,10
+d270be1c,17/06/09 20 11 08 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,75
+3fc9f5ff,17/06/09 20 11 09 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,35
+810c2fba,17/06/09 20 11 10 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,55
+14738456,17/06/09 20 11 11 INFO python.PythonRunner Times total <*> boot <*> init <*> finish <*>,15
+69bb10ca,17/06/09 20 <*> <*> INFO storage.MemoryStore Block <*> stored as bytes in memory (estimated size <*> <*> free <*> KB),112
+39b46a2f,17/06/09 20 <*> <*> INFO storage.MemoryStore Block <*> stored as values in memory (estimated size <*> <*> free <*> KB),37
+372c85dc,17/06/09 20 <*> <*> INFO executor.Executor Finished task <*> in stage <*> (TID <*> <*> bytes result sent to driver,300

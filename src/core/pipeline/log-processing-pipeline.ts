@@ -28,6 +28,7 @@ import type {
 } from '../types.js';
 import { matchEntireLine } from '../../agents/utils/regex.js';
 import { buildRegexFromTemplate } from '../../agents/agents/parsing-agent.js';
+import { normalizeRegexPattern } from '../../agents/utils/regex.js';
 
 interface PipelineAgents {
   routing: RoutingAgent;
@@ -407,8 +408,9 @@ export class LogProcessingPipeline {
         await this.appendMatches(libraryId, library, sampleMatch.matched, matchedRecords);
         newlyMatchedCount += sampleMatch.matched.length;
 
+        let rematch = { matched: [] as MatchedLogRecord[], unmatched: pendingLogs };
         if (pendingLogs.length > 0) {
-          const rematch = await this.deps.regexWorkerPool.match({
+          rematch = await this.deps.regexWorkerPool.match({
             logs: pendingLogs,
             templates: [postUpdateTemplate],
           });
@@ -417,6 +419,18 @@ export class LogProcessingPipeline {
             newlyMatchedCount += rematch.matched.length;
           }
           pendingLogs = rematch.unmatched;
+        }
+
+        // Tighten constants if some variables are identical across all matched samples for this template.
+        const tightened = await this.tightenTemplateConstants(
+          postUpdateTemplate,
+          [...sampleMatch.matched, ...rematch.matched],
+          libraryId,
+          library,
+          newTemplates,
+        );
+        if (tightened) {
+          postUpdateTemplate = tightened;
         }
 
         if (newlyMatchedCount > 0) {
@@ -578,5 +592,122 @@ export class LogProcessingPipeline {
     remaining.push(templateWithId);
     library.templates = remaining;
     return templateWithId;
+  }
+
+  /**
+   * If a variable captures the exact same value for all matched samples of a new template,
+   * fold it back into the template as a literal constant to avoid over-broad placeholders.
+   * This runs right after the first batch of matches for the new template.
+   */
+  private async tightenTemplateConstants(
+    template: LogTemplateDefinition,
+    matches: MatchedLogRecord[],
+    libraryId: string,
+    library: TemplateLibrary,
+    newTemplates: LogTemplateDefinition[],
+  ): Promise<LogTemplateDefinition | undefined> {
+    if (!template.placeholderTemplate || matches.length === 0) {
+      return undefined;
+    }
+
+    // Extract placeholders in order of appearance.
+    const placeholderRegex = /\u001b]9;var=([^\u0007]+)\u0007/g;
+    const placeholders: { name: string; start: number; end: number }[] = [];
+    let match: RegExpExecArray | null;
+    while ((match = placeholderRegex.exec(template.placeholderTemplate)) !== null) {
+      placeholders.push({
+        name: match[1],
+        start: match.index,
+        end: match.index + match[0].length,
+      });
+    }
+    if (placeholders.length === 0) {
+      return undefined;
+    }
+
+    // Derive final variable names (sanitized + numbered) to align with regex groups.
+    const nameCounts = new Map<string, number>();
+    const finalNames = placeholders.map((p) => {
+      const base = this.sanitizeVariableName(p.name);
+      const count = (nameCounts.get(base) ?? 0) + 1;
+      nameCounts.set(base, count);
+      return count === 1 ? base : `${base}${count}`;
+    });
+
+    // Collect values per variable.
+    const constants = new Map<number, string>();
+    finalNames.forEach((varName, idx) => {
+      const values = matches
+        .map((m) => m.variables?.[varName])
+        .filter((v): v is string => typeof v === 'string');
+      if (values.length === 0) {
+        return;
+      }
+      const first = values[0];
+      if (values.every((v) => v === first)) {
+        constants.set(idx, first);
+      }
+    });
+
+    if (constants.size === 0) {
+      return undefined;
+    }
+
+    // Rebuild the placeholder template, replacing constant placeholders with their literal value.
+    let cursor = 0;
+    let tightenedTemplate = '';
+    placeholders.forEach((ph, idx) => {
+      tightenedTemplate += template.placeholderTemplate.slice(cursor, ph.start);
+      if (constants.has(idx)) {
+        tightenedTemplate += constants.get(idx);
+      } else {
+        tightenedTemplate += template.placeholderTemplate.slice(ph.start, ph.end);
+      }
+      cursor = ph.end;
+    });
+    tightenedTemplate += template.placeholderTemplate.slice(cursor);
+
+    if (tightenedTemplate === template.placeholderTemplate) {
+      return undefined;
+    }
+
+    const remainingPlaceholders =
+      (tightenedTemplate.match(/\u001b]9;var=[^\u0007]+\u0007/g) ?? []).length;
+    if (remainingPlaceholders === 0) {
+      return undefined;
+    }
+
+    const sampleRaw = matches[0]?.raw;
+    const { pattern, variables } = buildRegexFromTemplate(
+      tightenedTemplate,
+      template.placeholderVariables ?? {},
+      sampleRaw,
+    );
+    const normalizedPattern = normalizeRegexPattern(pattern);
+
+    template.placeholderTemplate = tightenedTemplate;
+    template.pattern = normalizedPattern;
+    template.variables = variables;
+
+    // Persist tightened template and refresh library/newTemplates references.
+    const saved = await this.deps.templateManager.saveTemplate(libraryId, template);
+    if (saved.id) {
+      library.templates = library.templates.map((t) => (t.id === saved.id ? saved : t));
+      for (let i = 0; i < newTemplates.length; i += 1) {
+        if (newTemplates[i].id === saved.id) {
+          newTemplates[i] = saved;
+        }
+      }
+    }
+
+    return template;
+  }
+
+  private sanitizeVariableName(name: string): string {
+    const cleaned = name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_');
+    if (!cleaned) {
+      return 'var';
+    }
+    return cleaned;
   }
 }

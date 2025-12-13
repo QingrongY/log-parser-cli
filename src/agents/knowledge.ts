@@ -6,9 +6,9 @@
 
 export const COMMON_LOG_PARSER_KNOWLEDGE = `
 - BUSINESS DATA (variables) are dynamic, instance-specific values including timestamps, numbers,
-  identifiers, named entities, addresses, paths, URLs, process names and IDs, files. 
+  identifiers, named entities, addresses, paths, URLs, process names and IDs, files.
   They come from unbounded domains and replacing them does not change the semantic meaning of the event.
-  Note1: Year, month, day, time, ampm in any format (e.g., "Jun  5 12:12:34", ISO "2023-07-16 00:00:02", or AM/PM formats) must always be captured as a single variable "timestamp" (use timestamp1, timestamp2... if multiple).
+  Note1: Time-related segments like year, month, day, time, ampm in any format (e.g., "Jun  5 12:12:34", ISO "2023-07-16 00:00:02", or AM/PM formats) must always be captured as a single variable "timestamp" (use timestamp1, timestamp2... if multiple).
   Note2: When the same type of BUSINESS DATA appears multiple times in a single log entry, use numbered variable names to avoid duplication (e.g., "ip1", "ip2").
   Note3: Do not treat long texts as messages; preserve any messages as literal text and extract only internal BUSINESS DATA.
 - STRUCTURE (constants) are system-defined tokens such as event skeletons, module names, protocol keywords, static message text.

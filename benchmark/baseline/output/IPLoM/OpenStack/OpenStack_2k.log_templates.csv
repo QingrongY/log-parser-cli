@@ -1,0 +1,80 @@
+EventId,EventTemplate,Occurrences
+c2c881de,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.virt.libvirt.imagecache [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742) checking,82
+88b557e4,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 09 41.850 2931 WARNING nova.compute.manager [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] While synchronizing instance power states found 1 instances in the database and 0 instances on the hypervisor.,1
+fcf9e543,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.virt.libvirt.driver [-] [instance <*> Instance <*> successfully.,44
+13e4c788,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 00 32.974 2931 INFO nova.compute.manager [-] [instance b9000564-fe1a-409b-b8cc-1e88b294cd1d] VM Stopped (Lifecycle Event),1
+7cab253d,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 01 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+24863526,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 02 37.163 2931 INFO nova.compute.manager [-] [instance 78dc1847-8848-49cc-933e-9239b12c9dcf] VM Stopped (Lifecycle Event),1
+a81da392,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 03 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+afb1e618,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 04 41.170 2931 INFO nova.compute.manager [-] [instance af5f7392-f7d4-4298-b647-c98924c64aa1] VM Stopped (Lifecycle Event),1
+9c1a7868,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 05 23.100 2931 INFO nova.compute.manager [-] [instance ae3a1b5d-eec1-45bb-b76a-c59d83b1471f] VM Stopped (Lifecycle Event),1
+a34fe76f,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 06 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+c0deb041,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 07 27.105 2931 INFO nova.compute.manager [-] [instance 63a0d960-70b6-44c6-b606-491478a5cadf] VM Stopped (Lifecycle Event),1
+e02c45e1,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 08 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+796974a0,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 09 31.092 2931 INFO nova.compute.manager [-] [instance 70c1714b-c11b-4c88-b300-239afe1f5ff8] VM Stopped (Lifecycle Event),1
+f45a6a52,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 10 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+2ac51ef8,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 11 34.908 2931 INFO nova.compute.manager [-] [instance a015cf14-84bb-4156-a48d-7c4824ac7a9d] VM Stopped (Lifecycle Event),1
+aefd2d45,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 12 <*> 2931 INFO nova.compute.manager [-] [instance <*> VM Stopped (Lifecycle Event),2
+14776435,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 13 38.964 2931 INFO nova.compute.manager [-] [instance 127e769a-4fe6-4548-93b1-513ac51e0452] VM Stopped (Lifecycle Event),1
+0a4287a6,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 14 21.038 2931 INFO nova.compute.manager [-] [instance c62f4f25-982c-4ea2-b5e4-93000edfcfbf] VM Stopped (Lifecycle Event),1
+8add5c23,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*>,176
+5e210f74,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 WARNING nova.virt.libvirt.imagecache [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] Unknown base file /var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742,30
+8de4a5ac,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*>,166
+6c08ba29,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 <*> <*> <*> INFO nova.metadata.wsgi.server [-] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",89
+f0b67dda,nova-scheduler.log.1.2017-05-16_13 53 08 2017-05-16 00 <*> <*> 25998 INFO nova.scheduler.host_manager <*> - - - - -] Successfully synced instances from host 'cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us'.,2
+48097399,<*> <*> <*> 2017-05-16 00 <*> <*> <*> INFO <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,23
+10c5e5f1,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.compute.manager <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Took <*> seconds to build instance.,22
+547e8489,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.compute.resource_tracker [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] <*> <*> <*> <*> <*> <*> <*> <*>,30
+2a4a7b03,nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 <*> <*> 25746 INFO nova.api.openstack.wsgi <*> f7b8d1f1d4d44643b07fa10ca7d021fb e9746973ac574c6b8a9e8857f56a7608 - - -] HTTP exception thrown No instances found for any event,21
+b9e055b8,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*>,135
+fe5092ef,<*> <*> <*> 2017-05-16 00 00 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,58
+f25ed99d,<*> <*> <*> 2017-05-16 00 01 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,53
+a3a92158,<*> <*> <*> 2017-05-16 00 02 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,60
+ddfaa1d6,<*> <*> <*> 2017-05-16 00 03 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,49
+29ca284c,<*> <*> <*> 2017-05-16 00 04 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,64
+22c4b0ed,<*> <*> <*> 2017-05-16 00 05 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,47
+65da1a3b,<*> <*> <*> 2017-05-16 00 06 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,63
+810a5a1c,<*> <*> <*> 2017-05-16 00 07 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,54
+a83b37ec,<*> <*> <*> 2017-05-16 00 08 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,56
+f9887efb,<*> <*> <*> 2017-05-16 00 09 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,57
+51f7b7b2,<*> <*> <*> 2017-05-16 00 10 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,53
+f4c641ac,<*> <*> <*> 2017-05-16 00 11 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,58
+9d1f3a85,<*> <*> <*> 2017-05-16 00 12 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,51
+454d1b5f,<*> <*> <*> 2017-05-16 00 13 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,64
+f0de407c,<*> <*> <*> 2017-05-16 00 14 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,41
+cd606fe3,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 00 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",9
+802ace6d,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 01 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.124 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",3
+b81ebf97,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 02 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.125 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",4
+7eb100e3,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 03 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",10
+e14b465a,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 04 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.128 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",6
+6813ac96,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 05 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",11
+b8a7c315,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 06 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.131 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",5
+d75f1a91,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 07 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",14
+3865ed38,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 08 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.134 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",4
+c5227eb6,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 09 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",14
+7d739453,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 10 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.137 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",4
+945e0676,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 11 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",6
+4641e5ee,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 12 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",10
+915edf0f,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 13 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] 10.11.21.141 10.11.10.1 ""GET <*> HTTP/1.1"" status 200 len <*> time <*>",5
+bf4df262,"nova-api.log.1.2017-05-16_13 53 08 2017-05-16 00 14 <*> <*> INFO nova.metadata.wsgi.server <*> - - - - -] <*> 10.11.10.1 ""GET <*> HTTP/1.1"" status <*> len <*> time <*>",14
+a8612ccc,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.compute.manager <*> <*> <*> - - -] [instance <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,85
+57cd443d,<*> 53 08 2017-05-16 00 <*> <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,6
+673eed1e,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 00 31.092 2931 INFO nova.compute.claims [req-6a763803-4838-49c7-814e-eaefbaddee9d 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance 96abccce-8d1f-4e07-b6d1-4b2ab87e23b4] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+dc0e3712,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 01 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+c05c96ea,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 02 35.071 2931 INFO nova.compute.claims [req-d38f479d-9bb9-4276-9688-52607e8fd350 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance 95960536-049b-41f6-9049-05fc479b6a7c] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+051d77b5,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 03 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+bbd5494f,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 04 39.301 2931 INFO nova.compute.claims [req-d82fab16-60f8-4c9f-bde8-f362f57bdd40 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance ae3a1b5d-eec1-45bb-b76a-c59d83b1471f] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+10c3300e,<*> <*> <*> 2017-05-16 00 05 <*> <*> INFO <*> <*> <*> <*> - - -] <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*> <*>,2
+8127ed06,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 06 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+5ce2e5ce,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 07 25.202 2931 INFO nova.compute.claims [req-01d570b0-78a7-4719-b7a3-429fd7dc5a3f 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance d54b44eb-2d1a-4aa2-ba6b-074d35f8f12c] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+387637e5,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 08 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+1bbb2081,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 09 29.271 2931 INFO nova.compute.claims [req-a07ac654-8e81-416d-bfbb-189116b07969 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance bf8c824d-f099-4433-a41e-e3da7578262e] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+0402e3fd,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 10 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+1fede4e0,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 11 33.089 2931 INFO nova.compute.claims [req-5c8f52bd-8e3c-41f0-95a5-7861d247cafa 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance d96a117b-0193-4549-bdcc-63b917273d1d] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+8f343088,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 12 <*> 2931 INFO nova.compute.claims <*> 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance <*> Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,2
+693a713f,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 13 37.116 2931 INFO nova.compute.claims [req-6f9ecdfe-481c-4535-9bdc-45d86085d739 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance c62f4f25-982c-4ea2-b5e4-93000edfcfbf] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+662d31d4,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 14 18.993 2931 INFO nova.compute.claims [req-3d26bc3d-373c-4269-b095-004aab7a9785 113d3a99c3da401fbd62cc2caa5b96d2 54fadb412c4e40cdbaed9335e4c35a9e - - -] [instance faf974ea-cba5-4e1b-93f4-3a3bc606006f] Attempting claim memory 2048 MB disk 20 GB vcpus 1 CPU,1
+88ae14bc,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.virt.libvirt.imagecache [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] image 0673dd71-34c5-4fbb-86c4-40623fbe45b4 at (/var/lib/nova/instances/_base/a489c868f0c37da93b76227c91bb03908ac0e742) in use on this node 1 local 0 on other nodes sharing this instance storage,82
+81793048,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.compute.resource_tracker [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] Final resource view name cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us phys_ram 64172MB used_ram 2560MB phys_disk 15GB used_disk 20GB total_vcpus 16 used_vcpus 1 pci_stats [],9
+1c7b522a,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 00 59.733 2931 INFO nova.compute.manager [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] Running instance usage audit for host cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us from 2017-05-16 05 00 00 to 2017-05-16 06 00 00. 87 instances.,1
+678b48dd,nova-compute.log.1.2017-05-16_13 55 31 2017-05-16 00 <*> <*> 2931 INFO nova.compute.resource_tracker [req-addc1839-2ed5-4778-b57e-5854eb7b8b09 - - - - -] Final resource view name cp-1.slowvm1.tcloud-pg0.utah.cloudlab.us phys_ram 64172MB used_ram 512MB phys_disk 15GB used_disk 0GB total_vcpus 16 used_vcpus 0 pci_stats [],6

@@ -1,0 +1,152 @@
+EventId,EventTemplate,Occurrences
+adc914e6,- <*> <*> <*> <*> <*> RAS KERNEL INFO instruction cache parity error corrected,42
+c8224de2,- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> double-hummer alignment exceptions,109
+3f93cc6e,- <*> <*> <*> <*> <*> RAS KERNEL INFO CE sym <*> at <*> mask <*>,92
+18276083,APPREAD <*> <*> <*> <*> <*> RAS APP FATAL ciod: failed to read message prefix on control stream (CioStream socket to <*>,3
+6786df6f,- <*> 2005.06.05 <*> <*> <*> RAS KERNEL INFO generating <*>,44
+ad747a11,- <*> <*> <*> <*> <*> RAS KERNEL FATAL force load/store alignment...............0,2
+48baea6a,- <*> 2005.06.06 <*> <*> <*> RAS KERNEL INFO generating <*>,4
+e68b412e,- 1118112700 2005.06.06 R23-M0-N0-I:J18-U01 2005-06-06-19.51.40.376079 R23-M0-N0-I:J18-U01 RAS KERNEL INFO ciod: cpu 0 at treeaddr 438 sent unrecognized message 0xffffffff,1
+9226a762,- <*> 2005.06.07 <*> <*> <*> RAS KERNEL INFO generating <*>,15
+77eee8d8,- <*> <*> <*> <*> <*> RAS APP FATAL ciod: LOGIN <*> failed: No such file or directory,18
+0be58c30,"- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> ddr errors(s) detected and corrected on rank 0, symbol <*> bit <*>",18
+1623a813,- <*> 2005.06.08 <*> <*> <*> RAS KERNEL INFO generating <*>,3
+ec3238df,- <*> 2005.06.09 <*> <*> <*> RAS KERNEL INFO generating <*>,8
+9006487e,KERNDTLB <*> 2005.06.11 R30-M0-N9-C:J16-U01 <*> R30-M0-N9-C:J16-U01 RAS KERNEL FATAL data TLB error interrupt,60
+c80fa193,- 1118699850 2005.06.13 R22-M0-NC-I:J18-U01 2005-06-13-14.57.30.126106 R22-M0-NC-I:J18-U01 RAS KERNEL INFO ciod: Message code 0 is not 51 or 4294967295,1
+d0807088,KERNSTOR <*> <*> <*> <*> <*> RAS KERNEL FATAL data storage interrupt,30
+672c7dfc,- <*> <*> <*> <*> <*> RAS KERNEL FATAL instruction address: 0x00004ed8,20
+0793b0be,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL INFO generating <*>,7
+d5f91cb8,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL data <*> <*>,13
+d9b8a20b,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL machine <*> <*>,7
+7452000a,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL program interrupt: <*> <*>,12
+290d5be1,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL exception syndrome register: 0x00800000,5
+04c87178,- <*> <*> <*> <*> <*> RAS KERNEL <*> data store interrupt caused by <*>,10
+97b2ef34,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL store operation.............................1,2
+a5361456,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL <*> <*> register: 0x00002000,11
+a98ac41d,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL <*> state <*>,4
+5243cf1a,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL floating point instr. enabled.....1,4
+8b3b6b90,- 1118771075 2005.06.14 R24-M0-NF-C:J09-U01 2005-06-14-10.44.35.353282 R24-M0-NF-C:J09-U01 RAS KERNEL FATAL auxiliary processor.........................0,1
+2cc86408,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL floating pt ex mode <*> enable......0,5
+4ef3ac1b,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL debug <*> <*>,2
+e116640a,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL byte ordering exception.....................0,2
+c704ce1b,- 1118771679 2005.06.14 R21-M1-N5-C:J05-U11 2005-06-14-10.54.39.063056 R21-M1-N5-C:J05-U11 RAS KERNEL FATAL program interrupt: fp cr update.............0,1
+c550033c,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL guaranteed <*> cache block <*>,3
+08138fc5,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL program interrupt: fp cr field .............0,4
+fce34da3,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL icache prefetch <*>,3
+2352a1b0,- 1118772337 2005.06.14 R24-M0-N7-C:J06-U01 2005-06-14-11.05.37.845720 R24-M0-N7-C:J06-U01 RAS KERNEL FATAL critical input interrupt enable...0,1
+d9540727,- 1118772810 2005.06.14 R27-M0-N9-C:J12-U01 2005-06-14-11.13.30.870052 R27-M0-N9-C:J12-U01 RAS KERNEL FATAL special purpose registers:,1
+8abd0059,- 1118772877 2005.06.14 R27-M1-N3-C:J04-U11 2005-06-14-11.14.37.821210 R27-M1-N3-C:J04-U11 RAS KERNEL FATAL lr:00004ed0 cr:28244842 xer:20000002 ctr:00086000,1
+07485995,- 1118772927 2005.06.14 R27-M0-N6-C:J02-U11 2005-06-14-11.15.27.823191 R27-M0-N6-C:J02-U11 RAS KERNEL FATAL rts internal error,1
+65838588,- 1118773618 2005.06.14 R25-M1-N7-C:J09-U11 2005-06-14-11.26.58.490506 R25-M1-N7-C:J09-U11 RAS KERNEL FATAL instruction address space.........0,1
+4c03314f,- <*> 2005.06.14 <*> <*> <*> RAS KERNEL FATAL disable store gathering..................0,3
+fe54181e,- <*> <*> <*> <*> <*> RAS KERNEL INFO total of <*> ddr error(s) detected and corrected,13
+1322cbb4,- <*> 2005.06.15 <*> <*> <*> RAS KERNEL INFO generating <*>,4
+3222dbce,- <*> 2005.06.16 <*> <*> <*> RAS KERNEL INFO generating <*>,10
+1530840d,- 1119055358 2005.06.17 R12-M1-NB-C:J15-U01 2005-06-17-17.42.38.875141 R12-M1-NB-C:J15-U01 RAS KERNEL INFO generating core.1488,1
+2ea2c45a,- 1119151510 2005.06.18 R36-M0-NF-C:J13-U01 2005-06-18-20.25.10.503085 R36-M0-NF-C:J13-U01 RAS KERNEL INFO generating core.2186,1
+362f5738,- <*> 2005.06.19 <*> <*> <*> RAS KERNEL INFO generating <*>,3
+b12b458d,- <*> 2005.06.20 <*> <*> <*> RAS KERNEL INFO generating <*>,8
+aa5c2e75,"- <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error loading <*> invalid or missing program image, No such file or directory",21
+a20f4fdc,APPCHILD 1119319455 2005.06.20 R12-M1-NC-I:J18-U11 2005-06-20-19.04.15.002425 R12-M1-NC-I:J18-U11 RAS APP FATAL ciod: Error creating node map from file /p/gb2/cabot/miranda/newmaps/8k_128x64x1_8x4x4.map: No child processes,1
+019c504c,- <*> 2005.06.21 <*> <*> <*> RAS KERNEL INFO generating <*>,5
+17f30ecc,- <*> 2005.06.25 <*> <*> <*> RAS KERNEL INFO generating <*>,38
+786f351e,- <*> 2005.06.26 <*> <*> <*> RAS KERNEL INFO generating <*>,3
+bedffe62,- <*> 2005.06.26 <*> <*> <*> RAS KERNEL INFO program interrupt,3
+6420cd92,- <*> 2005.06.26 <*> <*> <*> RAS KERNEL INFO program interrupt: <*> <*>,8
+51719419,- <*> 2005.06.26 <*> <*> <*> RAS KERNEL INFO auxiliary processor.........................0,4
+89a07b31,- 1119806971 2005.06.26 R05-M1-N8-C:J15-U11 2005-06-26-10.29.31.819506 R05-M1-N8-C:J15-U11 RAS KERNEL INFO instruction address: 0x0062fe04,1
+9c9c8459,- 1119807051 2005.06.26 R05-M0-N6-C:J06-U11 2005-06-26-10.30.51.645473 R05-M0-N6-C:J06-U11 RAS KERNEL INFO exception syndrome register: 0x08000000,1
+4bd711ad,- <*> <*> <*> <*> <*> NULL DISCOVERY WARNING Node card is not fully functional,6
+4d83abb1,- <*> 2005.06.29 <*> <*> <*> RAS KERNEL INFO generating <*>,9
+19ae1067,- <*> 2005.06.30 <*> <*> <*> RAS KERNEL INFO generating <*>,24
+401bff98,- <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error creating node map from file <*> <*> <*> <*>,2
+c2a969ae,- <*> 2005.07.01 <*> <*> <*> RAS KERNEL INFO generating <*>,22
+5e6aecef,- <*> <*> UNKNOWN_LOCATION <*> UNKNOWN_LOCATION NULL DISCOVERY INFO Ido chip status changed: <*> <*> <*> <*> status=M <*> <*> <*> <*> PDT 2005,5
+3fe4593f,- <*> <*> <*> <*> <*> NULL DISCOVERY SEVERE Can not get assembly information for node card,6
+e227b468,- <*> 2005.07.02 <*> <*> <*> RAS KERNEL INFO generating <*>,5
+c1002d43,- <*> 2005.07.03 <*> <*> <*> RAS KERNEL INFO generating <*>,17
+e3f6a8ae,- <*> 2005.07.04 <*> <*> <*> RAS KERNEL INFO generating <*>,16
+2f16d027,- <*> <*> <*> <*> <*> RAS KERNEL INFO ciod: Missing or invalid fields on line 1 of node map file <*>,2
+bfa772c8,- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> torus receiver <*> input pipe error(s) (dcr <*> detected and corrected,4
+368cfbf2,- <*> 2005.07.07 <*> <*> <*> RAS KERNEL INFO generating <*>,18
+adf5f8e7,- 1120908821 2005.07.09 R20-M0-N8-I:J18-U01 2005-07-09-04.33.41.091472 R20-M0-N8-I:J18-U01 RAS KERNEL INFO ciod: duplicate canonical-rank 31 to logical-rank 0 mapping at line 3 of node map file /p/gb2/pakin1/sweep3d-5x5x400-10mk-3mmi-1024pes-sweep/sweep.map,1
+b00c0c06,- <*> 2005.07.09 <*> <*> <*> RAS KERNEL INFO generating <*>,180
+c605f8e7,- <*> 2005.07.10 <*> <*> <*> RAS KERNEL INFO generating <*>,14
+1f26bd73,KERNRTSP <*> 2005.07.11 <*> <*> <*> RAS KERNEL FATAL rts panic! - stopping execution,2
+0b706207,- <*> 2005.07.12 <*> <*> <*> RAS KERNEL INFO generating <*>,13
+f9f59a1c,- <*> 2005.07.13 <*> <*> <*> RAS KERNEL INFO generating <*>,87
+5656c986,- 1121383222 2005.07.14 R01-M0-N0-I:J18-U11 2005-07-14-16.20.22.672549 R01-M0-N0-I:J18-U11 RAS APP FATAL ciod: Error creating node map from file /home/pakin1/sweep3d-2.2b/results/random1-8x32x32x2.map: Permission denied,1
+c93e72eb,- 1121408299 2005.07.14 R23-M0-N0-I:J18-U01 2005-07-14-23.18.19.684786 R23-M0-N0-I:J18-U01 RAS KERNEL INFO ciod: Z coordinate 32 exceeds physical dimension 32 at line 33 of node map file /p/gb2/pakin1/contention-32768cpes-torus/xyzt-1x1x32768x1.map,1
+4cb1f890,- <*> 2005.07.15 <*> <*> <*> RAS KERNEL INFO generating <*>,39
+efdf6d16,- <*> 2005.07.17 <*> <*> <*> RAS KERNEL INFO generating <*>,32
+8a0fc0fd,- <*> 2005.07.18 <*> <*> <*> RAS KERNEL INFO generating <*>,11
+927b5b6b,"KERNTERM 1121727206 2005.07.18 R20-M1-N8-C:J12-U01 2005-07-18-15.53.26.229596 R20-M1-N8-C:J12-U01 RAS KERNEL FATAL rts: kernel terminated for reason 1001rts: bad message header: invalid cpu, type=42315, cpu=105, index=1207960804, total=2691015",1
+1b6c02b8,- 1121727746 2005.07.18 R00-M1-N5-C:J03-U11 2005-07-18-16.02.26.154455 R00-M1-N5-C:J03-U11 RAS KERNEL FATAL debug wait enable.................0,1
+76afe3bb,- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> floating point alignment exceptions,121
+2bc1419a,- <*> 2005.07.23 <*> <*> <*> RAS KERNEL INFO generating <*>,33
+78c8dbd9,- <*> 2005.07.24 <*> <*> <*> RAS KERNEL INFO generating <*>,10
+856a1fc8,- <*> 2005.07.25 <*> <*> <*> RAS KERNEL INFO generating <*>,4
+fa960568,- <*> 2005.07.26 <*> <*> <*> RAS KERNEL INFO generating <*>,29
+6e887e3f,- <*> 2005.07.27 <*> <*> <*> RAS KERNEL INFO generating <*>,2
+74771fb8,- <*> 2005.07.28 <*> <*> <*> RAS KERNEL INFO generating <*>,2
+aafd96a3,- <*> 2005.08.02 UNKNOWN_LOCATION <*> UNKNOWN_LOCATION NULL DISCOVERY INFO New ido chip inserted into the database: <*> <*> <*> <*>,3
+1e787891,- 1123025954 2005.08.02 R23-M0-N7 2005-08-02-16.39.14.159918 R23-M0-N7 NULL HARDWARE SEVERE NodeCard is not fully functional,1
+bb36b623,"- 1123030687 2005.08.02 R00-M0-N2 2005-08-02-17.58.07.084868 R00-M0-N2 NULL DISCOVERY ERROR Node card status: ALERT 0, ALERT 1, ALERT 2, ALERT 3 is (are) active. Clock Mode is Low. Clock Select is Midplane. Phy JTAG Reset is asserted. ASIC JTAG Reset is not asserted. Temperature Mask is not active. No temperature error. Temperature Limit Error Latch is clear. PGOOD is asserted. PGOOD error latch is clear. MPGOOD is OK. MPGOOD error latch is clear. The 2.5 volt rail is OK. The 1.5 volt rail is OK.",1
+af0fe655,- <*> <*> <*> <*> <*> NULL DISCOVERY INFO Node card VPD check: <*> node in processor card slot <*> do not match. VPD ecid <*> found <*>,9
+096a4f23,"- <*> <*> NULL <*> NULL RAS MMCS ERROR idoproxydb hit ASSERT condition: ASSERT expression=0 Source file=idotransportmgr.cpp Source line=1043 Function=int IdoTransportMgr::SendPacket(IdoUdpMgr*, BglCtlPavTrace*)",35
+c30e7886,- <*> <*> <*> <*> <*> NULL DISCOVERY ERROR Node card status: no ALERTs are active. Clock Mode is Low. Clock Select is Midplane. Phy JTAG Reset is asserted. ASIC JTAG Reset is asserted. Temperature Mask is not active. No temperature error. Temperature Limit Error Latch is clear. PGOOD IS NOT ASSERTED. PGOOD ERROR LATCH IS ACTIVE. MPGOOD IS NOT OK. MPGOOD ERROR LATCH IS ACTIVE. The 2.5 volt rail is OK. The 1.5 volt rail is OK.,5
+26e096a3,"- 1123262593 2005.08.05 R25-M1-N2 2005-08-05-10.23.13.029850 R25-M1-N2 NULL HARDWARE WARNING PrepareForService shutting down NodeCard(mLctn(R25-M1-N2), mCardSernum(203231503833343000000000594c31304b34333431303158), mLp(FF:F2:9F:16:CF:0F:00:0D:60:E9:30:F0), mIp(10.2.2.80), mType(4)) as part of Service Action 310",1
+81fb3f87,- 1123614572 2005.08.09 R00-M0-N6-C:J03-U11 2005-08-09-12.09.32.252222 R00-M0-N6-C:J03-U11 RAS KERNEL FATAL rts tree/torus link training failed: wanted: B C X+ X- Y+ Y- Z+ Z- got: B C X- Y- Z+ Z-,1
+5b787968,- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> tree receiver 2 in re-synch state event(s) (dcr 0x019a) detected,3
+1659bd3e,"- <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error loading <*> invalid or missing program image, Exec format error",17
+711940e9,APPSEV <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error reading message prefix after LOAD_MESSAGE on CioStream socket to <*> Link has been severed,9
+1040cb23,KERNTERM <*> <*> <*> <*> <*> RAS KERNEL FATAL rts: kernel terminated for reason <*>,6
+03963524,- <*> <*> <*> <*> <*> RAS KERNEL INFO ciod: generated <*> core files for program <*>,30
+70f607b2,- <*> 2005.08.26 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,36
+433c4237,- <*> 2005.08.28 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,19
+48b3f7a2,"- <*> 2005.08.28 <*> <*> <*> RAS KERNEL INFO NFS Mount failed on <*> slept 15 seconds, retrying (1)",2
+36314db5,KERNMNTF <*> <*> <*> <*> <*> RAS KERNEL FATAL Lustre mount FAILED : <*> : point /p/gb1,9
+c413e85b,- <*> <*> <*> <*> <*> RAS KERNEL INFO ciod: pollControlDescriptors: Detected the debugger died.,3
+5c6c5f29,"- 1126211906 2005.09.08 R62-M1-NC-I:J18-U11 2005-09-08-13.38.26.477794 R62-M1-NC-I:J18-U11 RAS KERNEL INFO ciod: In packet from node 91.0 (R62-M1-Nf-C:J03-U11), message code 2 is not 3 or 4294967295 (softheader=003b005b 00030000 00000001 00000000)",1
+af914928,- <*> <*> <*> <*> <*> RAS KERNEL INFO suppressing further interrupts of same type,2
+110f5f0a,- 1127264516 2005.09.20 R05-M0-N1-C:J06-U11 2005-09-20-18.01.56.398119 R05-M0-N1-C:J06-U11 RAS KERNEL FATAL rts: bad message header: expecting type 57 instead of type 3 (softheader=00131db8 81aa0003 00000002 00000000) PSR0=00001f01 PSR1=00000000 PRXF=00000002 PIXF=00000007,1
+ea3e4dd4,- <*> <*> <*> <*> <*> RAS KERNEL INFO critical input interrupt (unit=0x0b <*> warning for torus <*> wire,2
+ce23951d,"- <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error loading <*> invalid or missing program image, Permission denied",19
+978d2d11,- <*> 2005.10.17 R02-M0-N4-C:J04-U11 <*> R02-M0-N4-C:J04-U11 RAS KERNEL INFO data cache search parity error detected. attempting to correct,6
+ad6b2748,- 1129734520 2005.10.19 R17-M0-N0-I:J18-U01 2005-10-19-08.08.40.058960 R17-M0-N0-I:J18-U01 RAS KERNEL INFO shutdown complete,1
+88847187,"KERNREC <*> <*> <*> <*> <*> RAS KERNEL FATAL Error receiving packet on tree network, expecting type 57 instead of type 3 <*> <*> 00000002 00000000) <*> PSR1=00000000 PRXF=00000002 PIXF=00000007",5
+c8a89b31,- <*> 2005.11.03 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,59
+aad2bd1b,- <*> 2005.11.04 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,61
+4ad01242,- <*> 2005.11.07 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,2
+c0dec258,- <*> 2005.11.08 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,18
+cbaf59b7,- 1131525612 2005.11.09 R62-M0-N4-C:J13-U01 2005-11-09-00.40.12.350846 R62-M0-N4-C:J13-U01 RAS KERNEL FATAL program interrupt: privileged instruction...0,1
+41c47db8,- <*> 2005.11.09 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,10
+c928ec23,- 1131624435 2005.11.10 R22-M1-N1-C:J17-U11 2005-11-10-04.07.15.804295 R22-M1-N1-C:J17-U11 RAS KERNEL INFO 3 L3 EDRAM error(s) (dcr 0x0157) detected and corrected,1
+9c4a97de,- <*> 2005.11.10 <*> <*> <*> RAS KERNEL INFO iar <*> dear <*>,3
+6ec8fb79,"- <*> <*> <*> <*> <*> RAS KERNEL INFO critical input interrupt (unit=0x0b <*> warning for <*> <*> wire, suppressing further interrupts of same type",3
+e62f9c20,- <*> 2005.11.17 <*> <*> <*> RAS KERNEL INFO <*> torus sender z- retransmission error(s) (dcr 0x02f9) detected and corrected over <*> seconds,2
+81c4c383,"- <*> <*> <*> <*> <*> RAS KERNEL INFO ciod: Received signal 15, code=0, errno=0, <*>",16
+69af9b3d,KERNMNTF <*> <*> <*> <*> <*> RAS KERNEL FATAL Lustre mount FAILED : <*> : block_id : location,2
+96a125ca,- <*> 2005.11.21 R26-M0-N0-I:J18-U11 <*> R26-M0-N0-I:J18-U11 RAS KERNEL INFO MACHINE CHECK DCR read timeout (mc=e08x iar 0x00000000 lr 0xc00045a4),7
+212db61d,APPTO <*> 2005.11.21 <*> <*> <*> RAS APP FATAL ciod: Error reading message prefix on CioStream socket to <*> Connection timed out,2
+449bd3a4,APPRES <*> 2005.11.21 <*> <*> <*> RAS APP FATAL ciod: Error reading message prefix on CioStream socket to <*> Connection reset by peer,4
+063641e1,- 1132841276 2005.11.24 R03-M1-NF-C:J07-U01 2005-11-24-06.07.56.407913 R03-M1-NF-C:J07-U01 RAS KERNEL FATAL dbcr0=0x00000000 dbsr=0x00000000 ccr0=0x40002000,1
+2f9972de,APPSEV <*> <*> <*> <*> <*> RAS APP FATAL ciod: Error reading message prefix on CioStream socket to <*> Link has been severed,8
+59f01ee3,- 1133051996 2005.11.26 R03-M1-NF-C:J07-U01 2005-11-26-16.39.56.330868 R03-M1-NF-C:J07-U01 RAS KERNEL FATAL r24=0x0ffea4c8 r25=0x00000003 r26=0x0000000f r27=0xffffd000,1
+f1efb5ea,- <*> <*> R55-M0-N9-C:J06-U11 <*> R55-M0-N9-C:J06-U11 RAS KERNEL INFO <*> tree receiver 1 in re-synch state event(s) (dcr 0x0185) detected over <*> seconds,2
+594987c4,- <*> 2005.12.01 <*> <*> <*> RAS KERNEL INFO 0 microseconds spent in the rbs signal handler during 0 calls. 0 microseconds was the maximum time for a single instance of a correctable ddr.,51
+48a2e687,"- <*> 2005.12.01 <*> <*> <*> RAS KERNEL INFO <*> total interrupts. 0 critical input interrupts. 0 microseconds total spent on critical input interrupts, 0 microseconds max time in a critical input interrupt.",71
+f53b3416,"- <*> <*> <*> <*> <*> RAS KERNEL INFO <*> ddr error(s) detected and corrected on rank 0, symbol <*> over <*> seconds",7
+a0e21c25,"- 1133630999 2005.12.03 R10-M1-N2 2005-12-03-09.29.59.645290 R10-M1-N2 NULL HARDWARE WARNING PrepareForService shutting down Node card(mLctn(R10-M1-N2), mCardSernum(203231503833343000000000594c31304b34323934303257), mLp(FF:F2:9F:16:E0:DA:00:0D:60:E9:1F:25), mIp(10.1.1.164), mType(4)) as part of Service Action 648",1
+2ebca37c,"- 1133638373 2005.12.03 R56-M0-NA-C:J15-U11 2005-12-03-11.32.53.165837 R56-M0-NA-C:J15-U11 RAS KERNEL INFO Kernel detected 35591540 integer alignment exceptions (35591533) iar 0x0023f108, dear 0x1feaa260 (35591534) iar 0x00265564, dear 0x1feaa1c0 (35591535) iar 0x00265574, dear 0x1feaa1e0 (35591536) iar 0x00265578, dear 0x1feaa200 (35591537) iar 0x00265588, dear 0x1feaa220 (35591538) iar 0x0026558c, dear 0x1feaa240 (35591539) iar 0x00265594, dear 0x1feaa260 (35591540) iar 0x00265598, dear 0x1feaa280",1
+012a0629,- <*> <*> <*> <*> <*> RAS KERNEL INFO total of <*> ddr error(s) detected and corrected over <*> seconds,4
+7713ff61,- 1133721087 2005.12.04 R71-M0-N4-C:J14-U01 2005-12-04-10.31.27.742650 R71-M0-N4-C:J14-U01 RAS KERNEL FATAL minus normalized number..................0,1
+29412d94,- 1133835041 2005.12.05 R52-M1-NA-C:J03-U01 2005-12-05-18.10.41.610617 R52-M1-NA-C:J03-U01 RAS KERNEL FATAL fraction rounded.........................0,1
+5004c7fb,- 1133919747 2005.12.06 R03-M0-N7-C:J07-U01 2005-12-06-17.42.27.383145 R03-M0-N7-C:J07-U01 RAS KERNEL FATAL size of scratchpad portion of L3.........0 (0M),1
+c472091b,"- <*> 2005.12.06 <*> <*> <*> RAS KERNEL INFO Kernel detected <*> integer alignment exceptions <*> iar 0x00544ea8, dear <*> <*> iar 0x00544eb8, dear <*> <*> iar 0x00544ea8, dear <*> <*> iar 0x00544eb8, dear <*> <*> iar 0x00544ee0, dear <*> <*> iar 0x00544ef0, dear <*> <*> iar 0x00544ee0, dear <*> <*> iar 0x00544ef0, dear <*>",8
+54c5c94b,APPOUT 1134357549 2005.12.11 R63-M1-N0-I:J18-U11 2005-12-11-19.19.09.737509 R63-M1-N0-I:J18-U11 RAS APP FATAL ciod: LOGIN chdir(/p/gb1/stella/RAPTOR/2183) failed: Input/output error,1
+3f4f5302,- 1134929456 2005.12.18 R30-M1-N3-C:J13-U01 2005-12-18-10.10.56.366499 R30-M1-N3-C:J13-U01 RAS KERNEL INFO 2 L3 EDRAM error(s) (dcr 0x0157) detected and corrected over 282 seconds,1
+afca7b43,"- 1135178837 2005.12.21 R62-M0-N4-I:J18-U01 2005-12-21-07.27.17.749308 R62-M0-N4-I:J18-U01 RAS APP FATAL ciod: Error loading /g/g24/buber/Yunsic/BlueGene/partad.develf/taddriver.32.exe: program image too big, 361544528 > 266076160",1
+f256e3bb,- 1135579635 2005.12.25 R62-M1-NA-C:J04-U01 2005-12-25-22.47.15.963417 R62-M1-NA-C:J04-U01 RAS KERNEL FATAL fpr29=0xffffffff ffffffff ffffffff ffffffff,1
+147b7969,- 1135602839 2005.12.26 R61-M0-N3-C:J11-U11 2005-12-26-05.13.59.265193 R61-M0-N3-C:J11-U11 RAS KERNEL FATAL Machine State Register: 0x0002f900,1

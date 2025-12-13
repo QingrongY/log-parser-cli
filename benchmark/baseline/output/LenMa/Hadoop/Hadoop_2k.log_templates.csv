@@ -1,0 +1,74 @@
+EventId,EventTemplate,Occurrences
+e563a789,2015-10-18  INFO [main]      ,4
+39ed1802,2015-10-18  INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster:   ,3
+70423947,"2015-10-18 18:01:48,963 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: Kind: YARN_AM_RM_TOKEN, Service: , Ident: (appAttemptId { application_id { id: 20 cluster_timestamp: 1445144423722 } attemptId: 1 } keyId: -127633188)",1
+1dee0a21,"2015-10-18 18:01:50,353 INFO [main] org.apache.hadoop.mapreduce.v2.app.MRAppMaster: OutputCommitter set in config null",1
+955c1ceb,2015-10-18  INFO [main] org.apache.hadoop.yarn.event.AsyncDispatcher: Registering class  for class ,9
+00e92a99,2015-10-18  INFO [main]     ,12
+9f7bcaec,"2015-10-18 18:01:50,728 INFO [main] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Emitting job history data to the timeline server is not enabled",1
+560134ff,2015-10-18  INFO [main]       ,4
+89a8b6e3,2015-10-18  INFO [main]        ,4
+7948ed4a,"2015-10-18 18:01:51,619 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Not uberizing job_1445144423722_0020 because: not enabled; too many maps; too much input;",1
+fd140360,"2015-10-18 18:01:51,650 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Input size for job job_1445144423722_0020 = 1256521728. Number of splits = 10",1
+f0857c5d,"2015-10-18 18:01:51,650 INFO [main] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Number of reduces for job job_1445144423722_0020 = 1",1
+0e95dbdb,2015-10-18  INFO [Socket Reader #1 for port  org.apache.hadoop.ipc.Server: Starting Socket Reader #1 for port ,2
+028b4f65,2015-10-18  INFO [IPC Server Responder] org.apache.hadoop.ipc.Server: IPC Server Responder: starting,2
+4bf5d6d6,2015-10-18  INFO [IPC Server listener on  org.apache.hadoop.ipc.Server: IPC Server listener on  starting,2
+79c2dcf6,"2015-10-18 18:01:51,885 INFO [main] org.mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog",1
+8e4bf195,"2015-10-18 18:01:51,900 INFO [main] org.apache.hadoop.http.HttpRequestLog: Http request log for http.requests.mapreduce is not defined",1
+469855ff,"2015-10-18 18:01:51,963 INFO [main] org.mortbay.log: jetty-6.1.26",1
+bf48d9df,"2015-10-18 18:01:52,728 INFO [main] org.mortbay.log: Started HttpServer2$SelectChannelConnectorWithSafeStartup@0.0.0.0:62267",1
+57944f67,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.speculate.DefaultSpeculator:  ,11
+3634d5cc,"2015-10-18 18:01:53,447 INFO [main] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: nodeBlacklistingEnabled:true",1
+a9879af7,2015-10-18  INFO [main]    ,4
+0d7d59a8,2015-10-18  INFO  org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator:  ,3
+adb81772,"2015-10-18 18:01:53,713 INFO [main] org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Upper limit on the thread pool size is 500",1
+7aaa578b,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: job_1445144423722_0020Job Transitioned from  to ,2
+ee3b54ef,2015-10-18  INFO [CommitterEvent Processor  org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler: Processing the event EventType: ,3
+072381de,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.yarn.util.RackResolver: Resolved  to /default-rack,36
+ba46802d,2015-10-18  INFO [AsyncDispatcher event handler]    Transitioned from  to ,64
+e2c3dd73,"2015-10-18 18:01:53,900 INFO [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Event Writer setup for JobId: job_1445144423722_0020, File: hdfs://msra-sa-41:9000/tmp/hadoop-yarn/staging/msrabi/.staging/job_1445144423722_0020/job_1445144423722_0020_1.jhist",1
+63450599,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator:  Scheduling:     AssignedReds:0  CompletedReds:0    ,17
+19f5eed1,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor: getResources() for application_1445144423722_0020:  release=      knownNMs=4,12
+2bd6a91b,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator:    ,143
+7a09f7e1,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator:        ,131
+0fcbd7c1,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.yarn.util.RackResolver: Resolved  to /default-rack,3
+6c9219c8,2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Assigned container  to ,10
+1d72d8fd,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: The  file on the remote FS is ,2
+fe711a88,"2015-10-18 18:01:57,119 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Adding #0 tokens and #1 secret keys for NM use for launching container",1
+a9d0d9af,2015-10-18  INFO [AsyncDispatcher event handler]      ,3
+f4f2c638,2015-10-18  INFO [ContainerLauncher  org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Processing the event EventType:  for container  taskAttempt ,13
+80811a28,2015-10-18  INFO [ContainerLauncher  org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl:  ,13
+4285e835,2015-10-18  INFO [ContainerLauncher  org.apache.hadoop.yarn.client.api.impl.ContainerManagementProtocolProxy: Opening proxy : ,13
+bb6590aa,2015-10-18  INFO [ContainerLauncher  org.apache.hadoop.mapreduce.v2.app.launcher.ContainerLauncherImpl: Shuffle port returned by ContainerManager for  : 13562,10
+63bcb314,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: TaskAttempt:  using containerId:  on NM: ,10
+f144728f,2015-10-18  INFO [Socket Reader #1 for port 62270] SecurityLogger.org.apache.hadoop.ipc.Server: Auth successful for job_1445144423722_0020 (auth:SIMPLE),10
+4e3ebcb6,2015-10-18  INFO [IPC Server handler  on 62270] org.apache.hadoop.mapred.TaskAttemptListenerImpl: JVM with ID :  asked for a task,10
+6ea7cc93,2015-10-18  INFO [IPC Server handler  on 62270] org.apache.hadoop.mapred.TaskAttemptListenerImpl:       ,299
+80e8790d,"2015-10-18 18:04:10,002 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Cannot assign container Container: [ContainerId: container_1445144423722_0020_01_000012, NodeId: MSRA-SA-39.fareast.corp.microsoft.com:28345, NodeHttpAddress: MSRA-SA-39.fareast.corp.microsoft.com:8042, Resource: <memory:1024, vCores:1>, Priority: 20, Token: Token { kind: ContainerToken, service: 172.22.149.145:28345 }, ] for a map as either container memory less than required <memory:1024, vCores:1> or no pending map tasks - maps.isEmpty=true",1
+3610a1d3,"2015-10-18 18:04:11,034 ERROR [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Container complete event for unknown container id container_1445144423722_0020_01_000012",1
+7048650a,"2015-10-18 18:04:50,208 INFO [IPC Server handler 26 on 62270] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Done acknowledgement from attempt_1445144423722_0020_m_000003_0",1
+6b5f0b52,"2015-10-18 18:04:50,770 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.JobImpl: Num completed Tasks: 1",1
+1e1dfec2,"2015-10-18 18:04:51,114 INFO [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Reduce slow start threshold reached. Scheduling reduces.",1
+c3b8b28f,"2015-10-18 18:04:51,755 INFO [DefaultSpeculator background processing] org.apache.hadoop.mapreduce.v2.app.speculate.DefaultSpeculator: DefaultSpeculator.addSpeculativeAttempt -- we are speculating task_1445144423722_0020_m_000000",1
+01ca9ebc,"2015-10-18 18:04:51,755 INFO           ",2
+53cb9653,"2015-10-18 18:04:52,552 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from attempt_1445144423722_0020_m_000003_0: Container killed by the ApplicationMaster.",1
+94a3c692,2015-10-18  WARN [LeaseRenewer:msrabi@msra-sa-41:9000] org.apache.hadoop.ipc.Client: Address change detected. Old: msra-sa-41/10.190.173.170:9000 New: msra-sa-41:9000,327
+aefc643b,2015-10-18  WARN [LeaseRenewer:msrabi@msra-sa-41:9000] org.apache.hadoop.hdfs.LeaseRenewer: Failed to renew lease for [DFSClient_NONMAPREDUCE_1537864556_1] for  seconds. Will retry shortly ...,326
+f0e7a8b2,"2015-10-18 18:05:57,009 WARN [ResponseProcessor for block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731] org.apache.hadoop.hdfs.DFSClient: Slow ReadProcessor read fields took 65020ms (threshold=30000ms); ack: seqno: -2 status: SUCCESS status: ERROR downstreamAckTimeNanos: 0, targets: [10.86.169.121:50010, 10.190.173.170:50010]",1
+95bf6454,"2015-10-18 18:05:57,009 WARN [ResponseProcessor for block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731] org.apache.hadoop.hdfs.DFSClient: DFSOutputStream ResponseProcessor exception for block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731",1
+3c823607,"2015-10-18 18:05:57,024 WARN [DataStreamer for file /tmp/hadoop-yarn/staging/msrabi/.staging/job_1445144423722_0020/job_1445144423722_0020_1.jhist block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731] org.apache.hadoop.hdfs.DFSClient: Error Recovery for block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731 in pipeline 10.86.169.121:50010, 10.190.173.170:50010: bad datanode 10.190.173.170:50010",1
+d3a9998e,"2015-10-18 18:05:57,024 WARN [DataStreamer for file /tmp/hadoop-yarn/staging/msrabi/.staging/job_1445144423722_0020/job_1445144423722_0020_1.jhist block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731] org.apache.hadoop.ipc.Client: Address change detected. Old: msra-sa-41/10.190.173.170:9000 New: msra-sa-41:9000",1
+e0b7e5b8,"2015-10-18 18:05:57,024 WARN [DataStreamer for file /tmp/hadoop-yarn/staging/msrabi/.staging/job_1445144423722_0020/job_1445144423722_0020_1.jhist block BP-1347369012-10.190.173.170-1444972147527:blk_1073743512_2731] org.apache.hadoop.hdfs.DFSClient: DataStreamer Exception",1
+7278a1e0,2015-10-18  ERROR [RMCommunicator Allocator] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: ERROR IN CONTACTING RM.,147
+0d0c9b31,2015-10-18  WARN [RMCommunicator Allocator] org.apache.hadoop.ipc.Client: Address change detected. Old: msra-sa-41/10.190.173.170:8030 New: msra-sa-41:8030,146
+b267e9fb,"2015-10-18  INFO [RMCommunicator Allocator] org.apache.hadoop.ipc.Client: Retrying connect to server: msra-sa-41:8030. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)",146
+daa140a4,2015-10-18  FATAL [IPC Server handler  on 62270] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Task:  - exited : java.net.NoRouteToHostException: No Route to Host from MININT-FNANLI5/127.0.0.1 to msra-sa-41:9000 failed on socket timeout exception: java.net.NoRouteToHostException: No route to host: no further information; For more details see: http://wiki.apache.org/hadoop/NoRouteToHost,2
+c7ce3b26,2015-10-18  INFO [IPC Server handler  on 62270] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Diagnostics report from  Error: java.net.NoRouteToHostException: No Route to Host from MININT-FNANLI5/127.0.0.1 to msra-sa-41:9000 failed on socket timeout exception: java.net.NoRouteToHostException: No route to host: no further information; For more details see: http://wiki.apache.org/hadoop/NoRouteToHost,2
+fbcaad35,2015-10-18  INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from  Error: java.net.NoRouteToHostException: No Route to Host from MININT-FNANLI5/127.0.0.1 to msra-sa-41:9000 failed on socket timeout exception: java.net.NoRouteToHostException: No route to host: no further information; For more details see: http://wiki.apache.org/hadoop/NoRouteToHost,2
+6c004d2d,2015-10-18  WARN [CommitterEvent Processor  org.apache.hadoop.ipc.Client: Address change detected. Old: msra-sa-41/10.190.173.170:9000 New: msra-sa-41:9000,2
+cc75dc40,2015-10-18  WARN [CommitterEvent Processor  org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler: Task cleanup failed for attempt ,2
+d131f135,"2015-10-18 18:06:26,139 ERROR [eventHandlingThread] org.apache.hadoop.mapreduce.jobhistory.JobHistoryEventHandler: Error writing History Event: org.apache.hadoop.mapreduce.jobhistory.TaskAttemptUnsuccessfulCompletionEvent@7317849d",1
+8324eaee,"2015-10-18 18:06:26,139 ERROR [eventHandlingThread] org.apache.hadoop.yarn.YarnUncaughtExceptionHandler: Thread Thread[eventHandlingThread,5,main] threw an Exception.",1
+25e68f02,2015-10-18  INFO [Thread-50] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerRequestor:  failures on node MININT-FNANLI5.fareast.corp.microsoft.com,2
+27630f57,2015-10-18  INFO [Thread-50] org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator: Added  to list of failed maps,2
