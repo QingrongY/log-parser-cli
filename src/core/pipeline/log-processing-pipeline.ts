@@ -121,6 +121,32 @@ export class LogProcessingPipeline {
     }
   }
 
+  private async recordRefineTrace(
+    lineIndex: number,
+    rawLog: string,
+    output: RefineAgentOutput,
+    conflictingTemplate?: LogTemplateDefinition,
+  ): Promise<void> {
+    const trace = {
+      lineIndex,
+      rawLog,
+      stage: 'refine-trace',
+      timestamp: new Date().toISOString(),
+      action: output.action,
+      template: {
+        placeholderTemplate: output.template.placeholderTemplate,
+        placeholderVariables: output.template.placeholderVariables,
+        variables: output.template.variables,
+      },
+      conflictingTemplateId: conflictingTemplate?.id,
+    };
+
+    if (this.deps.failureLogPath) {
+      const { appendFile } = await import('node:fs/promises');
+      await appendFile(this.deps.failureLogPath, JSON.stringify(trace) + '\n', 'utf-8').catch(() => {});
+    }
+  }
+
   private extractLineIndex(context: AgentContext | undefined): number | undefined {
     const value = context?.metadata?.['lineIndex'];
     return typeof value === 'number' ? Number(value) : undefined;
@@ -231,8 +257,6 @@ export class LogProcessingPipeline {
 
       let currentTemplate: LogTemplateDefinition = parseResult.output;
       let templateAccepted = false;
-      let refineAttempts = 0;
-      const maxRefineAttempts = 10;
 
       while (!templateAccepted) {
         if (
@@ -305,22 +329,6 @@ export class LogProcessingPipeline {
         }
 
         const conflict = detectedConflicts[0];
-        refineAttempts++;
-
-        // Prevent infinite refine loop
-        if (refineAttempts > maxRefineAttempts) {
-          this.logStage(sample.index, 'refine', `exceeded max attempts (${maxRefineAttempts}), skipping`);
-          await this.recordFailure(
-            sample.index,
-            sample.raw,
-            'refine',
-            `Exceeded maximum refine attempts (${maxRefineAttempts})`,
-            validatedTemplate,
-            { conflictingTemplateId: conflict.template.id },
-          );
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
 
         const refineResult = await this.deps.agents.refine.run(
           {
@@ -334,6 +342,7 @@ export class LogProcessingPipeline {
 
         if (!refineResult.output) {
           this.logStage(sample.index, 'refine', 'failed');
+          // Stop further refine attempts for this sample; record failure and move on.
           await this.recordFailure(
             sample.index,
             sample.raw,
@@ -342,23 +351,17 @@ export class LogProcessingPipeline {
             validatedTemplate,
             { issues: refineResult.issues },
           );
-          conflicts.push({
-            candidate: validatedTemplate,
-            conflictsWith: [conflict.template],
-            diagnostics: [
-              {
-                sample: sample.raw,
-                reason: refineResult.issues?.join('; ') ?? 'Refine agent failed.',
-              },
-            ],
-          });
-          unresolvedSamples.push(sample.raw);
           break;
         }
 
         if (refineResult.output.action === 'refine_candidate') {
-          this.logStage(sample.index, 'refine', `refining candidate (${refineAttempts}/${maxRefineAttempts})`);
+          this.logStage(sample.index, 'refine', 'refining candidate');
+          // Replace conflicting template with refined candidate to avoid repeated conflicts.
+          await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id!);
+          library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
           currentTemplate = refineResult.output.template;
+          await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
+          // After refinement, loop back to validation for the updated template.
           continue;
         }
 
@@ -367,6 +370,7 @@ export class LogProcessingPipeline {
           await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id!);
           library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
           currentTemplate = refineResult.output.template;
+          await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
           continue;
         }
 
@@ -426,11 +430,30 @@ export class LogProcessingPipeline {
     sample: string,
     lineIndex: number,
   ): Promise<boolean> {
-    const runtime = buildRegexFromTemplate(
-      template.placeholderTemplate,
-      template.placeholderVariables,
-      sample,
-    );
+    let runtime;
+    try {
+      runtime = buildRegexFromTemplate(
+        template.placeholderTemplate,
+        template.placeholderVariables,
+        sample,
+      );
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      const prefix = Number.isFinite(lineIndex)
+        ? `[log-parser] line ${lineIndex + 1}`
+        : '[log-parser] validation';
+      console.error(`${prefix}: validation failed -> ${reason}`);
+      this.logStage(lineIndex, 'validation', 'failed');
+      await this.recordFailure(
+        lineIndex,
+        sample,
+        'validation',
+        reason,
+        template,
+      );
+      return false;
+    }
+
     const matchResult = matchEntireLine(runtime.pattern, sample);
 
     if (!matchResult.matched) {

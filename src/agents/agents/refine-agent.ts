@@ -11,14 +11,11 @@ import type {
   BaseAgentConfig,
   LogTemplateDefinition,
 } from '../types.js';
-import { normalizeRegexPattern } from '../utils/regex.js';
-import { buildRegexFromTemplate } from './parsing-agent.js';
 import {
   buildRefinePrompt,
   REFINE_RESPONSE_SCHEMA,
   REFINE_SYSTEM_PROMPT,
 } from '../prompts/refine.js';
-import { ensureValidRegex } from '../utils/validation.js';
 
 export interface RefineAgentInput {
   candidateTemplate: LogTemplateDefinition;
@@ -71,24 +68,17 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
     const parsed = this.parseJsonSafe<RefineLlmResponse>(completion.output);
     const note = parsed.explain ?? 'LLM refine decision';
 
-    const sampleForRender = input.candidateSamples[0] ?? input.candidateTemplate.placeholderTemplate;
-    const { pattern, variables } = buildRegexFromTemplate(
-      parsed.template,
-      parsed.variables,
-      sampleForRender,
-    );
-    const normalizedPattern = normalizeRegexPattern(pattern);
-    ensureValidRegex(normalizedPattern);
+    const { pattern: _ignoredPattern, ...baseTemplate } = input.candidateTemplate;
 
     const refinedTemplate: LogTemplateDefinition = {
-      ...input.candidateTemplate,
+      ...baseTemplate,
       placeholderTemplate: parsed.template,
       placeholderVariables: parsed.variables,
-      pattern: normalizedPattern,
       variables: Object.keys(parsed.variables ?? {}),
     };
 
     if (parsed.action === 'refine_candidate') {
+      console.log('[log-parser] refine: refine_candidate', { reason: note });
       return {
         status: 'success',
         output: {
@@ -100,6 +90,7 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
     }
 
     if (parsed.action === 'adopt_candidate') {
+      console.log('[log-parser] refine: adopt_candidate', { reason: note });
       return {
         status: 'success',
         output: {
@@ -110,6 +101,7 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
       };
     }
 
+    console.error('[log-parser] refine: invalid action', { action: parsed.action });
     throw new Error(`LLM response has invalid action: ${parsed.action}`);
   }
 }

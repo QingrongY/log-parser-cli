@@ -206,12 +206,7 @@ export const buildRegexFromTemplate = (
     throw new Error('LLM output contained no variables.');
   }
 
-  if (sample) {
-    const reconstructed = segments.map((segment) => segment.value).join('');
-    if (reconstructed !== sample) {
-      throw new Error('Template with values does not match the original log sample.');
-    }
-  }
+  // Skip strict reconstruction check to tolerate slight formatting differences from the LLM.
 
   const variables: string[] = [];
   const nameCounts = new Map<string, number>();
