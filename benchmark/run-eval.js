@@ -307,7 +307,7 @@ function main() {
   // Resolve project root relative to this script to avoid CWD issues.
   const scriptDir = path.dirname(fileURLToPath(import.meta.url));
   const root = path.resolve(scriptDir, '..');
-  const benchRoot = path.join(root, 'benchmark', 'ours');
+  const benchRoot = path.join(root, 'benchmark', 'results');
   const datasetsRoot = path.join(root, 'datasets');
   if (!fs.existsSync(benchRoot)) {
     console.error(`${benchRoot} is missing; run the parser first.`);

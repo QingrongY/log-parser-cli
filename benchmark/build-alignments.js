@@ -260,7 +260,7 @@ function main() {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const root = path.resolve(__dirname, '..');
-  const benchRoot = path.join(root, 'benchmark', 'ours');
+  const benchRoot = path.join(root, 'benchmark', 'results');
   const datasetsRoot = path.join(root, 'datasets');
   if (!fs.existsSync(benchRoot)) {
     console.error(`${benchRoot} is missing; run the parser first.`);

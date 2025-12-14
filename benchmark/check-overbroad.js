@@ -201,7 +201,7 @@ function writeAugmented(dataset, rows, statsByKey, outPath) {
 function main() {
   const scriptDir = path.dirname(fileURLToPath(import.meta.url));
   const root = path.resolve(scriptDir, '..');
-  const alignRoot = path.join(root, 'benchmark', 'ours', 'alignments');
+  const alignRoot = path.join(root, 'benchmark', 'results', 'alignments');
   const datasets = fs
     .readdirSync(alignRoot)
     .filter((d) => fs.statSync(path.join(alignRoot, d)).isDirectory())
