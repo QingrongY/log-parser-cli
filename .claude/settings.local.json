@@ -19,7 +19,8 @@
       "Bash(git commit -m \"$(cat <<''EOF''\n改进JSON解析鲁棒性和调试功能\n\n- 增强JSON解析错误处理，显示错误上下文\n- 处理LLM输出中的控制字符转义\n- 添加update-agent调试日志\n- 简化知识库描述\n- 修正占位符格式说明\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push)",
       "Bash(ls:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

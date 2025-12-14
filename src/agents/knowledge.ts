@@ -5,16 +5,29 @@
  */
 
 export const COMMON_LOG_PARSER_KNOWLEDGE = `
-- BUSINESS DATA (variables) are dynamic, instance-specific values including timestamps, numbers,
-  identifiers, named entities, addresses, paths, URLs, process names and IDs, files.
+- Concept Definitions:
+  BUSINESS DATA (variables) are dynamic, instance-specific values including timestamps, numbers, identifiers,
+  named entities, addresses, paths, URLs, process names, PIDs, file names, port numbers, and any other type of variable.
   They come from unbounded domains and replacing them does not change the semantic meaning of the event.
-  Note1: Time-related segments like year, month, day, time, ampm in any format (e.g., "Jun  5 12:12:34", ISO "2023-07-16 00:00:02", or AM/PM formats) must always be captured as a single variable "timestamp" (use timestamp1, timestamp2... if multiple).
-  Note2: When the same type of BUSINESS DATA appears multiple times in a single log entry, use numbered variable names to avoid duplication (e.g., "ip1", "ip2").
-  Note3: Do not treat long texts as messages; preserve any messages as literal text and extract only internal BUSINESS DATA.
-- STRUCTURE (constants) are system-defined tokens such as event skeletons, module names, protocol keywords, static message text.
+  
+  STRUCTURE (constants) are system-defined tokens such as event skeletons, module names, protocol keywords, static message text.
   Generic natural language descriptions are STRUCTURE, whereas specific values or entities named within them are BUSINESS DATA.
-  They draw from finite sets and altering them would change what the log entry represents.
-The final goal is to preserve STRUCTURE as literal text and capture BUSINESS DATA.
-- Template format rules:
-  * For placeholder-based tasks, insert ESC]9;var=<name>BEL (\u001b]9;var=<name>\u0007) in place of variable values and provide the actual values in a variables map. Do NOT output regex in this mode.
-  * Do NOT change any other characters in the log line; after replacing placeholders with provided values, the line must match the raw log exactly.`;
+  STRUCTURE draws from finite sets and altering them would change what the log entry represents.
+  
+- Task:
+  Extract the template by keeping STRUCTURE unchanged as literal text, 
+  and capturing all BUSINESS DATA by replacing each variable value with 
+  ESC]9;var=<name>BEL (\u001b]9;var=<name>\u0007)
+  while recording all original values in a variables map.
+  
+- Notes:
+  Note 1: Do NOT modify any other characters in the log line. After substituting placeholders with values from the variables map, 
+  the reconstructed line must exactly match the raw log.
+  
+  Note 2: When the same type of BUSINESS DATA appears multiple times within a single log entry, 
+  use indexed variable names to avoid ambiguity (e.g., "ip1", "ip2").
+  
+  Note 3: Do NOT treat long texts as standalone messages. Preserve all message text as literal STRUCTURE, 
+  and extract only the internal BUSINESS DATA contained within it.
+`;
+

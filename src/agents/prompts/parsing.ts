@@ -12,38 +12,44 @@ interface ParsingPromptOptions {
 }
 
 export const PARSING_SYSTEM_PROMPT =
-  `You are a senior log template engineer learning templates line-by-line. 
-  Focus on accurately separating STRUCTURE (constants) and BUSINESS DATA (variables) per the shared background knowledge.`;
+  `You are a senior log template engineer learning templates line-by-line.
+Follow the shared background knowledge strictly.
+Output must be valid JSON only (no markdown, no extra text).`;
 
 export const buildParsingPrompt = ({ logLine, variableHints }: ParsingPromptOptions): string => {
-  const hintsSection =
-    variableHints.length > 0
-      ? `Consider the following preferences provided by users: ${variableHints}`
+  const hints =
+    variableHints?.length
+      ? `User preferences for variable naming (use when applicable): ${variableHints.join(', ')}`
       : '';
 
-  return [
+  const parts = [
     `Shared background knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
-    `${hintsSection}.`,
-    'Your task is to mark all BUSINESS DATA (variables) directly in the raw log without changing any other text.',
-    'Use control-sequence placeholders for each variable: insert `\\u001b]9;var=<name>\\u0007` where the variable value should go. Do NOT include the value inline.',
-    'Provide the marked actual values in a variables map as their literal contents.',
-    'Do NOT remove, add, or change any other characters; only replace variable spans with the placeholder marker.',
-    'If a variable appears multiple times, insert the placeholder each time. Choose clear, lowercase names; prefer user hints when provided.',
-    'Return ONLY JSON in this form, which provides the actual values in a variables map as their literal contents.\',\n:',
-    '{',
-    '  "template": "raw log with placeholders (\\u001b]9;var=name\\u0007) inserted instead of variable values",',
-    '  "variables": {',
-    '    "name1": "value1",',
-    '    "name2": "value2"',
-    '  }',
-    '}',
-    '',
-    'Example (do not reuse literal values):',
-    'Raw: [Dec 04 04:47:44 2005] Library-AP path=/tmp/a.log',
-    'Template: [\\u001b]9;var=timestamp\\u0007] Library-AP path=\\u001b]9;var=path\\u0007',
-    'Variables: { "timestamp": "Dec 04 04:47:44 2005", "path": "/tmp/a.log" }',
-    '',
-    'Log line:',
-    logLine,
-  ].join('\n');
+    hints && `\n${hints}\n`,
+    `Task:
+- Mark all BUSINESS DATA (variables) directly in the raw log line WITHOUT changing any other characters.
+- Replace each variable span with the placeholder \\u001b]9;var=<name>\\u0007.
+- Do NOT include the variable value inline in the template.
+- Provide all original values (verbatim) in a variables map.
+- If the same type of BUSINESS DATA appears multiple times, use indexed names (e.g., ip1, ip2). Prefer clear, lowercase names; prefer user hints when provided.`,
+    `Output format:
+Return ONLY the following JSON object (no extra keys, no comments, no trailing text):
+{
+  "template": "<raw log with placeholders inserted>",
+  "variables": {
+    "<name1>": "<value1>",
+    "<name2>": "<value2>"
+  }
+}`,
+    `Example (do not reuse literal values):
+Raw: [Dec 04 04:47:44 2005] Library-AP path=/tmp/a.log
+JSON:
+{
+  "template": "[\\u001b]9;var=timestamp\\u0007] Library-AP path=\\u001b]9;var=path\\u0007",
+  "variables": { "timestamp": "Dec 04 04:47:44 2005", "path": "/tmp/a.log" }
+}`,
+    `Log line:
+${logLine}`,
+  ].filter(Boolean);
+
+  return parts.join('\n\n');
 };
