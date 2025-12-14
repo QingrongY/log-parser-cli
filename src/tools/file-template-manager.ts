@@ -69,6 +69,16 @@ export class FileTemplateManager implements TemplateManager {
     return templateWithId;
   }
 
+  async deleteTemplate(libraryId: string, templateId: string): Promise<void> {
+    const library = await this.loadLibrary(libraryId);
+    const nextTemplates = library.templates.filter((t) => t.id !== templateId);
+    const nextLibrary: TemplateLibrary = {
+      ...library,
+      templates: nextTemplates,
+    };
+    await this.persistLibrary(libraryId, nextLibrary);
+  }
+
   async recordMatches(id: string, matches: MatchedLogRecord[]): Promise<void> {
     if (matches.length === 0) {
       return;

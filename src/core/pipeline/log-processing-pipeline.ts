@@ -9,8 +9,8 @@ import type {
   AgentContext,
   ParsingAgent,
   RoutingAgent,
-  UpdateAgent,
-  UpdateAgentOutput,
+  RefineAgent,
+  RefineAgentOutput,
 } from '../../agents/index.js';
 import type { AgentResult, LogTemplateDefinition } from '../../agents/index.js';
 import { RegexWorkerPool } from '../workers/regex-worker-pool.js';
@@ -31,7 +31,7 @@ import { normalizeRegexPattern } from '../../agents/utils/regex.js';
 interface PipelineAgents {
   routing: RoutingAgent;
   parsing: ParsingAgent;
-  update: UpdateAgent;
+  refine: RefineAgent;
 }
 
 export interface LogProcessingPipelineDeps {
@@ -117,7 +117,7 @@ export class LogProcessingPipeline {
 
     if (this.deps.failureLogPath) {
       const { appendFile } = await import('node:fs/promises');
-      await appendFile(this.deps.failureLogPath, JSON.stringify(failure, null, 2) + '\n', 'utf-8').catch(() => {});
+      await appendFile(this.deps.failureLogPath, JSON.stringify(failure) + '\n', 'utf-8').catch(() => {});
     }
   }
 
@@ -231,7 +231,8 @@ export class LogProcessingPipeline {
 
       let currentTemplate: LogTemplateDefinition = parseResult.output;
       let templateAccepted = false;
-      let retryCount = 0;
+      let refineAttempts = 0;
+      const maxRefineAttempts = 10;
 
       while (!templateAccepted) {
         if (
@@ -254,36 +255,100 @@ export class LogProcessingPipeline {
         }
 
         const validatedTemplate = currentTemplate;
-        const updateResult = await this.deps.agents.update.run(
-          {
+        const detectedConflicts = this.findConflicts(validatedTemplate, library);
+
+        if (detectedConflicts.length === 0) {
+          this.logStage(sample.index, 'update', 'added new template', { action: 'added' });
+
+          const savedTemplate = await this.persistTemplate(library, libraryId, {
+            action: 'added',
             template: validatedTemplate,
-            existingTemplates: library.templates,
-            librarySamples: library.matchedSamples.map((record) => ({
-              raw: record.raw,
-              templateId: record.template?.id,
-            })),
+          });
+          const postTemplate = savedTemplate ?? validatedTemplate;
+          newTemplates.push(postTemplate);
+
+          const sampleMatch = await this.deps.regexWorkerPool.match({
+            logs: [sample],
+            templates: [postTemplate],
+          });
+
+          const allMatches: MatchedLogRecord[] = [...sampleMatch.matched];
+          let newlyMatchedCount = sampleMatch.matched.length;
+
+          if (pendingLogs.length > 0) {
+            const rematch = await this.deps.regexWorkerPool.match({
+              logs: pendingLogs,
+              templates: [postTemplate],
+            });
+            if (rematch.matched.length > 0) {
+              allMatches.push(...rematch.matched);
+              newlyMatchedCount += rematch.matched.length;
+            }
+            pendingLogs = rematch.unmatched;
+          }
+
+          await this.appendMatches(libraryId, library, allMatches, matchedRecords);
+
+          if (newlyMatchedCount > 0) {
+            if (this.deps.observer?.onMatching) {
+              this.deps.observer.onMatching({
+                lineIndex: sample.index,
+                matched: newlyMatchedCount,
+              });
+            } else {
+              this.logStage(sample.index, 'matching', `new template matched ${newlyMatchedCount} log(s)`);
+            }
+          }
+
+          templateAccepted = true;
+          continue;
+        }
+
+        const conflict = detectedConflicts[0];
+        refineAttempts++;
+
+        // Prevent infinite refine loop
+        if (refineAttempts > maxRefineAttempts) {
+          this.logStage(sample.index, 'refine', `exceeded max attempts (${maxRefineAttempts}), skipping`);
+          await this.recordFailure(
+            sample.index,
+            sample.raw,
+            'refine',
+            `Exceeded maximum refine attempts (${maxRefineAttempts})`,
+            validatedTemplate,
+            { conflictingTemplateId: conflict.template.id },
+          );
+          unresolvedSamples.push(sample.raw);
+          break;
+        }
+
+        const refineResult = await this.deps.agents.refine.run(
+          {
+            candidateTemplate: validatedTemplate,
             candidateSamples: [sample.raw],
+            conflictingTemplate: conflict.template,
+            conflictingSamples: conflict.samples,
           },
           lineContext,
         );
 
-        if (!updateResult.output) {
-          this.logStage(sample.index, 'update', 'failed');
+        if (!refineResult.output) {
+          this.logStage(sample.index, 'refine', 'failed');
           await this.recordFailure(
             sample.index,
             sample.raw,
-            'update',
-            'Update agent failed',
+            'refine',
+            'Refine agent failed',
             validatedTemplate,
-            { issues: updateResult.issues },
+            { issues: refineResult.issues },
           );
           conflicts.push({
             candidate: validatedTemplate,
-            conflictsWith: [],
+            conflictsWith: [conflict.template],
             diagnostics: [
               {
                 sample: sample.raw,
-                reason: updateResult.issues?.join('; ') ?? 'Update agent failed.',
+                reason: refineResult.issues?.join('; ') ?? 'Refine agent failed.',
               },
             ],
           });
@@ -291,136 +356,22 @@ export class LogProcessingPipeline {
           break;
         }
 
-        if (updateResult.output.action === 'conflict') {
-          this.logStage(sample.index, 'update', 'conflict', { action: 'conflict' });
-          await this.recordFailure(
-            sample.index,
-            sample.raw,
-            'update',
-            'Template conflict detected',
-            validatedTemplate,
-            { conflicts: updateResult.output.conflictingTemplates },
-          );
-          conflicts.push({
-            candidate: validatedTemplate,
-            conflictsWith: updateResult.output.conflictingTemplates ?? [],
-          });
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
-
-        if (updateResult.output.action === 'retry') {
-          this.logStage(sample.index, 'update', 'retry requested', { action: 'retry' });
-          retryCount += 1;
-          if (retryCount > 1) {
-            await this.recordFailure(
-              sample.index,
-              sample.raw,
-              'update',
-              'Template exceeded retry limit; human review required.',
-              updateResult.output.template,
-            );
-            conflicts.push({
-              candidate: updateResult.output.template,
-              conflictsWith: [],
-              diagnostics: [
-                {
-                  sample: sample.raw,
-                  reason: 'Template exceeded retry limit; human review required.',
-                },
-              ],
-            });
-            unresolvedSamples.push(sample.raw);
-            break;
-          }
-          currentTemplate = updateResult.output.template;
+        if (refineResult.output.action === 'refine_candidate') {
+          this.logStage(sample.index, 'refine', `refining candidate (${refineAttempts}/${maxRefineAttempts})`);
+          currentTemplate = refineResult.output.template;
           continue;
         }
 
-        let postUpdateTemplate = updateResult.output.template;
-        if (!postUpdateTemplate) {
-          unresolvedSamples.push(sample.raw);
-          break;
+        if (refineResult.output.action === 'adopt_candidate') {
+          this.logStage(sample.index, 'refine', 'adopting candidate, removing conflicting template');
+          await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id!);
+          library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
+          currentTemplate = refineResult.output.template;
+          continue;
         }
 
-        this.logStage(sample.index, 'update', `action=${updateResult.output.action}`, {
-          action: updateResult.output.action,
-        });
-
-        const isValidAfterUpdate = await this.validateTemplateMatch(
-          postUpdateTemplate,
-          sample.raw,
-          sample.index,
-        );
-
-        if (!isValidAfterUpdate) {
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
-
-        const sampleMatch = await this.deps.regexWorkerPool.match({
-          logs: [sample],
-          templates: [postUpdateTemplate],
-        });
-
-        if (sampleMatch.matched.length === 0) {
-          await this.recordFailure(sample.index, sample.raw, 'matching', 'Template does not match log after update', postUpdateTemplate);
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
-
-        if (updateResult.output.action !== 'skipped') {
-          const savedTemplate = await this.persistTemplate(library, libraryId, {
-            ...updateResult.output,
-            template: postUpdateTemplate,
-          });
-          if (savedTemplate) {
-            postUpdateTemplate = savedTemplate;
-          }
-          newTemplates.push(postUpdateTemplate);
-        }
-
-        const allMatches: MatchedLogRecord[] = [...sampleMatch.matched];
-        let newlyMatchedCount = sampleMatch.matched.length;
-
-        let rematch = { matched: [] as MatchedLogRecord[], unmatched: pendingLogs };
-        if (pendingLogs.length > 0) {
-          rematch = await this.deps.regexWorkerPool.match({
-            logs: pendingLogs,
-            templates: [postUpdateTemplate],
-          });
-          if (rematch.matched.length > 0) {
-            allMatches.push(...rematch.matched);
-            newlyMatchedCount += rematch.matched.length;
-          }
-          pendingLogs = rematch.unmatched;
-        }
-
-        const tightened = await this.tightenTemplateConstants(
-          postUpdateTemplate,
-          allMatches,
-          libraryId,
-          library,
-          newTemplates,
-        );
-        if (tightened) {
-          postUpdateTemplate = tightened;
-        }
-
-        await this.appendMatches(libraryId, library, allMatches, matchedRecords);
-
-        if (newlyMatchedCount > 0) {
-          if (this.deps.observer?.onMatching) {
-            this.deps.observer.onMatching({
-              lineIndex: sample.index,
-              matched: newlyMatchedCount,
-            });
-          } else {
-            this.logStage(sample.index, 'matching', `new template matched ${newlyMatchedCount} log(s)`);
-          }
-        }
-
-        templateAccepted = true;
+        unresolvedSamples.push(sample.raw);
+        break;
       }
     }
 
@@ -501,133 +452,49 @@ export class LogProcessingPipeline {
   private async persistTemplate(
     library: TemplateLibrary,
     libraryId: string,
-    updateOutput: AgentResult<UpdateAgentOutput>['output'],
+    output: { action: string; template: LogTemplateDefinition },
   ): Promise<LogTemplateDefinition | undefined> {
-    const template = updateOutput?.template;
+    const template = output?.template;
     if (!template) {
       return undefined;
     }
 
     const templateWithId = await this.deps.templateManager.saveTemplate(libraryId, template);
-    const replacedIds = new Set(updateOutput?.replacedTemplateIds ?? []);
-    if (templateWithId.id) {
-      replacedIds.add(templateWithId.id);
+    if (!library.templates.find((t) => t.id === templateWithId.id)) {
+      library.templates.push(templateWithId);
     }
-    const remaining = library.templates.filter(
-      (entry) => !replacedIds.has(entry.id ?? ''),
-    );
-    remaining.push(templateWithId);
-    library.templates = remaining;
     return templateWithId;
   }
 
-  /**
-   * If a variable captures the exact same value for all matched samples of a new template,
-   * fold it back into the template as a literal constant to avoid over-broad placeholders.
-   * This runs right after the first batch of matches for the new template.
-   */
-  private async tightenTemplateConstants(
-    template: LogTemplateDefinition,
-    matches: MatchedLogRecord[],
-    libraryId: string,
+  private findConflicts(
+    candidate: LogTemplateDefinition,
     library: TemplateLibrary,
-    newTemplates: LogTemplateDefinition[],
-  ): Promise<LogTemplateDefinition | undefined> {
-    if (!template.placeholderTemplate || matches.length === 0) {
-      return undefined;
-    }
-
-    // Extract placeholders in order of appearance.
-    const placeholderRegex = /\u001b]9;var=([^\u0007]+)\u0007/g;
-    const placeholders: { name: string; start: number; end: number }[] = [];
-    let match: RegExpExecArray | null;
-    while ((match = placeholderRegex.exec(template.placeholderTemplate)) !== null) {
-      placeholders.push({
-        name: match[1],
-        start: match.index,
-        end: match.index + match[0].length,
-      });
-    }
-    if (placeholders.length === 0) {
-      return undefined;
-    }
-
-    // Derive final variable names (sanitized + numbered) to align with regex groups.
-    const nameCounts = new Map<string, number>();
-    const finalNames = placeholders.map((p) => {
-      const base = this.sanitizeVariableName(p.name);
-      const count = (nameCounts.get(base) ?? 0) + 1;
-      nameCounts.set(base, count);
-      return count === 1 ? base : `${base}${count}`;
-    });
-
-    // Collect values per variable.
-    const constants = new Map<number, string>();
-    finalNames.forEach((varName, idx) => {
-      const values = matches
-        .map((m) => m.variables?.[varName])
-        .filter((v): v is string => typeof v === 'string');
-      if (values.length === 0) {
-        return;
-      }
-      const first = values[0];
-      if (values.every((v) => v === first)) {
-        constants.set(idx, first);
-      }
-    });
-
-    if (constants.size === 0) {
-      return undefined;
-    }
-
-    // Rebuild the placeholder template, replacing constant placeholders with their literal value.
-    let cursor = 0;
-    let tightenedTemplate = '';
-    placeholders.forEach((ph, idx) => {
-      tightenedTemplate += template.placeholderTemplate.slice(cursor, ph.start);
-      if (constants.has(idx)) {
-        tightenedTemplate += constants.get(idx);
-      } else {
-        tightenedTemplate += template.placeholderTemplate.slice(ph.start, ph.end);
-      }
-      cursor = ph.end;
-    });
-    tightenedTemplate += template.placeholderTemplate.slice(cursor);
-
-    if (tightenedTemplate === template.placeholderTemplate) {
-      return undefined;
-    }
-
-    const remainingPlaceholders =
-      (tightenedTemplate.match(/\u001b]9;var=[^\u0007]+\u0007/g) ?? []).length;
-    if (remainingPlaceholders === 0) {
-      return undefined;
-    }
-
-    const sampleRaw = matches[0]?.raw;
-    const { pattern, variables } = buildRegexFromTemplate(
-      tightenedTemplate,
-      template.placeholderVariables ?? {},
-      sampleRaw,
+  ): Array<{ template: LogTemplateDefinition; samples: string[] }> {
+    const candidateRuntime = buildRegexFromTemplate(
+      candidate.placeholderTemplate,
+      candidate.placeholderVariables,
+      undefined,
     );
-    const normalizedPattern = normalizeRegexPattern(pattern);
+    const conflicts = new Map<string, { template: LogTemplateDefinition; samples: string[] }>();
+    const templateMap = new Map(library.templates.map((t) => [t.id ?? '', t]));
 
-    template.placeholderTemplate = tightenedTemplate;
-    template.pattern = normalizedPattern;
-    template.variables = variables;
+    for (const sample of library.matchedSamples) {
+      if (!sample.raw) continue;
 
-    // Persist tightened template and refresh library/newTemplates references.
-    const saved = await this.deps.templateManager.saveTemplate(libraryId, template);
-    if (saved.id) {
-      library.templates = library.templates.map((t) => (t.id === saved.id ? saved : t));
-      for (let i = 0; i < newTemplates.length; i += 1) {
-        if (newTemplates[i].id === saved.id) {
-          newTemplates[i] = saved;
-        }
+      const result = matchEntireLine(candidateRuntime.pattern, sample.raw);
+      if (!result.matched) continue;
+
+      const key = sample.template?.id ?? 'unknown';
+      const template = templateMap.get(sample.template?.id ?? '');
+      if (!template) continue;
+
+      if (!conflicts.has(key)) {
+        conflicts.set(key, { template, samples: [] });
       }
+      conflicts.get(key)!.samples.push(sample.raw);
     }
 
-    return template;
+    return Array.from(conflicts.values());
   }
 
   private sanitizeVariableName(name: string): string {

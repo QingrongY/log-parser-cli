@@ -7,9 +7,7 @@
 export type LogParserAgentKind =
   | 'routing'
   | 'parsing'
-  | 'validation'
-  | 'repair'
-  | 'update'
+  | 'refine'
   | 'interaction';
 
 export type AgentRunStatus =

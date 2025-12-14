@@ -1,5 +1,5 @@
 param(
-  [string]$OutputDir = "benchmark/ours",
+  [string]$OutputDir = "benchmark/results",
   [string]$DatasetsRoot = "datasets",
   [string]$NodeBin = "node",
   [string]$Cli = "dist/src/cli/main.js",

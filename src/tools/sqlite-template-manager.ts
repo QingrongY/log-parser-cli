@@ -107,6 +107,15 @@ export class SqliteTemplateManager implements TemplateManager {
     return { ...template, id: assignedId };
   }
 
+  async deleteTemplate(libraryId: string, templateId: string): Promise<void> {
+    const handle = this.getHandle(libraryId);
+    const stmt = handle.db.prepare(`DELETE FROM log_templates WHERE id = ?`);
+    stmt.bind([templateId]);
+    stmt.step();
+    stmt.free();
+    this.persist(handle);
+  }
+
   async recordMatches(id: string, matches: MatchedLogRecord[]): Promise<void> {
     if (matches.length === 0) {
       return;

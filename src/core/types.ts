@@ -35,6 +35,7 @@ export interface TemplateManager {
   listLibraries(): Promise<string[]>;
   loadLibrary(id: string): Promise<TemplateLibrary>;
   saveTemplate(id: string, template: LogTemplateDefinition): Promise<LogTemplateDefinition>;
+  deleteTemplate(libraryId: string, templateId: string): Promise<void>;
   recordMatches(id: string, matches: MatchedLogRecord[]): Promise<void>;
 }
 

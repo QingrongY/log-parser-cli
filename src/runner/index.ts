@@ -11,7 +11,7 @@ import { randomUUID } from 'node:crypto';
 import {
   ParsingAgent,
   RoutingAgent,
-  UpdateAgent,
+  RefineAgent,
   type LlmClient,
 } from '../agents/index.js';
 import {
@@ -268,12 +268,12 @@ export async function runSemanticLogParser(
 function createDefaultAgents(llmClient: LlmClient): {
   routing: RoutingAgent;
   parsing: ParsingAgent;
-  update: UpdateAgent;
+  refine: RefineAgent;
 } {
   return {
     routing: new RoutingAgent({ llmClient }),
     parsing: new ParsingAgent({ llmClient }),
-    update: new UpdateAgent({ llmClient }),
+    refine: new RefineAgent({ llmClient }),
   };
 }
 
