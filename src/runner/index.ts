@@ -10,10 +10,8 @@ import readline from 'node:readline';
 import { randomUUID } from 'node:crypto';
 import {
   ParsingAgent,
-  RepairAgent,
   RoutingAgent,
   UpdateAgent,
-  ValidationAgent,
   type LlmClient,
 } from '../agents/index.js';
 import {
@@ -270,15 +268,11 @@ export async function runSemanticLogParser(
 function createDefaultAgents(llmClient: LlmClient): {
   routing: RoutingAgent;
   parsing: ParsingAgent;
-  validation: ValidationAgent;
-  repair: RepairAgent;
   update: UpdateAgent;
 } {
   return {
     routing: new RoutingAgent({ llmClient }),
     parsing: new ParsingAgent({ llmClient }),
-    validation: new ValidationAgent({ llmClient }),
-    repair: new RepairAgent({ llmClient }),
     update: new UpdateAgent({ llmClient }),
   };
 }

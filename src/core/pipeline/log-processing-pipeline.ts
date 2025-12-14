@@ -8,10 +8,8 @@ import { randomUUID } from 'node:crypto';
 import type {
   AgentContext,
   ParsingAgent,
-  RepairAgent,
   RoutingAgent,
   UpdateAgent,
-  ValidationAgent,
   UpdateAgentOutput,
 } from '../../agents/index.js';
 import type { AgentResult, LogTemplateDefinition } from '../../agents/index.js';
@@ -33,8 +31,6 @@ import { normalizeRegexPattern } from '../../agents/utils/regex.js';
 interface PipelineAgents {
   routing: RoutingAgent;
   parsing: ParsingAgent;
-  validation: ValidationAgent;
-  repair: RepairAgent;
   update: UpdateAgent;
 }
 
@@ -229,9 +225,6 @@ export class LogProcessingPipeline {
           undefined,
           { issues: parseResult.issues, diagnostics: parseResult.diagnostics },
         );
-        conflicts.push(
-          this.toConflictFromIssues(sample.raw, parseResult.issues ?? ['Parsing agent failed.']),
-        );
         unresolvedSamples.push(sample.raw);
         continue;
       }
@@ -249,26 +242,18 @@ export class LogProcessingPipeline {
           this.logStage(sample.index, 'update', `skipped due to threshold ${skipThreshold}`);
           break;
         }
-        const validatedTemplate = await this.validateAndRepair(
+        const isValid = await this.validateTemplateMatch(
           currentTemplate,
-          [sample.raw],
-          lineContext,
+          sample.raw,
+          sample.index,
         );
 
-        if (!validatedTemplate) {
-          conflicts.push({
-            candidate: currentTemplate,
-            conflictsWith: [],
-            diagnostics: [
-              {
-                sample: sample.raw,
-                reason: 'Validation/repair agents exhausted without success.',
-              },
-            ],
-          });
+        if (!isValid) {
           unresolvedSamples.push(sample.raw);
           break;
         }
+
+        const validatedTemplate = currentTemplate;
         const updateResult = await this.deps.agents.update.run(
           {
             template: validatedTemplate,
@@ -362,29 +347,16 @@ export class LogProcessingPipeline {
           action: updateResult.output.action,
         });
 
-        const revalidatedTemplate = await this.validateAndRepair(
+        const isValidAfterUpdate = await this.validateTemplateMatch(
           postUpdateTemplate,
-          [sample.raw],
-          lineContext,
+          sample.raw,
+          sample.index,
         );
 
-        if (!revalidatedTemplate) {
-          await this.recordFailure(sample.index, sample.raw, 'validation', 'Template failed revalidation after update', postUpdateTemplate);
-          conflicts.push({
-            candidate: postUpdateTemplate,
-            conflictsWith: [],
-            diagnostics: [
-              {
-                sample: sample.raw,
-                reason: 'Template failed validation after update/repair.',
-              },
-            ],
-          });
+        if (!isValidAfterUpdate) {
           unresolvedSamples.push(sample.raw);
           break;
         }
-
-        postUpdateTemplate = revalidatedTemplate;
 
         const sampleMatch = await this.deps.regexWorkerPool.match({
           logs: [sample],
@@ -398,15 +370,18 @@ export class LogProcessingPipeline {
         }
 
         if (updateResult.output.action !== 'skipped') {
-          await this.persistTemplate(library, libraryId, {
+          const savedTemplate = await this.persistTemplate(library, libraryId, {
             ...updateResult.output,
             template: postUpdateTemplate,
           });
+          if (savedTemplate) {
+            postUpdateTemplate = savedTemplate;
+          }
           newTemplates.push(postUpdateTemplate);
         }
-        let newlyMatchedCount = 0;
-        await this.appendMatches(libraryId, library, sampleMatch.matched, matchedRecords);
-        newlyMatchedCount += sampleMatch.matched.length;
+
+        const allMatches: MatchedLogRecord[] = [...sampleMatch.matched];
+        let newlyMatchedCount = sampleMatch.matched.length;
 
         let rematch = { matched: [] as MatchedLogRecord[], unmatched: pendingLogs };
         if (pendingLogs.length > 0) {
@@ -415,16 +390,15 @@ export class LogProcessingPipeline {
             templates: [postUpdateTemplate],
           });
           if (rematch.matched.length > 0) {
-            await this.appendMatches(libraryId, library, rematch.matched, matchedRecords);
+            allMatches.push(...rematch.matched);
             newlyMatchedCount += rematch.matched.length;
           }
           pendingLogs = rematch.unmatched;
         }
 
-        // Tighten constants if some variables are identical across all matched samples for this template.
         const tightened = await this.tightenTemplateConstants(
           postUpdateTemplate,
-          [...sampleMatch.matched, ...rematch.matched],
+          allMatches,
           libraryId,
           library,
           newTemplates,
@@ -432,6 +406,8 @@ export class LogProcessingPipeline {
         if (tightened) {
           postUpdateTemplate = tightened;
         }
+
+        await this.appendMatches(libraryId, library, allMatches, matchedRecords);
 
         if (newlyMatchedCount > 0) {
           if (this.deps.observer?.onMatching) {
@@ -494,81 +470,32 @@ export class LogProcessingPipeline {
     await this.deps.templateManager.recordMatches(libraryId, matches);
   }
 
-  private async validateAndRepair(
-    candidate: LogTemplateDefinition,
-    samples: string[],
-    context: AgentContext,
-  ): Promise<LogTemplateDefinition | undefined> {
-    const lineIndex = this.extractLineIndex(context);
-    if (lineIndex === undefined) {
-      throw new Error('validateAndRepair requires lineIndex in context');
-    }
-
-    const sample = samples[0] ?? '';
+  private async validateTemplateMatch(
+    template: LogTemplateDefinition,
+    sample: string,
+    lineIndex: number,
+  ): Promise<boolean> {
     const runtime = buildRegexFromTemplate(
-      candidate.placeholderTemplate,
-      candidate.placeholderVariables,
+      template.placeholderTemplate,
+      template.placeholderVariables,
       sample,
     );
     const matchResult = matchEntireLine(runtime.pattern, sample);
+
     if (!matchResult.matched) {
-      this.logStage(lineIndex, 'validation', 'failed');
-      await this.recordFailure(lineIndex, sample, 'validation', 'Template did not match sample; cannot validate variables.', candidate, {
-        matchError: matchResult.error,
-      });
-      return undefined;
-    }
-
-    const validationResult = await this.deps.agents.validation.run(
-      {
-        sample,
-        variables: matchResult.variables,
-      },
-      context,
-    );
-
-    if (validationResult.output?.isValid) {
-      return candidate;
-    }
-
-    if (!validationResult.output) {
       this.logStage(lineIndex, 'validation', 'failed');
       await this.recordFailure(
         lineIndex,
         sample,
         'validation',
-        'Validation agent did not return output.',
-        candidate,
-        { issues: validationResult.issues },
+        'Template regex does not match sample',
+        template,
+        { matchError: matchResult.error },
       );
-      return undefined;
+      return false;
     }
 
-    this.logStage(lineIndex, 'validation', 'failed');
-
-    const repairResult = await this.deps.agents.repair.run(
-      {
-        template: candidate,
-        diagnostics: validationResult.output.diagnostics,
-        samples,
-      },
-      context,
-    );
-
-    if (repairResult.status !== 'success' || !repairResult.output) {
-      this.logStage(lineIndex, 'repair', 'failed');
-      await this.recordFailure(
-        lineIndex,
-        sample,
-        'repair',
-        'Repair agent failed to fix validation issues.',
-        candidate,
-        { diagnostics: validationResult.output.diagnostics },
-      );
-      return undefined;
-    }
-
-    return repairResult.output.template;
+    return true;
   }
 
   private async persistTemplate(
