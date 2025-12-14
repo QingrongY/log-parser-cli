@@ -20,7 +20,9 @@
       "Bash(git push)",
       "Bash(ls:*)",
       "Bash(git commit:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(git reset:*)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []
