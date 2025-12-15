@@ -11,7 +11,7 @@ import type {
   TemplateLibrary,
   TemplateManager,
 } from '../core/index.js';
-import type { LogTemplateDefinition } from '../agents/index.js';
+import type { LogTemplateDefinition, HeadPatternDefinition } from '../agents/index.js';
 import { ensureDirectory, fileExists, readJsonFile, writeJsonFile } from './io/files.js';
 
 export interface FileTemplateManagerOptions {
@@ -46,6 +46,7 @@ export class FileTemplateManager implements TemplateManager {
       id: persisted.id ?? id,
       templates: persisted.templates ?? [],
       matchedSamples: persisted.matchedSamples ?? [],
+      headPattern: persisted.headPattern,
       nextTemplateNumber:
         persisted.nextTemplateNumber ??
         this.estimateNextTemplateNumber(persisted.templates ?? []),
@@ -95,6 +96,15 @@ export class FileTemplateManager implements TemplateManager {
 
   private resolvePath(id: string): string {
     return join(this.baseDir, `${id}.json`);
+  }
+
+  async saveHeadPattern(id: string, head: HeadPatternDefinition): Promise<void> {
+    const library = await this.loadLibrary(id);
+    const nextLibrary: TemplateLibrary = {
+      ...library,
+      headPattern: head,
+    };
+    await this.persistLibrary(id, nextLibrary);
   }
 
   private async persistLibrary(id: string, library: TemplateLibrary): Promise<void> {

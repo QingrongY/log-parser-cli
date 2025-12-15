@@ -8,6 +8,7 @@ export type LogParserAgentKind =
   | 'routing'
   | 'parsing'
   | 'refine'
+  | 'head'
   | 'interaction';
 
 export type AgentRunStatus =
@@ -79,6 +80,12 @@ export interface LogTemplateDefinition {
   description?: string;
   source?: string;
   metadata?: Record<string, unknown>;
+}
+
+export interface HeadPatternDefinition {
+  pattern: string;
+  notes?: string;
+  samples?: Array<{ raw: string; content?: string }>;
 }
 
 export interface TemplateValidationDiagnostics {

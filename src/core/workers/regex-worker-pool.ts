@@ -7,15 +7,20 @@
 import type { LogTemplateDefinition } from '../../agents/index.js';
 import { buildRegexFromTemplate } from '../../agents/agents/parsing-agent.js';
 import type { MatchedLogRecord } from '../types.js';
+import type { HeadPatternDefinition } from '../../agents/types.js';
+import { extractContentWithHead } from '../utils/head-pattern.js';
 
 export interface RegexLogEntry {
   raw: string;
   index: number;
+  content?: string;
+  headMatched?: boolean;
 }
 
 export interface RegexMatchRequest {
   logs: RegexLogEntry[];
   templates: LogTemplateDefinition[];
+  headPattern?: HeadPatternDefinition;
 }
 
 export interface RegexMatchResult {
@@ -40,10 +45,11 @@ export class RegexWorkerPool {
     const concurrency = Math.max(1, this.options.concurrency ?? 1);
     const chunkSize = Math.max(1, Math.ceil(request.logs.length / concurrency));
     const chunks = this.chunkLogs(request.logs, chunkSize);
+    const headRuntime = this.buildHeadRuntime(request.headPattern);
 
     for (const chunk of chunks) {
       for (const entry of chunk) {
-        const record = this.matchSingle(entry, request.templates);
+        const record = this.matchSingle(entry, request.templates, headRuntime);
         if (record) {
           matched.push(record);
         } else {
@@ -58,6 +64,7 @@ export class RegexWorkerPool {
   private matchSingle(
     entry: RegexLogEntry,
     templates: LogTemplateDefinition[],
+    headRuntime?: { regex: RegExp; head: HeadPatternDefinition },
   ): MatchedLogRecord | undefined {
     for (const template of templates) {
       try {
@@ -69,12 +76,17 @@ export class RegexWorkerPool {
           template.placeholderVariables ?? {},
         );
         const regex = new RegExp(pattern);
-        const match = regex.exec(entry.raw);
+        const targetText = this.selectTargetText(entry, template, headRuntime);
+        if (targetText === undefined) {
+          continue;
+        }
+        const match = regex.exec(targetText);
         if (!match) {
           continue;
         }
         return {
           raw: entry.raw,
+          content: targetText === entry.raw ? undefined : targetText,
           lineIndex: entry.index,
           template,
           variables: this.extractVariables(match, variables ?? []),
@@ -115,5 +127,38 @@ export class RegexWorkerPool {
       result.push(logs.slice(i, i + size));
     }
     return result;
+  }
+
+  private buildHeadRuntime(
+    head?: HeadPatternDefinition,
+  ): { regex: RegExp; head: HeadPatternDefinition } | undefined {
+    if (!head?.pattern) {
+      return undefined;
+    }
+    try {
+      const regex = new RegExp(head.pattern);
+      return { regex, head };
+    } catch {
+      return undefined;
+    }
+  }
+
+  private selectTargetText(
+    entry: RegexLogEntry,
+    template: LogTemplateDefinition,
+    headRuntime?: { regex: RegExp; head: HeadPatternDefinition },
+  ): string | undefined {
+    const contentOnly = Boolean(template.metadata?.['contentOnly']);
+    if (!contentOnly || !headRuntime) {
+      return entry.raw;
+    }
+    if (entry.content !== undefined && entry.headMatched) {
+      return entry.content;
+    }
+    const extracted = extractContentWithHead(entry.raw, headRuntime.head, headRuntime.regex);
+    if (!extracted.matched) {
+      return undefined;
+    }
+    return extracted.content ?? entry.raw;
   }
 }

@@ -6,6 +6,7 @@
 
 import type {
   LogTemplateDefinition,
+  HeadPatternDefinition,
   TemplateValidationDiagnostics,
 } from '../agents/index.js';
 
@@ -19,6 +20,7 @@ export interface LogProcessingOptions {
 
 export interface MatchedLogRecord {
   raw: string;
+  content?: string;
   template: LogTemplateDefinition;
   variables: Record<string, string>;
   lineIndex?: number;
@@ -29,6 +31,7 @@ export interface TemplateLibrary {
   templates: LogTemplateDefinition[];
   matchedSamples: MatchedLogRecord[];
   nextTemplateNumber?: number;
+  headPattern?: HeadPatternDefinition;
 }
 
 export interface TemplateManager {
@@ -37,6 +40,7 @@ export interface TemplateManager {
   saveTemplate(id: string, template: LogTemplateDefinition): Promise<LogTemplateDefinition>;
   deleteTemplate(libraryId: string, templateId: string): Promise<void>;
   recordMatches(id: string, matches: MatchedLogRecord[]): Promise<void>;
+  saveHeadPattern?(libraryId: string, head: HeadPatternDefinition): Promise<void>;
 }
 
 export interface LogProcessingSummary {

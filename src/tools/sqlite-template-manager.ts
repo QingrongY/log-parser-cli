@@ -13,7 +13,7 @@ import type {
   TemplateLibrary,
   TemplateManager,
 } from '../core/index.js';
-import type { LogTemplateDefinition } from '../agents/index.js';
+import type { HeadPatternDefinition, LogTemplateDefinition } from '../agents/index.js';
 
 const SQL = await initSqlJs();
 type SqlJsDatabase = InstanceType<typeof SQL.Database>;
@@ -77,11 +77,13 @@ export class SqliteTemplateManager implements TemplateManager {
     const templates = this.loadTemplates(handle, id);
     const matchedSamples = this.loadMatchedSamples(handle, id);
     const nextTemplateNumber = this.getNextTemplateNumber(handle, id);
+    const headPattern = this.getHeadPattern(handle, id);
     return {
       id,
       templates,
       matchedSamples,
       nextTemplateNumber,
+      headPattern,
     };
   }
 
@@ -144,6 +146,19 @@ export class SqliteTemplateManager implements TemplateManager {
     this.persist(handle);
   }
 
+  async saveHeadPattern(libraryId: string, head: HeadPatternDefinition): Promise<void> {
+    const handle = this.getHandle(libraryId);
+    this.ensureLibraryRecord(handle, libraryId);
+    const payload = JSON.stringify(head);
+    const stmt = handle.db.prepare(
+      `UPDATE template_libraries SET head_pattern = ? WHERE id = ?`,
+    );
+    stmt.bind([payload, libraryId]);
+    stmt.step();
+    stmt.free();
+    this.persist(handle);
+  }
+
   private getHandle(libraryId: string): DbHandle {
     let handle = this.handles.get(libraryId);
     if (handle) {
@@ -153,6 +168,7 @@ export class SqliteTemplateManager implements TemplateManager {
     ensureDirectory(dirname(filePath));
     const { db, existed } = this.loadDatabase(filePath);
     this.setup(db);
+    this.ensureHeadPatternColumn(db);
     handle = { db, path: filePath };
     this.handles.set(libraryId, handle);
     if (!existed) {
@@ -173,7 +189,8 @@ export class SqliteTemplateManager implements TemplateManager {
     db.exec(`
       CREATE TABLE IF NOT EXISTS template_libraries (
         id TEXT PRIMARY KEY,
-        next_template_number INTEGER NOT NULL DEFAULT 1
+        next_template_number INTEGER NOT NULL DEFAULT 1,
+        head_pattern TEXT
       );
       CREATE TABLE IF NOT EXISTS log_templates (
         id TEXT PRIMARY KEY,
@@ -316,6 +333,38 @@ export class SqliteTemplateManager implements TemplateManager {
   private persist(handle: DbHandle): void {
     const data = handle.db.export();
     writeFileSync(handle.path, Buffer.from(data));
+  }
+
+  private ensureHeadPatternColumn(db: SqlJsDatabase): void {
+    const info = db.exec(`PRAGMA table_info(template_libraries);`);
+    const exists = info.some((table: { values?: unknown[][] }) =>
+      (table.values ?? []).some((row: unknown[]) => Array.isArray(row) && row[1] === 'head_pattern'),
+    );
+    if (!exists) {
+      try {
+        db.exec('ALTER TABLE template_libraries ADD COLUMN head_pattern TEXT');
+      } catch {
+        // ignore if column already added concurrently
+      }
+    }
+  }
+
+  private getHeadPattern(handle: DbHandle, libraryId: string): HeadPatternDefinition | undefined {
+    const stmt = handle.db.prepare('SELECT head_pattern FROM template_libraries WHERE id = ?');
+    stmt.bind([libraryId]);
+    stmt.step();
+    const row = stmt.getAsObject() as Record<string, unknown>;
+    stmt.free();
+    const value = row['head_pattern'];
+    if (typeof value !== 'string' || value.length === 0) {
+      return undefined;
+    }
+    try {
+      const parsed = JSON.parse(value);
+      return parsed && typeof parsed === 'object' ? (parsed as HeadPatternDefinition) : undefined;
+    } catch {
+      return undefined;
+    }
   }
 
   private fromFileName(name: string): string | undefined {

@@ -12,6 +12,7 @@ import {
   ParsingAgent,
   RoutingAgent,
   RefineAgent,
+  HeadAgent,
   type LlmClient,
 } from '../agents/index.js';
 import {
@@ -22,6 +23,8 @@ import {
   type TemplateManager,
   type ProcessingObserver,
 } from '../core/index.js';
+import type { RegexLogEntry } from '../core/workers/regex-worker-pool.js';
+import { extractContentWithHead } from '../core/utils/head-pattern.js';
 import {
   SqliteTemplateManager,
   writeMatchReport,
@@ -269,11 +272,13 @@ function createDefaultAgents(llmClient: LlmClient): {
   routing: RoutingAgent;
   parsing: ParsingAgent;
   refine: RefineAgent;
+  head: HeadAgent;
 } {
   return {
     routing: new RoutingAgent({ llmClient }),
     parsing: new ParsingAgent({ llmClient }),
     refine: new RefineAgent({ llmClient }),
+    head: new HeadAgent({ llmClient }),
   };
 }
 
@@ -406,16 +411,31 @@ async function replayMatchPhase({
     }
 
     totalLines += lines.length;
-    const entries = lines.map((raw) => ({
-      raw,
-      index: globalLineIndex++,
-    }));
-
     let library = libraryCache.get(record.libraryId);
     if (!library) {
       library = await templateManager.loadLibrary(record.libraryId);
       libraryCache.set(record.libraryId, library);
     }
+    const headPattern = library.headPattern;
+    let headRegex: RegExp | undefined;
+    if (headPattern?.pattern) {
+      try {
+        headRegex = new RegExp(headPattern.pattern);
+      } catch {
+        headRegex = undefined;
+      }
+    }
+    const entries: RegexLogEntry[] = lines.map((raw) => {
+      const entry: RegexLogEntry = { raw, index: globalLineIndex++ };
+      if (headRegex) {
+        const extraction = extractContentWithHead(raw, headPattern, headRegex);
+        if (extraction.matched) {
+          entry.content = extraction.content;
+          entry.headMatched = true;
+        }
+      }
+      return entry;
+    });
     const templates = library.templates;
     const result =
       templates.length === 0
@@ -423,6 +443,7 @@ async function replayMatchPhase({
         : await regexWorkerPool.match({
             logs: entries,
             templates,
+            headPattern,
           });
 
     matched += result.matched.length;

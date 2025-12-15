@@ -201,10 +201,6 @@ export const buildRegexFromTemplate = (
   if (segments.length === 0) {
     throw new Error('LLM did not produce any placeholders.');
   }
-  const hasVariables = segments.some((segment) => segment.kind === 'var');
-  if (!hasVariables) {
-    throw new Error('LLM output contained no variables.');
-  }
 
   // Skip strict reconstruction check to tolerate slight formatting differences from the LLM.
 
