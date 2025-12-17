@@ -11,7 +11,7 @@ import pandas as pd
 
 # Resolve paths using this file location (CWD independent)
 SCRIPT_DIR = Path(__file__).resolve().parent  # baseline/
-DATASETS_ROOT = SCRIPT_DIR / ".." / "datasets"
+DATASETS_ROOT = SCRIPT_DIR / ".." / ".." / "datasets"
 BASELINE_PKG_ROOT = SCRIPT_DIR
 BASELINE_REPO = SCRIPT_DIR / "logparser"
 OUTPUT_ROOT = SCRIPT_DIR / "output"
@@ -267,8 +267,8 @@ def save_results(results):
 
 
 def load_ours_results():
-    """Load latest evaluation results from evaluation/results/*.json and map to baseline schema."""
-    eval_dir = Path("../evaluation/results").resolve()
+    """Load latest evaluation results from results/*.json and map to baseline schema."""
+    eval_dir = Path("../results").resolve()
     json_files = sorted(eval_dir.glob("*.json"))
     if not json_files:
         print("[warn] no evaluation results found for 'Ours'")

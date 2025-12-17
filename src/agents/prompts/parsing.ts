@@ -16,7 +16,10 @@ export const PARSING_SYSTEM_PROMPT =
 Follow the shared background knowledge strictly.
 Output must be valid JSON only (no markdown, no extra text).`;
 
-export const buildParsingPrompt = ({ logLine, variableHints }: ParsingPromptOptions): string => {
+export const buildParsingPrompt = ({
+  logLine,
+  variableHints,
+}: ParsingPromptOptions): string => {
   const hints =
     variableHints?.length
       ? `User preferences for variable naming (use when applicable): ${variableHints.join(', ')}`

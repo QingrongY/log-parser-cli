@@ -86,6 +86,16 @@ export class LogProcessingPipeline {
     details?: Record<string, unknown>
   ): Promise<void> {
     const enrichedDetails = { ...(details ?? {}) };
+    // Keep LLM output and reconstruction traces if provided by agents.
+    if (details?.['llmOutput']) {
+      enrichedDetails.llmOutput = details['llmOutput'];
+    }
+    if (details?.['failedTemplate']) {
+      enrichedDetails.failedTemplate = details['failedTemplate'];
+    }
+    if (details?.['failedReconstruction']) {
+      enrichedDetails.failedReconstruction = details['failedReconstruction'];
+    }
 
     try {
       if (template) {
@@ -244,7 +254,7 @@ export class LogProcessingPipeline {
         break;
       }
 
-      const parseResult = await this.deps.agents.parsing.run(
+      let parseResult = await this.deps.agents.parsing.run(
         {
           samples: [this.selectParsingInput(sample, headPattern)],
           variableHints: options.variableHints,
@@ -350,9 +360,9 @@ export class LogProcessingPipeline {
         const refineResult = await this.deps.agents.refine.run(
           {
             candidateTemplate: validatedTemplate,
-            candidateSamples: [sample.raw],
+            candidateSamples: [this.selectParsingInput(sample, headPattern)],
             conflictingTemplate: conflict.template,
-            conflictingSamples: conflict.samples,
+            conflictingSamples: conflict.samples.map((raw) => this.selectRefineInput(raw, headPattern)),
           },
           lineContext,
         );
@@ -588,7 +598,7 @@ export class LogProcessingPipeline {
       samples.forEach((s) => seenSamples.add(s));
       if (samples.length > 0) {
         this.logStage(-1, 'head', `deriving head regex (initial, samples=${samples.length})`);
-      const result = await headAgent.run({ samples }, params.context);
+        const result = await headAgent.run({ samples, newSamples: samples }, params.context);
         if (result.status === 'success' && result.output?.pattern) {
           current = result.output;
           params.library.headPattern = current;
@@ -672,7 +682,7 @@ export class LogProcessingPipeline {
         `[log-parser] head refine round ${round + 1}: unmatched=${state.unmatched.length}, samples=${refineSamples.length}`,
       );
       const result = await headAgent.run(
-        { samples: refineSamples, previousPattern: current.pattern },
+        { samples: refineSamples, newSamples: newPicks, previousPattern: current.pattern },
         params.context,
       );
       if (result.status !== 'success' || !result.output?.pattern) {
@@ -689,7 +699,7 @@ export class LogProcessingPipeline {
       console.log(
         `[log-parser] head candidate round ${round + 1}: unmatched=${next.unmatched.length}/${params.logs.length}`,
       );
-      if (next.unmatched.length < bestState.unmatched.length) {
+      if (next.unmatched.length <= bestState.unmatched.length) {
         bestState = next;
         bestPattern = next.pattern;
         current = next.pattern;
@@ -768,6 +778,15 @@ export class LogProcessingPipeline {
     });
   }
 
+  private reconstructFromTemplate(template: LogTemplateDefinition): string | undefined {
+    if (!template.placeholderTemplate) return undefined;
+    const variables = template.placeholderVariables ?? {};
+    return template.placeholderTemplate.replace(/\u001b]9;var=([^\\u0007]+)\u0007/g, (_m, name) => {
+      const key = String(name);
+      return variables[key] ?? '';
+    });
+  }
+
   private evaluateHeadCoverage(
     logs: string[],
     headPattern: HeadPatternDefinition,
@@ -795,6 +814,17 @@ export class LogProcessingPipeline {
       return sample.content;
     }
     return sample.content ?? sample.raw;
+  }
+
+  private selectRefineInput(raw: string, headPattern?: HeadPatternDefinition): string {
+    if (!headPattern?.pattern) {
+      return raw;
+    }
+    const extraction = extractContentWithHead(raw, headPattern);
+    if (extraction.matched && extraction.content !== undefined) {
+      return extraction.content;
+    }
+    return raw;
   }
 
   private maybeAttachHeadMetadata(

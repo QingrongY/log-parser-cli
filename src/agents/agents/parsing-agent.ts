@@ -19,6 +19,8 @@ import { ensureValidRegex } from '../utils/validation.js';
 export interface ParsingAgentInput {
   samples: string[];
   variableHints?: string[];
+  failedTemplate?: string;
+  failedReconstruction?: string;
 }
 
 export interface ParsingAgentOutput extends LogTemplateDefinition {
@@ -88,7 +90,10 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       hint.trim().toLowerCase(),
     );
 
-    const prompt = buildParsingPrompt({ logLine: samples[0], variableHints });
+    const prompt = buildParsingPrompt({
+      logLine: samples[0],
+      variableHints,
+    });
 
     try {
       const llmResult = await this.generateWithLlm(
@@ -124,6 +129,10 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
     context: AgentContext,
     prompt: string,
   ): Promise<LlmParsingResult> {
+    const renderTemplate = (tpl: string, vars: Record<string, string>): string =>
+      tpl.replace(/\u001b]9;var=([^\u0007]+)\u0007/g, (_m, name) => vars[name] ?? '');
+    let parsed: ParsingLlmResponse | undefined;
+    let reconstruction: string | undefined;
     const completion = await this.llmClient!.complete({
       prompt,
       systemPrompt: PARSING_SYSTEM_PROMPT,
@@ -137,7 +146,7 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmRaw: safeSerialize(completion.raw),
         });
       }
-      const parsed = this.parseJsonSafe<ParsingLlmResponse>(completion.output);
+      parsed = this.parseJsonSafe<ParsingLlmResponse>(completion.output);
       if (!parsed.template) {
         throw new ParsingFailureError('LLM response missing template with placeholders.', {
           llmOutput: completion.output,
@@ -148,7 +157,26 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmOutput: completion.output,
         });
       }
-      const { pattern, variables } = buildRegexFromTemplate(parsed.template, parsed.variables, sample);
+      try {
+        reconstruction = renderTemplate(parsed.template, parsed.variables);
+      } catch {
+        reconstruction = undefined;
+      }
+
+      let pattern: string;
+      let variables: string[];
+      try {
+        const built = buildRegexFromTemplate(parsed.template, parsed.variables, sample);
+        pattern = built.pattern;
+        variables = built.variables;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        throw new ParsingFailureError(message, {
+          failedTemplate: parsed.template,
+          failedVariables: parsed.variables,
+          failedReconstruction: reconstruction,
+        });
+      }
       const normalizedPattern = normalizeRegexPattern(pattern);
       ensureValidRegex(normalizedPattern);
       const template: LogTemplateDefinition = {
@@ -158,16 +186,16 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
         variables,
         description: parsed.description ?? 'LLM-placeholder log template',
         source: context.templateLibraryId ?? context.sourceHint,
-      metadata: {
-        sample,
-        variableHints,
-        taggedSample: parsed.template,
-        llmExample: parsed.example,
-        llmModel: this.llmClient?.modelName,
-        llmRaw: completion.output,
-        llmTemplate: parsed.template,
-        llmVariables: parsed.variables,
-      },
+        metadata: {
+          sample,
+          variableHints,
+          taggedSample: parsed.template,
+          llmExample: parsed.example,
+          llmModel: this.llmClient?.modelName,
+          llmRaw: completion.output,
+          llmTemplate: parsed.template,
+          llmVariables: parsed.variables,
+        },
       };
 
       return { template, prompt };
@@ -175,9 +203,15 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       const message = error instanceof Error ? error.message : String(error);
       const details =
         error instanceof ParsingFailureError ? error.details : undefined;
-      throw new ParsingFailureError(message, {
+      const enriched = {
         ...(details ?? {}),
+        failedTemplate: details?.failedTemplate ?? parsed?.template,
+        failedVariables: details?.failedVariables ?? parsed?.variables,
+        failedReconstruction: details?.failedReconstruction ?? reconstruction,
         llmOutput: completion.output,
+      };
+      throw new ParsingFailureError(message, {
+        ...enriched,
       });
     }
   }
@@ -202,15 +236,15 @@ export const buildRegexFromTemplate = (
     throw new Error('LLM did not produce any placeholders.');
   }
 
-  // Skip strict reconstruction check to tolerate slight formatting differences from the LLM.
-
   const variables: string[] = [];
   const nameCounts = new Map<string, number>();
   const parts: string[] = [];
+  const reconstructed: string[] = [];
 
   for (const segment of segments) {
     if (segment.kind === 'text') {
       parts.push(escapeRegex(segment.value));
+      reconstructed.push(segment.value);
       continue;
     }
     const baseName = sanitizeVariableName(segment.name);
@@ -220,6 +254,14 @@ export const buildRegexFromTemplate = (
     variables.push(finalName);
     const fragment = inferRegexForValue(segment.value);
     parts.push(`(?<${finalName}>${fragment})`);
+    reconstructed.push(segment.value);
+  }
+
+  if (sample !== undefined) {
+    const joined = reconstructed.join('');
+    if (joined !== sample) {
+      throw new Error('Reconstructed line does not match the raw sample.');
+    }
   }
 
   return { pattern: parts.join(''), variables };

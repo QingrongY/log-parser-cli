@@ -26,10 +26,11 @@ Task:
 - REFINE_CANDIDATE: The candidate is too generic or marks STRUCTURE as BUSINESS DATA. Make it strictly MORE SPECIFIC.
 - ADOPT_CANDIDATE: The existing template is too strict and hard-codes BUSINESS DATA. Return the candidate EXACTLY as provided.
 
-Output rules:
-- Use \\u001b]9;var=<name>\\u0007 for every BUSINESS DATA span.
-- Every placeholder that appears in your returned template MUST have a value in "variables" with the same name.
-- Do NOT invent extra variable names; after substitution the line must exactly reconstruct the raw log sample.
+Output rules if refine candidate:
+- Mark all BUSINESS DATA (variables) directly in the raw log line WITHOUT changing any other characters.
+- Replace each variable span with the placeholder \\u001b]9;var=<name>\\u0007.
+- Do NOT include the variable value inline in the template.
+- Provide all original values (verbatim) in a variables map.
 - Index repeated types (ip1, ip2, ...); prefer clear, lowercase names; prefer user hints when provided.
 
 Output JSON only (no markdown, no extra text):

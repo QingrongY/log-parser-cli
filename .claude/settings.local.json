@@ -23,7 +23,11 @@
       "Bash(git rm:*)",
       "Bash(git reset:*)",
       "Bash(git mv:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git fetch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git submodule:*)"
     ],
     "deny": [],
     "ask": []
