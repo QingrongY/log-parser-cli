@@ -25,7 +25,6 @@ export interface ParsingAgentInput {
 
 export interface ParsingAgentOutput extends LogTemplateDefinition {
   sampleCount: number;
-  promptUsed: string;
 }
 
 interface ParsingLlmResponse {
@@ -37,7 +36,6 @@ interface ParsingLlmResponse {
 
 interface LlmParsingResult {
   template: LogTemplateDefinition;
-  prompt: string;
 }
 
 class ParsingFailureError extends Error {
@@ -93,6 +91,8 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
     const prompt = buildParsingPrompt({
       logLine: samples[0],
       variableHints,
+      failedTemplate: input.failedTemplate,
+      failedRendered: input.failedReconstruction,
     });
 
     try {
@@ -107,7 +107,6 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
         output: {
           ...llmResult.template,
           sampleCount: samples.length,
-          promptUsed: llmResult.prompt,
         },
       };
     } catch (error) {
@@ -118,7 +117,7 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       return {
         status: 'retryable-error',
         issues: [`LLM parsing failed: ${message}`],
-        diagnostics: { promptUsed: prompt, ...(details ?? {}) },
+        diagnostics: { ...(details ?? {}) },
       };
     }
   }
@@ -198,7 +197,7 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
         },
       };
 
-      return { template, prompt };
+      return { template };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       const details =

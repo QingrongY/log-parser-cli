@@ -149,8 +149,11 @@ export class RegexWorkerPool {
     headRuntime?: { regex: RegExp; head: HeadPatternDefinition },
   ): string | undefined {
     const contentOnly = Boolean(template.metadata?.['contentOnly']);
-    if (!contentOnly || !headRuntime) {
+    if (!contentOnly) {
       return entry.raw;
+    }
+    if (!headRuntime) {
+      return undefined;
     }
     if (entry.content !== undefined && entry.headMatched) {
       return entry.content;
@@ -159,6 +162,6 @@ export class RegexWorkerPool {
     if (!extracted.matched) {
       return undefined;
     }
-    return extracted.content ?? entry.raw;
+    return extracted.content;
   }
 }

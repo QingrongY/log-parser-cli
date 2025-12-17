@@ -85,7 +85,8 @@ export class LogProcessingPipeline {
     template?: LogTemplateDefinition,
     details?: Record<string, unknown>
   ): Promise<void> {
-    const enrichedDetails = { ...(details ?? {}) };
+    const { promptUsed, ...restDetails } = details ?? {};
+    const enrichedDetails = { ...restDetails };
     // Keep LLM output and reconstruction traces if provided by agents.
     if (details?.['llmOutput']) {
       enrichedDetails.llmOutput = details['llmOutput'];
@@ -128,11 +129,7 @@ export class LogProcessingPipeline {
     };
     this.failures.push(failure);
     this.deps.observer?.onFailure?.(failure);
-
-    if (this.deps.failureLogPath) {
-      const { appendFile } = await import('node:fs/promises');
-      await appendFile(this.deps.failureLogPath, JSON.stringify(failure) + '\n', 'utf-8').catch(() => {});
-    }
+    console.error(`[log-parser] failure: ${JSON.stringify(failure)}`);
   }
 
   private async recordRefineTrace(
@@ -149,16 +146,12 @@ export class LogProcessingPipeline {
       action: output.action,
       template: {
         placeholderTemplate: output.template.placeholderTemplate,
-        placeholderVariables: output.template.placeholderVariables,
-        variables: output.template.variables,
-      },
-      conflictingTemplateId: conflictingTemplate?.id,
-    };
-
-    if (this.deps.failureLogPath) {
-      const { appendFile } = await import('node:fs/promises');
-      await appendFile(this.deps.failureLogPath, JSON.stringify(trace) + '\n', 'utf-8').catch(() => {});
-    }
+      placeholderVariables: output.template.placeholderVariables,
+      variables: output.template.variables,
+    },
+    conflictingTemplateId: conflictingTemplate?.id,
+  };
+    console.log(`[log-parser] refine-trace: ${JSON.stringify(trace)}`);
   }
 
   private extractLineIndex(context: AgentContext | undefined): number | undefined {
@@ -232,13 +225,6 @@ export class LogProcessingPipeline {
       if (!sample) {
         break;
       }
-      const lineContext: AgentContext = {
-        ...pipelineContext,
-        metadata: {
-          ...(pipelineContext.metadata ?? {}),
-          lineIndex: sample.index,
-        },
-      };
       const remainingLogs = pendingLogs.length + 1;
       if (skipThreshold > 0 && remainingLogs <= skipThreshold) {
         this.logStage(
@@ -246,172 +232,30 @@ export class LogProcessingPipeline {
           'update',
           `skipped remaining ${remainingLogs} log(s) (threshold ${skipThreshold})`,
         );
-        unresolvedSamples.push(sample.raw);
-        unresolvedSamples.push(
-          ...pendingLogs.map((entry) => entry.raw),
-        );
+        unresolvedSamples.push(sample.raw, ...pendingLogs.map((entry) => entry.raw));
         pendingLogs = [];
         break;
       }
-
-      let parseResult = await this.deps.agents.parsing.run(
-        {
-          samples: [this.selectParsingInput(sample, headPattern)],
-          variableHints: options.variableHints,
+      const lineContext: AgentContext = {
+        ...pipelineContext,
+        metadata: {
+          ...(pipelineContext.metadata ?? {}),
+          lineIndex: sample.index,
         },
-        lineContext,
-      );
-      if (parseResult.status !== 'success' || !parseResult.output) {
-        this.logStage(sample.index, 'parsing', 'failed');
-        await this.recordFailure(
-          sample.index,
-          sample.raw,
-          'parsing',
-          'Parsing agent failed',
-          undefined,
-          { issues: parseResult.issues, diagnostics: parseResult.diagnostics },
-        );
-        unresolvedSamples.push(sample.raw);
-        continue;
-      }
-
-      let currentTemplate: LogTemplateDefinition = this.maybeAttachHeadMetadata(
-        parseResult.output,
+      };
+      pendingLogs = await this.processSample({
         sample,
+        pendingLogs,
+        library,
+        libraryId,
         headPattern,
-      );
-      let templateAccepted = false;
-
-      while (!templateAccepted) {
-        if (
-          skipThreshold > 0 &&
-          pendingLogs.length + (sample ? 1 : 0) <= skipThreshold
-        ) {
-          unresolvedSamples.push(sample.raw);
-          this.logStage(sample.index, 'update', `skipped due to threshold ${skipThreshold}`);
-          break;
-        }
-        const isValid = await this.validateTemplateMatch(
-          currentTemplate,
-          sample,
-          sample.index,
-          headPattern,
-        );
-
-        if (!isValid) {
-          unresolvedSamples.push(sample.raw);
-          break;
-        }
-
-        const validatedTemplate = currentTemplate;
-        const detectedConflicts = this.findConflicts(validatedTemplate, library, headPattern);
-
-        if (detectedConflicts.length === 0) {
-          this.logStage(sample.index, 'update', 'added new template', { action: 'added' });
-
-          const savedTemplate = await this.persistTemplate(library, libraryId, {
-            action: 'added',
-            template: validatedTemplate,
-          });
-          const postTemplate = savedTemplate ?? validatedTemplate;
-          newTemplates.push(postTemplate);
-
-          const sampleMatch = await this.deps.regexWorkerPool.match({
-            logs: [sample],
-            templates: [postTemplate],
-            headPattern,
-          });
-
-          const allMatches: MatchedLogRecord[] = [...sampleMatch.matched];
-          let newlyMatchedCount = sampleMatch.matched.length;
-
-          if (pendingLogs.length > 0) {
-            const rematch = await this.deps.regexWorkerPool.match({
-              logs: pendingLogs,
-              templates: [postTemplate],
-              headPattern,
-            });
-            if (rematch.matched.length > 0) {
-              allMatches.push(...rematch.matched);
-              newlyMatchedCount += rematch.matched.length;
-            }
-            pendingLogs = rematch.unmatched;
-          }
-
-          await this.appendMatches(libraryId, library, allMatches, matchedRecords);
-
-          if (newlyMatchedCount > 0) {
-            if (this.deps.observer?.onMatching) {
-              this.deps.observer.onMatching({
-                lineIndex: sample.index,
-                matched: newlyMatchedCount,
-              });
-            } else {
-              this.logStage(sample.index, 'matching', `new template matched ${newlyMatchedCount} log(s)`);
-            }
-          }
-
-          templateAccepted = true;
-          continue;
-        }
-
-        const conflict = detectedConflicts[0];
-
-        const refineResult = await this.deps.agents.refine.run(
-          {
-            candidateTemplate: validatedTemplate,
-            candidateSamples: [this.selectParsingInput(sample, headPattern)],
-            conflictingTemplate: conflict.template,
-            conflictingSamples: conflict.samples.map((raw) => this.selectRefineInput(raw, headPattern)),
-          },
-          lineContext,
-        );
-
-        if (!refineResult.output) {
-          this.logStage(sample.index, 'refine', 'failed');
-          // Stop further refine attempts for this sample; record failure and move on.
-          await this.recordFailure(
-            sample.index,
-            sample.raw,
-            'refine',
-            'Refine agent failed',
-            validatedTemplate,
-            { issues: refineResult.issues },
-          );
-          break;
-        }
-
-        if (refineResult.output.action === 'refine_candidate') {
-          this.logStage(sample.index, 'refine', 'refining candidate');
-          // Replace conflicting template with refined candidate to avoid repeated conflicts.
-          await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id!);
-          library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
-          currentTemplate = this.maybeAttachHeadMetadata(
-            refineResult.output.template,
-            sample,
-            headPattern,
-          );
-          await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
-          // After refinement, loop back to validation for the updated template.
-          continue;
-        }
-
-        if (refineResult.output.action === 'adopt_candidate') {
-          this.logStage(sample.index, 'refine', 'adopting candidate, removing conflicting template');
-          await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id!);
-          library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
-          currentTemplate = this.maybeAttachHeadMetadata(
-            refineResult.output.template,
-            sample,
-            headPattern,
-          );
-          await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
-          continue;
-        }
-
-        unresolvedSamples.push(sample.raw);
-        break;
-      }
+        variableHints: options.variableHints,
+        context: lineContext,
+        matchedRecords,
+        newTemplates,
+        conflicts,
+        unresolvedSamples,
+      });
     }
 
     const summary = {
@@ -424,7 +268,7 @@ export class LogProcessingPipeline {
       newTemplates,
       conflicts,
       matchedRecords,
-      unmatchedSamples: unresolvedSamples,
+      unmatchedSamples: unresolvedSamples.map((s) => s),
       failures: this.failures,
     };
 
@@ -435,15 +279,236 @@ export class LogProcessingPipeline {
     return summary;
   }
 
-  private toConflictFromIssues(sample: string, issues: string[]): TemplateConflict {
-    return {
-      candidate: {
-        placeholderTemplate: sample,
-        placeholderVariables: {},
+  private async processSample(params: {
+    sample: RegexLogEntry;
+    pendingLogs: RegexLogEntry[];
+    library: TemplateLibrary;
+    libraryId: string;
+    headPattern?: HeadPatternDefinition;
+    variableHints?: string[];
+    context: AgentContext;
+    matchedRecords: MatchedLogRecord[];
+    newTemplates: LogTemplateDefinition[];
+    conflicts: TemplateConflict[];
+    unresolvedSamples: string[];
+  }): Promise<RegexLogEntry[]> {
+    const {
+      sample,
+      pendingLogs,
+      library,
+      libraryId,
+      headPattern,
+      variableHints,
+      context,
+      matchedRecords,
+      newTemplates,
+      conflicts,
+      unresolvedSamples,
+    } = params;
+    const content = this.getContent(sample, headPattern);
+    if (headPattern?.pattern && content === undefined) {
+      this.logStage(sample.index, 'parsing', 'failed (head content missing)');
+      await this.recordFailure(sample.index, sample.raw, 'parsing', 'Head content missing', undefined, {
+        headPattern: headPattern.pattern,
+      });
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    const parseResult = await this.deps.agents.parsing.run(
+      {
+        samples: [content ?? ''],
+        variableHints,
       },
-      conflictsWith: [],
-      diagnostics: issues.map((issue) => ({ sample, reason: issue })),
-    };
+      context,
+    );
+
+    if (parseResult.status !== 'success' || !parseResult.output) {
+      this.logStage(sample.index, 'parsing', 'failed');
+      const issueText = parseResult.issues?.join('; ') ?? 'unknown';
+      const reconstructed = (parseResult.diagnostics as Record<string, unknown> | undefined)?.[
+        'failedReconstruction'
+      ] as string | undefined;
+      const contentShown = content ?? '';
+      if (reconstructed) {
+        console.warn(
+          `[log-parser] line ${sample.index}: parsing-agent failed -> ${issueText}; reconstructed="${reconstructed}"; content="${contentShown}"`,
+        );
+      } else {
+        console.warn(`[log-parser] line ${sample.index}: parsing-agent failed -> ${issueText}`);
+      }
+      await this.recordFailure(
+        sample.index,
+        sample.raw,
+        'parsing',
+        'Parsing agent failed',
+        undefined,
+        {
+          issues: parseResult.issues,
+          diagnostics: parseResult.diagnostics,
+          contentUsed: contentShown,
+          headPattern: headPattern?.pattern,
+        },
+      );
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    const parsedTemplate: LogTemplateDefinition = this.maybeAttachHeadMetadata(
+      parseResult.output,
+      sample,
+      headPattern,
+    );
+
+    if (!(await this.validateTemplateMatch(parsedTemplate, sample, sample.index, headPattern))) {
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    const detectedConflicts = this.findConflicts(parsedTemplate, library, headPattern);
+    if (detectedConflicts.length === 0) {
+      this.logStage(sample.index, 'update', 'added new template', { action: 'added' });
+      return this.finalizeTemplate({
+        template: parsedTemplate,
+        sample,
+        pendingLogs,
+        library,
+        libraryId,
+        headPattern,
+        matchedRecords,
+        newTemplates,
+      });
+    }
+
+    conflicts.push({
+      candidate: parsedTemplate,
+      conflictsWith: detectedConflicts.map((c) => c.template),
+    });
+
+    const conflict = detectedConflicts[0];
+    const refineResult = await this.deps.agents.refine.run(
+      {
+        candidateTemplate: parsedTemplate,
+        candidateSamples: [content ?? ''],
+        conflictingTemplate: conflict.template,
+        conflictingSamples: conflict.samples
+          .map((raw) => this.getContentFromRaw(raw, headPattern))
+          .filter((s): s is string => Boolean(s)),
+      },
+      context,
+    );
+
+    if (!refineResult.output) {
+      this.logStage(sample.index, 'refine', 'failed');
+      await this.recordFailure(sample.index, sample.raw, 'refine', 'Refine agent failed', parsedTemplate, {
+        issues: refineResult.issues,
+      });
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
+    if (conflict.template.id) {
+      await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id);
+    }
+    library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
+
+    const refinedTemplate = this.maybeAttachHeadMetadata(
+      refineResult.output.template,
+      sample,
+      headPattern,
+    );
+
+    if (!(await this.validateTemplateMatch(refinedTemplate, sample, sample.index, headPattern))) {
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    const remainingConflicts = this.findConflicts(refinedTemplate, library, headPattern);
+    if (remainingConflicts.length > 0) {
+      conflicts.push({
+        candidate: refinedTemplate,
+        conflictsWith: remainingConflicts.map((c) => c.template),
+      });
+      unresolvedSamples.push(sample.raw);
+      return pendingLogs;
+    }
+
+    this.logStage(sample.index, 'refine', 'accepted refined template');
+    return this.finalizeTemplate({
+      template: refinedTemplate,
+      sample,
+      pendingLogs,
+      library,
+      libraryId,
+      headPattern,
+      matchedRecords,
+      newTemplates,
+    });
+  }
+
+  private async finalizeTemplate(params: {
+    template: LogTemplateDefinition;
+    sample: RegexLogEntry;
+    pendingLogs: RegexLogEntry[];
+    library: TemplateLibrary;
+    libraryId: string;
+    headPattern?: HeadPatternDefinition;
+    matchedRecords: MatchedLogRecord[];
+    newTemplates: LogTemplateDefinition[];
+  }): Promise<RegexLogEntry[]> {
+    const {
+      template,
+      sample,
+      pendingLogs,
+      library,
+      libraryId,
+      headPattern,
+      matchedRecords,
+      newTemplates,
+    } = params;
+
+    const savedTemplate = await this.persistTemplate(library, libraryId, {
+      action: 'added',
+      template,
+    });
+    const activeTemplate = savedTemplate ?? template;
+    newTemplates.push(activeTemplate);
+
+    const sampleMatch = await this.deps.regexWorkerPool.match({
+      logs: [sample],
+      templates: [activeTemplate],
+      headPattern,
+    });
+
+    const allMatches: MatchedLogRecord[] = [...sampleMatch.matched];
+    let updatedPending = pendingLogs;
+
+    if (pendingLogs.length > 0) {
+      const rematch = await this.deps.regexWorkerPool.match({
+        logs: pendingLogs,
+        templates: [activeTemplate],
+        headPattern,
+      });
+      updatedPending = rematch.unmatched;
+      if (rematch.matched.length > 0) {
+        allMatches.push(...rematch.matched);
+      }
+    }
+
+    if (allMatches.length > 0) {
+      await this.appendMatches(libraryId, library, allMatches, matchedRecords);
+      if (this.deps.observer?.onMatching) {
+        this.deps.observer.onMatching({
+          lineIndex: sample.index,
+          matched: allMatches.length,
+        });
+      } else {
+        this.logStage(sample.index, 'matching', `new template matched ${allMatches.length} log(s)`);
+      }
+    }
+
+    return updatedPending;
   }
 
   private async appendMatches(
@@ -466,7 +531,7 @@ export class LogProcessingPipeline {
     lineIndex: number,
     headPattern?: HeadPatternDefinition,
   ): Promise<boolean> {
-    const target = this.resolveTextForTemplate(template, sample, headPattern);
+    const target = this.getTextForTemplate(template, sample, headPattern);
     if (!target.text) {
       this.logStage(lineIndex, 'validation', 'failed');
       await this.recordFailure(
@@ -559,7 +624,7 @@ export class LogProcessingPipeline {
         index: sample.lineIndex ?? 0,
         content: sample.content,
       };
-      const target = this.resolveTextForTemplate(candidate, pseudoEntry, headPattern);
+      const target = this.getTextForTemplate(candidate, pseudoEntry, headPattern);
       if (!target.text) continue;
 
       const result = matchEntireLine(candidateRuntime.pattern, target.text);
@@ -661,13 +726,6 @@ export class LogProcessingPipeline {
           seenSamples.add(line);
           sampleAccumulator.push(line);
         }
-      }
-      if (newPicks.length > 0) {
-        console.log(
-          `[log-parser] head new samples (round ${round + 1}):\n${newPicks
-            .map((s) => `  ${s}`)
-            .join('\n')}`,
-        );
       }
       const refineSamples = [...sampleAccumulator];
       if (refineSamples.length === 0) {
@@ -771,19 +829,12 @@ export class LogProcessingPipeline {
           entry.content = extraction.content;
           entry.headMatched = true;
         } else {
+          // If head doesn't match, treat as failure to extract content.
           entry.headMatched = false;
+          entry.content = undefined;
         }
       }
       return entry;
-    });
-  }
-
-  private reconstructFromTemplate(template: LogTemplateDefinition): string | undefined {
-    if (!template.placeholderTemplate) return undefined;
-    const variables = template.placeholderVariables ?? {};
-    return template.placeholderTemplate.replace(/\u001b]9;var=([^\\u0007]+)\u0007/g, (_m, name) => {
-      const key = String(name);
-      return variables[key] ?? '';
     });
   }
 
@@ -809,24 +860,6 @@ export class LogProcessingPipeline {
     return { unmatched };
   }
 
-  private selectParsingInput(sample: RegexLogEntry, headPattern?: HeadPatternDefinition): string {
-    if (headPattern && sample.content !== undefined) {
-      return sample.content;
-    }
-    return sample.content ?? sample.raw;
-  }
-
-  private selectRefineInput(raw: string, headPattern?: HeadPatternDefinition): string {
-    if (!headPattern?.pattern) {
-      return raw;
-    }
-    const extraction = extractContentWithHead(raw, headPattern);
-    if (extraction.matched && extraction.content !== undefined) {
-      return extraction.content;
-    }
-    return raw;
-  }
-
   private maybeAttachHeadMetadata(
     template: LogTemplateDefinition,
     sample: RegexLogEntry,
@@ -848,7 +881,7 @@ export class LogProcessingPipeline {
     };
   }
 
-  private resolveTextForTemplate(
+  private getTextForTemplate(
     template: LogTemplateDefinition,
     sample: RegexLogEntry,
     headPattern?: HeadPatternDefinition,
@@ -857,25 +890,28 @@ export class LogProcessingPipeline {
     if (!contentOnly) {
       return { text: sample.raw };
     }
-    if (sample.content) {
+    if (headPattern?.pattern && sample.content !== undefined) {
       return { text: sample.content };
     }
-    if (!headPattern?.pattern) {
-      return { text: sample.raw };
-    }
-    const extraction = extractContentWithHead(sample.raw, headPattern);
-    if (!extraction.matched) {
-      // Tolerate head mismatch by treating the whole line as content.
-      return { text: sample.raw };
-    }
-    return { text: extraction.content ?? sample.raw };
+    // No content extracted; treat as failure.
+    return { text: undefined, error: 'Head extraction missing content' };
   }
 
-  private sanitizeVariableName(name: string): string {
-    const cleaned = name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_');
-    if (!cleaned) {
-      return 'var';
+  private getContent(entry: RegexLogEntry, headPattern?: HeadPatternDefinition): string | undefined {
+    if (headPattern?.pattern) {
+      return entry.content;
     }
-    return cleaned;
+    return entry.raw;
+  }
+
+  private getContentFromRaw(raw: string, headPattern?: HeadPatternDefinition): string | undefined {
+    if (!headPattern?.pattern) {
+      return raw;
+    }
+    const extraction = extractContentWithHead(raw, headPattern);
+    if (!extraction.matched) {
+      return undefined;
+    }
+    return extraction.content;
   }
 }

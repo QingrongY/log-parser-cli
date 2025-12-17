@@ -9,6 +9,8 @@ import { COMMON_LOG_PARSER_KNOWLEDGE } from '../knowledge.js';
 interface ParsingPromptOptions {
   logLine: string;
   variableHints: string[];
+  failedTemplate?: string;
+  failedRendered?: string;
 }
 
 export const PARSING_SYSTEM_PROMPT =
@@ -19,6 +21,8 @@ Output must be valid JSON only (no markdown, no extra text).`;
 export const buildParsingPrompt = ({
   logLine,
   variableHints,
+  failedTemplate,
+  failedRendered,
 }: ParsingPromptOptions): string => {
   const hints =
     variableHints?.length
@@ -52,6 +56,12 @@ JSON:
 }`,
     `Log line:
 ${logLine}`,
+    failedTemplate && failedRendered
+      ? `Previous attempt (INCORRECT — do NOT reuse):
+- Incorrect template: ${failedTemplate}
+- When filling the extracted variables back into the template, it reconstructed to: ${failedRendered}
+Fix the extraction so the reconstructed line matches the raw log exactly.`
+      : '',
   ].filter(Boolean);
 
   return parts.join('\n\n');
