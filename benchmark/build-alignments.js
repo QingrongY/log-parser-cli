@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const PLACEHOLDER_PATTERN = /\u001b\]9;var=[^\u0007]+\u0007/g;
+const PLACEHOLDER_PATTERN = /\u001b\]9;[^\u0007]+\u0007/g;
 
 function parseCsv(text) {
   const rows = [];
@@ -167,7 +167,6 @@ function buildAlignment(dataset, benchRoot, datasetsRoot) {
       predTemplate: '',
       predTemplateNormalized: '',
       predTemplateId: '',
-      predVariables: '',
       gtEventId,
       gtTemplate,
     };
@@ -183,7 +182,6 @@ function buildAlignment(dataset, benchRoot, datasetsRoot) {
     target.predTemplate = m.template_placeholder ?? m.template ?? '';
     target.predTemplateNormalized = normalizePlaceholder(target.predTemplate);
     target.predTemplateId = m.template_id ?? m.templateId ?? '';
-    target.predVariables = m.variables ?? '';
   });
 
   return rows;

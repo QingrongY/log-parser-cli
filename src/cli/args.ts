@@ -9,7 +9,6 @@ import { resolve } from 'node:path';
 export interface RunnerOptions {
   inputPath: string;
   limit?: number;
-  variableHints: string[];
   batchSize?: number;
   outputDir: string;
   sourceHint?: string;
@@ -23,7 +22,6 @@ export const parseArgs = (argv: string[]): RunnerOptions => {
   const benchRoot = 'benchmark';
   const options: RunnerOptions = {
     inputPath: '',
-    variableHints: [],
     outputDir: resolve(process.cwd(), `${benchRoot}/log-parser`),
   };
 
@@ -37,9 +35,6 @@ export const parseArgs = (argv: string[]): RunnerOptions => {
       case '--limit':
       case '-n':
         options.limit = Number(argv[++i]);
-        break;
-      case '--hint':
-        options.variableHints.push(argv[++i]);
         break;
       case '--batch-size':
         options.batchSize = Number(argv[++i]);

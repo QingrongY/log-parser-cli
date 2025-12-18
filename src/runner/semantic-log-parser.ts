@@ -36,7 +36,6 @@ export interface SemanticLogParserOptions {
   outputDir: string;
   llmClient?: LlmClient;
   limit?: number;
-  variableHints?: string[];
   batchSize?: number;
   sourceHint?: string;
   templateManager?: TemplateManager;
@@ -72,8 +71,11 @@ export interface SemanticLogParserResult {
 export async function runSemanticLogParser(
   options: SemanticLogParserOptions,
 ): Promise<SemanticLogParserResult> {
+  if (!process.env.FORCE_COLOR) {
+    process.env.FORCE_COLOR = '1';
+  }
+
   const runId = options.runId ?? randomUUID();
-  const variableHints = options.variableHints ?? [];
   const templateLibraryDir =
     options.templateLibraryDir ?? join(options.outputDir, 'template-libraries');
   const reportDir = options.reportDir ?? join(options.outputDir, 'reports');
@@ -177,7 +179,6 @@ export async function runSemanticLogParser(
     const summary = await pipeline.process(batch, {
       runId,
       sourceHint: options.sourceHint,
-      variableHints,
       batchSize: 1,
       skipThreshold: options.skipThreshold,
     });
@@ -214,6 +215,10 @@ export async function runSemanticLogParser(
   const templateLibraryPaths = [...libraryIds].map((id) =>
     getLibraryDatabasePath(templateLibraryDir, id),
   );
+
+  if (allFailures.length > 0) {
+    await writeFailureReport(failureLogPath, allFailures);
+  }
 
   const conflictReportPath = join(reportDir, `${runId}-conflicts.json`);
   if (conflictsDetected > 0) {

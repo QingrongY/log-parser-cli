@@ -10,6 +10,7 @@ import type { TemplateLibrary, TemplateManager } from '../types.js';
 import type { RegexLogEntry } from '../regex-worker-pool.js';
 import { selectDiverseSamples } from '../diverse-sampler.js';
 import { extractContentWithHead } from '../head-pattern.js';
+import { logConsole } from '../logging.js';
 
 export interface HeadPatternManagerOptions {
   headAgent?: HeadAgent;
@@ -54,14 +55,17 @@ export class HeadPatternManager {
           if (this.options.templateManager.saveHeadPattern) {
             await this.options.templateManager.saveHeadPattern(params.libraryId, current);
           }
-          console.log(`[log-parser] head regex (initial): ${current.pattern}`);
+          logConsole('info', 'head', [
+            ['phase', 'initial'],
+            ['pattern', current.pattern],
+          ]);
           this.options.observer?.onStage?.({
             stage: 'head',
             message: 'derived head regex',
             data: { pattern: current.pattern },
           });
         } else {
-          console.warn('[log-parser] head initial derivation failed');
+          logConsole('warn', 'head', [['phase', 'initial'], ['message', 'derivation failed']]);
         }
       }
     } else if (!seedSamples.length) {
@@ -77,7 +81,7 @@ export class HeadPatternManager {
     }
 
     // Validate coverage on the current batch; iteratively refine with unmatched samples if needed.
-    const maxRefineRounds = 10;
+    const maxRefineRounds = 20;
 
     const attemptRefine = async (
       pattern: HeadPatternDefinition,
@@ -95,14 +99,16 @@ export class HeadPatternManager {
       `head coverage check: unmatched=${state.unmatched.length}/${params.logs.length}`,
     );
     if (!headAgent && state.unmatched.length > 0) {
-      console.warn('[log-parser] head refine skipped (no head agent configured)');
+      logConsole('warn', 'head', [['message', 'head refine skipped (no head agent configured)']]);
     }
 
-    for (let round = 0; round < maxRefineRounds && state.unmatched.length > 0; round += 1) {
+    for (let round = 0; round < maxRefineRounds; round += 1) {
       if (!headAgent) {
         break;
       }
-      // Add incremental unmatched samples (3 per round) to the accumulated pool.
+      if (state.unmatched.length === 0) {
+        break;
+      }
       const available = state.unmatched.filter((line) => !seenSamples.has(line));
       const newPicks = selectDiverseSamples(available, Math.min(3, available.length), available.length);
       for (const line of newPicks) {
@@ -112,35 +118,43 @@ export class HeadPatternManager {
         }
       }
       const refineSamples = [...sampleAccumulator];
-      if (refineSamples.length === 0) {
-        break;
-      }
       this.logStage(
         -1,
         'head',
         `refining head regex (round ${round + 1}, unmatched=${state.unmatched.length}, samples=${refineSamples.length})`,
       );
-      console.log(
-        `[log-parser] head refine round ${round + 1}: unmatched=${state.unmatched.length}, samples=${refineSamples.length}`,
-      );
+      logConsole('info', 'head-refine', [
+        ['round', round + 1],
+        ['unmatched', state.unmatched.length],
+        ['samples', refineSamples.length],
+      ]);
       const result = await headAgent.run(
         { samples: refineSamples, newSamples: newPicks, previousPattern: current.pattern },
         params.context,
       );
       if (result.status !== 'success' || !result.output?.pattern) {
-        console.warn(`[log-parser] head refine round ${round + 1} failed status=${result.status}`);
+        logConsole('warn', 'head-refine', [
+          ['round', round + 1],
+          ['message', `failed status=${result.status}`],
+        ]);
         break;
       }
-      console.log(`[log-parser] head regex (candidate round ${round + 1}): ${result.output.pattern}`);
+      logConsole('info', 'head', [
+        ['phase', 'refine-candidate'],
+        ['round', round + 1],
+        ['pattern', result.output.pattern],
+      ]);
       const next = await attemptRefine(result.output);
       this.logStage(
         -1,
         'head',
         `head candidate evaluated (round ${round + 1}): unmatched=${next.unmatched.length}/${params.logs.length}`,
       );
-      console.log(
-        `[log-parser] head candidate round ${round + 1}: unmatched=${next.unmatched.length}/${params.logs.length}`,
-      );
+      logConsole('info', 'head', [
+        ['phase', 'refine-eval'],
+        ['round', round + 1],
+        ['unmatched', `${next.unmatched.length}/${params.logs.length}`],
+      ]);
       if (next.unmatched.length <= bestState.unmatched.length) {
         bestState = next;
         bestPattern = next.pattern;
@@ -157,13 +171,16 @@ export class HeadPatternManager {
             unmatchedSamples: next.unmatched.length,
           },
         });
-        console.log(
-          `[log-parser] head refined round ${round + 1}: unmatched now ${next.unmatched.length}/${params.logs.length}`,
-        );
+        logConsole('info', 'head-refine', [
+          ['round', round + 1],
+          ['unmatched', `${next.unmatched.length}/${params.logs.length}`],
+          ['pattern', current.pattern],
+        ]);
       } else {
-        console.log(
-          `[log-parser] head candidate rejected (round ${round + 1}): no improvement (${next.unmatched.length}/${params.logs.length})`,
-        );
+        logConsole('info', 'head-refine', [
+          ['round', round + 1],
+          ['message', `candidate rejected (no improvement ${next.unmatched.length}/${params.logs.length})`],
+        ]);
       }
       state = bestState;
     }
@@ -185,9 +202,11 @@ export class HeadPatternManager {
         `head regex did not cover ${bestState.unmatched.length} log(s)`,
         { unmatchedCount: bestState.unmatched.length },
       );
-      console.error(
-        `[log-parser] head regex did not cover ${bestState.unmatched.length}/${params.logs.length} logs; pattern=${bestPattern.pattern}`,
-      );
+      logConsole('error', 'head', [
+        ['phase', 'coverage'],
+        ['unmatched', `${bestState.unmatched.length}/${params.logs.length}`],
+        ['pattern', bestPattern.pattern],
+      ]);
     }
 
     return bestPattern;
@@ -213,7 +232,7 @@ export class HeadPatternManager {
       if (compiled) {
         const extraction = extractContentWithHead(raw, headPattern, compiled);
         if (extraction.matched) {
-          entry.content = extraction.content;
+          entry.content = extraction.content?.trimStart() ?? '';
           entry.headMatched = true;
         } else {
           // If head doesn't match, treat as failure to extract content.
@@ -255,7 +274,7 @@ export class HeadPatternManager {
    */
   getContent(entry: RegexLogEntry, headPattern?: HeadPatternDefinition): string | undefined {
     if (headPattern?.pattern) {
-      return entry.content;
+      return entry.content?.trimStart();
     }
     return entry.raw;
   }
@@ -271,7 +290,7 @@ export class HeadPatternManager {
     if (!extraction.matched) {
       return undefined;
     }
-    return extraction.content;
+    return extraction.content?.trimStart();
   }
 
   private logStage(

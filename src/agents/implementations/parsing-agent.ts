@@ -12,14 +12,12 @@ import type {
   LogTemplateDefinition,
 } from '../types.js';
 import { buildParsingPrompt, PARSING_SYSTEM_PROMPT } from '../prompts/parsing.js';
-import { extractJsonObject } from '../utilities/json.js';
 import { normalizeRegexPattern } from '../utilities/regex.js';
 import { ensureValidRegex } from '../utilities/validation.js';
-import { buildRegexFromTemplate } from '../../common/regex-builder.js';
+import { buildRegexFromTemplate, type BuiltRegex } from '../../common/regex-builder.js';
 
 export interface ParsingAgentInput {
   samples: string[];
-  variableHints?: string[];
   failedTemplate?: string;
   failedReconstruction?: string;
 }
@@ -30,7 +28,6 @@ export interface ParsingAgentOutput extends LogTemplateDefinition {
 
 interface ParsingLlmResponse {
   template: string;
-  variables: Record<string, string>;
   description?: string;
   example?: Record<string, unknown>;
 }
@@ -48,13 +45,9 @@ class ParsingFailureError extends Error {
 const PARSING_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
   additionalProperties: true,
-  required: ['template', 'variables'],
+  required: ['template'],
   properties: {
     template: { type: 'string', minLength: 1 },
-    variables: {
-      type: 'object',
-      additionalProperties: { type: 'string' },
-    },
     description: { type: 'string' },
     example: { type: 'object' },
   },
@@ -85,24 +78,14 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       };
     }
 
-    const variableHints = (input.variableHints ?? []).map((hint) =>
-      hint.trim().toLowerCase(),
-    );
-
     const prompt = buildParsingPrompt({
       logLine: samples[0],
-      variableHints,
       failedTemplate: input.failedTemplate,
       failedRendered: input.failedReconstruction,
     });
 
     try {
-      const llmResult = await this.generateWithLlm(
-        samples[0],
-        variableHints,
-        context,
-        prompt,
-      );
+      const llmResult = await this.generateWithLlm(samples[0], context, prompt);
       return {
         status: 'success',
         output: {
@@ -125,14 +108,11 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
 
   private async generateWithLlm(
     sample: string,
-    variableHints: string[],
     context: AgentContext,
     prompt: string,
   ): Promise<LlmParsingResult> {
-    const renderTemplate = (tpl: string, vars: Record<string, string>): string =>
-      tpl.replace(/\u001b]9;var=([^\u0007]+)\u0007/g, (_m, name) => vars[name] ?? '');
     let parsed: ParsingLlmResponse | undefined;
-    let reconstruction: string | undefined;
+    let buildResult: BuiltRegex | undefined;
     const completion = await this.llmClient!.complete({
       prompt,
       systemPrompt: PARSING_SYSTEM_PROMPT,
@@ -152,49 +132,35 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
           llmOutput: completion.output,
         });
       }
-      if (!parsed.variables || typeof parsed.variables !== 'object') {
-        throw new ParsingFailureError('LLM response missing variables map.', {
-          llmOutput: completion.output,
-        });
-      }
-      try {
-        reconstruction = renderTemplate(parsed.template, parsed.variables);
-      } catch {
-        reconstruction = undefined;
-      }
 
-      let pattern: string;
-      let variables: string[];
       try {
-        const built = buildRegexFromTemplate(parsed.template, parsed.variables, sample);
-        pattern = built.pattern;
-        variables = built.variables;
+        buildResult = buildRegexFromTemplate(parsed.template, sample);
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         throw new ParsingFailureError(message, {
           failedTemplate: parsed.template,
-          failedVariables: parsed.variables,
-          failedReconstruction: reconstruction,
+          failedVariables: buildResult?.values,
+          failedReconstruction: buildResult?.reconstructed,
         });
       }
-      const normalizedPattern = normalizeRegexPattern(pattern);
+      const normalizedPattern = normalizeRegexPattern(buildResult.pattern);
       ensureValidRegex(normalizedPattern);
       const template: LogTemplateDefinition = {
         placeholderTemplate: parsed.template,
-        placeholderVariables: parsed.variables,
+        placeholderVariables: buildResult.values,
         pattern: normalizedPattern,
-        variables,
+        variables: buildResult.variables,
         description: parsed.description ?? 'LLM-placeholder log template',
         source: context.templateLibraryId ?? context.sourceHint,
         metadata: {
           sample,
-          variableHints,
           taggedSample: parsed.template,
           llmExample: parsed.example,
           llmModel: this.llmClient?.modelName,
           llmRaw: completion.output,
           llmTemplate: parsed.template,
-          llmVariables: parsed.variables,
+          extractedVariables: buildResult.values,
+          reconstructedSample: buildResult.reconstructed,
         },
       };
 
@@ -206,8 +172,8 @@ export class ParsingAgent extends BaseAgent<ParsingAgentInput, ParsingAgentOutpu
       const enriched = {
         ...(details ?? {}),
         failedTemplate: details?.failedTemplate ?? parsed?.template,
-        failedVariables: details?.failedVariables ?? parsed?.variables,
-        failedReconstruction: details?.failedReconstruction ?? reconstruction,
+        failedVariables: details?.failedVariables ?? buildResult?.values,
+        failedReconstruction: details?.failedReconstruction ?? buildResult?.reconstructed,
         llmOutput: completion.output,
       };
       throw new ParsingFailureError(message, {

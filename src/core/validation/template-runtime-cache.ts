@@ -50,7 +50,6 @@ export class TemplateRuntimeCache {
     try {
       const { pattern, variables } = buildRegexFromTemplate(
         template.placeholderTemplate,
-        template.placeholderVariables ?? {},
         sample,
       );
       const regex = new RegExp(pattern);

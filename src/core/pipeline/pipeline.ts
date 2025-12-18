@@ -30,6 +30,7 @@ import type {
 import { HeadPatternManager } from '../head-pattern/manager.js';
 import { TemplateValidator } from '../validation/template-validator.js';
 import { ConflictDetector } from '../validation/conflict-detector.js';
+import { logConsole, colorizePlaceholders, diffStrings } from '../logging.js';
 
 interface PipelineAgents {
   routing: RoutingAgent;
@@ -90,7 +91,6 @@ export class LogProcessingPipeline {
       runId,
       sourceHint: routingResult.output.source,
       templateLibraryId: libraryId,
-      userPreferences: { variableHints: options.variableHints },
     };
 
     this.deps.observer?.onRouting?.({
@@ -156,7 +156,6 @@ export class LogProcessingPipeline {
         library,
         libraryId,
         headPattern,
-        variableHints: options.variableHints,
         context: lineContext,
         matchedRecords,
         newTemplates,
@@ -192,7 +191,6 @@ export class LogProcessingPipeline {
     library: TemplateLibrary;
     libraryId: string;
     headPattern?: HeadPatternDefinition;
-    variableHints?: string[];
     context: AgentContext;
     matchedRecords: MatchedLogRecord[];
     newTemplates: LogTemplateDefinition[];
@@ -205,7 +203,6 @@ export class LogProcessingPipeline {
       library,
       libraryId,
       headPattern,
-      variableHints,
       context,
       matchedRecords,
       newTemplates,
@@ -225,7 +222,6 @@ export class LogProcessingPipeline {
     const parseResult = await this.deps.agents.parsing.run(
       {
         samples: [content ?? ''],
-        variableHints,
       },
       context,
     );
@@ -237,13 +233,6 @@ export class LogProcessingPipeline {
         'failedReconstruction'
       ] as string | undefined;
       const contentShown = content ?? '';
-      if (reconstructed) {
-        console.warn(
-          `[log-parser] line ${sample.index}: parsing-agent failed -> ${issueText}; reconstructed="${reconstructed}"; content="${contentShown}"`,
-        );
-      } else {
-        console.warn(`[log-parser] line ${sample.index}: parsing-agent failed -> ${issueText}`);
-      }
       await this.recordFailure(
         sample.index,
         sample.raw,
@@ -475,20 +464,20 @@ export class LogProcessingPipeline {
     output: RefineAgentOutput,
     conflictingTemplate?: LogTemplateDefinition,
   ): Promise<void> {
-    const trace = {
-      lineIndex,
-      rawLog,
-      stage: 'refine-trace',
-      timestamp: new Date().toISOString(),
-      action: output.action,
-      template: {
-        placeholderTemplate: output.template.placeholderTemplate,
-        placeholderVariables: output.template.placeholderVariables,
-        variables: output.template.variables,
-      },
-      conflictingTemplateId: conflictingTemplate?.id,
-    };
-    console.log(`[log-parser] refine-trace: ${JSON.stringify(trace)}`);
+    const coloredTemplate = colorizePlaceholders(output.template.placeholderTemplate);
+    const displayRaw =
+      typeof output.template.metadata?.['contentSample'] === 'string'
+        ? (output.template.metadata?.['contentSample'] as string)
+        : undefined;
+    const coloredRaw = displayRaw ? colorizePlaceholders(displayRaw) ?? displayRaw : undefined;
+
+    logConsole('info', 'refine-trace', [
+      ['line', lineIndex],
+      ['action', output.action],
+      ['conflictWith', conflictingTemplate?.id],
+      ['template', coloredTemplate],
+      ['content', coloredRaw],
+    ]);
   }
 
   private async recordFailure(
@@ -499,18 +488,9 @@ export class LogProcessingPipeline {
     template?: LogTemplateDefinition,
     details?: Record<string, unknown>
   ): Promise<void> {
-    const { promptUsed, ...restDetails } = details ?? {};
-    const enrichedDetails = { ...restDetails };
-    // Keep LLM output and reconstruction traces if provided by agents.
-    if (details?.['llmOutput']) {
-      enrichedDetails.llmOutput = details['llmOutput'];
-    }
-    if (details?.['failedTemplate']) {
-      enrichedDetails.failedTemplate = details['failedTemplate'];
-    }
-    if (details?.['failedReconstruction']) {
-      enrichedDetails.failedReconstruction = details['failedReconstruction'];
-    }
+    const sanitizedTemplate: LogTemplateDefinition | undefined = template
+      ? { ...template, pattern: undefined }
+      : undefined;
 
     const failure: FailureRecord = {
       lineIndex,
@@ -518,12 +498,54 @@ export class LogProcessingPipeline {
       stage,
       reason,
       timestamp: new Date().toISOString(),
-      template,
-      details: enrichedDetails,
+      template: sanitizedTemplate,
+      details,
     };
     this.failures.push(failure);
     this.deps.observer?.onFailure?.(failure);
-    console.error(`[log-parser] failure: ${JSON.stringify(failure)}`);
+
+    const diagnostics = (details as Record<string, unknown> | undefined)?.diagnostics as
+      | Record<string, unknown>
+      | undefined;
+
+    const templateSource =
+      sanitizedTemplate?.placeholderTemplate ??
+      (typeof details?.['failedTemplate'] === 'string'
+        ? (details['failedTemplate'] as string)
+        : typeof diagnostics?.['failedTemplate'] === 'string'
+          ? (diagnostics['failedTemplate'] as string)
+          : undefined);
+
+    const coloredTemplate = colorizePlaceholders(templateSource);
+    const displayRaw =
+      typeof details?.['contentUsed'] === 'string'
+        ? (details['contentUsed'] as string)
+        : typeof diagnostics?.['contentUsed'] === 'string'
+          ? (diagnostics['contentUsed'] as string)
+          : undefined;
+    const reconstruction =
+      typeof details?.['failedReconstruction'] === 'string'
+        ? (details['failedReconstruction'] as string)
+        : typeof diagnostics?.['failedReconstruction'] === 'string'
+          ? (diagnostics['failedReconstruction'] as string)
+          : undefined;
+    const diff = diffStrings(displayRaw, reconstruction);
+    const coloredRaw =
+      diff.expected ??
+      (displayRaw ? colorizePlaceholders(displayRaw) ?? displayRaw : undefined);
+    const coloredReconstructed =
+      diff.actual ??
+      (reconstruction ? colorizePlaceholders(reconstruction) ?? reconstruction : undefined);
+    const issues = Array.isArray(details?.['issues']) ? details?.['issues'] : undefined;
+    logConsole('error', 'failure', [
+      ['line', lineIndex],
+      ['stage', stage],
+      ['reason', reason],
+      ['template', coloredTemplate],
+      ['expected', coloredRaw],
+      ['reconstructed', coloredReconstructed],
+      ['issues', issues ? issues.join('; ') : undefined],
+    ]);
   }
 
   private logStage(
@@ -534,4 +556,5 @@ export class LogProcessingPipeline {
   ): void {
     this.deps.observer?.onStage?.({ lineIndex, stage, message, data });
   }
+
 }

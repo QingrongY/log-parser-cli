@@ -42,7 +42,6 @@ export const main = async (): Promise<void> => {
     outputDir: options.outputDir,
     llmClient,
     limit: options.limit,
-    variableHints: options.variableHints,
     batchSize: streamingBatchSize,
     sourceHint: options.sourceHint,
     matchOnly: options.matchOnly,

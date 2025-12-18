@@ -18,41 +18,33 @@ export const REFINE_SYSTEM_PROMPT = `
 You resolve conflicts between a candidate log template and an existing template.
 A conflict means the candidate matches one or more samples currently attributed to the existing template.
 
-Shared background knowledge (follow strictly):
+Shared background knowledge:
 ${COMMON_LOG_PARSER_KNOWLEDGE}
 
 Task:
 - Decide whether to REFINE the candidate or ADOPT it as-is.
-- REFINE_CANDIDATE: The candidate is too generic or marks STRUCTURE as BUSINESS DATA. Make it strictly MORE SPECIFIC.
-- ADOPT_CANDIDATE: The existing template is too strict and hard-codes BUSINESS DATA. Return the candidate EXACTLY as provided.
+- REFINE_CANDIDATE: The candidate template is too generic and marks STRUCTURE as BUSINESS DATA. Make it strictly MORE SPECIFIC.
+- ADOPT_CANDIDATE: The candidate template is better and accurately captures previously overlooked BUSINESS DATA. Return the candidate EXACTLY as provided.
 
 Output rules if refine candidate:
-- Mark all BUSINESS DATA (variables) directly in the raw log line WITHOUT changing any other characters.
-- Replace each variable span with the placeholder \\u001b]9;var=<name>\\u0007.
-- Do NOT include the variable value inline in the template.
-- Provide all original values (verbatim) in a variables map.
-- Index repeated types (ip1, ip2, ...); prefer clear, lowercase names; prefer user hints when provided.
+- Mark BUSINESS DATA spans inline with OSC placeholders containing the ORIGINAL raw value: \\u001b]9;<value>\\u0007.
+- Do NOT invent variable names or abstractions; the placeholder content must stay identical to the raw value.
 
 Output JSON only (no markdown, no extra text):
 {
   "action": "refine_candidate" | "adopt_candidate",
   "template": "<template>",
-  "variables": { "<name>": "<value>" },
   "explain": "<brief reason>"
 }
 `.trim();
 
 export const REFINE_RESPONSE_SCHEMA: Record<string, unknown> = {
   type: 'object',
-  required: ['action', 'template', 'variables', 'explain'],
+  required: ['action', 'template', 'explain'],
   additionalProperties: false,
   properties: {
     action: { type: 'string', enum: ['refine_candidate', 'adopt_candidate'] },
     template: { type: 'string', minLength: 1 },
-    variables: {
-      type: 'object',
-      additionalProperties: { type: 'string' },
-    },
     explain: { type: 'string', minLength: 1 },
   },
 };
@@ -66,17 +58,14 @@ export const buildRefinePrompt = ({
   const candidateSample = candidateSamples[0] ?? '(no sample)';
   const conflictingSample = conflictingSamples[0] ?? '(no sample)';
 
-  const candidateVars = JSON.stringify(candidate.placeholderVariables ?? {});
-  const conflictingVars = JSON.stringify(conflicting.placeholderVariables ?? {});
-
   return [
-    'Candidate variables:',
-    candidateVars,
+    'Candidate template:',
+    candidate.placeholderTemplate ?? '(no template)',
     'Candidate sample:',
     candidateSample,
     '',
-    'Existing (conflicting) variables:',
-    conflictingVars,
+    'Existing template:',
+    conflicting.placeholderTemplate ?? '(no template)',
     'Existing sample:',
     conflictingSample,
   ].join('\n');

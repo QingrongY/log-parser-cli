@@ -8,59 +8,34 @@ import { COMMON_LOG_PARSER_KNOWLEDGE } from '../knowledge.js';
 
 interface ParsingPromptOptions {
   logLine: string;
-  variableHints: string[];
   failedTemplate?: string;
   failedRendered?: string;
 }
 
 export const PARSING_SYSTEM_PROMPT =
-  `You are a senior log template engineer learning templates line-by-line.
-Follow the shared background knowledge strictly.
-Output must be valid JSON only (no markdown, no extra text).`;
+  `You are a senior log template engineer learning template for a log line.`;
 
 export const buildParsingPrompt = ({
   logLine,
-  variableHints,
   failedTemplate,
   failedRendered,
 }: ParsingPromptOptions): string => {
-  const hints =
-    variableHints?.length
-      ? `User preferences for variable naming (use when applicable): ${variableHints.join(', ')}`
-      : '';
-
   const parts = [
     `Shared background knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
-    hints && `\n${hints}\n`,
     `Task:
 - Mark all BUSINESS DATA (variables) directly in the raw log line WITHOUT changing any other characters.
-- Replace each variable span with the placeholder \\u001b]9;var=<name>\\u0007.
-- Do NOT include the variable value inline in the template.
-- Provide all original values (verbatim) in a variables map.
-- If the same type of BUSINESS DATA appears multiple times, use indexed names (e.g., ip1, ip2). Prefer clear, lowercase names; prefer user hints when provided.`,
+- Wrap each variable span with the OSC placeholder that contains the ORIGINAL raw value: \\u001b]9;<value>\\u0007.`,
     `Output format:
 Return ONLY the following JSON object (no extra keys, no comments, no trailing text):
 {
-  "template": "<raw log with placeholders inserted>",
-  "variables": {
-    "<name1>": "<value1>",
-    "<name2>": "<value2>"
-  }
-}`,
-    `Example (do not reuse literal values):
-Raw: [Dec 04 04:47:44 2005] Library-AP path=/tmp/a.log
-JSON:
-{
-  "template": "[\\u001b]9;var=timestamp\\u0007] Library-AP path=\\u001b]9;var=path\\u0007",
-  "variables": { "timestamp": "Dec 04 04:47:44 2005", "path": "/tmp/a.log" }
+  "template": "<raw log with placeholders inserted>"
 }`,
     `Log line:
 ${logLine}`,
     failedTemplate && failedRendered
-      ? `Previous attempt (INCORRECT — do NOT reuse):
-- Incorrect template: ${failedTemplate}
-- When filling the extracted variables back into the template, it reconstructed to: ${failedRendered}
-Fix the extraction so the reconstructed line matches the raw log exactly.`
+      ? `Previous incorrect template: ${failedTemplate}
+When interpreting placeholders as their embedded values, it reconstructed to: ${failedRendered}
+Fix the annotation so the reconstructed line matches the raw log exactly.`
       : '',
   ].filter(Boolean);
 

@@ -11,7 +11,7 @@ import type {
   BaseAgentConfig,
   HeadPatternDefinition,
 } from '../types.js';
-import { buildHeadPrompt, HEAD_SYSTEM_PROMPT, HEAD_RESPONSE_SCHEMA } from '../prompts/head.js';
+import { buildHeadPromptBundle, HEAD_RESPONSE_SCHEMA } from '../prompts/head.js';
 import { extractJsonObject } from '../utilities/json.js';
 import { normalizeRegexPattern } from '../utilities/regex.js';
 
@@ -53,7 +53,7 @@ export class HeadAgent extends BaseAgent<HeadAgentInput, HeadPatternDefinition> 
       return { status: 'needs-input', issues: ['LLM client not configured.'] };
     }
 
-    const prompt = buildHeadPrompt({
+    const { systemPrompt, userPrompt } = buildHeadPromptBundle({
       samples,
       newSamples,
       previousPattern: input.previousPattern,
@@ -61,8 +61,8 @@ export class HeadAgent extends BaseAgent<HeadAgentInput, HeadPatternDefinition> 
 
     try {
       const completion = await this.llmClient.complete({
-        prompt,
-        systemPrompt: HEAD_SYSTEM_PROMPT,
+        prompt: userPrompt,
+        systemPrompt,
         temperature: 0.2,
         responseMimeType: 'application/json',
         responseSchema: HEAD_RESPONSE_SCHEMA,

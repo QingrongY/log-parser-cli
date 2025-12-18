@@ -12,6 +12,10 @@ import type {
   LogTemplateDefinition,
 } from '../types.js';
 import {
+  extractVariablesFromTemplate,
+  type ExtractedTemplateVariables,
+} from '../../common/template-variable-extractor.js';
+import {
   buildRefinePrompt,
   REFINE_RESPONSE_SCHEMA,
   REFINE_SYSTEM_PROMPT,
@@ -33,7 +37,6 @@ export interface RefineAgentOutput {
 interface RefineLlmResponse {
   action: 'refine_candidate' | 'adopt_candidate';
   template: string;
-  variables: Record<string, string>;
   explain?: string;
 }
 
@@ -70,15 +73,26 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
 
     const { pattern: _ignoredPattern, ...baseTemplate } = input.candidateTemplate;
 
+    const primarySample = input.candidateSamples?.[0] ?? input.conflictingSamples?.[0];
+    let extracted: ExtractedTemplateVariables;
+
+    try {
+      extracted = extractVariablesFromTemplate(parsed.template, primarySample);
+    } catch (error) {
+      const extractionError = error instanceof Error ? error.message : String(error);
+      throw new Error(
+        `Failed to extract variables from template during refine: ${extractionError}`,
+      );
+    }
+
     const refinedTemplate: LogTemplateDefinition = {
       ...baseTemplate,
       placeholderTemplate: parsed.template,
-      placeholderVariables: parsed.variables,
-      variables: Object.keys(parsed.variables ?? {}),
+      placeholderVariables: extracted.variables,
+      variables: extracted.order,
     };
 
     if (parsed.action === 'refine_candidate') {
-      console.log('[log-parser] refine: refine_candidate', { reason: note });
       return {
         status: 'success',
         output: {
@@ -90,7 +104,6 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
     }
 
     if (parsed.action === 'adopt_candidate') {
-      console.log('[log-parser] refine: adopt_candidate', { reason: note });
       return {
         status: 'success',
         output: {
@@ -101,7 +114,6 @@ export class RefineAgent extends BaseAgent<RefineAgentInput, RefineAgentOutput> 
       };
     }
 
-    console.error('[log-parser] refine: invalid action', { action: parsed.action });
     throw new Error(`LLM response has invalid action: ${parsed.action}`);
   }
 }

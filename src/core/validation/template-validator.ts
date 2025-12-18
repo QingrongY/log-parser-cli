@@ -48,7 +48,6 @@ export class TemplateValidator {
     try {
       runtime = buildRegexFromTemplate(
         template.placeholderTemplate,
-        template.placeholderVariables,
         target.text,
       );
     } catch (error) {

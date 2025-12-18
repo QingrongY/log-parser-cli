@@ -32,11 +32,7 @@ export class ConflictDetector {
     library: TemplateLibrary,
     headPattern?: HeadPatternDefinition,
   ): Array<{ template: LogTemplateDefinition; samples: string[] }> {
-    const candidateRuntime = buildRegexFromTemplate(
-      candidate.placeholderTemplate,
-      candidate.placeholderVariables,
-      undefined,
-    );
+    const candidateRuntime = buildRegexFromTemplate(candidate.placeholderTemplate);
     const conflicts = new Map<string, { template: LogTemplateDefinition; samples: string[] }>();
     const templateMap = new Map(library.templates.map((t) => [t.id ?? '', t]));
 

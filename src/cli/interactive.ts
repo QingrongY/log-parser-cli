@@ -56,12 +56,6 @@ export async function runInteractiveSetup(options: RunnerOptions): Promise<void>
       },
       {
         type: 'text',
-        name: 'variableHints',
-        message: 'BUSINESS DATA names to track (comma-separated)',
-        initial: options.variableHints.join(', '),
-      },
-      {
-        type: 'text',
         name: 'model',
         message: 'Preferred LLM model (e.g., google/gemini-2.0-flash)',
         initial: resolveModelFromEnv(),
@@ -111,12 +105,6 @@ export async function runInteractiveSetup(options: RunnerOptions): Promise<void>
   }
   if (responses.libraryId) {
     options.libraryId = responses.libraryId.trim();
-  }
-  if (responses.variableHints) {
-    options.variableHints = responses.variableHints
-      .split(',')
-      .map((value: string) => value.trim())
-      .filter((value: string) => value.length > 0);
   }
   if (typeof responses.skipThreshold === 'number' && !Number.isNaN(responses.skipThreshold)) {
     options.skipThreshold = responses.skipThreshold;

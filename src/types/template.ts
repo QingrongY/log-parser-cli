@@ -12,6 +12,7 @@
 export interface LogTemplateDefinition {
   id?: string;
   placeholderTemplate: string;
+  // Values embedded in the annotated template, keyed by generated slot names (v1, v2, ...).
   placeholderVariables: Record<string, string>;
   // Derived regex for transient matching (not persisted)
   pattern?: string;

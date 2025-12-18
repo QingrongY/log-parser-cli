@@ -53,7 +53,7 @@ export class HeadContentExtractor {
 
     // If content is already extracted in the entry, use it
     if (entry.content !== undefined && entry.headMatched) {
-      return { text: entry.content };
+      return { text: entry.content?.trimStart() };
     }
 
     // If we have a headRuntime, perform on-demand extraction
@@ -62,7 +62,7 @@ export class HeadContentExtractor {
       if (!extracted.matched) {
         return { text: undefined, error: 'Head pattern did not match log entry' };
       }
-      return { text: extracted.content };
+      return { text: extracted.content?.trimStart() };
     }
 
     // Fallback: try extraction with headPattern (compile on-demand)
@@ -73,7 +73,7 @@ export class HeadContentExtractor {
         if (!extracted.matched) {
           return { text: undefined, error: 'Head pattern did not match log entry' };
         }
-        return { text: extracted.content };
+        return { text: extracted.content?.trimStart() };
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         return { text: undefined, error: `Head pattern compilation failed: ${message}` };

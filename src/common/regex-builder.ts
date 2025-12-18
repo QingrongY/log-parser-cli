@@ -9,120 +9,57 @@
  * Extracted from parsing-agent to make it reusable across the codebase.
  */
 
-type TaggedSegment =
-  | { kind: 'text'; value: string }
-  | { kind: 'var'; name: string; value: string };
+import { extractVariablesFromTemplate } from './template-variable-extractor.js';
+import type { ExtractedTemplateVariables } from './template-variable-extractor.js';
 
-const ESC = '\u001b';
-const BEL = '\u0007';
-const START_PREFIX = `${ESC}]9;var=`;
+export { extractVariablesFromTemplate } from './template-variable-extractor.js';
+
 const REGEX_SPECIAL = /[\\^$.*+?()[\]{}|]/g;
 
+export interface BuiltRegex {
+  pattern: string;
+  variables: string[];
+  values: Record<string, string>;
+  reconstructed: string;
+}
+
 /**
- * Builds a regex pattern from a template with variable placeholders.
+ * Builds a regex pattern from an annotated template.
  *
- * @param template - Template string with OSC escape sequences marking variables
- * @param values - Map of variable names to their actual values
+ * @param template - Template string with OSC placeholders that contain raw values
  * @param sample - Optional sample to validate reconstruction against
- * @returns Object containing the regex pattern and list of variable names
+ * @returns Object containing the regex pattern, capture names, and extracted values
  * @throws Error if template is invalid or reconstruction doesn't match sample
  */
 export const buildRegexFromTemplate = (
   template: string,
-  values: Record<string, string>,
   sample?: string,
-): { pattern: string; variables: string[] } => {
-  const segments = parseTemplateSegments(template, values);
-  if (segments.length === 0) {
-    throw new Error('LLM did not produce any placeholders.');
+): BuiltRegex => {
+  const parsed: ExtractedTemplateVariables = extractVariablesFromTemplate(template, sample);
+  const variables = parsed.order;
+  const parts: string[] = [];
+  let varIndex = 0;
+
+  if (parsed.segments.length === 0) {
+    throw new Error('Template did not produce any annotated segments.');
   }
 
-  const variables: string[] = [];
-  const nameCounts = new Map<string, number>();
-  const parts: string[] = [];
-  const reconstructed: string[] = [];
-
-  for (const segment of segments) {
+  for (const segment of parsed.segments) {
     if (segment.kind === 'text') {
       parts.push(escapeRegex(segment.value));
-      reconstructed.push(segment.value);
       continue;
     }
-    const baseName = sanitizeVariableName(segment.name);
-    const count = (nameCounts.get(baseName) ?? 0) + 1;
-    nameCounts.set(baseName, count);
-    const finalName = count === 1 ? baseName : `${baseName}${count}`;
-    variables.push(finalName);
+    const name = variables[varIndex++] ?? `v${varIndex}`;
     const fragment = inferRegexForValue(segment.value);
-    parts.push(`(?<${finalName}>${fragment})`);
-    reconstructed.push(segment.value);
+    parts.push(`(?<${name}>${fragment})`);
   }
 
-  if (sample !== undefined) {
-    const joined = reconstructed.join('');
-    if (joined !== sample) {
-      throw new Error('Reconstructed line does not match the raw sample.');
-    }
-  }
-
-  return { pattern: parts.join(''), variables };
-};
-
-/**
- * Parses a template string into segments of text and variables.
- *
- * @param template - Template with OSC escape sequences
- * @param values - Variable name to value mapping
- * @returns Array of parsed segments
- * @throws Error if a placeholder references an undefined variable
- */
-const parseTemplateSegments = (
-  template: string,
-  values: Record<string, string>,
-): TaggedSegment[] => {
-  const segments: TaggedSegment[] = [];
-  let cursor = 0;
-
-  const pushText = (end: number): void => {
-    if (end > cursor) {
-      segments.push({ kind: 'text', value: template.slice(cursor, end) });
-    }
+  return {
+    pattern: parts.join(''),
+    variables,
+    values: parsed.variables,
+    reconstructed: parsed.reconstructed,
   };
-
-  while (cursor < template.length) {
-    const startIdx = template.indexOf(START_PREFIX, cursor);
-    if (startIdx === -1) {
-      pushText(template.length);
-      break;
-    }
-
-    pushText(startIdx);
-    const nameStart = startIdx + START_PREFIX.length;
-    const nameEnd = template.indexOf(BEL, nameStart);
-    if (nameEnd === -1) {
-      // No terminator; treat the ESC as literal.
-      segments.push({ kind: 'text', value: template.slice(startIdx, startIdx + 1) });
-      cursor = startIdx + 1;
-      continue;
-    }
-
-    const name = template.slice(nameStart, nameEnd);
-    if (!name) {
-      segments.push({ kind: 'text', value: template.slice(startIdx, nameEnd + 1) });
-      cursor = nameEnd + 1;
-      continue;
-    }
-
-    const value = values[name];
-    if (value === undefined) {
-      throw new Error(`LLM template placeholder "${name}" missing value in variables map.`);
-    }
-
-    segments.push({ kind: 'var', name, value });
-    cursor = nameEnd + 1;
-  }
-
-  return segments;
 };
 
 /**
@@ -139,21 +76,6 @@ const escapeRegex = (text: string): string => {
     return `\\x${hex}`;
   });
   return escaped;
-};
-
-/**
- * Sanitizes a variable name to be safe for use in regex named groups.
- *
- * @param name - Raw variable name
- * @returns Sanitized name (lowercase, alphanumeric + underscore)
- * @throws Error if name is empty or invalid
- */
-const sanitizeVariableName = (name: string): string => {
-  const cleaned = name?.trim().toLowerCase().replace(/[^a-z0-9]/gi, '_');
-  if (!cleaned) {
-    throw new Error('Invalid variable name encountered in tags.');
-  }
-  return cleaned;
 };
 
 /**

@@ -72,14 +72,15 @@ export abstract class BaseAgent<TInput, TOutput> {
     try {
       const result = await this.handle(input, context);
       if (result.status !== 'success') {
-        console.log(
-          `${prefix}: ${this.name} failed -> ${(result.issues ?? []).join('; ') || result.status}`,
-        );
+        this.logger.warn(`${prefix}: ${this.name} failed`, {
+          issues: result.issues,
+          status: result.status,
+        });
       }
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      console.error(`${prefix}: ${this.name} fatal-error -> ${message}`);
+      this.logger.error(`${prefix}: ${this.name} fatal-error`, { error: message });
       return {
         status: 'fatal-error',
         issues: [message],
@@ -163,4 +164,3 @@ export abstract class BaseAgent<TInput, TOutput> {
     context: AgentContext,
   ): Promise<AgentResult<TOutput>>;
 }
-

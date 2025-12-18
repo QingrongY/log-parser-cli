@@ -13,7 +13,6 @@ import type {
 export interface LogProcessingOptions {
   runId?: string;
   sourceHint?: string;
-  variableHints?: string[];
   batchSize?: number;
   skipThreshold?: number;
 }
