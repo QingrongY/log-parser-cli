@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { fixDuplicatedVariables } from './template-duplication-fixer.js';
+
 const ESC = '\u001b';
 const BEL = '\u0007';
 const START_PREFIX = `${ESC}]9;`;
@@ -56,6 +58,13 @@ export function extractVariablesFromTemplate(
 
   const reconstructedLine = reconstructed.join('');
   if (logLine !== undefined && reconstructedLine !== logLine) {
+    // Try to fix duplicated variables before giving up
+    const fixResult = fixDuplicatedVariables(template, logLine);
+    if (fixResult.fixed && fixResult.fixedTemplate) {
+      // Recursively try with the fixed template
+      return extractVariablesFromTemplate(fixResult.fixedTemplate, logLine);
+    }
+
     throw new Error(
       `Template reconstruction does not match the provided log line. Expected "${logLine}", got "${reconstructedLine}".`,
     );
