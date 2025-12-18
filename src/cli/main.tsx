@@ -7,7 +7,7 @@
 
 import { render } from 'ink';
 import type { SemanticLogParserOptions } from '../runner/index.js';
-import { LogParserApp } from '../ui/log-parser-app.js';
+import { LogParserApp } from './log-parser-app.js';
 import { parseArgs, type RunnerOptions } from './args.js';
 import { runInteractiveSetup } from './interactive.js';
 import { resolveLlmConfigFromEnv, createLlmClient } from '../llm/config.js';

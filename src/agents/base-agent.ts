@@ -13,7 +13,7 @@ import {
   type BaseAgentConfig,
   type LlmClient,
 } from './types.js';
-import { extractJsonObject } from './utils/json.js';
+import { extractJsonObject } from './utilities/json.js';
 
 class NullLogger implements AgentLogger {
   constructor(_agentName: string) {}

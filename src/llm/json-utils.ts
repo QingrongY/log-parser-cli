@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { extractJsonObject } from '../agents/utils/json.js';
+import { extractJsonObject } from '../agents/utilities/json.js';
 
 interface SchemaObject {
   type?: string;

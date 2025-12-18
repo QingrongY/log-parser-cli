@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export * from './io/files.js';
-export * from './report-writer.js';
-export * from './file-template-manager.js';
-export * from './sqlite-template-manager.js';
+export * from './files.js';
+export * from './reports/report-writer.js';
+export * from './template-managers/file-template-manager.js';
+export * from './template-managers/sqlite-template-manager.js';
