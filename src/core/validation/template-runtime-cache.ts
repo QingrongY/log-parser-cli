@@ -40,13 +40,11 @@ export class TemplateRuntimeCache {
   getRuntime(template: LogTemplateDefinition, sample?: string): TemplateRuntime | undefined {
     const cacheKey = this.getCacheKey(template);
 
-    // Return cached runtime if available
     const cached = this.cache.get(cacheKey);
     if (cached) {
       return cached;
     }
 
-    // Compile and cache
     try {
       const { pattern, variables } = buildRegexFromTemplate(
         template.placeholderTemplate,
@@ -58,7 +56,6 @@ export class TemplateRuntimeCache {
       this.cache.set(cacheKey, runtime);
       return runtime;
     } catch (error) {
-      // Compilation failed, don't cache
       return undefined;
     }
   }
@@ -95,14 +92,12 @@ export class TemplateRuntimeCache {
       return `id:${template.id}`;
     }
 
-    // Generate content-based key for templates without IDs
     const contentKey = JSON.stringify({
       placeholder: template.placeholderTemplate,
       variables: template.placeholderVariables,
       pattern: template.pattern,
     });
 
-    // Use a simple hash to keep keys manageable
     return `content:${this.simpleHash(contentKey)}`;
   }
 

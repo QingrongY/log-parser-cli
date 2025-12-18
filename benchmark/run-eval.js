@@ -111,7 +111,7 @@ function loadMatches(reportsDir) {
   return parseCsv(fs.readFileSync(path.join(reportsDir, matchesFile), 'utf8'));
 }
 
-const PLACEHOLDER_PATTERN = /\u001b\]9;[^\u0007]+\u0007/g;
+const PLACEHOLDER_PATTERN = /⟪[^⟫]+⟫/g;
 function normalizePlaceholder(str) {
   if (!str) return '';
   return str.replace(PLACEHOLDER_PATTERN, '<*>').replace(/\s+/g, ' ').trim();

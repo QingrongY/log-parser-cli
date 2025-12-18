@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const PLACEHOLDER_PATTERN = /\u001b\]9;[^\u0007]+\u0007/g;
+const PLACEHOLDER_PATTERN = /⟪[^⟫]+⟫/g;
 
 function parseCsv(text) {
   const rows = [];

@@ -27,7 +27,7 @@ Task:
 - ADOPT_CANDIDATE: The candidate template is better and accurately captures previously overlooked BUSINESS DATA. Return the candidate EXACTLY as provided.
 
 Output rules if refine candidate:
-- Mark BUSINESS DATA spans inline with OSC placeholders containing the ORIGINAL raw value: \\u001b]9;<value>\\u0007.
+- Mark BUSINESS DATA spans inline with placeholders containing the ORIGINAL raw value: ⟪<value>⟫.
 - Do NOT invent variable names or abstractions; the placeholder content must stay identical to the raw value.
 
 Output JSON only (no markdown, no extra text):

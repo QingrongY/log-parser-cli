@@ -32,11 +32,11 @@ export const logConsole = (
 };
 
 /**
- * Highlights OSC placeholder markers ( \u001b]9;value\u0007 ) with ANSI color.
+ * Highlights placeholder markers ( ⟪value⟫ ) with ANSI color.
  */
 export const colorizePlaceholders = (text?: string): string | undefined =>
   typeof text === 'string'
-    ? text.replace(/\u001b]9;([^\u0007]+)\u0007/g, (_m, v) => `\x1b[36m${v}\x1b[0m`)
+    ? text.replace(/⟪([^⟫]+)⟫/g, (_m, v) => `\x1b[36m${v}\x1b[0m`)
     : undefined;
 
 /**

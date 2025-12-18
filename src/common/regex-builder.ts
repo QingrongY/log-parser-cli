@@ -26,7 +26,7 @@ export interface BuiltRegex {
 /**
  * Builds a regex pattern from an annotated template.
  *
- * @param template - Template string with OSC placeholders that contain raw values
+ * @param template - Template string with ⟪⟫ placeholders that contain raw values
  * @param sample - Optional sample to validate reconstruction against
  * @returns Object containing the regex pattern, capture names, and extracted values
  * @throws Error if template is invalid or reconstruction doesn't match sample

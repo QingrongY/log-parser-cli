@@ -314,6 +314,35 @@ export class LogProcessingPipeline {
     }
 
     await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
+
+    const orphanedLogs = matchedRecords.filter((m) => m.template.id === conflict.template.id);
+    let updatedPending = pendingLogs;
+
+    if (orphanedLogs.length > 0) {
+      matchedRecords.splice(
+        0,
+        matchedRecords.length,
+        ...matchedRecords.filter((m) => m.template.id !== conflict.template.id),
+      );
+      library.matchedSamples = library.matchedSamples.filter(
+        (m) => m.template.id !== conflict.template.id,
+      );
+
+      const orphanedEntries: RegexLogEntry[] = orphanedLogs.map((m) => ({
+        raw: m.raw,
+        content: m.content,
+        index: m.lineIndex ?? 0,
+        headMatched: m.content !== undefined,
+      }));
+      updatedPending = [...pendingLogs, ...orphanedEntries];
+
+      this.logStage(
+        sample.index,
+        'refine',
+        `re-queued ${orphanedLogs.length} log(s) from deleted template`,
+      );
+    }
+
     if (conflict.template.id) {
       await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id);
     }
@@ -337,7 +366,7 @@ export class LogProcessingPipeline {
         refinedValidation.details,
       );
       unresolvedSamples.push(sample.raw);
-      return pendingLogs;
+      return updatedPending;
     }
 
     const remainingConflicts = this.conflictDetector.findConflicts(refinedTemplate, library, headPattern);
@@ -347,14 +376,14 @@ export class LogProcessingPipeline {
         conflictsWith: remainingConflicts.map((c) => c.template),
       });
       unresolvedSamples.push(sample.raw);
-      return pendingLogs;
+      return updatedPending;
     }
 
     this.logStage(sample.index, 'refine', 'accepted refined template');
     return this.finalizeTemplate({
       template: refinedTemplate,
       sample,
-      pendingLogs,
+      pendingLogs: updatedPending,
       library,
       libraryId,
       headPattern,

@@ -41,22 +41,18 @@ export class HeadContentExtractor {
   ): ContentExtractionResult {
     const contentOnly = Boolean(template.metadata?.['contentOnly']);
 
-    // If template doesn't require content extraction, use raw log
     if (!contentOnly) {
       return { text: entry.raw };
     }
 
-    // Content-only template requires head pattern
     if (!headPattern?.pattern && !headRuntime) {
       return { text: undefined, error: 'Content-only template requires head pattern' };
     }
 
-    // If content is already extracted in the entry, use it
     if (entry.content !== undefined && entry.headMatched) {
       return { text: entry.content?.trimStart() };
     }
 
-    // If we have a headRuntime, perform on-demand extraction
     if (headRuntime) {
       const extracted = extractContentWithHead(entry.raw, headRuntime.head, headRuntime.regex);
       if (!extracted.matched) {
@@ -65,7 +61,6 @@ export class HeadContentExtractor {
       return { text: extracted.content?.trimStart() };
     }
 
-    // Fallback: try extraction with headPattern (compile on-demand)
     if (headPattern) {
       try {
         const regex = new RegExp(headPattern.pattern);
@@ -80,7 +75,6 @@ export class HeadContentExtractor {
       }
     }
 
-    // No content available
     return { text: undefined, error: 'Head extraction missing content' };
   }
 

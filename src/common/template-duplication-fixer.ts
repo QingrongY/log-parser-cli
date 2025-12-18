@@ -13,9 +13,8 @@
  * - Input value: "10.100.20.25010.100.20.250", Expected: "10.100.20.250"
  */
 
-const ESC = '\u001b';
-const BEL = '\u0007';
-const START_PREFIX = `${ESC}]9;`;
+const START_PREFIX = '⟪';
+const END_PREFIX = '⟫';
 
 export interface DuplicationFixResult {
   fixed: boolean;
@@ -32,7 +31,7 @@ export interface DuplicationFixResult {
 /**
  * Attempts to fix a template where variable values have been duplicated.
  *
- * @param template - The template with OSC escape sequences
+ * @param template - The template with ⟪⟫ placeholders
  * @param expectedLogLine - The original log line that should be reconstructed
  * @returns Result indicating if fixes were made and the new template
  */
@@ -46,22 +45,19 @@ export function fixDuplicatedVariables(
     fixes: [],
   };
 
-  // Parse template to extract variables
   const variables = extractVariablesFromTemplate(template);
   if (variables.length === 0) {
     return result;
   }
 
-  // Try to fix each variable
   let fixedTemplate = template;
   let anyFixed = false;
 
   for (const varInfo of variables) {
     const fixedValue = findBestDuplicationFix(varInfo.value, expectedLogLine);
     if (fixedValue !== null && fixedValue !== varInfo.value) {
-      // Replace the old value with fixed value in template
-      const oldPlaceholder = `${START_PREFIX}${varInfo.value}${BEL}`;
-      const newPlaceholder = `${START_PREFIX}${fixedValue}${BEL}`;
+      const oldPlaceholder = `${START_PREFIX}${varInfo.value}${END_PREFIX}`;
+      const newPlaceholder = `${START_PREFIX}${fixedValue}${END_PREFIX}`;
       fixedTemplate = fixedTemplate.replace(oldPlaceholder, newPlaceholder);
 
       result.fixes.push({
@@ -93,36 +89,27 @@ function findBestDuplicationFix(
   duplicatedValue: string,
   logLine: string,
 ): string | null {
-  // If the value already exists in log line, no fix needed
   if (logLine.includes(duplicatedValue)) {
     return null;
   }
 
-  // Try to detect if value is a simple repetition
-  // e.g., "1930319303" -> "19303", "33" -> "3"
   const halfLength = Math.floor(duplicatedValue.length / 2);
 
   for (let len = halfLength; len >= 1; len--) {
     const possibleOriginal = duplicatedValue.slice(0, len);
 
-    // Check if the value is this substring repeated
     if (isRepeatedPattern(duplicatedValue, possibleOriginal)) {
-      // Verify the original exists in log line
       if (logLine.includes(possibleOriginal)) {
         return possibleOriginal;
       }
     }
   }
 
-  // Try prefix matching ONLY if the duplicated value looks like an exact duplication
-  // e.g., "10.100.20.25010.100.20.250" -> "10.100.20.250"
-  // This is more conservative - only tries exact half-way split
   const midPoint = Math.floor(duplicatedValue.length / 2);
   if (midPoint >= 3) {
     const firstHalf = duplicatedValue.slice(0, midPoint);
     const secondHalf = duplicatedValue.slice(midPoint);
 
-    // Only fix if second half starts with first half (indicating duplication)
     if (secondHalf.startsWith(firstHalf) || firstHalf.endsWith(secondHalf)) {
       if (logLine.includes(firstHalf)) {
         return firstHalf;
@@ -150,7 +137,6 @@ function isRepeatedPattern(value: string, pattern: string): boolean {
   if (repeatCount < 2) return false;
 
   const repeated = pattern.repeat(repeatCount);
-  // Check if value starts with the repeated pattern
   return value.startsWith(repeated);
 }
 
@@ -180,7 +166,7 @@ function extractVariablesFromTemplate(template: string): VariableInfo[] {
     if (startIdx === -1) break;
 
     const valueStart = startIdx + START_PREFIX.length;
-    const valueEnd = template.indexOf(BEL, valueStart);
+    const valueEnd = template.indexOf(END_PREFIX, valueStart);
     if (valueEnd === -1) {
       cursor = startIdx + 1;
       continue;

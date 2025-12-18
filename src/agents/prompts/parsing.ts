@@ -24,7 +24,9 @@ export const buildParsingPrompt = ({
     `Shared background knowledge:\n${COMMON_LOG_PARSER_KNOWLEDGE}`,
     `Task:
 - Mark all BUSINESS DATA (variables) directly in the raw log line WITHOUT changing any other characters.
-- Wrap each variable span with the OSC placeholder that contains the ORIGINAL raw value: \\u001b]9;<value>\\u0007.`,
+- Wrap each variable span with the placeholder that contains the ORIGINAL raw value: ⟪<value>⟫.
+- BUSINESS DATA can only appear intact within placeholders and cannot appear outside of them.
+`,
     `Output format:
 Return ONLY the following JSON object (no extra keys, no comments, no trailing text):
 {
