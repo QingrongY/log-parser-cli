@@ -114,15 +114,21 @@ function findBestDuplicationFix(
     }
   }
 
-  // Try prefix matching for IP addresses and complex values
+  // Try prefix matching ONLY if the duplicated value looks like an exact duplication
   // e.g., "10.100.20.25010.100.20.250" -> "10.100.20.250"
-  for (let len = Math.floor(duplicatedValue.length * 0.75); len >= 3; len--) {
-    const possibleOriginal = duplicatedValue.slice(0, len);
-    if (logLine.includes(possibleOriginal)) {
-      // Make sure it's not a substring of something longer in the log
-      const pattern = new RegExp(`\\b${escapeRegex(possibleOriginal)}\\b`);
-      if (pattern.test(logLine)) {
-        return possibleOriginal;
+  // This is more conservative - only tries exact half-way split
+  const midPoint = Math.floor(duplicatedValue.length / 2);
+  if (midPoint >= 3) {
+    const firstHalf = duplicatedValue.slice(0, midPoint);
+    const secondHalf = duplicatedValue.slice(midPoint);
+
+    // Only fix if second half starts with first half (indicating duplication)
+    if (secondHalf.startsWith(firstHalf) || firstHalf.endsWith(secondHalf)) {
+      if (logLine.includes(firstHalf)) {
+        return firstHalf;
+      }
+      if (logLine.includes(secondHalf)) {
+        return secondHalf;
       }
     }
   }
