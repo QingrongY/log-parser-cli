@@ -9,6 +9,7 @@ import type { TemplateLibrary } from '../types.js';
 import type { RegexLogEntry } from '../regex-worker-pool.js';
 import { buildRegexFromTemplate } from '../../common/regex-builder.js';
 import { matchEntireLine } from '../../agents/utilities/regex.js';
+import { HeadContentExtractor } from '../head-pattern/content-extractor.js';
 
 /**
  * Detects conflicts between a candidate template and existing templates in a library.
@@ -16,6 +17,8 @@ import { matchEntireLine } from '../../agents/utilities/regex.js';
  * by a different template.
  */
 export class ConflictDetector {
+  private readonly contentExtractor = new HeadContentExtractor();
+
   /**
    * Finds all existing templates that conflict with the candidate template.
    *
@@ -45,7 +48,7 @@ export class ConflictDetector {
         index: sample.lineIndex ?? 0,
         content: sample.content,
       };
-      const target = this.getTextForTemplate(candidate, pseudoEntry, headPattern);
+      const target = this.contentExtractor.getTextForTemplate(candidate, pseudoEntry, headPattern);
       if (!target.text) continue;
 
       const result = matchEntireLine(candidateRuntime.pattern, target.text);
@@ -64,23 +67,4 @@ export class ConflictDetector {
     return Array.from(conflicts.values());
   }
 
-  /**
-   * Determines the appropriate text to use for template matching.
-   * Returns content if template is content-only, otherwise returns raw log.
-   */
-  private getTextForTemplate(
-    template: LogTemplateDefinition,
-    sample: RegexLogEntry,
-    headPattern?: HeadPatternDefinition,
-  ): { text?: string; error?: string } {
-    const contentOnly = Boolean(template.metadata?.['contentOnly']);
-    if (!contentOnly) {
-      return { text: sample.raw };
-    }
-    if (headPattern?.pattern && sample.content !== undefined) {
-      return { text: sample.content };
-    }
-    // No content extracted; treat as failure.
-    return { text: undefined, error: 'Head extraction missing content' };
-  }
 }

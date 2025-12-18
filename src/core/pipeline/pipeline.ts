@@ -15,6 +15,7 @@ import type {
   HeadAgent,
   LogTemplateDefinition,
 } from '../../agents/index.js';
+import type { ProcessingObserver, StageEvent } from '../../types/observer.js';
 import { RegexWorkerPool } from '../regex-worker-pool.js';
 import type { RegexLogEntry } from '../regex-worker-pool.js';
 import type {
@@ -43,23 +44,6 @@ export interface LogProcessingPipelineDeps {
   regexWorkerPool: RegexWorkerPool;
   observer?: ProcessingObserver;
   failureLogPath?: string;
-}
-
-export interface StageEvent {
-  stage: string;
-  message: string;
-  lineIndex?: number;
-  data?: Record<string, unknown>;
-}
-
-export interface ProcessingObserver {
-  onRouting?(info: { source: string; libraryId: string; existingTemplates: number }): void;
-  onStage?(event: StageEvent): void;
-  onMatching?(info: { lineIndex?: number; matched: number }): void;
-  onExistingMatchSummary?(info: { matched: number; unmatched: number }): void;
-  onBatchProgress?(info: { current: number; total?: number }): void;
-  onFailure?(failure: FailureRecord): void;
-  onUnmatched?(info: { samples: string[] }): void;
 }
 
 /**

@@ -8,6 +8,7 @@ import type { LogTemplateDefinition, HeadPatternDefinition } from '../../agents/
 import type { RegexLogEntry } from '../regex-worker-pool.js';
 import { buildRegexFromTemplate } from '../../common/regex-builder.js';
 import { matchEntireLine } from '../../agents/utilities/regex.js';
+import { HeadContentExtractor } from '../head-pattern/content-extractor.js';
 
 export interface ValidationResult {
   valid: boolean;
@@ -20,6 +21,8 @@ export interface ValidationResult {
  * Ensures templates generate valid regex patterns and correctly match expected logs.
  */
 export class TemplateValidator {
+  private readonly contentExtractor = new HeadContentExtractor();
+
   /**
    * Validates that a template correctly matches a given sample.
    *
@@ -33,7 +36,7 @@ export class TemplateValidator {
     sample: RegexLogEntry,
     headPattern?: HeadPatternDefinition,
   ): Promise<ValidationResult> {
-    const target = this.getTextForTemplate(template, sample, headPattern);
+    const target = this.contentExtractor.getTextForTemplate(template, sample, headPattern);
     if (!target.text) {
       return {
         valid: false,
@@ -93,23 +96,4 @@ export class TemplateValidator {
     };
   }
 
-  /**
-   * Determines the appropriate text to use for template validation.
-   * Returns content if template is content-only, otherwise returns raw log.
-   */
-  private getTextForTemplate(
-    template: LogTemplateDefinition,
-    sample: RegexLogEntry,
-    headPattern?: HeadPatternDefinition,
-  ): { text?: string; error?: string } {
-    const contentOnly = Boolean(template.metadata?.['contentOnly']);
-    if (!contentOnly) {
-      return { text: sample.raw };
-    }
-    if (headPattern?.pattern && sample.content !== undefined) {
-      return { text: sample.content };
-    }
-    // No content extracted; treat as failure.
-    return { text: undefined, error: 'Head extraction missing content' };
-  }
 }

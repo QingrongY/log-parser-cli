@@ -5,10 +5,10 @@
  */
 
 import type { LogTemplateDefinition } from '../agents/index.js';
-import { buildRegexFromTemplate } from '../common/regex-builder.js';
 import type { MatchedLogRecord } from './types.js';
 import type { HeadPatternDefinition } from '../agents/types.js';
-import { extractContentWithHead } from './head-pattern.js';
+import { HeadContentExtractor, type HeadRuntime } from './head-pattern/content-extractor.js';
+import { TemplateRuntimeCache } from './validation/template-runtime-cache.js';
 
 export interface RegexLogEntry {
   raw: string;
@@ -36,6 +36,9 @@ export interface RegexWorkerPoolOptions {
  * Placeholder worker pool that currently executes regex matching synchronously.
  */
 export class RegexWorkerPool {
+  private readonly contentExtractor = new HeadContentExtractor();
+  private readonly runtimeCache = new TemplateRuntimeCache();
+
   constructor(private readonly options: RegexWorkerPoolOptions = {}) {}
 
   async match(request: RegexMatchRequest): Promise<RegexMatchResult> {
@@ -45,7 +48,7 @@ export class RegexWorkerPool {
     const concurrency = Math.max(1, this.options.concurrency ?? 1);
     const chunkSize = Math.max(1, Math.ceil(request.logs.length / concurrency));
     const chunks = this.chunkLogs(request.logs, chunkSize);
-    const headRuntime = this.buildHeadRuntime(request.headPattern);
+    const headRuntime = this.contentExtractor.buildHeadRuntime(request.headPattern);
 
     for (const chunk of chunks) {
       for (const entry of chunk) {
@@ -64,32 +67,41 @@ export class RegexWorkerPool {
   private matchSingle(
     entry: RegexLogEntry,
     templates: LogTemplateDefinition[],
-    headRuntime?: { regex: RegExp; head: HeadPatternDefinition },
+    headRuntime?: HeadRuntime,
   ): MatchedLogRecord | undefined {
     for (const template of templates) {
       try {
         if (!template.placeholderTemplate) {
           continue;
         }
-        const { pattern, variables } = buildRegexFromTemplate(
-          template.placeholderTemplate,
-          template.placeholderVariables ?? {},
-        );
-        const regex = new RegExp(pattern);
-        const targetText = this.selectTargetText(entry, template, headRuntime);
-        if (targetText === undefined) {
+
+        // Get compiled runtime from cache (significant performance improvement)
+        const runtime = this.runtimeCache.getRuntime(template);
+        if (!runtime) {
           continue;
         }
-        const match = regex.exec(targetText);
+
+        const extraction = this.contentExtractor.getTextForTemplate(
+          template,
+          entry,
+          headRuntime?.head,
+          headRuntime,
+        );
+        if (!extraction.text) {
+          continue;
+        }
+
+        const match = runtime.regex.exec(extraction.text);
         if (!match) {
           continue;
         }
+
         return {
           raw: entry.raw,
-          content: targetText === entry.raw ? undefined : targetText,
+          content: extraction.text === entry.raw ? undefined : extraction.text,
           lineIndex: entry.index,
           template,
-          variables: this.extractVariables(match, variables ?? []),
+          variables: this.extractVariables(match, runtime.variables),
         };
       } catch (error) {
         // eslint-disable-next-line no-console -- placeholder diagnostics until workers land.
@@ -129,39 +141,4 @@ export class RegexWorkerPool {
     return result;
   }
 
-  private buildHeadRuntime(
-    head?: HeadPatternDefinition,
-  ): { regex: RegExp; head: HeadPatternDefinition } | undefined {
-    if (!head?.pattern) {
-      return undefined;
-    }
-    try {
-      const regex = new RegExp(head.pattern);
-      return { regex, head };
-    } catch {
-      return undefined;
-    }
-  }
-
-  private selectTargetText(
-    entry: RegexLogEntry,
-    template: LogTemplateDefinition,
-    headRuntime?: { regex: RegExp; head: HeadPatternDefinition },
-  ): string | undefined {
-    const contentOnly = Boolean(template.metadata?.['contentOnly']);
-    if (!contentOnly) {
-      return entry.raw;
-    }
-    if (!headRuntime) {
-      return undefined;
-    }
-    if (entry.content !== undefined && entry.headMatched) {
-      return entry.content;
-    }
-    const extracted = extractContentWithHead(entry.raw, headRuntime.head, headRuntime.regex);
-    if (!extracted.matched) {
-      return undefined;
-    }
-    return extracted.content;
-  }
 }

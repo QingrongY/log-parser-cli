@@ -9,6 +9,8 @@ export { LogProcessingPipeline, type LogProcessingPipelineDeps, type ProcessingO
 export * from './regex-worker-pool.js';
 export * from './validation/template-validator.js';
 export * from './validation/conflict-detector.js';
+export { TemplateRuntimeCache, type TemplateRuntime } from './validation/template-runtime-cache.js';
 export { HeadPatternManager } from './head-pattern/manager.js';
+export { HeadContentExtractor, type HeadRuntime, type ContentExtractionResult } from './head-pattern/content-extractor.js';
 export * from './diverse-sampler.js';
 export * from './head-pattern.js';

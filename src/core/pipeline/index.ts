@@ -7,6 +7,7 @@
 export {
   LogProcessingPipeline,
   type LogProcessingPipelineDeps,
-  type ProcessingObserver,
-  type StageEvent,
 } from './pipeline.js';
+
+// Re-export observer types for convenience
+export type { ProcessingObserver, StageEvent } from '../../types/observer.js';

@@ -5,14 +5,11 @@
  */
 
 import type { HeadAgent, HeadPatternDefinition, AgentContext } from '../../agents/index.js';
+import type { ProcessingObserver } from '../../types/observer.js';
 import type { TemplateLibrary, TemplateManager } from '../types.js';
 import type { RegexLogEntry } from '../regex-worker-pool.js';
 import { selectDiverseSamples } from '../diverse-sampler.js';
 import { extractContentWithHead } from '../head-pattern.js';
-
-export interface ProcessingObserver {
-  onStage?(event: { stage: string; message: string; data?: Record<string, unknown> }): void;
-}
 
 export interface HeadPatternManagerOptions {
   headAgent?: HeadAgent;
