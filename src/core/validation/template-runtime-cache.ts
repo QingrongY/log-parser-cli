@@ -6,6 +6,7 @@
 
 import type { LogTemplateDefinition } from '../../agents/index.js';
 import { buildRegexFromTemplate } from '../../common/regex-builder.js';
+import { normalizeRegexPattern } from '../../agents/utilities/regex.js';
 
 /**
  * Compiled runtime representation of a template.
@@ -46,12 +47,10 @@ export class TemplateRuntimeCache {
     }
 
     try {
-      const { pattern, variables } = buildRegexFromTemplate(
-        template.placeholderTemplate,
-        sample,
-      );
+      const buildResult = buildRegexFromTemplate(template.placeholderTemplate, sample);
+      const pattern = normalizeRegexPattern(template.pattern ?? buildResult.pattern);
       const regex = new RegExp(pattern);
-      const runtime: TemplateRuntime = { pattern, regex, variables: variables ?? [] };
+      const runtime: TemplateRuntime = { pattern, regex, variables: buildResult.variables ?? [] };
 
       this.cache.set(cacheKey, runtime);
       return runtime;

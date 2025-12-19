@@ -292,6 +292,15 @@ export class LogProcessingPipeline {
     });
 
     const conflict = detectedConflicts[0];
+    const conflictIdsPreview = detectedConflicts
+      .slice(0, 5)
+      .map((c) => c.template.id ?? 'unknown')
+      .join(', ');
+    this.logStage(
+      sample.index,
+      'refine',
+      `conflicts detected with ${detectedConflicts.length} template(s): ${conflictIdsPreview}`,
+    );
     const refineResult = await this.deps.agents.refine.run(
       {
         candidateTemplate: parsedTemplate,
@@ -315,46 +324,20 @@ export class LogProcessingPipeline {
 
     await this.recordRefineTrace(sample.index, sample.raw, refineResult.output, conflict.template);
 
-    const orphanedLogs = matchedRecords.filter((m) => m.template.id === conflict.template.id);
-    let updatedPending = pendingLogs;
+    const accumulatedOrphanedLogs: RegexLogEntry[] = await this.removeConflictingTemplates({
+      conflicts: detectedConflicts,
+      library,
+      libraryId,
+      matchedRecords,
+    });
 
-    if (orphanedLogs.length > 0) {
-      matchedRecords.splice(
-        0,
-        matchedRecords.length,
-        ...matchedRecords.filter((m) => m.template.id !== conflict.template.id),
-      );
-      library.matchedSamples = library.matchedSamples.filter(
-        (m) => m.template.id !== conflict.template.id,
-      );
-
-      const orphanedEntries: RegexLogEntry[] = orphanedLogs.map((m) => ({
-        raw: m.raw,
-        content: m.content,
-        index: m.lineIndex ?? 0,
-        headMatched: m.content !== undefined,
-      }));
-      updatedPending = [...pendingLogs, ...orphanedEntries];
-
-      this.logStage(
-        sample.index,
-        'refine',
-        `re-queued ${orphanedLogs.length} log(s) from deleted template`,
-      );
-    }
-
-    if (conflict.template.id) {
-      await this.deps.templateManager.deleteTemplate(libraryId, conflict.template.id);
-    }
-    library.templates = library.templates.filter((t) => t.id !== conflict.template.id);
-
-    const refinedTemplate = this.templateValidator.attachHeadMetadata(
+    let currentTemplate = this.templateValidator.attachHeadMetadata(
       refineResult.output.template,
       sample,
       headPattern,
     );
 
-    const refinedValidation = await this.templateValidator.validate(refinedTemplate, sample, headPattern);
+    const refinedValidation = await this.templateValidator.validate(currentTemplate, sample, headPattern);
     if (!refinedValidation.valid) {
       this.logStage(sample.index, 'validation', 'failed (refined)');
       await this.recordFailure(
@@ -362,34 +345,119 @@ export class LogProcessingPipeline {
         sample.raw,
         'validation',
         refinedValidation.error ?? 'Refined template validation failed',
-        refinedTemplate,
+        currentTemplate,
         refinedValidation.details,
       );
       unresolvedSamples.push(sample.raw);
-      return updatedPending;
+      return [...pendingLogs, ...accumulatedOrphanedLogs];
     }
 
-    const remainingConflicts = this.conflictDetector.findConflicts(refinedTemplate, library, headPattern);
-    if (remainingConflicts.length > 0) {
-      conflicts.push({
-        candidate: refinedTemplate,
-        conflictsWith: remainingConflicts.map((c) => c.template),
+    let iteration = 0;
+    const MAX_REFINE_ITERATIONS = 5;
+
+    while (iteration < MAX_REFINE_ITERATIONS) {
+      const remainingConflicts = this.conflictDetector.findConflicts(currentTemplate, library, headPattern);
+
+      if (remainingConflicts.length === 0) {
+        this.logStage(sample.index, 'refine', 'accepted refined template');
+        return this.finalizeTemplate({
+          template: currentTemplate,
+          sample,
+          pendingLogs: [...pendingLogs, ...accumulatedOrphanedLogs],
+          library,
+          libraryId,
+          headPattern,
+          matchedRecords,
+          newTemplates,
+        });
+      }
+
+      const nextConflict = remainingConflicts[0];
+      const preview = remainingConflicts
+        .slice(0, 5)
+        .map((c) => c.template.id ?? 'unknown')
+        .join(', ');
+      this.logStage(
+        sample.index,
+        'refine',
+        `iteration ${iteration + 1}: resolving conflicts (${remainingConflicts.length}) e.g. ${preview}`,
+      );
+
+      const nextRefineResult = await this.deps.agents.refine.run(
+        {
+          candidateTemplate: currentTemplate,
+          candidateSamples: [content ?? ''],
+          conflictingTemplate: nextConflict.template,
+          conflictingSamples: nextConflict.samples
+            .map((raw) => this.headPatternManager.getContentFromRaw(raw, headPattern))
+            .filter((s): s is string => Boolean(s)),
+        },
+        context,
+      );
+
+      if (!nextRefineResult.output) {
+        this.logStage(sample.index, 'refine', `failed at iteration ${iteration + 1}`);
+        await this.recordFailure(
+          sample.index,
+          sample.raw,
+          'refine',
+          `Refine agent failed at iteration ${iteration + 1}`,
+          currentTemplate,
+          { issues: nextRefineResult.issues },
+        );
+        unresolvedSamples.push(sample.raw);
+        return [...pendingLogs, ...accumulatedOrphanedLogs];
+      }
+
+      await this.recordRefineTrace(sample.index, sample.raw, nextRefineResult.output, nextConflict.template);
+
+      const requeued = await this.removeConflictingTemplates({
+        conflicts: remainingConflicts,
+        library,
+        libraryId,
+        matchedRecords,
       });
-      unresolvedSamples.push(sample.raw);
-      return updatedPending;
+      if (requeued.length > 0) {
+        accumulatedOrphanedLogs.push(...requeued);
+        this.logStage(
+          sample.index,
+          'refine',
+          `re-queued ${requeued.length} log(s) from deleted templates (iteration ${iteration + 1})`,
+        );
+      }
+
+      currentTemplate = this.templateValidator.attachHeadMetadata(
+        nextRefineResult.output.template,
+        sample,
+        headPattern,
+      );
+
+      const validation = await this.templateValidator.validate(currentTemplate, sample, headPattern);
+      if (!validation.valid) {
+        this.logStage(sample.index, 'validation', `failed (refined, iteration ${iteration + 1})`);
+        await this.recordFailure(
+          sample.index,
+          sample.raw,
+          'validation',
+          validation.error ?? 'Refined template validation failed',
+          currentTemplate,
+          validation.details,
+        );
+        unresolvedSamples.push(sample.raw);
+        return [...pendingLogs, ...accumulatedOrphanedLogs];
+      }
+
+      iteration++;
     }
 
-    this.logStage(sample.index, 'refine', 'accepted refined template');
-    return this.finalizeTemplate({
-      template: refinedTemplate,
-      sample,
-      pendingLogs: updatedPending,
-      library,
-      libraryId,
-      headPattern,
-      matchedRecords,
-      newTemplates,
+    this.logStage(sample.index, 'refine', `max iterations (${MAX_REFINE_ITERATIONS}) reached`);
+    const finalConflicts = this.conflictDetector.findConflicts(currentTemplate, library, headPattern);
+    conflicts.push({
+      candidate: currentTemplate,
+      conflictsWith: finalConflicts.map((c) => c.template),
     });
+    unresolvedSamples.push(sample.raw);
+    return [...pendingLogs, ...accumulatedOrphanedLogs];
   }
 
   private async finalizeTemplate(params: {
@@ -465,9 +533,82 @@ export class LogProcessingPipeline {
     if (matches.length === 0) {
       return;
     }
-    accumulator.push(...matches);
-    library.matchedSamples.push(...matches);
-    await this.deps.templateManager.recordMatches(libraryId, matches);
+    // Deduplicate by line index + raw content to avoid double-counting when logs are re-queued.
+    const seen = new Set(
+      accumulator.map((m) => `${m.lineIndex ?? -1}:${m.raw}`),
+    );
+    const unique = matches.filter((m) => {
+      const key = `${m.lineIndex ?? -1}:${m.raw}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    });
+
+    if (unique.length === 0) {
+      return;
+    }
+
+    accumulator.push(...unique);
+    library.matchedSamples.push(...unique);
+    await this.deps.templateManager.recordMatches(libraryId, unique);
+  }
+
+  /**
+   * Deletes all conflicting templates and re-queues their matched logs.
+   */
+  private async removeConflictingTemplates(params: {
+    conflicts: Array<{ template: LogTemplateDefinition; samples: string[] }>;
+    library: TemplateLibrary;
+    libraryId: string;
+    matchedRecords: MatchedLogRecord[];
+  }): Promise<RegexLogEntry[]> {
+    const { conflicts, library, libraryId, matchedRecords } = params;
+    const templateIds = new Set<string>();
+    let removedMatches = 0;
+    const orphanedEntries: RegexLogEntry[] = [];
+
+    for (const conflict of conflicts) {
+      const templateId = conflict.template.id;
+      if (!templateId || templateIds.has(templateId)) {
+        continue;
+      }
+      templateIds.add(templateId);
+      const orphaned = matchedRecords.filter((m) => m.template.id === templateId);
+      removedMatches += orphaned.length;
+      orphanedEntries.push(
+        ...orphaned.map((m) => ({
+          raw: m.raw,
+          content: m.content,
+          index: m.lineIndex ?? 0,
+          headMatched: m.content !== undefined,
+        })),
+      );
+    }
+
+    if (templateIds.size === 0) {
+      return orphanedEntries;
+    }
+
+    if (removedMatches > 0) {
+      const kept = matchedRecords.filter((m) => !templateIds.has(m.template.id ?? ''));
+      matchedRecords.splice(0, matchedRecords.length, ...kept);
+      library.matchedSamples = library.matchedSamples.filter(
+        (m) => !templateIds.has(m.template.id ?? ''),
+      );
+      this.deps.observer?.onExistingMatchSummary?.({
+        matched: -removedMatches,
+        unmatched: removedMatches,
+      });
+    }
+
+    library.templates = library.templates.filter((t) => !templateIds.has(t.id ?? ''));
+    for (const id of templateIds) {
+      await this.deps.templateManager.deleteTemplate(libraryId, id);
+    }
+
+    return orphanedEntries;
   }
 
   private async persistTemplate(
